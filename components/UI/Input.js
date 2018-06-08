@@ -3,7 +3,7 @@ import { View, TextInput } from 'react-native';
 
 const Input = (props) => {
    return(
-      <View style={styles.container}>
+      <View style={[styles.container, props.style]}>
          <TextInput
             value={props.value}
             onChangeText={props.onChangeText}

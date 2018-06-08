@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
+import ViewContainer from '../UI/View';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
 
@@ -22,18 +23,19 @@ class SignupForm extends Component {
 
    render() {
       return(
-         <View style={styles.container}>
+         <ViewContainer>
             <View>
                <Input 
-                  label="Email"
+                  placeholder="Email"
                   value={this.state.email}
-                  placeholder="test@test.com"
+                  placeholder="Email"
                   onChangeText={email => this.setState({ email })}
-                  keyboardType="email-address" />
+                  keyboardType="email-address"
+                  style={{ marginTop: 10 }} />
             </View>
             <View style={{ marginBottom: 10}}>
                <Input
-                  label="Password"
+                  placeholder="Password"
                   value={this.state.password}
                   onChangeText={password => this.setState({ password })}
                   password={true} />
@@ -41,7 +43,7 @@ class SignupForm extends Component {
             <Button 
                title="Sign Up" 
                onPress={this.handleSubmit} />
-         </View>
+         </ViewContainer>
       );
    }
 }
