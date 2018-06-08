@@ -33,6 +33,7 @@ const styles = {
    },
    headerText: {
       fontSize: 30,
+      fontWeight: 'bold'
    },
 }
 
