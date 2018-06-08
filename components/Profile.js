@@ -20,7 +20,9 @@ class Profile extends Component {
                   <Icon name="info-circle" size={25} />               
                   <Text style={styles.heading}>Basic information</Text>
                </View>
-               <Input placeholder="First Name" />
+               <Input 
+                  placeholder="First Name"
+                  onSubmitEditing={()=> {} } />
                <Input placeholder="Last Name" />
 
                <View style={[styles.headingContainer, {marginTop: 20}]}>

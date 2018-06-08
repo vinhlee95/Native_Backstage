@@ -15,6 +15,10 @@ const Input = (props) => {
             password={props.password}
             placeholder={props.placeholder}
             keyboardType={props.keyboardType}
+            onSubmitEditing={props.onSubmitEditing}
+            returnKeyType={props.returnKeyType}
+            focus={props.focus}
+            autofocus={props.autofocus}
             containerStyle={{ 
                width: '100%', 
                marginLeft: 'auto', 
