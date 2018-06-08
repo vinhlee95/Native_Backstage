@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, KeyboardAvoidingView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewContainer from './UI/View';
 import Header from './UI/Header';
@@ -12,6 +12,7 @@ class Profile extends Component {
 
    render() {
       return(
+         <KeyboardAvoidingView behavior="padding" style={{ flex: 1}}>
          <ScrollView style={{ flex: 1 }}>
             <Header headerName = "Profile" />
             <ViewContainer>
@@ -30,6 +31,7 @@ class Profile extends Component {
                </View>
             </ViewContainer>
          </ScrollView>
+         </KeyboardAvoidingView>
       );
    }
 }
