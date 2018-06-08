@@ -21,7 +21,7 @@ class Dashboard extends Component {
             <Header headerName="Dashboard"/>            
             <ViewContainer >
                <Text style={styles.title}>Welcome {email}</Text>
-               <Text>You can find your need-to-confirm, upcoming and past gigs bellow</Text>
+               <Text style={{ fontSize: 18}}>You can find your need-to-confirm, upcoming and past gigs bellow</Text>
             </ViewContainer>
          </View>
       );
