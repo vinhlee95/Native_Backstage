@@ -14,8 +14,8 @@ class Profile extends Component {
    render() {
       return(
          <KeyboardAvoidingView behavior="padding" style={{ flex: 1}}>
+         <Header headerName = "Profile" />         
          <ScrollView style={{ flex: 1 }}>
-            <Header headerName = "Profile" />
             <ViewContainer>
                <View style={styles.headingContainer}>
                   <Icon name="info-circle" size={25} />               
