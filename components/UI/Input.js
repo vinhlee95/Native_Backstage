@@ -21,8 +21,7 @@ const Input = (props) => {
                marginRight: 'auto',   
             }}
             inputStyle={{
-               marginTop: 0,
-               marginBottom: 0,
+               color: 'black'
             }}
          />
       </View>
