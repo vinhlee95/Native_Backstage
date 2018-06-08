@@ -16,11 +16,17 @@ class Profile extends Component {
          <ScrollView style={{ flex: 1 }}>
             <Header headerName = "Profile" />
             <ViewContainer>
-               <Text style={styles.heading}>Basic information</Text>
+               <View style={styles.headingContainer}>
+                  <Icon name="info-circle" size={25} />               
+                  <Text style={styles.heading}>Basic information</Text>
+               </View>
                <Input placeholder="First Name" />
                <Input placeholder="Last Name" />
 
-               <Text style={[styles.heading, {marginTop: 20}]}>Basic information</Text>
+               <View style={[styles.headingContainer, {marginTop: 20}]}>
+                  <Icon name="map-marker" size={25} />               
+                  <Text style={styles.heading}>Home address</Text>                  
+               </View>
                <View>
                   <Input placeholder="Street Address" />
                   <Input placeholder="Number" keyboardType="numeric" />
@@ -37,10 +43,17 @@ class Profile extends Component {
 }
 
 const styles = {
+   headingContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'flex-start'
+   },
    heading: {
       fontSize: 20,
       marginBottom: 0,
-      paddingBottom: 0
+      marginLeft: 5,
+      paddingBottom: 0,
+      fontWeight: 'bold',
    }
 }
 
