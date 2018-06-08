@@ -22,10 +22,10 @@ const Input = (props) => {
 
 const styles = {
    container: {
-      marginBottom: 10,
+      marginBottom: 15,
    },
    input: {
-      fontSize: 16,
+      fontSize: 18,
       borderBottomColor: '#cacdd1',
       borderTopWidth: 0,
       borderBottomWidth: 1,
