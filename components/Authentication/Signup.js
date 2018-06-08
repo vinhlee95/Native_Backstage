@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { View, Text } from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { Button } from 'react-native-elements';
+import Input from '../UI/Input';
 
 
 class SignupForm extends Component {
@@ -13,16 +14,16 @@ class SignupForm extends Component {
       return(
          <View style={styles.container}>
             <View>
-               <FormLabel>Email</FormLabel>
-               <FormInput 
+               <Input 
+                  label="Email"
                   value={this.state.email}
                   placeholder="test@test.com"
                   onChangeText={email => this.setState({ email })}
                   keyboardType="email-address" />
             </View>
             <View style={{ marginBottom: 10}}>
-               <FormLabel>Password</FormLabel>
-               <FormInput
+               <Input
+                  label="Password"
                   value={this.state.password}
                   onChangeText={password => this.setState({ password })}
                   password={true} />
