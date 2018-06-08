@@ -8,6 +8,9 @@ import firebase from 'firebase';
 import LoginForm from './components/Authentication/Login';
 import SignupForm from './components/Authentication/Signup';
 import Dashboard from './components/Dashboard';
+import Performer from './components/Performer';
+import Calendar from './components/Calendar';
+import Profile from './components/Profile';
 
 export default class App extends React.Component {
 
@@ -29,7 +32,12 @@ export default class App extends React.Component {
         login: LoginForm,
         signup: SignupForm,
       }),
-      dashboard: Dashboard,
+      main: createBottomTabNavigator({
+        Dashboard: Dashboard, 
+        Performer: Performer,
+        Calendar: Calendar,
+        Profile: Profile, 
+      })
     },
     {
       navigationOptions: {
