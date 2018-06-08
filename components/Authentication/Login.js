@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { View, Text } from 'react-native';
-import { Button } from 'react-native-elements';
 import Input from '../UI/Input';
+import Button from '../UI/Button';
 
 
 class LoginForm extends Component {
@@ -30,12 +30,10 @@ class LoginForm extends Component {
             </View>
             <Button 
                title="Log In" 
-               buttonStyle={{ backgroundColor: '#2b6edb', borderRadius: 3}}
                onPress={this.handleSubmit} />
             <Text style={styles.message}>First time here?</Text>
             <Button
                title="Sign Up"
-               buttonStyle={{ backgroundColor: '#2b6edb', borderRadius: 3}}
                onPress={() => this.props.navigation.navigate('signup')} />
          </View>
       );

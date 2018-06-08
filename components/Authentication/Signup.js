@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View, Text } from 'react-native';
-import { Button } from 'react-native-elements';
+import Button from '../UI/Button';
 import Input from '../UI/Input';
 
 
@@ -30,7 +30,6 @@ class SignupForm extends Component {
             </View>
             <Button 
                title="Sign Up" 
-               buttonStyle={{ backgroundColor: '#2b6edb', borderRadius: 3}}
                onPress={this.handleSubmit} />
          </View>
       );
