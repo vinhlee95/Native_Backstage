@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import firebase from 'firebase';
 import ViewContainer from './UI/View';
 import Header from './UI/Header';
@@ -18,11 +18,13 @@ class Dashboard extends Component {
       }
       return(
          <View style={{ flex: 1 }}>
-            <Header headerName="Dashboard"/>            
-            <ViewContainer >
-               <Text style={styles.title}>Welcome {email}</Text>
-               <Text style={{ fontSize: 18}}>You can find your need-to-confirm, upcoming and past gigs bellow</Text>
-            </ViewContainer>
+            <Header headerName="Dashboard"/>   
+            <ScrollView style={{ flex: 1 }}>         
+               <ViewContainer >
+                  <Text style={styles.title}>Welcome {email}</Text>
+                  <Text style={{ fontSize: 18}}>You can find your need-to-confirm, upcoming and past gigs bellow</Text>
+               </ViewContainer>
+            </ScrollView>
          </View>
       );
    }
@@ -30,7 +32,8 @@ class Dashboard extends Component {
 
 const styles = {
    title: {
-      fontSize: 25
+      fontSize: 25,
+      marginTop: 15,
    }
 }
 
