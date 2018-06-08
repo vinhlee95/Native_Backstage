@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ViewContainer from './UI/View';
+import Header from './UI/Header';
 
 class Calendar extends Component {
    static navigationOptions = {
@@ -9,8 +11,8 @@ class Calendar extends Component {
 
    render() {
       return(
-         <View>
-            <Text>Calendar</Text>
+         <View style={{ flex: 1 }}>
+            <Header headerName = "Calendar" />
          </View>
       );
    }

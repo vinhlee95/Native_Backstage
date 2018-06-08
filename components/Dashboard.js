@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Text, View } from 'react-native';
 import firebase from 'firebase';
+import ViewContainer from './UI/View';
+import Header from './UI/Header';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Dashboard extends Component {
@@ -14,20 +17,19 @@ class Dashboard extends Component {
          email = firebase.auth().currentUser.email;
       }
       return(
-         <View style={styles.container} >
-            <Text style={styles.header}>Welcome {email}</Text>
-            <Text>You can find your need-to-confirm, upcoming and past gigs bellow</Text>
+         <View style={{ flex: 1 }}>
+            <Header headerName="Dashboard"/>            
+            <ViewContainer >
+               <Text style={styles.title}>Welcome {email}</Text>
+               <Text>You can find your need-to-confirm, upcoming and past gigs bellow</Text>
+            </ViewContainer>
          </View>
       );
    }
 }
 
 const styles = {
-   container: {
-      flex: 1,
-      marginTop: 20,
-   },
-   header: {
+   title: {
       fontSize: 25
    }
 }

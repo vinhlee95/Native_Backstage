@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ViewContainer from './UI/View';
+import Header from './UI/Header';
 
 class Profile extends Component {
    static navigationOptions = {
@@ -9,8 +11,8 @@ class Profile extends Component {
 
    render() {
       return(
-         <View>
-            <Text>Profile</Text>
+         <View style={{ flex: 1 }}>
+            <Header headerName = "Profile" />
          </View>
       );
    }

@@ -44,6 +44,7 @@ export default class App extends React.Component {
       },
       {
         navigationOptions: {
+          labeled: false,
           shifting: false,
           barStyle: {
             backgroundColor: '#eff3f9',
