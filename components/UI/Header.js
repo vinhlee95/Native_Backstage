@@ -24,7 +24,7 @@ const styles = {
       shadowOffset: {width: 0, height: 2},
       shadowOpacity: 0.1,
       shadowRadius: 2,
-      paddingTop: 25,
+      paddingTop: 30,
       paddingBottom: 10,
       paddingLeft: 8,
       paddingRight: 8,
