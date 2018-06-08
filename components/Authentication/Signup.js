@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
+
 import Button from '../UI/Button';
 import Input from '../UI/Input';
 
@@ -9,6 +12,13 @@ class SignupForm extends Component {
       title: 'Sign up'
    }
    state = { email: '', password: ''}
+
+   handleSubmit = () => {
+      const { email, password } = this.state;
+      this.props.signup(email, password, () => {
+         this.props.navigation.navigate('dashboard');
+      });
+   }
 
    render() {
       return(
@@ -43,4 +53,4 @@ const styles = {
    },
 }
 
-export default SignupForm;
+export default connect(null, actions)(SignupForm);

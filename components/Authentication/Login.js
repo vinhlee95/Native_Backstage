@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { View, Text } from 'react-native';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 
 class LoginForm extends Component {
@@ -9,6 +11,13 @@ class LoginForm extends Component {
       title: 'Log in'
    }
    state = { email: '', password: ''}
+
+   handleSubmit = () => {
+      const { email, password } = this.state;
+      this.props.login(email, password, () => {
+         this.props.navigation.navigate('dashboard');
+      });
+   }
 
    render() {
       return(
@@ -54,4 +63,4 @@ const styles = {
    }
 }
 
-export default LoginForm;
+export default connect(null, actions)(LoginForm);
