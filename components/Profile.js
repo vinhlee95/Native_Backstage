@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewContainer from './UI/View';
 import Header from './UI/Header';
 import Input from './UI/Input';
+import LocationSearch from './Location/LocationSearch';
 
 class Profile extends Component {
    static navigationOptions = {
@@ -30,7 +31,7 @@ class Profile extends Component {
                   <Text style={styles.heading}>Home address</Text>                  
                </View>
                <View>
-                  <Input placeholder="Street Address" />
+                  <LocationSearch  placeholder="Street Adress" />                  
                   <Input placeholder="Number" keyboardType="numeric" />
                </View>
                <View>
