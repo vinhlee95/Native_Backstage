@@ -38,9 +38,13 @@ class Profile extends Component {
                </View>
                <View>
                   <Input placeholder="Postal Code" keyboardType="numeric"  />
-                  <Input placeholder="City" />                
+                  <LocationSearch  placeholder="City" />                 
                </View>
-               <View style={{ flex: 1}}>
+               <View style={[styles.headingContainer, {marginTop: 20, marginBottom: 20}]}>
+                  <Icon name="map" size={25} />               
+                  <Text style={styles.heading}>Map</Text>                  
+               </View>
+               <View style={{ flex: 1 }}>
                   <Map />
                </View>
             </ViewContainer>
