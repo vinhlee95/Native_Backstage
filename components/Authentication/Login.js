@@ -15,7 +15,7 @@ class LoginForm extends Component {
    handleSubmit = () => {
       const { email, password } = this.state;
       this.props.login(email, password, () => {
-         this.props.navigation.navigate('dashboard');
+         this.props.navigation.navigate('Dashboard');
       });
    }
 
