@@ -5,6 +5,7 @@ import ViewContainer from './UI/View';
 import Header from './UI/Header';
 import Input from './UI/Input';
 import LocationSearch from './Location/LocationSearch';
+import Map from './Location/Map';
 
 class Profile extends Component {
    static navigationOptions = {
@@ -38,6 +39,9 @@ class Profile extends Component {
                <View>
                   <Input placeholder="Postal Code" keyboardType="numeric"  />
                   <Input placeholder="City" />                
+               </View>
+               <View style={{ flex: 1}}>
+                  <Map />
                </View>
             </ViewContainer>
          </ScrollView>
