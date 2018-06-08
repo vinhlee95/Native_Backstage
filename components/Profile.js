@@ -4,12 +4,17 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewContainer from './UI/View';
 import Header from './UI/Header';
 import Input from './UI/Input';
+import Button from './UI/Button';
 import LocationSearch from './Location/LocationSearch';
 import Map from './Location/Map';
 
 class Profile extends Component {
    static navigationOptions = {
       tabBarIcon:  <Icon name="user" size={24} />
+   }
+
+   handleSaveInfo = () => {
+      console.log('Saved')
    }
 
    render() {
@@ -47,6 +52,7 @@ class Profile extends Component {
                <View style={{ flex: 1 }}>
                   <Map />
                </View>
+               <Button title="Save your information" onPress={this.handleSaveInfo}/>
             </ViewContainer>
          </ScrollView>
          </KeyboardAvoidingView>
