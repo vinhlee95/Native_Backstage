@@ -52,9 +52,19 @@ class Profile extends Component {
                <View style={{ flex: 1 }}>
                   <Map />
                </View>
-               <Button title="Save your information" onPress={this.handleSaveInfo}/>
+               
             </ViewContainer>
          </ScrollView>
+         <Button 
+            title="Save your information" 
+            onPress={this.handleSaveInfo}
+            style={{
+               position: 'absolute',
+               bottom: 0,
+               width: '90%',
+               left: '5%',
+               opacity: .9
+         }}/>
          </KeyboardAvoidingView>
       );
    }

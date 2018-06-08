@@ -3,7 +3,7 @@ import { View, Button } from 'react-native';
 
 const ReusableButton = (props) => {
    return(
-      <View style={buttonStyle}>
+      <View style={[buttonStyle, props.style]}>
          <Button 
             title={props.title}
             color="white"
