@@ -28,7 +28,6 @@ const styles = {
       paddingBottom: 10,
       paddingLeft: 8,
       paddingRight: 8,
-      marginBottom: 15,
       backgroundColor: '#eff3f9',      
    },
    headerText: {

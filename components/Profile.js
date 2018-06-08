@@ -17,7 +17,7 @@ class Profile extends Component {
          <Header headerName = "Profile" />         
          <ScrollView style={{ flex: 1 }}>
             <ViewContainer>
-               <View style={styles.headingContainer}>
+               <View style={[styles.headingContainer, { marginTop: 15 }]}>
                   <Icon name="info-circle" size={25} />               
                   <Text style={styles.heading}>Basic information</Text>
                </View>
