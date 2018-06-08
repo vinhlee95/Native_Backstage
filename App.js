@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { Provider } from 'react-redux';
 import store from './store';
 import firebase from 'firebase';
@@ -30,21 +31,32 @@ export default class App extends React.Component {
 
   render() {
     const MainNavigator = createBottomTabNavigator({
-      // Loading: Loading,
+      Loading: Loading,
       auth: createStackNavigator({
         login: LoginForm,
         signup: SignupForm,
       }),
-      main: createBottomTabNavigator({
+      main: createMaterialBottomTabNavigator({
         Dashboard: Dashboard, 
         Performer: Performer,
         Calendar: Calendar,
         Profile: Profile, 
-      })
+      },
+      {
+        navigationOptions: {
+          shifting: false,
+          barStyle: {
+            backgroundColor: '#eff3f9',
+            borderTopColor: '#cacdd1',
+            borderWidth: .5,
+          }          
+        }
+      }
+    )
     },
     {
       navigationOptions: {
-        tabBarVisible: false
+        tabBarVisible: false,
       }
     }
     );

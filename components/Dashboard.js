@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import firebase from 'firebase';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Dashboard extends Component {
+   static navigationOptions = {
+      tabBarIcon:  <Icon name="briefcase" size={24} />
+   }
 
    render() {
       let email = null;
