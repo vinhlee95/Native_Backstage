@@ -14,7 +14,7 @@ const Input = (props) => {
             returnKeyType={props.returnKeyType}
             focus={props.focus}
             autofocus={props.autofocus}
-            style={styles.input}
+            style={[styles.input, props.style]}
          />
       </View>
    );

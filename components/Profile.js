@@ -23,7 +23,8 @@ class Profile extends Component {
                </View>
                <Input 
                   placeholder="First Name"
-                  onSubmitEditing={()=> {} } />
+                  onSubmitEditing={()=> {} }
+                  style={{ marginTop: 10}} />
                <Input placeholder="Last Name" />
 
                <View style={[styles.headingContainer, {marginTop: 20}]}>
