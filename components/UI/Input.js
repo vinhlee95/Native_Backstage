@@ -1,15 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
-import {
-   FormLabel,
-   FormInput,
-} from 'react-native-elements';
+import { View, TextInput } from 'react-native';
 
 const Input = (props) => {
    return(
       <View style={styles.container}>
-         <FormLabel>{props.label}</FormLabel>
-         <FormInput
+         <TextInput
             value={props.value}
             onChangeText={props.onChangeText}
             password={props.password}
@@ -19,14 +14,7 @@ const Input = (props) => {
             returnKeyType={props.returnKeyType}
             focus={props.focus}
             autofocus={props.autofocus}
-            containerStyle={{ 
-               width: '100%', 
-               marginLeft: 'auto', 
-               marginRight: 'auto',   
-            }}
-            inputStyle={{
-               color: 'black'
-            }}
+            style={styles.input}
          />
       </View>
    );
@@ -34,8 +22,15 @@ const Input = (props) => {
 
 const styles = {
    container: {
-      margin: 0,
-      padding: 0,
+      marginBottom: 10,
+   },
+   input: {
+      fontSize: 16,
+      borderBottomColor: '#cacdd1',
+      borderTopWidth: 0,
+      borderBottomWidth: 1,
+      paddingTop: 10,
+      paddingBottom: 10,
    }
 }
 
