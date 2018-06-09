@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import firebase from 'firebase';
 import Banner from './UI/Banner';
+import Spinner from './UI/Spinner';
 
 class Profile extends Component {
    static navigationOptions = {
@@ -27,6 +28,7 @@ class Profile extends Component {
             postalCode:  ''
          },
       isBannerShowed: false,
+      isSpinnerShowed: false,
    }
 
    componentDidMount() {
@@ -39,9 +41,10 @@ class Profile extends Component {
    }
    
    handleSaveInfo = () => {
+      this.setState({ isSpinnerShowed: true })
       const { firstName, lastName, location } = this.state;
       this.props.saveData(firstName, lastName, location, () => {
-         this.setState({ isBannerShowed: true });
+         this.setState({ isBannerShowed: true, isSpinnerShowed: false });
       });
    }
 
@@ -50,7 +53,11 @@ class Profile extends Component {
    }
 
    render() {
-      console.log(this.state)
+      // show spinner while loading data
+      const { firstName, lastName, location } = this.state;
+      if(!firstName || !lastName || !location || this.state.isSpinnerShowed) {
+         return <Spinner />
+      }
       return(
          <KeyboardAvoidingView behavior="padding" style={{ flex: 1}}>
          <Header headerName = "Profile" />         
