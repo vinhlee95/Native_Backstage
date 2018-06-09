@@ -32,11 +32,9 @@ class Profile extends Component {
    }
 
    componentDidMount() {
-      const uid = firebase.auth().currentUser.uid;
-      const userPath = firebase.database().ref(`users/${uid}`);
-      const data = userPath.on('value', snapshot => {
-         const { firstName, lastName, location } = snapshot.val();
-         this.setState({...this.state, firstName, lastName, location });
+      this.props.loadData(() => {
+         const { firstName, lastName, location } = this.props;
+         this.setState({ ...this.state, firstName, lastName, location })
       });
    }
    
@@ -144,4 +142,12 @@ const styles = {
    }
 }
 
-export default connect(null, actions)(Profile);
+const mapStateToProps = ({ data }) => {
+   return {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      location: data.location
+   }
+}
+
+export default connect(mapStateToProps, actions)(Profile);
