@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import firebase from 'firebase';
+import Spinner from './UI/Spinner';
 
 class Loading extends Component {
    state = { isLogin: false }
@@ -18,7 +19,7 @@ class Loading extends Component {
       firebase.auth().onAuthStateChanged((user) => {
          if (user) {
             this.setState({ isLogin: true });
-            this.props.navigation.navigate('Dashboard');
+            this.props.navigation.navigate('login');
          } else {
             this.setState({
                isLogin: false,
@@ -31,18 +32,11 @@ class Loading extends Component {
 
    render() {
       return(
-         <View style={styles.loadingContainer}>
-            <ActivityIndicator animating={!this.state.isLogin} size="large" color="#0000ff" />
-         </View>
+         <Spinner animating={!this.state.isLogin} />
       );
    }
 }
 
-const styles = {
-   loadingContainer: {
-      flex: 1,
-      justifyContent: 'center'
-   }
-}
+
 
 export default Loading;

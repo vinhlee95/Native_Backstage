@@ -8,6 +8,8 @@ import Button from './UI/Button';
 import LocationSearch from './Location/LocationSearch';
 import Map from './Location/Map';
 
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 import firebase from 'firebase';
 import Banner from './UI/Banner';
 
@@ -36,7 +38,6 @@ class Profile extends Component {
       });
    }
    
-
    handleSaveInfo = () => {
       const { firstName, lastName, location } = this.state;
       this.props.saveData(firstName, lastName, location, () => {
@@ -79,9 +80,8 @@ class Profile extends Component {
                      placeholder="Adress" 
                      handleSelectLocation={this.handleSelectLocation} />                  
                   <Input 
-                     placeholder="Number" 
+                     placeholder="House number" 
                      value={this.state.location.houseNumber}
-                     keyboardType="numeric"
                      onChangeText={(houseNumber) => this.setState({ location: {...this.state.location, houseNumber} })} />
                </View>
                <View>
@@ -137,4 +137,4 @@ const styles = {
    }
 }
 
-export default Profile;
+export default connect(null, actions)(Profile);

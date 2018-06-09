@@ -5,15 +5,17 @@ import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import Spinner from '../UI/Spinner';
 
 
 class LoginForm extends Component {
    static navigationOptions = {
       title: 'Log in'
    }
-   state = { email: '', password: ''}
+   state = { email: '', password: '', isSpinnershowed: false }
 
    handleSubmit = () => {
+      this.setState({ isSpinnershowed: true })
       const { email, password } = this.state;
       this.props.login(email, password, () => {
          this.props.navigation.navigate('Dashboard');
@@ -39,6 +41,13 @@ class LoginForm extends Component {
                   onChangeText={password => this.setState({ password })}
                   password={true} />
             </View>
+            {
+               this.state.isSpinnershowed ?
+               <View style={{ marginTop: 10, marginBottom: 10 }}>
+                  <Spinner />
+               </View>
+               : null
+            }
             <Button 
                title="Log In" 
                onPress={this.handleSubmit} />
