@@ -1,5 +1,6 @@
 import {
    SAVE_DATA,
+   LOAD_DATA
 } from './types';
 import firebase from 'firebase';
 
@@ -23,4 +24,18 @@ export const saveData = (firstName, lastName, location, callback) => async (disp
          location
       }
    });
+}
+
+export const loadData = () => {
+   let uid = firebase.auth().currentUser.uid;
+   let userPath = firebase.database().ref(`users/${uid}`);
+   return (dispatch) => {
+      userPath.on('value', (snapshot) => {
+         dispatch({
+            type: LOAD_DATA,
+            payload: snapshot.val(),
+         })
+         console.log(snapshot.val())
+      });
+   }
 }

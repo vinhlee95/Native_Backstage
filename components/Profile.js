@@ -8,10 +8,8 @@ import Button from './UI/Button';
 import LocationSearch from './Location/LocationSearch';
 import Map from './Location/Map';
 
-import { connect } from 'react-redux';
-import * as actions from '../actions';
+import firebase from 'firebase';
 import Banner from './UI/Banner';
-
 
 class Profile extends Component {
    static navigationOptions = {
@@ -20,8 +18,22 @@ class Profile extends Component {
    state = { 
       firstName: '',
       lastName: '',
-      location: {lat:'', lng:'', houseNumber: '', postalCode: ''},
+      location: 
+         {
+            lat:'', lng:'', 
+            houseNumber:  '', 
+            postalCode:  ''
+         },
       isBannerShowed: false,
+   }
+
+   componentDidMount() {
+      const uid = firebase.auth().currentUser.uid;
+      const userPath = firebase.database().ref(`users/${uid}`);
+      const data = userPath.on('value', snapshot => {
+         const { firstName, lastName, location } = snapshot.val();
+         this.setState({...this.state, firstName, lastName, location });
+      });
    }
    
 
@@ -37,6 +49,7 @@ class Profile extends Component {
    }
 
    render() {
+      console.log(this.state)
       return(
          <KeyboardAvoidingView behavior="padding" style={{ flex: 1}}>
          <Header headerName = "Profile" />         
@@ -48,11 +61,13 @@ class Profile extends Component {
                </View>
                <Input 
                   placeholder="First Name"
+                  value={this.state.firstName}
                   onChangeText={(firstName) => this.setState({ firstName })}
                   onSubmitEditing={()=> {} }
                   style={{ marginTop: 10}} />
                <Input 
                   placeholder="Last Name"
+                  value={this.state.lastName}                  
                   onChangeText={(lastName) => this.setState({ lastName })} />
 
                <View style={[styles.headingContainer, {marginTop: 20}]}>
@@ -60,15 +75,19 @@ class Profile extends Component {
                   <Text style={styles.heading}>Home address</Text>                  
                </View>
                <View>
-                  <LocationSearch  placeholder="Adress" handleSelectLocation={this.handleSelectLocation} />                  
+                  <LocationSearch  
+                     placeholder="Adress" 
+                     handleSelectLocation={this.handleSelectLocation} />                  
                   <Input 
                      placeholder="Number" 
+                     value={this.state.location.houseNumber}
                      keyboardType="numeric"
                      onChangeText={(houseNumber) => this.setState({ location: {...this.state.location, houseNumber} })} />
                </View>
                <View>
                   <Input 
-                     placeholder="Postal Code" 
+                     placeholder="Postal Code"
+                     value={this.state.location.postalCode} 
                      keyboardType="numeric"
                      onChangeText={(postalCode) => this.setState({ location: {...this.state.location, postalCode} })} />
                </View>
@@ -118,4 +137,4 @@ const styles = {
    }
 }
 
-export default connect(null, actions)(Profile);
+export default Profile;
