@@ -12,12 +12,18 @@ class Profile extends Component {
    static navigationOptions = {
       tabBarIcon:  <Icon name="user" size={24} />
    }
+   state = { location: {lat:'', lng:''} }
 
    handleSaveInfo = () => {
       console.log('Saved')
    }
 
+   handleSelectLocation = (lat, lng) => {
+      this.setState({ location: { lat, lng } });
+   }
+
    render() {
+      console.log(this.state.location)
       return(
          <KeyboardAvoidingView behavior="padding" style={{ flex: 1}}>
          <Header headerName = "Profile" />         
@@ -38,19 +44,18 @@ class Profile extends Component {
                   <Text style={styles.heading}>Home address</Text>                  
                </View>
                <View>
-                  <LocationSearch  placeholder="Street Adress" />                  
+                  <LocationSearch  placeholder="Adress" handleSelectLocation={this.handleSelectLocation} />                  
                   <Input placeholder="Number" keyboardType="numeric" />
                </View>
                <View>
                   <Input placeholder="Postal Code" keyboardType="numeric"  />
-                  <LocationSearch  placeholder="City" />                 
                </View>
                <View style={[styles.headingContainer, {marginTop: 20, marginBottom: 20}]}>
                   <Icon name="map" size={25} />               
                   <Text style={styles.heading}>Map</Text>                  
                </View>
                <View style={{ flex: 1 }}>
-                  <Map />
+                  <Map location={this.state.location}/>
                </View>
                
             </ViewContainer>

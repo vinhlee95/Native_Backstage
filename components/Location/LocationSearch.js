@@ -3,6 +3,7 @@ import { View, Image, Text } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 const LocationSearch = (props) => {
+
   return (
     <GooglePlacesAutocomplete
       placeholder={props.placeholder}
@@ -13,7 +14,8 @@ const LocationSearch = (props) => {
       fetchDetails={true}
       renderDescription={row => row.description} // custom description render
       onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-        console.log(data, details);
+        const { lat, lng } = details.geometry.location;
+        props.handleSelectLocation(lat, lng);
       }}
       
       getDefaultValue={() => ''}
