@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, KeyboardAvoidingView } from 'react-native';
+import { ScrollView, View, Text, KeyboardAvoidingView, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewContainer from './UI/View';
 import Header from './UI/Header';
@@ -8,22 +8,35 @@ import Button from './UI/Button';
 import LocationSearch from './Location/LocationSearch';
 import Map from './Location/Map';
 
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+import Banner from './UI/Banner';
+
+
 class Profile extends Component {
    static navigationOptions = {
       tabBarIcon:  <Icon name="user" size={24} />
    }
-   state = { location: {lat:'', lng:''} }
+   state = { 
+      firstName: '',
+      lastName: '',
+      location: {lat:'', lng:'', houseNumber: '', postalCode: ''},
+      isBannerShowed: false,
+   }
+   
 
    handleSaveInfo = () => {
-      console.log('Saved')
+      const { firstName, lastName, location } = this.state;
+      this.props.saveData(firstName, lastName, location, () => {
+         this.setState({ isBannerShowed: true });
+      });
    }
 
    handleSelectLocation = (lat, lng) => {
-      this.setState({ location: { lat, lng } });
+      this.setState({ location: {...this.state.location, lat, lng } });
    }
 
    render() {
-      console.log(this.state.location)
       return(
          <KeyboardAvoidingView behavior="padding" style={{ flex: 1}}>
          <Header headerName = "Profile" />         
@@ -35,9 +48,12 @@ class Profile extends Component {
                </View>
                <Input 
                   placeholder="First Name"
+                  onChangeText={(firstName) => this.setState({ firstName })}
                   onSubmitEditing={()=> {} }
                   style={{ marginTop: 10}} />
-               <Input placeholder="Last Name" />
+               <Input 
+                  placeholder="Last Name"
+                  onChangeText={(lastName) => this.setState({ lastName })} />
 
                <View style={[styles.headingContainer, {marginTop: 20}]}>
                   <Icon name="map-marker" size={25} />               
@@ -45,10 +61,16 @@ class Profile extends Component {
                </View>
                <View>
                   <LocationSearch  placeholder="Adress" handleSelectLocation={this.handleSelectLocation} />                  
-                  <Input placeholder="Number" keyboardType="numeric" />
+                  <Input 
+                     placeholder="Number" 
+                     keyboardType="numeric"
+                     onChangeText={(houseNumber) => this.setState({ location: {...this.state.location, houseNumber} })} />
                </View>
                <View>
-                  <Input placeholder="Postal Code" keyboardType="numeric"  />
+                  <Input 
+                     placeholder="Postal Code" 
+                     keyboardType="numeric"
+                     onChangeText={(postalCode) => this.setState({ location: {...this.state.location, postalCode} })} />
                </View>
                <View style={[styles.headingContainer, {marginTop: 20, marginBottom: 20}]}>
                   <Icon name="map" size={25} />               
@@ -70,6 +92,12 @@ class Profile extends Component {
                left: '5%',
                opacity: .9
          }}/>
+         {
+            this.state.isBannerShowed 
+            ? 
+            <Banner handleCloseModal={() => this.setState({ isBannerShowed: false })} />
+            : null
+         }
          </KeyboardAvoidingView>
       );
    }
@@ -90,4 +118,4 @@ const styles = {
    }
 }
 
-export default Profile;
+export default connect(null, actions)(Profile);
