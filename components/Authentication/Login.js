@@ -108,7 +108,7 @@ const styles = {
       marginBottom: 0,
    },
    message: {
-      color: 'gray',
+      color: '#969393',
       textAlign: 'center',
       fontSize: 16,
       paddingTop: 5,
@@ -118,7 +118,7 @@ const styles = {
       textAlign: 'center',
       fontSize: 18,
       textDecorationLine: 'underline',
-      color: '#d8d4d4'
+      color: '#969393'
    }
 }
 
