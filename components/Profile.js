@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, KeyboardAvoidingView, Animated } from 'react-native';
+import { ScrollView, View, Text, KeyboardAvoidingView, Animated, TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewContainer from './UI/View';
 import Header from './UI/Header';
@@ -30,6 +30,7 @@ class Profile extends Component {
       isLoading: true,
       isBannerShowed: false,
       isSpinnerShowed: false,
+      isMapFullScreen: false,
    }
 
    // componentWillMount() {
@@ -68,7 +69,17 @@ class Profile extends Component {
    }
 
    render() {
-      console.log(this.state.firstName)
+      // show map full screen when user tap the map 
+      if(this.state.isMapFullScreen) {
+         return (
+            <View style={{ flex: 1}}>
+                  <View style={{ flex: 1, position: 'absolute', top: 15, left: 15, zIndex: 1000 }}>
+                     <Text style={{ fontSize: 30, color: 'white' }} onPress={() => this.setState({ isMapFullScreen: false })}>X</Text>
+                  </View>
+               <Map location={this.state.location} />
+            </View>
+         )
+      }
       return(
          <KeyboardAvoidingView behavior="padding" style={{ flex: 1}}>
             <Header headerName = "Profile" />         
@@ -122,7 +133,7 @@ class Profile extends Component {
                         <Map 
                            location={this.state.location} 
                            scrollEnabled={false}  
-                           onPress={() => console.log('Map pressed!')}
+                           onPress={() => this.setState({ isMapFullScreen: true })}
                            style={{ height: 300, marginBottom: 70 }} />
                      </View>
                      

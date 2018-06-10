@@ -17,6 +17,7 @@ import Loading from './components/Loading';
 
 export default class App extends React.Component {
 
+
   componentWillMount() {
     var config = {
       apiKey: "AIzaSyBQKxPJo3KvbF3VHobpXbQpS-yB8hdCmcg",

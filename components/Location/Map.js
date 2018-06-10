@@ -14,11 +14,11 @@ export default class Map extends React.Component {
       }
       return (
          <MapView
-         onPress={this.props.onPress}
-         scrollEnabled={this.props.scrollEnabled}
-         style={[{ flex: 1 }, this.props.style]}
-         initialRegion={initialRegion}
-         region={initialRegion} >
+            onPress={this.props.onPress}
+            scrollEnabled={this.props.scrollEnabled}
+            style={[{ flex: 1 }, this.props.style]}
+            initialRegion={initialRegion}
+            region={initialRegion} >
             <MapView.Marker coordinate = {initialRegion}/>     
          </MapView>
       );
