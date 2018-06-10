@@ -27,22 +27,29 @@ class Profile extends Component {
             houseNumber:  '', 
             postalCode:  ''
          },
+      isLoading: true,
       isBannerShowed: false,
       isSpinnerShowed: false,
    }
 
    componentDidMount() {
-      this.props.loadData(() => {
-         const { firstName, lastName, location } = this.props;
-         this.setState({ ...this.state, firstName, lastName, location })
-      });
+      this.loadData();
    }
    
    handleSaveInfo = () => {
-      this.setState({ isSpinnerShowed: true })
+      this.setState({ isLoading: true })
       const { firstName, lastName, location } = this.state;
       this.props.saveData(firstName, lastName, location, () => {
-         this.setState({ isBannerShowed: true, isSpinnerShowed: false });
+         this.setState({ isLoading: false, isBannerShowed: true });
+         this.loadData();         
+      });
+   }
+
+   loadData = () => {
+      this.props.loadData(() => {
+         console.log(this.props)
+         const { firstName, lastName, location } = this.props;
+         this.setState({ ...this.state, firstName, lastName, location, isLoading: false })
       });
    }
 
@@ -51,77 +58,86 @@ class Profile extends Component {
    }
 
    render() {
-      // show spinner while loading data
-      const { firstName, lastName, location } = this.state;
-      if(!firstName || !lastName || !location || this.state.isSpinnerShowed) {
-         return <Spinner />
-      }
+      console.log(this.state.firstName)
       return(
          <KeyboardAvoidingView behavior="padding" style={{ flex: 1}}>
-         <Header headerName = "Profile" />         
-         <ScrollView style={{ flex: 1 }}>
-            <ViewContainer>
-               <View style={[styles.headingContainer, { marginTop: 15 }]}>
-                  <Icon name="info-circle" size={25} />               
-                  <Text style={styles.heading}>Basic information</Text>
-               </View>
-               <Input 
-                  placeholder="First Name"
-                  value={this.state.firstName}
-                  onChangeText={(firstName) => this.setState({ firstName })}
-                  onSubmitEditing={()=> {} }
-                  style={{ marginTop: 10}} />
-               <Input 
-                  placeholder="Last Name"
-                  value={this.state.lastName}                  
-                  onChangeText={(lastName) => this.setState({ lastName })} />
+            <Header headerName = "Profile" />         
+            {
+               this.state.isLoading
+               ?
+               <Spinner />
+               :
+               <ScrollView style={{ flex: 1 }}>
+                  <ViewContainer>
+                     <View style={[styles.headingContainer, { marginTop: 15 }]}>
+                        <Icon name="info-circle" size={25} />               
+                        <Text style={styles.heading}>Basic information</Text>
+                     </View>
+                     <Input 
+                        placeholder="First Name"
+                        value={this.state.firstName}
+                        onChangeText={(firstName) => this.setState({ firstName })}
+                        onSubmitEditing={()=> {} }
+                        style={{ marginTop: 10}} />
+                     <Input 
+                        placeholder="Last Name"
+                        value={this.state.lastName}                  
+                        onChangeText={(lastName) => this.setState({ lastName })} />
 
-               <View style={[styles.headingContainer, {marginTop: 20}]}>
-                  <Icon name="map-marker" size={25} />               
-                  <Text style={styles.heading}>Home address</Text>                  
-               </View>
-               <View>
-                  <LocationSearch  
-                     placeholder="Adress" 
-                     handleSelectLocation={this.handleSelectLocation} />                  
-                  <Input 
-                     placeholder="House number" 
-                     value={this.state.location.houseNumber}
-                     onChangeText={(houseNumber) => this.setState({ location: {...this.state.location, houseNumber} })} />
-               </View>
-               <View>
-                  <Input 
-                     placeholder="Postal Code"
-                     value={this.state.location.postalCode} 
-                     keyboardType="numeric"
-                     onChangeText={(postalCode) => this.setState({ location: {...this.state.location, postalCode} })} />
-               </View>
-               <View style={[styles.headingContainer, {marginTop: 20, marginBottom: 20}]}>
-                  <Icon name="map" size={25} />               
-                  <Text style={styles.heading}>Map</Text>                  
-               </View>
-               <View style={{ flex: 1 }}>
-                  <Map location={this.state.location}/>
-               </View>
-               
-            </ViewContainer>
-         </ScrollView>
-         <Button 
-            title="Save your information" 
-            onPress={this.handleSaveInfo}
-            style={{
-               position: 'absolute',
-               bottom: 0,
-               width: '90%',
-               left: '5%',
-               opacity: .9
-         }}/>
-         {
-            this.state.isBannerShowed 
-            ? 
-            <Banner handleCloseModal={() => this.setState({ isBannerShowed: false })} />
-            : null
-         }
+                     <View style={[styles.headingContainer, {marginTop: 20}]}>
+                        <Icon name="map-marker" size={25} />               
+                        <Text style={styles.heading}>Home address</Text>                  
+                     </View>
+                     <View>
+                        <LocationSearch  
+                           placeholder="Adress" 
+                           handleSelectLocation={this.handleSelectLocation} />                  
+                        <Input 
+                           placeholder="House number" 
+                           value={this.state.location.houseNumber}
+                           onChangeText={(houseNumber) => this.setState({ location: {...this.state.location, houseNumber} })} />
+                     </View>
+                     <View>
+                        <Input 
+                           placeholder="Postal Code"
+                           value={this.state.location.postalCode} 
+                           keyboardType="numeric"
+                           onChangeText={(postalCode) => this.setState({ location: {...this.state.location, postalCode} })} />
+                     </View>
+                     <View style={[styles.headingContainer, {marginTop: 20, marginBottom: 20}]}>
+                        <Icon name="map" size={25} />               
+                        <Text style={styles.heading}>Map</Text>                  
+                     </View>
+                     <View style={{ flex: 1 }}>
+                        <Map location={this.state.location}/>
+                     </View>
+                     
+                  </ViewContainer>
+               </ScrollView>
+            }
+            
+            {
+               !this.state.isSpinnerShowed
+               ?
+               <Button 
+                  title="Save your information" 
+                  onPress={this.handleSaveInfo}
+                  style={{
+                     position: 'absolute',
+                     bottom: 0,
+                     width: '90%',
+                     left: '5%',
+                     opacity: .9
+               }}/>
+               : null
+            }
+
+            {
+               this.state.isBannerShowed 
+               ? 
+               <Banner handleCloseModal={() => this.setState({ isBannerShowed: false })} />
+               : null
+            }
          </KeyboardAvoidingView>
       );
    }
