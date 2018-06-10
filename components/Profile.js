@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, KeyboardAvoidingView, Dimensions } from 'react-native';
+import { ScrollView, View, Text, KeyboardAvoidingView, Animated } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewContainer from './UI/View';
 import Header from './UI/Header';
@@ -32,6 +32,10 @@ class Profile extends Component {
       isSpinnerShowed: false,
    }
 
+   // componentWillMount() {
+   //    this.position = new Animated.ValueXY({ x: 0, y: 0})
+   // }
+
    componentDidMount() {
       this.loadData();
    }
@@ -41,6 +45,12 @@ class Profile extends Component {
       const { firstName, lastName, location } = this.state;
       this.props.saveData(firstName, lastName, location, () => {
          this.setState({ isLoading: false, isBannerShowed: true });
+         // Animated.spring(this.position, {
+         //    toValue: {
+         //       x: 0,
+         //       y: -250
+         //    },
+         // }).start();
          this.loadData();         
       });
    }
