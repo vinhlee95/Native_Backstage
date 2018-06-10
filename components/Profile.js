@@ -118,8 +118,12 @@ class Profile extends Component {
                         <Icon name="map" size={25} />               
                         <Text style={styles.heading}>Map</Text>                  
                      </View>
-                     <View style={{ flex: 1 }}>
-                        <Map location={this.state.location}/>
+                     <View style={{ flex: 1, shadowColor: '#000', shadowOffset: {width: 2, height: 4}, shadowOpacity: 0.1, }}>
+                        <Map 
+                           location={this.state.location} 
+                           scrollEnabled={false}  
+                           onPress={() => console.log('Map pressed!')}
+                           style={{ height: 300, marginBottom: 70 }} />
                      </View>
                      
                   </ViewContainer>
