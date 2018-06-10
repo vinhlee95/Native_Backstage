@@ -1,6 +1,6 @@
 import {
    SAVE_DATA,
-   LOAD_DATA
+   LOAD_DATA,
 } from './types';
 import firebase from 'firebase';
 

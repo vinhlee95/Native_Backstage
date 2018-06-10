@@ -16,7 +16,13 @@ import Spinner from './UI/Spinner';
 
 class Profile extends Component {
    static navigationOptions = {
-      tabBarIcon:  <Icon name="user" size={24} />
+      tabBarIcon: ({ focused, tintColor }) => (
+         focused
+         ?
+         <Icon name="user" size={24} color="#2b6edb" />
+         :
+         <Icon name="user" size={24} />
+      ),
    }
    state = { 
       firstName: '',

@@ -8,7 +8,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Dashboard extends Component {
    static navigationOptions = {
-      tabBarIcon:  <Icon name="briefcase" size={24} />
+      tabBarIcon: ({ focused, tintColor }) => (
+         focused
+         ?
+         <Icon name="briefcase" size={24} color="#2b6edb" />
+         :
+         <Icon name="briefcase" size={24} />
+      ),
    }
 
    render() {

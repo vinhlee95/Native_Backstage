@@ -6,7 +6,13 @@ import Header from './UI/Header';
 
 class Performer extends Component {
    static navigationOptions = {
-      tabBarIcon:  <Icon name="fire" size={24} />
+      tabBarIcon: ({ focused, tintColor }) => (
+         focused
+         ?
+         <Icon name="fire" size={24} color="#2b6edb" />
+         :
+         <Icon name="fire" size={24} />
+      )
    }
 
    render() {

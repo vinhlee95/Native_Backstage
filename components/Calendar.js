@@ -6,7 +6,13 @@ import Header from './UI/Header';
 
 class Calendar extends Component {
    static navigationOptions = {
-      tabBarIcon:  <Icon name="calendar" size={24} />
+      tabBarIcon: ({ focused, tintColor }) => (
+         focused
+         ?
+         <Icon name="calendar" size={24} color="#2b6edb" />
+         :
+         <Icon name="calendar" size={24} />
+      ),
    }
 
    render() {
