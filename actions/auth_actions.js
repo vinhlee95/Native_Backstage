@@ -29,7 +29,8 @@ export const signup = (email, password, callback, handleError) => async (dispatc
          },
       });
    } catch (error) {
-      
+      console.log(error)
+      handleError(error);
    }
 }
 

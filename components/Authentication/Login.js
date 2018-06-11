@@ -26,7 +26,7 @@ class LoginForm extends Component {
          this.props.navigation.navigate('Dashboard');
       },
       (error) => {
-         this.setState({ error })
+         this.setState({ error, isSpinnershowed: false })
       }
    );
    }
@@ -67,7 +67,7 @@ class LoginForm extends Component {
                   <Input 
                   placeholder="Password"
                   value={this.state.password}
-                  onChangeText={password => this.setState({ password })}
+                  onChangeText={password => this.setState({ password, error: {} })}
                   passsword
                   />
                   
@@ -80,7 +80,7 @@ class LoginForm extends Component {
                   }
                   
                   {
-                     this.state.isSpinnershowed && !this.state.error ?
+                     this.state.isSpinnershowed  ?
                      <View style={{ marginTop: 10, marginBottom: 20 }}>
                            <Spinner />
                      </View>

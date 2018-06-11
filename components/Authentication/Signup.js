@@ -13,7 +13,7 @@ const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 class SignupForm extends Component {
    
-   state = { email: '', password: '', isSpinnershowed: false}
+   state = { email: '', password: '', isSpinnershowed: false, error: ''}
 
    handleSubmit = () => {
       this.setState({ isSpinnershowed: true })      
@@ -22,8 +22,8 @@ class SignupForm extends Component {
           this.props.login(email, password, () => {
              this.props.navigation.navigate('Dashboard');
           });
-      });
-     
+      }, (error) => { this.setState({ error, isSpinnershowed: false })}
+      );
    }
 
    render() {
@@ -44,24 +44,41 @@ class SignupForm extends Component {
                <Input 
                   placeholder="Email"
                   value={this.state.email}
-                  onChangeText={email => this.setState({ email })}
+                  onChangeText={email => this.setState({ email, error: { message: ''} })}
                   keyboardType="email-address"
                   autoFocus
                   returnKeyType="next"
                />
+               {/* display email-relatederror */}
+                  {
+                     this.state.error.code === "auth/invalid-email" 
+                     || this.state.error.code === "auth/user-not-found"
+                     ?
+                     <Text style={{ color: 'red' }}>{this.state.error.message}</Text>
+                     : null
+                  }
 
                <Input 
                   placeholder="Password"
                   value={this.state.password}
-                  onChangeText={password => this.setState({ password })}
+                  onChangeText={password => this.setState({ password, error: { message: ''} })}
                   passsword
                />
 
+
+               {
+                  this.state.error.code === "auth/wrong-password" 
+                  || this.state.error.code === "auth/weak-password"
+                  ?
+                  <Text style={{ color: 'red', marginBottom: 10 }}>{this.state.error.message}</Text>
+                  : null
+               }
+
                {
                   this.state.isSpinnershowed ?
-                  <View style={{ marginTop: 10, marginBottom: 20 }}>
-                        <Spinner />
-                  </View>
+                     <View style={{ marginTop: 10, marginBottom: 20 }}>
+                           <Spinner />
+                     </View>
                   : null
                }
                
