@@ -139,18 +139,24 @@ class Profile extends Component {
                            keyboardType="numeric"
                            onChangeText={(postalCode) => this.setState({ location: {...this.state.location, postalCode} })} />
                      </View>
-                     <View style={[styles.headingContainer, {marginTop: 20, marginBottom: 20}]}>
-                        <Icon name="map" size={25} />               
-                        <Text style={styles.heading}>Map</Text>                  
-                     </View>
-                     <View style={{ flex: 1, shadowColor: '#000', shadowOffset: {width: 2, height: 4}, shadowOpacity: 0.1, }}>
-                        <Map 
-                           location={this.state.location} 
-                           scrollEnabled={false}  
-                           onPress={() => this.setState({ isMapFullScreen: true })}
-                           style={{ height: 300, marginBottom: 70 }} />
-                     </View>
-                     
+                     {
+                        this.state.location.description
+                        ?
+                        <View style={{flex:1}}>
+                           <View style={[styles.headingContainer, {marginTop: 20, marginBottom: 20}]}>
+                              <Icon name="map" size={25} />               
+                              <Text style={styles.heading}>Map</Text>                  
+                           </View>
+                           <View style={{ flex: 1, shadowColor: '#000', shadowOffset: {width: 2, height: 4}, shadowOpacity: 0.1, }}>
+                              <Map 
+                                 location={this.state.location} 
+                                 scrollEnabled={false}  
+                                 onPress={() => this.setState({ isMapFullScreen: true })}
+                                 style={{ height: 300, marginBottom: 70 }} />
+                           </View>
+                        </View>
+                        : null
+                     }
                   </ViewContainer>
                </ScrollView>
             }
