@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Dimensions} from 'react-native';
+import {View, Text, Image, TouchableHighlight, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -11,7 +11,17 @@ const Header = (props) => {
          {
             !props.notShowIcon
             ?
-            <Icon name="user" size={30} onPress={() => props.navigation.navigate('account', { goBackKey: props.goBackKey})} />
+            <TouchableHighlight onPress={() => props.onPress()}  >
+               <Image
+                  source={require('../../images/CV_Crop.jpg')}
+                  style={{
+                     width: 35,
+                     height: 35,
+                     borderRadius: 17.5,
+                     paddingRight: 5,
+                  }}
+               />
+            </TouchableHighlight>
             : null
          }
          {

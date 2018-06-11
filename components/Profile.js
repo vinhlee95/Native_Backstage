@@ -40,10 +40,6 @@ class Profile extends Component {
       isMapFullScreen: false,
    }
 
-   // componentWillMount() {
-   //    this.position = new Animated.ValueXY({ x: 0, y: 0})
-   // }
-
    componentDidMount() {
       this.loadData();
    }
@@ -53,19 +49,13 @@ class Profile extends Component {
       const { firstName, lastName, location } = this.state;
       this.props.saveData(firstName, lastName, location, () => {
          this.setState({ isLoading: false, isBannerShowed: true });
-         // Animated.spring(this.position, {
-         //    toValue: {
-         //       x: 0,
-         //       y: -250
-         //    },
-         // }).start();
          this.loadData();         
       });
    }
 
    loadData = () => {
       this.props.loadData(() => {
-      //    console.log(this.props)
+         console.log(this.props)
          const { firstName, lastName, location } = this.props;
          this.setState({ ...this.state, firstName, lastName, location, isLoading: false })
       });

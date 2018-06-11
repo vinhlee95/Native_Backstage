@@ -23,6 +23,8 @@ class LoginForm extends Component {
       this.setState({ isSpinnershowed: true })
       const { email, password } = this.state;
       this.props.login(email, password, () => {
+         // clear input after logging in
+         this.setState({ email: '', password: '', isSpinnershowed: false })
          this.props.navigation.navigate('Dashboard');
       },
       (error) => {

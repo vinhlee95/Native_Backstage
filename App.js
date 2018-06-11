@@ -21,12 +21,12 @@ export default class App extends React.Component {
 
   componentWillMount() {
     var config = {
-      apiKey: "AIzaSyBQKxPJo3KvbF3VHobpXbQpS-yB8hdCmcg",
-      authDomain: "gigs-2cb8b.firebaseapp.com",
-      databaseURL: "https://gigs-2cb8b.firebaseio.com",
-      projectId: "gigs-2cb8b",
-      storageBucket: "",
-      messagingSenderId: "936084268710"
+      apiKey: "AIzaSyATiuCvBYsbvwD6crTDGRGYA4kgWaWTluE",
+      authDomain: "backstage-mobile.firebaseapp.com",
+      databaseURL: "https://backstage-mobile.firebaseio.com",
+      projectId: "backstage-mobile",
+      storageBucket: "backstage-mobile.appspot.com",
+      messagingSenderId: "193289166623"
     };
     firebase.initializeApp(config);
   }
