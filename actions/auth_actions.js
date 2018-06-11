@@ -22,6 +22,7 @@ export const signup = (email, password, callback, handleError) => async (dispatc
          firstName: '',
          lastName: '',
          location: {
+            detail:'',
             houseNumber: '',
             lat: '',
             lng: '',

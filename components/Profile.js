@@ -29,6 +29,7 @@ class Profile extends Component {
       lastName: '',
       location: 
          {
+            detail: '',
             lat:'', lng:'', 
             houseNumber:  '', 
             postalCode:  ''
@@ -64,7 +65,7 @@ class Profile extends Component {
 
    loadData = () => {
       this.props.loadData(() => {
-         console.log(this.props)
+      //    console.log(this.props)
          const { firstName, lastName, location } = this.props;
          this.setState({ ...this.state, firstName, lastName, location, isLoading: false })
       });
@@ -74,7 +75,12 @@ class Profile extends Component {
       this.setState({ location: {...this.state.location, lat, lng } });
    }
 
+   submitLocationDescription = (description) => {
+      this.setState({ location: {...this.state.location, description }})
+   }
+
    render() {
+      console.log(this.state.location.description)
       // show map full screen when user tap the map 
       if(this.state.isMapFullScreen) {
          return (
@@ -118,7 +124,9 @@ class Profile extends Component {
                      <View>
                         <LocationSearch  
                            placeholder="Adress" 
-                           handleSelectLocation={this.handleSelectLocation} />                  
+                           defaultValue={this.state.location.description}
+                           handleSelectLocation={this.handleSelectLocation}
+                           submitLocationDescription={this.submitLocationDescription} />
                         <Input 
                            placeholder="House number" 
                            value={this.state.location.houseNumber}
@@ -186,7 +194,7 @@ const styles = {
       marginLeft: 5,
       paddingBottom: 0,
       fontWeight: 'bold',
-   }
+   },
 }
 
 const mapStateToProps = ({ data }) => {
