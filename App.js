@@ -12,6 +12,7 @@ import SignupForm from './components/Authentication/Signup';
 import Dashboard from './components/Dashboard';
 import Performer from './components/Performer';
 import Calendar from './components/Calendar';
+import Account from './components/Authentication/Account';
 import Profile from './components/Profile';
 import Loading from './components/Loading';
 
@@ -35,6 +36,7 @@ export default class App extends React.Component {
       Loading: Loading,
       login: LoginForm,
       signup: SignupForm,
+      account: Account,
       main: createMaterialBottomTabNavigator({
         Dashboard: Dashboard, 
         Performer: Performer,

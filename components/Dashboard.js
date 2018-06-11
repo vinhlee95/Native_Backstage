@@ -24,7 +24,10 @@ class Dashboard extends Component {
       }
       return(
          <View style={{ flex: 1 }}>
-            <Header headerName="Dashboard"/>   
+            <Header 
+               headerName="Dashboard" 
+               navigation={this.props.navigation}
+               goBackKey={this.props.navigation.state.key} />   
             <ScrollView style={{ flex: 1 }}>         
                <ViewContainer >
                   <Text style={styles.title}>Welcome {email}</Text>

@@ -8,7 +8,21 @@ const Header = (props) => {
    return(
       <View style={styles.header}>
          <Text style={styles.headerText}>{props.headerName}</Text>
-         <Icon name="user" size={30} />
+         {
+            !props.notShowIcon
+            ?
+            <Icon name="user" size={30} onPress={() => props.navigation.navigate('account', { goBackKey: props.goBackKey})} />
+            : null
+         }
+         {
+            props.showDone
+            ?
+            <Text 
+               style={styles.done} 
+               onPress={() => props.navigateBack()}
+                >Done</Text>
+            : null
+         }
       </View>
    );
 }
@@ -17,6 +31,7 @@ const styles = {
    header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
+      alignItems: 'center',
       height: DEVICE_HEIGHT/8,
       borderBottomColor: '#cacdd1',
       borderBottomWidth: 0,
@@ -34,6 +49,13 @@ const styles = {
       fontSize: 30,
       fontWeight: 'bold'
    },
+   done: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: 'red',
+      paddingRight: 10,
+      marginTop: 10,
+   }
 }
 
 export default Header;
