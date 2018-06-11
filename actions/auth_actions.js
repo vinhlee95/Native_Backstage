@@ -8,6 +8,7 @@ export const signup = (email, password, callback) => async (dispatch) => {
    try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
       console.log(`A new user with email: ${email} has been created `)
+      await firebase.auth().signInWithEmailAndPassword(email, password);      
       callback();
       dispatch({
          type: AUTH_USER,

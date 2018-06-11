@@ -30,43 +30,6 @@ class LoginForm extends Component {
    render() {
       return(
          <View style={{ flex: 1 }}>
-         <ViewContainer style={styles.container}>
-            <Text style={styles.title}>Sign into Gigle</Text>
-            <Input 
-               placeholder="Email"
-               value={this.state.email}
-               onChangeText={email => this.setState({ email })}
-               keyboardType="email-address"
-               autoFocus
-               returnKeyType="next"
-            />
-
-            <Input 
-               placeholder="Password"
-               value={this.state.password}
-               onChangeText={password => this.setState({ password })}
-               passsword
-            />
-            
-            {
-               this.state.isSpinnershowed ?
-               <View style={{ marginTop: 10, marginBottom: 10 }}>
-                  <Spinner />
-               </View>
-               : null
-            }
-            <Button 
-               title="Log In" 
-               onPress={this.handleSubmit}
-               style={styles.button} />
-            <Text style={styles.message}>
-               ------------or-----------
-            </Text>
-            <Text
-               onPress={() => this.props.navigation.navigate('signup')}
-               style={styles.signup}
-            >Create an account</Text>
-         </ViewContainer>
             <Image 
                source={require('../../images/background.jpg')} 
                style={{ 
@@ -77,6 +40,43 @@ class LoginForm extends Component {
                   alignSelf: 'stretch',
                   opacity: 0.8 }}
             />
+            <ViewContainer style={styles.container}>
+                  <Text style={styles.title}>Sign into Gigle</Text>
+                  <Input 
+                  placeholder="Email"
+                  value={this.state.email}
+                  onChangeText={email => this.setState({ email })}
+                  keyboardType="email-address"
+                  autoFocus
+                  returnKeyType="next"
+                  />
+
+                  <Input 
+                  placeholder="Password"
+                  value={this.state.password}
+                  onChangeText={password => this.setState({ password })}
+                  passsword
+                  />
+                  
+                  {
+                  this.state.isSpinnershowed ?
+                  <View style={{ marginTop: 10, marginBottom: 20 }}>
+                        <Spinner />
+                  </View>
+                  : null
+                  }
+                  <Button 
+                  title="Log In" 
+                  onPress={this.handleSubmit}
+                  style={styles.button} />
+                  <Text style={styles.message}>
+                  ------------or-----------
+                  </Text>
+                  <Text
+                  onPress={() => this.props.navigation.navigate('signup')}
+                  style={styles.signup}
+                  >Create an account</Text>
+            </ViewContainer>
          </View>
       );
    }

@@ -33,10 +33,8 @@ export default class App extends React.Component {
   render() {
     const MainNavigator = createBottomTabNavigator({
       Loading: Loading,
-      auth: createStackNavigator({
-        login: LoginForm,
-        signup: SignupForm,
-      }),
+      login: LoginForm,
+      signup: SignupForm,
       main: createMaterialBottomTabNavigator({
         Dashboard: Dashboard, 
         Performer: Performer,

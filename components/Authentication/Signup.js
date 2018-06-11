@@ -6,50 +6,29 @@ import * as actions from '../../actions';
 import ViewContainer from '../UI/View';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
+import Spinner from '../UI/Spinner';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 class SignupForm extends Component {
-   static navigationOptions = {
-      header: null,
-   }
-   state = { email: '', password: ''}
+   
+   state = { email: '', password: '', isSpinnershowed: false}
 
    handleSubmit = () => {
+      this.setState({ isSpinnershowed: true })      
       const { email, password } = this.state;
       this.props.signup(email, password, () => {
-         this.props.navigation.navigate('dashboard');
+          this.props.login(email, password, () => {
+             this.props.navigation.navigate('Dashboard');
+          });
       });
+     
    }
 
    render() {
       return(
          <View style={{ flex: 1 }}>
-         <ViewContainer style={styles.container}>
-            <Text style={styles.title}>Sign Up</Text>
-            <Input 
-               placeholder="Email"
-               value={this.state.email}
-               onChangeText={email => this.setState({ email })}
-               keyboardType="email-address"
-               autoFocus
-               returnKeyType="next"
-            />
-
-            <Input 
-               placeholder="Password"
-               value={this.state.password}
-               onChangeText={password => this.setState({ password })}
-               passsword
-            />
-            
-            <Button 
-               title="Sign Up" 
-               onPress={this.handleSubmit}
-               style={styles.button} />
-            
-         </ViewContainer>
             <Image 
                source={require('../../images/background.jpg')} 
                style={{ 
@@ -60,6 +39,38 @@ class SignupForm extends Component {
                   alignSelf: 'stretch',
                   opacity: 0.8 }}
             />
+            <ViewContainer style={styles.container}>
+               <Text style={styles.title}>Sign Up</Text>
+               <Input 
+                  placeholder="Email"
+                  value={this.state.email}
+                  onChangeText={email => this.setState({ email })}
+                  keyboardType="email-address"
+                  autoFocus
+                  returnKeyType="next"
+               />
+
+               <Input 
+                  placeholder="Password"
+                  value={this.state.password}
+                  onChangeText={password => this.setState({ password })}
+                  passsword
+               />
+
+               {
+                  this.state.isSpinnershowed ?
+                  <View style={{ marginTop: 10, marginBottom: 20 }}>
+                        <Spinner />
+                  </View>
+                  : null
+               }
+               
+               <Button 
+                  title="Sign Up" 
+                  onPress={this.handleSubmit}
+                  style={styles.button} />
+               
+            </ViewContainer>
          </View>
       );
    }
@@ -68,7 +79,7 @@ class SignupForm extends Component {
 const styles = {
    container: {
       marginTop: 30,
-      flex: 0.5,
+      flex: 0.4,
       justifyContent: 'space-around',
       width: '95%',
       zIndex: 1000,
@@ -76,7 +87,7 @@ const styles = {
       opacity: 0.8,
       paddingLeft: '5%',
       paddingRight: '5%',
-      paddingBottom: 20,
+      paddingBottom: 15,
       borderRadius: 5,
    },
    title: {
