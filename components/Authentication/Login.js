@@ -17,17 +17,22 @@ class LoginForm extends Component {
    static navigationOptions = {
       header: null,
    }
-   state = { email: '', password: '', isSpinnershowed: false }
+   state = { email: '', password: '', isSpinnershowed: false, error: '' }
 
    handleSubmit = () => {
       this.setState({ isSpinnershowed: true })
       const { email, password } = this.state;
       this.props.login(email, password, () => {
          this.props.navigation.navigate('Dashboard');
-      });
+      },
+      (error) => {
+         this.setState({ error })
+      }
+   );
    }
 
    render() {
+      console.log(this.state.error.code)
       return(
          <View style={{ flex: 1 }}>
             <Image 
@@ -45,11 +50,19 @@ class LoginForm extends Component {
                   <Input 
                   placeholder="Email"
                   value={this.state.email}
-                  onChangeText={email => this.setState({ email })}
+                  onChangeText={email => this.setState({ email, error: {} })}
                   keyboardType="email-address"
                   autoFocus
                   returnKeyType="next"
                   />
+                  {/* display email-relatederror */}
+                  {
+                     this.state.error.code === "auth/invalid-email" 
+                     || this.state.error.code === "auth/user-not-found"
+                     ?
+                     <Text style={{ color: 'red' }}>{this.state.error.message}</Text>
+                     : null
+                  }
 
                   <Input 
                   placeholder="Password"
@@ -59,11 +72,19 @@ class LoginForm extends Component {
                   />
                   
                   {
-                  this.state.isSpinnershowed ?
-                  <View style={{ marginTop: 10, marginBottom: 20 }}>
-                        <Spinner />
-                  </View>
-                  : null
+                     this.state.error.code === "auth/wrong-password" 
+                     // || this.state.error.code === "auth/user-not-found"
+                     ?
+                     <Text style={{ color: 'red', marginBottom: 10 }}>{this.state.error.message}</Text>
+                     : null
+                  }
+                  
+                  {
+                     this.state.isSpinnershowed && !this.state.error ?
+                     <View style={{ marginTop: 10, marginBottom: 20 }}>
+                           <Spinner />
+                     </View>
+                     : null
                   }
                   <Button 
                   title="Log In" 

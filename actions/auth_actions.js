@@ -3,7 +3,7 @@ import {
 } from './types';
 import firebase from 'firebase';
 
-export const signup = (email, password, callback) => async (dispatch) => {
+export const signup = (email, password, callback, handleError) => async (dispatch) => {
    console.log('CREATING ACCCOUNT')
    try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -29,23 +29,22 @@ export const signup = (email, password, callback) => async (dispatch) => {
          },
       });
    } catch (error) {
-      console.log(error);
-      // handleError(error);
+      
    }
 }
 
-export const login = (email, password, callback) => async (dispatch) => {
+export const login = (email, password, callback, handleError) => async (dispatch) => {
    console.log('LOGGING IN');
    try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
-      const {uid} = firebase.auth().currentUser;
+      // const {uid} = firebase.auth().currentUser;
       callback();
       dispatch({
          type: AUTH_USER,
          payload: firebase.auth().currentUser.email
       })
    } catch (error) {
-      console.log(error);
-      // handleError(error);
+      // console.log(error);
+      handleError(error);
    }
 }
