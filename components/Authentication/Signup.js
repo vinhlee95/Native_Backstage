@@ -53,6 +53,7 @@ class SignupForm extends Component {
                   {
                      this.state.error.code === "auth/invalid-email" 
                      || this.state.error.code === "auth/user-not-found"
+                     || this.state.error.code === "auth/email-already-in-use"
                      ?
                      <Text style={{ color: 'red' }}>{this.state.error.message}</Text>
                      : null

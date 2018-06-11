@@ -21,7 +21,7 @@ class LocationSearch extends Component {
           this.props.submitLocationDescription(data.description);
         }}
         
-        getDefaultValue={() => `${this.props.defaultValue}`}
+        getDefaultValue={() => {this.props.defaultValue ? `${this.props.defaultValue}` : ' ' }}
         
         query={{
           // available options: https://developers.google.com/places/web-service/autocomplete
