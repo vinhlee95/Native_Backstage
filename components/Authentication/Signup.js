@@ -19,9 +19,11 @@ class SignupForm extends Component {
       this.setState({ isSpinnershowed: true })      
       const { email, password } = this.state;
       this.props.signup(email, password, () => {
-          this.props.login(email, password, () => {
-             this.props.navigation.navigate('Dashboard');
-          });
+         this.props.login(email, password, () => {
+            // clear inputs after signing up
+            this.setState({ email: '', password: '', isSpinnershowed: false })
+            this.props.navigation.navigate('Dashboard');
+         });
       }, (error) => { this.setState({ error, isSpinnershowed: false })}
       );
    }

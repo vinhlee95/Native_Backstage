@@ -38,11 +38,11 @@ export default class App extends React.Component {
       signup: SignupForm,
       account: Account,
       main: createMaterialBottomTabNavigator({
-          Dashboard: Dashboard, 
-          Performer: Performer,
-          Calendar: Calendar,
-          Profile: Profile, 
-        },
+        Dashboard: Dashboard, 
+        Performer: Performer,
+        Calendar: Calendar,
+        Profile: Profile, 
+      },
       {
         navigationOptions: {
           labeled: false,
