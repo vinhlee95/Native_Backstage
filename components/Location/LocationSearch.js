@@ -4,7 +4,10 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 
 class LocationSearch extends Component {
   state = { locationName: '' }
+  
   render() {
+    let defaultValue;
+    this.props.defaultValue ? defaultValue = this.props.defaultValue : defaultValue = '';
     return (
       <GooglePlacesAutocomplete
         value="Helsinki, Finland"
@@ -21,7 +24,7 @@ class LocationSearch extends Component {
           this.props.submitLocationDescription(data.description);
         }}
         
-        getDefaultValue={() => {this.props.defaultValue ? `${this.props.defaultValue}` : ' ' }}
+        getDefaultValue={() => defaultValue}
         
         query={{
           // available options: https://developers.google.com/places/web-service/autocomplete
