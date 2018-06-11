@@ -21,14 +21,14 @@ export default class App extends React.Component {
 
   componentWillMount() {
     var config = {
-      apiKey: "AIzaSyATiuCvBYsbvwD6crTDGRGYA4kgWaWTluE",
-      authDomain: "backstage-mobile.firebaseapp.com",
-      databaseURL: "https://backstage-mobile.firebaseio.com",
-      projectId: "backstage-mobile",
-      storageBucket: "backstage-mobile.appspot.com",
-      messagingSenderId: "193289166623"
-    };
-    firebase.initializeApp(config);
+    apiKey: "AIzaSyATiuCvBYsbvwD6crTDGRGYA4kgWaWTluE",
+    authDomain: "backstage-mobile.firebaseapp.com",
+    databaseURL: "https://backstage-mobile.firebaseio.com",
+    projectId: "backstage-mobile",
+    storageBucket: "backstage-mobile.appspot.com",
+    messagingSenderId: "193289166623"
+  };
+  firebase.initializeApp(config);
   }
 
   render() {
@@ -38,11 +38,11 @@ export default class App extends React.Component {
       signup: SignupForm,
       account: Account,
       main: createMaterialBottomTabNavigator({
-        Dashboard: Dashboard, 
-        Performer: Performer,
-        Calendar: Calendar,
-        Profile: Profile, 
-      },
+          Dashboard: Dashboard, 
+          Performer: Performer,
+          Calendar: Calendar,
+          Profile: Profile, 
+        },
       {
         navigationOptions: {
           labeled: false,
@@ -54,7 +54,7 @@ export default class App extends React.Component {
           }          
         }
       }
-    )
+      )
     },
     {
       navigationOptions: {

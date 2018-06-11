@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const Header = (props) => {
+   console.log(props.goBackKey)
    return(
       <View style={styles.header}>
          <Text style={styles.headerText}>{props.headerName}</Text>

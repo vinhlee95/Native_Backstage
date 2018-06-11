@@ -16,6 +16,7 @@ import Spinner from './UI/Spinner';
 
 class Profile extends Component {
    static navigationOptions = {
+      header: null,
       tabBarIcon: ({ focused, tintColor }) => (
          focused
          ?

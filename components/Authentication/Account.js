@@ -12,7 +12,6 @@ export default class Account extends Component {
    }
 
   render() {
-     console.log(this.props.goBackKey)
       let email = null;
       if (firebase.auth().currentUser) {
          email = firebase.auth().currentUser.email;
