@@ -34,7 +34,7 @@ const styles = {
       alignItems: 'center',
       height: DEVICE_HEIGHT/8,
       borderBottomColor: '#cacdd1',
-      borderBottomWidth: 0,
+      borderBottomWidth: 0.5,
       shadowColor: '#000',
       shadowOffset: {width: 0, height: 2},
       shadowOpacity: 0.1,
