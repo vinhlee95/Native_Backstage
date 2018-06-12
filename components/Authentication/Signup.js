@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { View, Text, Image, Dimensions, Animated, Keyboard  } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
@@ -80,6 +81,7 @@ class SignupForm extends Component {
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
             <ViewContainer>
                <Text style={styles.title}>Sign Up</Text>
+               <Icon name="arrow-left" size={20} style={styles.backButton} onPress={() => this.props.navigation.navigate('login')}/>
                <Input 
                   placeholder="Email"
                   value={this.state.email}
@@ -144,7 +146,7 @@ const color = {
 const styles = {
    container: {
       display: 'flex',
-      height: DEVICE_HEIGHT /3,
+      height: DEVICE_HEIGHT /2.5,
       justifyContent: 'space-around',
       width: '95%',
       marginLeft: 'auto',
@@ -163,6 +165,11 @@ const styles = {
       fontWeight: 'bold',
       paddingTop: 10, 
       paddingBottom: 10,
+   },
+   backButton: {
+      position: 'absolute',
+      top: 10,
+      left: 0,
    },
    button: {
       marginTop: 0,
