@@ -18,7 +18,7 @@ class Performer extends Component {
    render() {
       return(
          <View style={{ flex: 1 }}>
-            <Header headerName = "Performer" />
+            <Header headerName = "Performer" onPress={() => this.props.navigation.navigate('Account')} />
          </View>
       );
    }

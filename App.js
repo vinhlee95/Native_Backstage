@@ -36,8 +36,10 @@ export default class App extends React.Component {
       Loading: Loading,
       Login: LoginForm,
       Signup: SignupForm,
-      Account: Account,
-      Profile: Profile,       
+      setting: createStackNavigator({
+        Account: Account,
+        Profile: Profile,
+      }),
       main: createMaterialBottomTabNavigator({
         Dashboard: Dashboard, 
         Performer: Performer,

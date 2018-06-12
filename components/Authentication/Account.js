@@ -9,6 +9,11 @@ import firebase from 'firebase';
 import ViewContainer from '../UI/View';
 
 export default class Account extends Component {
+   static navigationOptions = ({ navigation }) => {
+      return {
+         header: <Header headerName="Account" notShowIcon showDone navigateBack={() => navigation.navigate('Dashboard')} />
+      }
+   }
 
    handleSignout = () => {
       firebase.auth().signOut();
@@ -22,10 +27,7 @@ export default class Account extends Component {
       }
       return (
          <View style={{flex:1}}>
-            <Header 
-               headerName="Account" 
-               notShowIcon showDone
-               navigateBack={() => this.props.navigation.navigate('Dashboard')} />
+            
             <View style={styles.header}>
                 <Image 
                     source={require('../../images/CV_Crop.jpg')} 

@@ -15,15 +15,17 @@ import Banner from './UI/Banner';
 import Spinner from './UI/Spinner';
 
 class Profile extends Component {
-   static navigationOptions = {
-      header: null,
-      tabBarIcon: ({ focused, tintColor }) => (
+   static navigationOptions = ({ navigation }) => {
+      return {
+         header: <Header headerName="Profile" notShowIcon showDone navigateBack={() => navigation.navigate('Account')} />,
+         tabBarIcon: ({ focused, tintColor }) => (
          focused
          ?
          <Icon name="user" size={24} color="#2b6edb" />
          :
          <Icon name="user" size={24} />
-      ),
+         ),
+      }
    }
    state = { 
       firstName: '',
@@ -85,7 +87,7 @@ class Profile extends Component {
       }
       return(
          <KeyboardAvoidingView behavior="padding" style={{ flex: 1}}>
-            <Header headerName = "Profile" />         
+                   
             {
                this.state.isLoading
                ?
