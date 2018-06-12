@@ -87,6 +87,7 @@ class SignupForm extends Component {
                   keyboardType="email-address"
                   autoFocus
                   returnKeyType="next"
+                  inputStyle={{ color: color.inputColor }}
                />
                {/* display email-relatederror */}
                   {
@@ -103,6 +104,7 @@ class SignupForm extends Component {
                   value={this.state.password}
                   onChangeText={password => this.setState({ password, error: { message: ''} })}
                   passsword
+                  inputStyle={{ color: color.inputColor }}
                />
 
 
@@ -133,6 +135,10 @@ class SignupForm extends Component {
          </View>
       );
    }
+}
+
+const color = {
+   inputColor: '#6a6b6d',
 }
 
 const styles = {
