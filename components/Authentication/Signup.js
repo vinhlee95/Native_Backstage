@@ -81,7 +81,7 @@ class SignupForm extends Component {
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
             <ViewContainer>
                <Text style={styles.title}>Sign Up</Text>
-               <Icon name="chevron-left" size={20} style={styles.backButton} color="#2b6edb" onPress={() => this.props.navigation.navigate('login')}/>
+               <Icon name="chevron-left" size={20} style={styles.backButton} color="#2b6edb" onPress={() => this.props.navigation.navigate('Login')}/>
                <Input 
                   placeholder="Email"
                   value={this.state.email}

@@ -28,7 +28,7 @@ class Dashboard extends Component {
                headerName="Dashboard" 
                navigation={this.props.navigation}
                goBackKey={this.props.navigation.state.key}
-               onPress={() => this.props.navigation.navigate('account')} />   
+               onPress={() => this.props.navigation.navigate('Account')} />   
             <ScrollView style={{ flex: 1 }}>         
                <ViewContainer >
                   <Text style={styles.title}>Welcome {email}</Text>

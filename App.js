@@ -34,14 +34,14 @@ export default class App extends React.Component {
   render() {
     const MainNavigator = createBottomTabNavigator({
       Loading: Loading,
-      login: LoginForm,
-      signup: SignupForm,
-      account: Account,
+      Login: LoginForm,
+      Signup: SignupForm,
+      Account: Account,
+      Profile: Profile,       
       main: createMaterialBottomTabNavigator({
         Dashboard: Dashboard, 
         Performer: Performer,
         Calendar: Calendar,
-        Profile: Profile, 
       },
       {
         navigationOptions: {
