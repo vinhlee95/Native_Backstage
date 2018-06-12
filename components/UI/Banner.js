@@ -30,7 +30,7 @@ const styles = {
    },
    banner: {
       position: 'absolute',
-      top: DEVICE_HEIGHT/2.5,
+      top: DEVICE_HEIGHT/3.5,
       width: '80%',
       left: '10%',
       right: '10%',

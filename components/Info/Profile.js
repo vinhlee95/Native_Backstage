@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, KeyboardAvoidingView, Animated, TouchableWithoutFeedback } from 'react-native';
+import { ScrollView, View, Text, KeyboardAvoidingView, Animated, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewContainer from '../UI/View';
 import Header from '../UI/Header';
@@ -27,21 +27,54 @@ class Profile extends Component {
          ),
       }
    }
-   state = { 
-      firstName: '',
-      lastName: '',
-      location: 
-         {
+
+   constructor(props) {
+      super(props);
+      this.state = {
+         firstName: '',
+         lastName: '',
+         location: {
             detail: '',
-            lat:'', lng:'', 
-            houseNumber:  '', 
-            postalCode:  ''
+            lat: '',
+            lng: '',
+            houseNumber: '',
+            postalCode: ''
          },
-      isLoading: true,
-      isBannerShowed: false,
-      isSpinnerShowed: false,
-      isMapFullScreen: false,
+         isLoading: true,
+         isBannerShowed: false,
+         isSpinnerShowed: false,
+         isMapFullScreen: false,
+      };
+      this.keyboardHeight = new Animated.Value(0);
    }
+
+   // add event listener for keyboard to show up
+   componentWillMount() {
+      this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+      this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+   }
+
+   componentWillUnmount() {
+      this.keyboardWillShowSub.remove();
+      this.keyboardWillHideSub.remove();
+   }
+
+   // callbacks
+   keyboardWillShow = (event) => {
+      // this.setState({ flexNumber: 0.7})
+      Animated.timing(this.keyboardHeight, {
+         duration: event.duration,
+         toValue: event.endCoordinates.height,
+      }).start();
+   };
+
+   keyboardWillHide = (event) => {
+      // this.setState({ flexNumber: 0.4})      
+      Animated.timing(this.keyboardHeight, {
+         duration: event.duration,
+         toValue: 10,
+      }).start();
+   };
 
    componentDidMount() {
       this.loadData();
@@ -73,7 +106,7 @@ class Profile extends Component {
    }
 
    render() {
-      console.log(this.state.location.description)
+      // console.log(this.state.location.description)
       // show map full screen when user tap the map 
       if(this.state.isMapFullScreen) {
          return (
@@ -86,7 +119,8 @@ class Profile extends Component {
          )
       }
       return(
-         <KeyboardAvoidingView behavior="padding" style={{ flex: 1}}>
+         <View style={{flex:1}}>
+         <Animated.View style={[styles.container, { paddingBottom: this.keyboardHeight } ]}>
                    
             {
                this.state.isLoading
@@ -150,38 +184,42 @@ class Profile extends Component {
                         </View>
                         : null
                      }
+                     
                   </ViewContainer>
+                  
                </ScrollView>
             }
-            
-            {
-               !this.state.isSpinnerShowed
-               ?
-               <Button 
-                  title="Save your information" 
-                  onPress={this.handleSaveInfo}
-                  style={{
-                     position: 'absolute',
-                     bottom: 0,
-                     width: '90%',
-                     left: '5%',
-                     opacity: .9
-               }}/>
-               : null
-            }
-
             {
                this.state.isBannerShowed 
                ? 
                <Banner handleCloseModal={() => this.setState({ isBannerShowed: false })} />
                : null
             }
-         </KeyboardAvoidingView>
+         </Animated.View>
+         {
+            !this.state.isSpinnerShowed
+            ?
+            <Button 
+                  title="Save your information" 
+                  onPress={this.handleSaveInfo}
+                  style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  width: '90%',
+                  left: '5%',
+                  opacity: .9
+            }}/>
+            : null
+            }
+         </View>
       );
    }
 }
 
 const styles = {
+   container: {
+      flex: 1,
+   },
    headingContainer: {
       display: 'flex',
       flexDirection: 'row',

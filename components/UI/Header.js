@@ -26,12 +26,12 @@ const Header = (props) => {
             : null
          }
          {
-            props.showDone
+            props.headerRightTitle
             ?
             <Text 
                style={styles.done} 
                onPress={() => props.navigateBack()}
-                >Done</Text>
+                >{props.headerRightTitle}</Text>
             : null
          }
       </View>
