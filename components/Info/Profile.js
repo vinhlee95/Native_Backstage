@@ -113,8 +113,9 @@ class Profile extends Component {
       if(this.state.isMapFullScreen) {
          return (
             <View style={{ flex: 1}}>
-                  <View style={{ flex: 1, position: 'absolute', top: 15, left: 15, zIndex: 1000 }}>
-                     <Text style={{ fontSize: 30, color: 'white', backgroundColor: 'gray', borderRadius: 5, padding: 10 }} onPress={() => this.setState({ isMapFullScreen: false, isHeaderShowed: true })}>X</Text>
+                  <View style={{ flex: 1, position: 'absolute', top: 30, left: 15, zIndex: 1000 }}>
+                     <Icon name="times-circle" size={30} onPress={() => this.setState({ isMapFullScreen: false, isHeaderShowed: true })} />
+
                   </View>
                <Map location={this.state.location} />
             </View>
