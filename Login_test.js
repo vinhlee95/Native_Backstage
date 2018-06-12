@@ -38,7 +38,6 @@ class LoginForm extends Component {
 
    // callbacks
    keyboardWillShow = (event) => {
-      // this.setState({ flexNumber: 0.7})
       Animated.timing(this.keyboardHeight, {
          duration: event.duration,
          toValue: event.endCoordinates.height,
@@ -46,7 +45,6 @@ class LoginForm extends Component {
    };
 
    keyboardWillHide = (event) => {
-      // this.setState({ flexNumber: 0.4})      
       Animated.timing(this.keyboardHeight, {
          duration: event.duration,
          toValue: 10,
@@ -68,6 +66,8 @@ class LoginForm extends Component {
    }
 
    render() {
+      const translateYamount = -this.keyboardHeight;
+      console.log(this.keyboardHeight)
       return(
          <View style={{ flex: 1, justifyContent: 'center' }}>
             <Image 
@@ -80,7 +80,7 @@ class LoginForm extends Component {
                   alignSelf: 'stretch',
                   opacity: 0.8 }}
             />
-            <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
+            <Animated.View style={[styles.container, { transform: [{translateY: this.keyboardHeight}] } ]}>
             <ViewContainer>
                   <Text style={styles.title}>Sign into Gigle</Text>
                   <Input 
@@ -148,8 +148,7 @@ const color = {
 
 const styles = {
    container: {
-      display: 'flex',
-      height: DEVICE_HEIGHT / 2.2,
+      flex: 0.4,
       justifyContent: 'space-around',
       width: '95%',
       marginLeft: 'auto',
@@ -159,14 +158,14 @@ const styles = {
       opacity: 0.8,
       paddingLeft: '5%',
       paddingRight: '5%',
-      paddingTop: 20,
-      paddingBottom: 10,
+      paddingBottom: 20,
       borderRadius: 5,
    },
    title: {
       textAlign: 'center',
       fontSize: 20,
       fontWeight: 'bold',
+      paddingTop: 10, 
       paddingBottom: 10,
    },
    button: {
@@ -177,8 +176,8 @@ const styles = {
       color: color.inputColor,
       textAlign: 'center',
       fontSize: 16,
-      paddingTop: 10,
-      paddingBottom: 10
+      paddingTop: 5,
+      paddingBottom: 5
    },
    signup: {
       textAlign: 'center',
