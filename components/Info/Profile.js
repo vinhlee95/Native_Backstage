@@ -17,7 +17,7 @@ import Spinner from '../UI/Spinner';
 class Profile extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
-         header: <Header headerName="Profile" notShowIcon showDone navigateBack={() => navigation.navigate('Account')} />,
+         header: null,
          tabBarIcon: ({ focused, tintColor }) => (
          focused
          ?
@@ -44,6 +44,8 @@ class Profile extends Component {
          isBannerShowed: false,
          isSpinnerShowed: false,
          isMapFullScreen: false,
+         isHeaderShowed: true,
+         headerTitleRight: 'Done'
       };
       this.keyboardHeight = new Animated.Value(0);
    }
@@ -112,7 +114,7 @@ class Profile extends Component {
          return (
             <View style={{ flex: 1}}>
                   <View style={{ flex: 1, position: 'absolute', top: 15, left: 15, zIndex: 1000 }}>
-                     <Text style={{ fontSize: 30, color: 'white' }} onPress={() => this.setState({ isMapFullScreen: false })}>X</Text>
+                     <Text style={{ fontSize: 30, color: 'white', backgroundColor: 'gray', borderRadius: 5, padding: 10 }} onPress={() => this.setState({ isMapFullScreen: false, isHeaderShowed: true })}>X</Text>
                   </View>
                <Map location={this.state.location} />
             </View>
@@ -120,6 +122,19 @@ class Profile extends Component {
       }
       return(
          <View style={{flex:1}}>
+         {
+            this.state.isHeaderShowed
+            ?
+            <Header 
+               headerName = "Profile"
+               notShowIcon headerRightTitle = {this.state.headerTitleRight}
+               navigateBack = {
+                  () => this.props.navigation.navigate('Account')
+               }
+            />
+            : null
+         }
+         
          <Animated.View style={[styles.container, { paddingBottom: this.keyboardHeight } ]}>
                    
             {
@@ -178,7 +193,7 @@ class Profile extends Component {
                               <Map 
                                  location={this.state.location} 
                                  scrollEnabled={false}  
-                                 onPress={() => this.setState({ isMapFullScreen: true })}
+                                 onPress={() => this.setState({ isMapFullScreen: true, isHeaderShowed: false })}
                                  style={{ height: 300, marginBottom: 70 }} />
                            </View>
                         </View>
