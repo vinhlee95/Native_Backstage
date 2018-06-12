@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image } from 'react-native';
+import { ListItem } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome'
+
 import Header from '../UI/Header';
 import Button from '../UI/Button';
 import firebase from 'firebase';
+import ViewContainer from '../UI/View';
 
 export default class Account extends Component {
 
@@ -23,22 +27,30 @@ export default class Account extends Component {
                notShowIcon showDone
                navigateBack={() => this.props.navigation.navigate('Dashboard')} />
             <View style={styles.header}>
-               <Image 
-                  source={require('../../images/CV_Crop.jpg')} 
-                  style={{ 
-                     width: 150, 
-                     height: 150,
-                     marginLeft: 'auto',
-                     marginRight: 'auto',
-                     borderRadius: 75
-                  }}
-               />
-               <Text style={styles.email}>{email}</Text>
+                <Image 
+                    source={require('../../images/CV_Crop.jpg')} 
+                    style={{ 
+                        width: 150, 
+                        height: 150,
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                        borderRadius: 75
+                    }}
+                />
+                <Text style={styles.email}>{email}</Text>
             </View>
-            <Button 
-               title="Log Out" 
-               style={styles.button}
-               onPress={this.handleSignout} />
+            <ViewContainer>
+                <ListItem 
+                    title="Edit your profile" 
+                    leftIcon={<Icon name="user" size={20} style={{ marginRight: 10}} />}
+                    titleStyle={{ fontSize: 18}}
+                    containerStyle={{ borderBottomWidth: .5, paddingLeft: 0 }}
+                    onPress={() => this.props.navigation.navigate('Profile')} />
+                <Button 
+                title="Log Out" 
+                style={styles.button}
+                onPress={this.handleSignout} />
+            </ViewContainer>
          </View>
       )
    }
@@ -60,6 +72,7 @@ const styles = {
       backgroundColor: '#ed3838',
       width: '80%',
       marginLeft: '10%',
-      marginRight: '10%'
+      marginRight: '10%',
+      marginTop: 20,
    }
 }

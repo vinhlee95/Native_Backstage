@@ -81,7 +81,7 @@ class SignupForm extends Component {
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
             <ViewContainer>
                <Text style={styles.title}>Sign Up</Text>
-               <Icon name="arrow-left" size={20} style={styles.backButton} onPress={() => this.props.navigation.navigate('login')}/>
+               <Icon name="chevron-left" size={20} style={styles.backButton} color="#2b6edb" onPress={() => this.props.navigation.navigate('login')}/>
                <Input 
                   placeholder="Email"
                   value={this.state.email}
@@ -170,6 +170,8 @@ const styles = {
       position: 'absolute',
       top: 10,
       left: 0,
+      paddingTop: 5,
+      paddingRight: 10,
    },
    button: {
       marginTop: 0,
