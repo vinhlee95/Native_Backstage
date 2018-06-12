@@ -14,9 +14,6 @@ const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 
 class LoginForm extends Component {
-   static navigationOptions = {
-      header: null,
-   }
    constructor(props) {
       super(props);
       this.state = {
@@ -71,7 +68,6 @@ class LoginForm extends Component {
       // dynamically disable button
       let disableStatus;
       this.state.email === '' || this.state.password === '' ? disableStatus = true : disableStatus = false;
-      console.log(disableStatus)
       return(
          <View style={{ flex: 1, justifyContent: 'center' }}>
             <Image 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, Image, Dimensions } from 'react-native';
+import { View, Text, Image, Dimensions, Animated, Keyboard  } from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
@@ -12,8 +12,41 @@ const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 class SignupForm extends Component {
-   
-   state = { email: '', password: '', isSpinnershowed: false, error: ''}
+   constructor(props) {
+      super(props);
+      this.state = {
+         email: '', password: '', isSpinnershowed: false, error: '',
+      };
+      this.keyboardHeight = new Animated.Value(0);
+   }
+
+   // add event listener for keyboard to show up
+   componentWillMount() {
+      this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+      this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+   }
+
+   componentWillUnmount() {
+      this.keyboardWillShowSub.remove();
+      this.keyboardWillHideSub.remove();
+   }
+
+   // callbacks
+   keyboardWillShow = (event) => {
+      // this.setState({ flexNumber: 0.7})
+      Animated.timing(this.keyboardHeight, {
+         duration: event.duration,
+         toValue: event.endCoordinates.height,
+      }).start();
+   };
+
+   keyboardWillHide = (event) => {
+      // this.setState({ flexNumber: 0.4})      
+      Animated.timing(this.keyboardHeight, {
+         duration: event.duration,
+         toValue: 10,
+      }).start();
+   };
 
    handleSubmit = () => {
       this.setState({ isSpinnershowed: true })      
@@ -29,8 +62,11 @@ class SignupForm extends Component {
    }
 
    render() {
+      // dynamically disable button
+      let disableStatus;
+      this.state.email === '' || this.state.password === '' ? disableStatus = true : disableStatus = false;
       return(
-         <View style={{ flex: 1 }}>
+         <View style={{ flex: 1, justifyContent: 'center' }}>
             <Image 
                source={require('../../images/background.jpg')} 
                style={{ 
@@ -41,7 +77,8 @@ class SignupForm extends Component {
                   alignSelf: 'stretch',
                   opacity: 0.8 }}
             />
-            <ViewContainer style={styles.container}>
+            <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
+            <ViewContainer>
                <Text style={styles.title}>Sign Up</Text>
                <Input 
                   placeholder="Email"
@@ -88,9 +125,11 @@ class SignupForm extends Component {
                <Button 
                   title="Sign Up" 
                   onPress={this.handleSubmit}
-                  style={styles.button} />
+                  style={styles.button}
+                  disabled={disableStatus} />
                
             </ViewContainer>
+            </Animated.View>
          </View>
       );
    }
@@ -98,10 +137,12 @@ class SignupForm extends Component {
 
 const styles = {
    container: {
-      marginTop: 30,
-      flex: 0.4,
+      display: 'flex',
+      height: DEVICE_HEIGHT /3,
       justifyContent: 'space-around',
       width: '95%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
       zIndex: 1000,
       backgroundColor: 'rgba(255, 255, 255, 0.8)',
       opacity: 0.8,
