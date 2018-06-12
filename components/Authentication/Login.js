@@ -54,7 +54,7 @@ class LoginForm extends Component {
                   value={this.state.email}
                   onChangeText={email => this.setState({ email, error: {} })}
                   keyboardType="email-address"
-                  autoFocus
+                  autoFocus={true}
                   returnKeyType="next"
                   />
                   {/* display email-relatederror */}
