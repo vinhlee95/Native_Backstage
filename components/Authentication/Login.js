@@ -68,6 +68,10 @@ class LoginForm extends Component {
    }
 
    render() {
+      // dynamically disable button
+      let disableStatus;
+      this.state.email === '' || this.state.password === '' ? disableStatus = true : disableStatus = false;
+      console.log(disableStatus)
       return(
          <View style={{ flex: 1, justifyContent: 'center' }}>
             <Image 
@@ -125,16 +129,18 @@ class LoginForm extends Component {
                      : null
                   }
                   <Button 
-                  title="Log In" 
-                  onPress={this.handleSubmit}
-                  style={styles.button} />
+                     title="Log In" 
+                     onPress={this.handleSubmit}
+                     style={styles.button}
+                     disabled={disableStatus} />
+
                   <Text style={styles.message}>
                   ------------or-----------
                   </Text>
                   <Text
-                  onPress={() => this.props.navigation.navigate('signup')}
-                  style={styles.signup}
-                  >Create an account</Text>
+                     onPress={() => this.props.navigation.navigate('signup')}
+                     style={styles.signup}
+                     >Create an account</Text>
             </ViewContainer>
             </Animated.View>
          </View>

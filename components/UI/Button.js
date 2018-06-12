@@ -7,7 +7,8 @@ const ReusableButton = (props) => {
          <Button 
             title={props.title}
             color="white"
-            onPress={props.onPress}>
+            onPress={props.onPress}
+            disabled={props.disabled} >
          </Button>
       </View>
    );
