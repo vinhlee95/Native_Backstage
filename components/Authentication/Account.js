@@ -11,7 +11,7 @@ import ViewContainer from '../UI/View';
 export default class Account extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
-         header: <Header headerName="Account" notShowIcon showDone navigateBack={() => navigation.navigate('Dashboard')} />
+         header: <Header headerName="Account" notShowIcon headerRightTitle="Done" navigateBack={() => navigation.navigate('Dashboard')} />
       }
    }
 
