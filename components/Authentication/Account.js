@@ -26,7 +26,7 @@ export default class Account extends Component {
          email = firebase.auth().currentUser.email;
       }
       return (
-         <View style={{flex:1}}>
+         <View style={{flex:1, backgroundColor: 'white'}}>
             
             <View style={styles.header}>
                 <Image 

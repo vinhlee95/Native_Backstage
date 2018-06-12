@@ -14,6 +14,9 @@ const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 
 class LoginForm extends Component {
+   static navigationOptions = {
+      header: null,
+   }
    constructor(props) {
       super(props);
       this.state = {
@@ -26,6 +29,17 @@ class LoginForm extends Component {
    componentWillMount() {
       this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
       this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+      // render image
+      this.image = <Image 
+                     source={require('../../images/background.jpg')} 
+                     style={{ 
+                        width: DEVICE_WIDTH, 
+                        height: DEVICE_HEIGHT,
+                        position: 'absolute',
+                        zIndex: 0,
+                        alignSelf: 'stretch',
+                        opacity: 0.8 }}
+                  />
    }
 
    componentWillUnmount() {
@@ -70,16 +84,7 @@ class LoginForm extends Component {
       this.state.email === '' || this.state.password === '' ? disableStatus = true : disableStatus = false;
       return(
          <View style={{ flex: 1, justifyContent: 'center' }}>
-            <Image 
-               source={require('../../images/background.jpg')} 
-               style={{ 
-                  width: DEVICE_WIDTH, 
-                  height: DEVICE_HEIGHT,
-                  position: 'absolute',
-                  zIndex: 0,
-                  alignSelf: 'stretch',
-                  opacity: 0.8 }}
-            />
+            {this.image}
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
             <ViewContainer>
                   <Text style={styles.title}>Sign into Gigle</Text>
@@ -134,7 +139,7 @@ class LoginForm extends Component {
                   ------------or-----------
                   </Text>
                   <Text
-                     onPress={() => this.props.navigation.navigate('signup')}
+                     onPress={() => this.props.navigation.navigate('Signup')}
                      style={styles.signup}
                      >Create an account</Text>
             </ViewContainer>

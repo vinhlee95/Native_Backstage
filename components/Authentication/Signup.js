@@ -13,6 +13,9 @@ const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 class SignupForm extends Component {
+   static navigationOptions = {
+      header: null,
+   }
    constructor(props) {
       super(props);
       this.state = {
@@ -25,6 +28,16 @@ class SignupForm extends Component {
    componentWillMount() {
       this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
       this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+      this.image = <Image 
+                     source={require('../../images/background.jpg')} 
+                     style={{ 
+                        width: DEVICE_WIDTH, 
+                        height: DEVICE_HEIGHT,
+                        position: 'absolute',
+                        zIndex: 0,
+                        alignSelf: 'stretch',
+                        opacity: 0.8 }}
+                  />
    }
 
    componentWillUnmount() {
@@ -68,16 +81,7 @@ class SignupForm extends Component {
       this.state.email === '' || this.state.password === '' ? disableStatus = true : disableStatus = false;
       return(
          <View style={{ flex: 1, justifyContent: 'center' }}>
-            <Image 
-               source={require('../../images/background.jpg')} 
-               style={{ 
-                  width: DEVICE_WIDTH, 
-                  height: DEVICE_HEIGHT,
-                  position: 'absolute',
-                  zIndex: 0,
-                  alignSelf: 'stretch',
-                  opacity: 0.8 }}
-            />
+            {this.image}
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
             <ViewContainer>
                <Text style={styles.title}>Sign Up</Text>

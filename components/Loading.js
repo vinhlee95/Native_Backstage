@@ -10,7 +10,7 @@ class Loading extends Component {
       firebase.auth().onAuthStateChanged((user) => {
          if (user) {
             this.setState({ isLogin: true });
-            this.props.navigation.navigate('Profile');
+            this.props.navigation.navigate('Login');
          } else {
             this.setState({
                isLogin: false,

@@ -93,7 +93,7 @@ class Profile extends Component {
                ?
                <Spinner />
                :
-               <ScrollView style={{ flex: 1 }}>
+               <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
                   <ViewContainer>
                      <View style={[styles.headingContainer, { marginTop: 15 }]}>
                         <Icon name="info-circle" size={25} />               
