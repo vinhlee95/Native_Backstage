@@ -36,7 +36,7 @@ class LoginForm extends Component {
    render() {
       console.log(this.state.error.code)
       return(
-         <View style={{ flex: 1 }}>
+         <View style={{ flex: 1, justifyContent: 'center' }}>
             <Image 
                source={require('../../images/background.jpg')} 
                style={{ 
@@ -50,12 +50,13 @@ class LoginForm extends Component {
             <ViewContainer style={styles.container}>
                   <Text style={styles.title}>Sign into Gigle</Text>
                   <Input 
-                  placeholder="Email"
-                  value={this.state.email}
-                  onChangeText={email => this.setState({ email, error: {} })}
-                  keyboardType="email-address"
-                  autoFocus={true}
-                  returnKeyType="next"
+                     placeholder="Email"
+                     value={this.state.email}
+                     onChangeText={email => this.setState({ email, error: {} })}
+                     keyboardType="email-address"
+                     autoFocus={true}
+                     returnKeyType="next"
+                     inputStyle={{ color: color.inputColor }}
                   />
                   {/* display email-relatederror */}
                   {
@@ -67,10 +68,11 @@ class LoginForm extends Component {
                   }
 
                   <Input 
-                  placeholder="Password"
-                  value={this.state.password}
-                  onChangeText={password => this.setState({ password, error: {} })}
-                  passsword
+                     placeholder="Password"
+                     value={this.state.password}
+                     onChangeText={password => this.setState({ password, error: {} })}
+                     passsword
+                     inputStyle={{ color: color.inputColor }}
                   />
                   
                   {
@@ -105,10 +107,13 @@ class LoginForm extends Component {
    }
 }
 
+const color = {
+   inputColor: '#6a6b6d',
+}
+
 const styles = {
    container: {
-      marginTop: 30,
-      flex: 0.5,
+      flex: 0.4,
       justifyContent: 'space-around',
       width: '95%',
       zIndex: 1000,
@@ -131,7 +136,7 @@ const styles = {
       marginBottom: 0,
    },
    message: {
-      color: '#969393',
+      color: color.inputColor,
       textAlign: 'center',
       fontSize: 16,
       paddingTop: 5,
@@ -141,7 +146,7 @@ const styles = {
       textAlign: 'center',
       fontSize: 18,
       textDecorationLine: 'underline',
-      color: '#969393'
+      color: color.inputColor
    }
 }
 
