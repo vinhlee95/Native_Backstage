@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, KeyboardAvoidingView, Animated, TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import ViewContainer from './UI/View';
-import Header from './UI/Header';
-import Input from './UI/Input';
-import Button from './UI/Button';
-import LocationSearch from './Location/LocationSearch';
-import Map from './Location/Map';
+import ViewContainer from '../UI/View';
+import Header from '../UI/Header';
+import Input from '../UI/Input';
+import Button from '../UI/Button';
+import LocationSearch from '../Location/LocationSearch';
+import Map from '../Location/Map';
 
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+import * as actions from '../../actions';
 import firebase from 'firebase';
-import Banner from './UI/Banner';
-import Spinner from './UI/Spinner';
+import Banner from '../UI/Banner';
+import Spinner from '../UI/Spinner';
 
 class Profile extends Component {
    static navigationOptions = ({ navigation }) => {

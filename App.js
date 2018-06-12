@@ -13,7 +13,7 @@ import Dashboard from './components/Dashboard';
 import Performer from './components/Performer';
 import Calendar from './components/Calendar';
 import Account from './components/Authentication/Account';
-import Profile from './components/Profile';
+import Profile from './components/Info/Profile';
 import Loading from './components/Loading';
 
 export default class App extends React.Component {
