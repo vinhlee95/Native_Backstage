@@ -88,6 +88,7 @@ class LoginForm extends Component {
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
             <ViewContainer>
                   <Text style={styles.title}>Sign into Gigle</Text>
+                  <Icon name="chevron-left" size={20} style={styles.backButton} color="#2b6edb" onPress={() => this.props.navigation.navigate('Signup')}/>
                   <Input 
                      placeholder="Email"
                      value={this.state.email}
@@ -135,13 +136,7 @@ class LoginForm extends Component {
                      style={styles.button}
                      disabled={disableStatus} />
 
-                  <Text style={styles.message}>
-                  ------------or-----------
-                  </Text>
-                  <Text
-                     onPress={() => this.props.navigation.navigate('Signup')}
-                     style={styles.signup}
-                     >Create an account</Text>
+                  
             </ViewContainer>
             </Animated.View>
          </View>
@@ -156,7 +151,7 @@ const color = {
 const styles = {
    container: {
       display: 'flex',
-      height: DEVICE_HEIGHT / 2.2,
+      height: DEVICE_HEIGHT / 2.5,
       justifyContent: 'space-around',
       width: '95%',
       marginLeft: 'auto',
@@ -180,19 +175,13 @@ const styles = {
       marginTop: 0,
       marginBottom: 0,
    },
-   message: {
-      color: color.inputColor,
-      textAlign: 'center',
-      fontSize: 16,
-      paddingTop: 10,
-      paddingBottom: 10
+   backButton: {
+      position: 'absolute',
+      top: 5,
+      left: 0,
+      paddingRight: 10,
    },
-   signup: {
-      textAlign: 'center',
-      fontSize: 18,
-      textDecorationLine: 'underline',
-      color: color.inputColor
-   }
+   
 }
 
 export default connect(null, actions)(LoginForm);

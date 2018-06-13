@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, Image, Dimensions, Animated, Keyboard  } from 'react-native';
+import { View, Text, Image, Dimensions, Animated, Keyboard, TouchableHighlight  } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -84,8 +84,8 @@ class SignupForm extends Component {
             {this.image}
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
             <ViewContainer>
-               <Text style={styles.title}>Sign Up</Text>
-               <Icon name="chevron-left" size={20} style={styles.backButton} color="#2b6edb" onPress={() => this.props.navigation.navigate('Login')}/>
+               <Text style={styles.title}>Create a new account</Text>
+               
                <Input 
                   placeholder="Email"
                   value={this.state.email}
@@ -135,6 +135,20 @@ class SignupForm extends Component {
                   onPress={this.handleSubmit}
                   style={styles.button}
                   disabled={disableStatus} />
+               <Text style={styles.message}>
+                  Already had an account?
+               </Text>
+               <TouchableHighlight 
+                  style={{flex:1}}
+                  onPress={() => this.props.navigation.navigate('Login')} >
+                  <View 
+                     style={styles.signinContainer} >
+                     <Text
+                        style={styles.siginText}
+                        >Sign In</Text>
+                     <Icon name="arrow-right" size={20} color="#2b6edb" />
+                  </View>
+               </TouchableHighlight>
                
             </ViewContainer>
             </Animated.View>
@@ -150,7 +164,7 @@ const color = {
 const styles = {
    container: {
       display: 'flex',
-      height: DEVICE_HEIGHT /2.5,
+      height: DEVICE_HEIGHT /2.3,
       justifyContent: 'space-around',
       width: '95%',
       marginLeft: 'auto',
@@ -160,7 +174,7 @@ const styles = {
       opacity: 0.8,
       paddingLeft: '5%',
       paddingRight: '5%',
-      paddingBottom: 15,
+      paddingBottom: 5,
       borderRadius: 5,
    },
    title: {
@@ -170,17 +184,29 @@ const styles = {
       paddingTop: 10, 
       paddingBottom: 10,
    },
-   backButton: {
-      position: 'absolute',
-      top: 10,
-      left: 0,
-      paddingTop: 5,
-      paddingRight: 10,
-   },
    button: {
       marginTop: 0,
       marginBottom: 0,
    },
+   message: {
+      color: color.inputColor,
+      textAlign: 'center',
+      fontSize: 16,
+      paddingTop: 10,
+      paddingBottom: 10
+   },
+   signinContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+   },
+   siginText: {
+      textAlign: 'center',
+      fontSize: 18,
+      color: '#2b6edb',
+      fontWeight: 'bold',
+      marginRight: 5,
+   }
 }
 
 export default connect(null, actions)(SignupForm);
