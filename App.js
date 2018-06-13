@@ -18,13 +18,14 @@ import Loading from './components/Loading';
 
 export default class App extends React.Component {
 
-  componentDidMount() {
-    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE_RIGHT);
-  }
+  // // landscape orientation
+  // componentDidMount() {
+  //   Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE_RIGHT);
+  // }
 
-  componentWillUnmount() {
-    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
-  }
+  // componentWillUnmount() {
+  //   Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
+  // }
 
 
   componentWillMount() {
