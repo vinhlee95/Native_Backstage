@@ -7,7 +7,7 @@ import Header from '../UI/Header';
 import Button from '../UI/Button';
 import firebase from 'firebase';
 import ViewContainer from '../UI/View';
-import ModalLogout from '../UI/ModalLogout';
+import Modal from '../UI/Modal';
 
 import { connect } from 'react-redux';
 
@@ -23,7 +23,7 @@ class Account extends Component {
       setTimeout(() => {
          firebase.auth().signOut();
          this.props.navigation.navigate('login');
-      }, 2000);
+      }, 1000);
       
    }
 
@@ -68,7 +68,12 @@ class Account extends Component {
             {
                this.state.showModalLogout
                ?
-               <ModalLogout />
+               <Modal
+                  title="Logging out"
+                  spinnerColor='#c7c7d6'
+                  textColor='#c7c7d6'
+                  spinnerSize='small'
+                  bannerBackgroundColor='#333335' />
                :null
             }
          </View>
