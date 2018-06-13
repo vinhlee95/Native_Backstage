@@ -18,6 +18,7 @@ const Modal = (props) => {
          width: DEVICE_WIDTH,
          height: DEVICE_HEIGHT,
          backgroundColor: 'rgba(0,0,0, .3)',
+         zIndex: 1001,
       },
       banner: {
          position: 'absolute',
@@ -30,6 +31,7 @@ const Modal = (props) => {
          paddingTop: 20,
          paddingBottom: 20,
          display: 'flex',
+         zIndex: 1001,
       },
       text: {
          textAlign: 'center',

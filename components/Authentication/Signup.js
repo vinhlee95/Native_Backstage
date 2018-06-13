@@ -7,7 +7,7 @@ import * as actions from '../../actions';
 import ViewContainer from '../UI/View';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
-import Spinner from '../UI/Spinner';
+import Modal from '../UI/Modal';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -82,6 +82,16 @@ class SignupForm extends Component {
       return(
          <View style={{ flex: 1, justifyContent: 'center' }}>
             {this.image}
+            {/* show loading screen */}
+            {
+               this.state.isSpinnershowed ?
+                  <Modal
+                     title="Signing in"
+                     textColor='#1a4b93'
+                     spinnerSize='small'
+                     bannerBackgroundColor='white' />
+               : null
+            }
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
             <ViewContainer>
                <Text style={styles.title}>Create a new account</Text>
@@ -122,14 +132,6 @@ class SignupForm extends Component {
                   : null
                }
 
-               {
-                  this.state.isSpinnershowed ?
-                     <View style={{ marginTop: 10, marginBottom: 20 }}>
-                           <Spinner />
-                     </View>
-                  : null
-               }
-               
                <Button 
                   title="Sign Up" 
                   onPress={this.handleSubmit}

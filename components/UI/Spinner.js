@@ -7,7 +7,7 @@ const Spinner = (props) => {
          <ActivityIndicator 
             animating={props.animating} 
             size={props.size ? props.size : 'large'}
-            color={props.color ? props.color : '#0000ff'} />
+            color={props.color ? props.color : '#1a4b93'} />
       </View>
    )
 }
