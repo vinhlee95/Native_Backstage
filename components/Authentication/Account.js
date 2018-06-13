@@ -7,6 +7,7 @@ import Header from '../UI/Header';
 import Button from '../UI/Button';
 import firebase from 'firebase';
 import ViewContainer from '../UI/View';
+import ModalLogout from '../UI/ModalLogout';
 
 import { connect } from 'react-redux';
 
@@ -15,9 +16,15 @@ class Account extends Component {
        header: null,
    }
 
+   state = { showModalLogout: false }
+
    handleSignout = () => {
-      firebase.auth().signOut();
-      this.props.navigation.navigate('login');
+      this.setState({ showModalLogout: true })
+      setTimeout(() => {
+         firebase.auth().signOut();
+         this.props.navigation.navigate('login');
+      }, 2000);
+      
    }
 
   render() {
@@ -58,6 +65,12 @@ class Account extends Component {
                 style={styles.button}
                 onPress={this.handleSignout} />
             </ViewContainer>
+            {
+               this.state.showModalLogout
+               ?
+               <ModalLogout />
+               :null
+            }
          </View>
       )
    }
