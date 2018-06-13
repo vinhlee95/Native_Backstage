@@ -16,7 +16,7 @@ const ReusableButton = (props) => {
 
 const buttonStyle = {
    borderRadius: 5,
-   backgroundColor: '#2b6edb',
+   backgroundColor: '#1a4b93',
    paddingTop: 5,
    paddingBottom: 5,
    marginTop: 10,

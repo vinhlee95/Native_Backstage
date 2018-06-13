@@ -4,6 +4,9 @@ import firebase from 'firebase';
 import ViewContainer from './UI/View';
 import Header from './UI/Header';
 
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Dashboard extends Component {
@@ -11,13 +14,14 @@ class Dashboard extends Component {
       tabBarIcon: ({ focused, tintColor }) => (
          focused
          ?
-         <Icon name="briefcase" size={24} color="#2b6edb" />
+         <Icon name="briefcase" size={24} color="#1a4b93" />
          :
          <Icon name="briefcase" size={24} />
       ),
    }
 
    render() {
+      console.log(this.props.navigation.state.key)
       let email = null;
       if (firebase.auth().currentUser) {
          email = firebase.auth().currentUser.email;
@@ -26,9 +30,11 @@ class Dashboard extends Component {
          <View style={{ flex: 1 }}>
             <Header 
                headerName="Dashboard" 
-               navigation={this.props.navigation}
-               goBackKey={this.props.navigation.state.key}
-               onPress={() => this.props.navigation.navigate('Account')} />   
+               route={this.props.navigation.state.key}
+               onPress={() => {
+                  this.props.navigation.navigate('Account');
+                  this.props.saveRouteName('Dashboard');
+               }} />   
             <ScrollView style={{ flex: 1 }}>         
                <ViewContainer >
                   <Text style={styles.title}>Welcome {email}</Text>
@@ -47,4 +53,5 @@ const styles = {
    }
 }
 
-export default Dashboard;
+
+export default connect(null, actions)(Dashboard);

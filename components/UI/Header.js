@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const Header = (props) => {
-   console.log(props.goBackKey)
+   console.log(props.route)
    return(
       <View style={styles.header}>
          <Text style={styles.headerText}>{props.headerName}</Text>
@@ -54,16 +54,17 @@ const styles = {
       paddingBottom: 15,
       paddingLeft: 8,
       paddingRight: 8,
-      backgroundColor: '#eff3f9',      
+      backgroundColor: '#1a4b93',
    },
    headerText: {
       fontSize: 30,
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      color: 'white',
    },
    done: {
       fontSize: 18,
       fontWeight: 'bold',
-      color: 'red',
+      color: '#ed3838',
       paddingRight: 10,
       marginTop: 10,
    }

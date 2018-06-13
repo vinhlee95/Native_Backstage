@@ -8,11 +8,11 @@ import Button from '../UI/Button';
 import firebase from 'firebase';
 import ViewContainer from '../UI/View';
 
-export default class Account extends Component {
-   static navigationOptions = ({ navigation }) => {
-      return {
-         header: <Header headerName="Account" notShowIcon headerRightTitle="Done" navigateBack={() => navigation.navigate('Dashboard')} />
-      }
+import { connect } from 'react-redux';
+
+class Account extends Component {
+   static navigationOptions = {
+       header: null,
    }
 
    handleSignout = () => {
@@ -21,13 +21,17 @@ export default class Account extends Component {
    }
 
   render() {
+      console.log(this.props.route)
       let email = null;
       if (firebase.auth().currentUser) {
          email = firebase.auth().currentUser.email;
       }
       return (
          <View style={{flex:1, backgroundColor: 'white'}}>
-            
+            <Header 
+                headerName="Account" 
+                notShowIcon headerRightTitle="Done" 
+                navigateBack={() => this.props.navigation.navigate(`${this.props.route}`)} />
             <View style={styles.header}>
                 <Image 
                     source={require('../../images/CV_Crop.jpg')} 
@@ -48,6 +52,7 @@ export default class Account extends Component {
                     titleStyle={{ fontSize: 18}}
                     containerStyle={{ borderBottomWidth: .5, paddingLeft: 0 }}
                     onPress={() => this.props.navigation.navigate('Profile')} />
+              
                 <Button 
                 title="Log Out" 
                 style={styles.button}
@@ -78,3 +83,9 @@ const styles = {
       marginTop: 20,
    }
 }
+
+const mapStateToProps = ({ route }) => {
+    return { route };
+}
+
+export default connect(mapStateToProps)(Account);

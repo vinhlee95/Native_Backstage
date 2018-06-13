@@ -9,7 +9,7 @@ class Calendar extends Component {
       tabBarIcon: ({ focused, tintColor }) => (
          focused
          ?
-         <Icon name="calendar" size={24} color="#2b6edb" />
+         <Icon name="calendar" size={24} color="#1a4b93" />
          :
          <Icon name="calendar" size={24} />
       ),

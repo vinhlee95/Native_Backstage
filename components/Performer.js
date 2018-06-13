@@ -9,7 +9,7 @@ class Performer extends Component {
       tabBarIcon: ({ focused, tintColor }) => (
          focused
          ?
-         <Icon name="fire" size={24} color="#2b6edb" />
+         <Icon name="fire" size={24} color="#1a4b93" />
          :
          <Icon name="fire" size={24} />
       )
