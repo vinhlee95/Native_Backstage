@@ -4,6 +4,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewContainer from './UI/View';
 import Header from './UI/Header';
 
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+
 class Performer extends Component {
    static navigationOptions = {
       tabBarIcon: ({ focused, tintColor }) => (
@@ -18,10 +21,15 @@ class Performer extends Component {
    render() {
       return(
          <View style={{ flex: 1 }}>
-            <Header headerName = "Performer" onPress={() => this.props.navigation.navigate('Account')} />
+            <Header 
+               headerName = "Performer" 
+               onPress={() => {
+                  this.props.navigation.navigate('Account');
+                  this.props.saveRouteName('Performer');
+               }} />
          </View>
       );
    }
 }
 
-export default Performer;
+export default connect(null, actions)(Performer);

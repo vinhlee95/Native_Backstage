@@ -4,6 +4,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewContainer from './UI/View';
 import Header from './UI/Header';
 
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+
 class Calendar extends Component {
    static navigationOptions = {
       tabBarIcon: ({ focused, tintColor }) => (
@@ -18,10 +21,15 @@ class Calendar extends Component {
    render() {
       return(
          <View style={{ flex: 1 }}>
-            <Header headerName = "Calendar" />
+            <Header 
+               headerName = "Calendar"
+               onPress={() => {
+                  this.props.navigation.navigate('Account');
+                  this.props.saveRouteName('Calendar');
+               }} />
          </View>
       );
    }
 }
 
-export default Calendar;
+export default connect(null, actions)(Calendar);
