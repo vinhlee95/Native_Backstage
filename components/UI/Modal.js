@@ -9,6 +9,8 @@ const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const Modal = (props) => {
+   let width = props.width ? props.width : '60%';
+   let centerMargin = props.centerMargin ? props.centerMargin : '20%'
    const styles = {
       backdrop: {
          flex: 1,
@@ -23,9 +25,9 @@ const Modal = (props) => {
       banner: {
          position: 'absolute',
          top: DEVICE_HEIGHT / 3,
-         width: '60%',
-         left: '20%',
-         right: '20%',
+         width: width,
+         left: centerMargin,
+         right: centerMargin,
          backgroundColor: props.bannerBackgroundColor,
          borderRadius: 5,
          paddingTop: 20,
@@ -33,7 +35,7 @@ const Modal = (props) => {
          display: 'flex',
          zIndex: 1001,
       },
-      text: {
+      title: {
          textAlign: 'center',
          fontSize: 20,
          fontWeight: 'bold',
@@ -45,7 +47,8 @@ const Modal = (props) => {
    return(
       <View style={styles.backdrop}>
          <View style={styles.banner}>
-            <Text style={styles.text}>{props.title}</Text>
+            <Text style={[styles.title, {marginBottom: 5}]}>{props.title}</Text>
+            <Text style={[styles.title, {marginBottom: 15}]}>{props.subtitle}</Text>
             <Spinner color={props.spinnerColor} size={props.spinnerSize} />
          </View>
       </View>

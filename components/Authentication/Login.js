@@ -7,7 +7,7 @@ import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import Spinner from '../UI/Spinner';
+import Modal from '../UI/Modal';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -85,6 +85,18 @@ class LoginForm extends Component {
       return(
          <View style={{ flex: 1, justifyContent: 'center' }}>
             {this.image}
+            {
+               this.state.isSpinnershowed ?
+                  <Modal
+                     title="Thanks for signing up!"
+                     subtitle="Logging you in"
+                     textColor='#1a4b93'
+                     spinnerSize='small'
+                     bannerBackgroundColor='white'
+                     width='80%'
+                     centerMargin='10%' />
+               : null
+            }
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
             <ViewContainer>
                   <Text style={styles.title}>Sign into Gigle</Text>
@@ -123,13 +135,6 @@ class LoginForm extends Component {
                      : null
                   }
                   
-                  {
-                     this.state.isSpinnershowed  ?
-                     <View style={{ marginTop: 10, marginBottom: 20 }}>
-                           <Spinner />
-                     </View>
-                     : null
-                  }
                   <Button 
                      title="Log In" 
                      onPress={this.handleSubmit}
