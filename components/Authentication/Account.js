@@ -34,7 +34,7 @@ class Account extends Component {
                 navigateBack={() => this.props.navigation.navigate(`${this.props.route}`)} />
             <View style={styles.header}>
                 <Image 
-                    source={require('../../images/CV_Crop.jpg')} 
+                    source={require('../../images/profile_big.png')} 
                     style={{ 
                         width: 150, 
                         height: 150,

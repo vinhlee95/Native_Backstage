@@ -30,7 +30,6 @@ class Dashboard extends Component {
          <View style={{ flex: 1 }}>
             <Header 
                headerName="Dashboard" 
-               route={this.props.navigation.state.key}
                onPress={() => {
                   this.props.navigation.navigate('Account');
                   this.props.saveRouteName('Dashboard');

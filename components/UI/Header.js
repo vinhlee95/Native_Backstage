@@ -14,7 +14,7 @@ const Header = (props) => {
             ?
             <TouchableHighlight onPress={() => props.onPress()}  >
                <Image
-                  source={require('../../images/CV_Crop.jpg')}
+                  source={require('../../images/profile.png')}
                   style={{
                      width: 35,
                      height: 35,
