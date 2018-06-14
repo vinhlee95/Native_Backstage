@@ -108,6 +108,7 @@ class SignupForm extends Component {
                   autoFocus
                   returnKeyType="next"
                   inputStyle={{ color: color.inputColor }}
+                  handleClearInput={() => this.setState({ email: ''})}
                />
                {/* display email-relatederror */}
                   {
@@ -125,6 +126,7 @@ class SignupForm extends Component {
                   onChangeText={password => this.setState({ password, error: { message: ''} })}
                   inputStyle={{ color: color.inputColor }}
                   secureTextEntry
+                  handleClearInput={() => this.setState({ password: ''})}
                />
 
 
