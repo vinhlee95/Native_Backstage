@@ -23,6 +23,7 @@ class Account extends Component {
       setTimeout(() => {
          firebase.auth().signOut();
          this.props.navigation.navigate('login');
+        this.setState({ showModalLogout: false })
       }, 1000);
       
    }

@@ -86,12 +86,16 @@ class SignupForm extends Component {
             {
                this.state.isSpinnershowed ?
                   <Modal
-                     title="Signing in"
+                     title="Thanks for signing up!"
+                     subtitle="Logging you in"
                      textColor='#1a4b93'
                      spinnerSize='small'
-                     bannerBackgroundColor='white' />
+                     bannerBackgroundColor='white'
+                     width='80%'
+                     centerMargin='10%' />
                : null
             }
+            
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
             <ViewContainer>
                <Text style={styles.title}>Create a new account</Text>

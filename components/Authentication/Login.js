@@ -69,7 +69,7 @@ class LoginForm extends Component {
       const { email, password } = this.state;
       this.props.login(email, password, () => {
          // clear input after logging in
-         this.setState({ email: '', password: '', isSpinnershowed: false })
+         this.setState({ password: '', isSpinnershowed: false })
          this.props.navigation.navigate('Dashboard');
       },
       (error) => {
@@ -88,13 +88,10 @@ class LoginForm extends Component {
             {
                this.state.isSpinnershowed ?
                   <Modal
-                     title="Thanks for signing up!"
-                     subtitle="Logging you in"
+                     title="Signing in"
                      textColor='#1a4b93'
                      spinnerSize='small'
-                     bannerBackgroundColor='white'
-                     width='80%'
-                     centerMargin='10%' />
+                     bannerBackgroundColor='white' />
                : null
             }
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
