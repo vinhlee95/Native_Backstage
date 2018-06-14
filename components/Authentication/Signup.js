@@ -123,8 +123,8 @@ class SignupForm extends Component {
                   placeholder="Password"
                   value={this.state.password}
                   onChangeText={password => this.setState({ password, error: { message: ''} })}
-                  passsword
                   inputStyle={{ color: color.inputColor }}
+                  secureTextEntry
                />
 
 

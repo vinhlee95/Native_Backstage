@@ -7,7 +7,6 @@ const Input = (props) => {
          <TextInput
             value={props.value}
             onChangeText={props.onChangeText}
-            password={props.password}
             placeholder={props.placeholder}
             keyboardType={props.keyboardType}
             onSubmitEditing={props.onSubmitEditing}
@@ -15,6 +14,7 @@ const Input = (props) => {
             focus={props.focus}
             autofocus={props.autofocus}
             style={[styles.input, props.inputStyle]}
+            secureTextEntry={props.secureTextEntry}
          />
       </View>
    );

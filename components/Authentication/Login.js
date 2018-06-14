@@ -20,7 +20,7 @@ class LoginForm extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         email: '', password: '', isSpinnershowed: false, error: '',
+         email: 'vinh@test.com', password: '', isSpinnershowed: false, error: '',
       };
       this.keyboardHeight = new Animated.Value(0);
    }
@@ -120,8 +120,8 @@ class LoginForm extends Component {
                      placeholder="Password"
                      value={this.state.password}
                      onChangeText={password => this.setState({ password, error: {} })}
-                     passsword
                      inputStyle={{ color: color.inputColor }}
+                     secureTextEntry
                   />
                   
                   {
