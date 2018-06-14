@@ -174,7 +174,7 @@ class Profile extends Component {
                         <Input 
                            placeholder="House number" 
                            value={this.state.location.houseNumber}
-									handleClearInput={() => this.setState({location:{...this.state.location, houseNumber: ''}})} />
+									handleClearInput={() => this.setState({location:{...this.state.location, houseNumber: ''}})}
                            onChangeText={(houseNumber) => this.setState({ location: {...this.state.location, houseNumber} })} />
                      </View>
                      <View>
@@ -182,7 +182,7 @@ class Profile extends Component {
                            placeholder="Postal Code"
                            value={this.state.location.postalCode} 
 									keyboardType="numeric"
-									handleClearInput={() => this.setState({location:{...this.state.location, postalCo: ''}})} />									
+									handleClearInput={() => this.setState({location:{...this.state.location, postalCode: ''}})} 									
                            onChangeText={(postalCode) => this.setState({ location: {...this.state.location, postalCode} })} />
                      </View>
                      {
