@@ -8,8 +8,6 @@ import Header from '../UI/Header';
 import Modal from '../UI/Modal';
 import PerformerItem from './PerformerItem';
 
-import { connect } from 'react-redux';
-import * as actions from '../../actions';
 
 class Performer extends Component {
    static navigationOptions = {
@@ -52,6 +50,11 @@ class Performer extends Component {
                   key={performer.data.id}
                   performerData={performer.data}
                   productData={_.toArray(performer.products)}
+                  handleViewInfo={() => {
+                     this.props.navigation.navigate('PerformerInfo', {
+                        performerData: performer.data
+                     });
+                  }}
                />
             );
          });
@@ -65,7 +68,6 @@ class Performer extends Component {
                headerStyle={{ paddingBottom: 5 }}
                onPress={() => {
                   this.props.navigation.navigate('Account');
-                  this.props.saveRouteName('Performer');
                }} />
             <ScrollView>
                <View>
@@ -77,4 +79,4 @@ class Performer extends Component {
    }
 }
 
-export default connect(null, actions)(Performer);
+export default Performer;

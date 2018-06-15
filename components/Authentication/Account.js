@@ -9,7 +9,6 @@ import firebase from 'firebase';
 import ViewContainer from '../UI/View';
 import Modal from '../UI/Modal';
 
-import { connect } from 'react-redux';
 
 class Account extends Component {
    static navigationOptions = {
@@ -38,7 +37,7 @@ class Account extends Component {
             <Header 
                 headerName="Account" 
                 notShowIcon headerRightTitle="Done" 
-                navigateBack={() => this.props.navigation.navigate(`${this.props.route}`)} />
+                navigateBack={() => this.props.navigation.goBack()} />
             <View style={styles.header}>
                 <Image 
                     source={require('../../images/profile_big.png')} 
@@ -102,8 +101,5 @@ const styles = {
    }
 }
 
-const mapStateToProps = ({ route }) => {
-    return { route };
-}
 
-export default connect(mapStateToProps)(Account);
+export default Account;

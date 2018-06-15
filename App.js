@@ -15,6 +15,7 @@ import Calendar from './components/Calendar';
 import Account from './components/Authentication/Account';
 import Profile from './components/Info/Profile';
 import Loading from './components/Loading';
+import PerformerInfo from './components/Performer/PerformerInfo';
 
 export default class App extends React.Component {
 
@@ -50,6 +51,7 @@ export default class App extends React.Component {
       setting: createStackNavigator({
         Account: Account,
         Profile: Profile,
+        PerformerInfo: PerformerInfo,
         main: createMaterialBottomTabNavigator({
           Dashboard: Dashboard,
           Performer: Performer,

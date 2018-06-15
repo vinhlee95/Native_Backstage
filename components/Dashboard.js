@@ -4,9 +4,6 @@ import firebase from 'firebase';
 import ViewContainer from './UI/View';
 import Header from './UI/Header';
 
-import { connect } from 'react-redux';
-import * as actions from '../actions';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Dashboard extends Component {
@@ -31,7 +28,6 @@ class Dashboard extends Component {
                headerName="Dashboard" 
                onPress={() => {
                   this.props.navigation.navigate('Account');
-                  this.props.saveRouteName('Dashboard');
                }} />   
             <ScrollView style={{ flex: 1 }}>         
                <ViewContainer >
@@ -52,4 +48,4 @@ const styles = {
 }
 
 
-export default connect(null, actions)(Dashboard);
+export default Dashboard;

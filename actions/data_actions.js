@@ -3,6 +3,8 @@ import {
    LOAD_DATA,
 } from './types';
 import firebase from 'firebase';
+import request from 'superagent';
+import _ from 'lodash';
 
 export const saveData = (firstName, lastName, location, callback) => async (dispatch) => {
    let database = firebase.database();

@@ -12,6 +12,7 @@ const Modal = (props) => {
    let width = props.width ? props.width : '60%';
    let centerMargin = props.centerMargin ? props.centerMargin : '20%';
    let textColor = props.textColor ? props.textColor : '#1a4b93';
+   let bannerBackgroundColor = props.bannerBackgroundColor ? props.bannerBackgroundColor : 'white';
    const styles = {
       backdrop: {
          flex: 1,
@@ -29,7 +30,7 @@ const Modal = (props) => {
          width: width,
          left: centerMargin,
          right: centerMargin,
-         backgroundColor: props.bannerBackgroundColor,
+         backgroundColor: bannerBackgroundColor,
          borderRadius: 5,
          paddingTop: 20,
          paddingBottom: 20,

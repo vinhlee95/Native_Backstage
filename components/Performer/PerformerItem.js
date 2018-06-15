@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import PerformanceItem from './PerformanceItem';
 
 const PerformerItem = (props) => {
-   const { performerData, productData } = props;
+   const { performerData, productData, handleViewInfo } = props;
    const {name, profileThumb} = performerData;
    let performanceList;
    performanceList = productData.map(performance => {
@@ -15,7 +15,7 @@ const PerformerItem = (props) => {
    return(
       <View>
          <TouchableHighlight 
-            onPress={() => console.log('performer pressed')}
+            onPress={() => handleViewInfo()}
             underlayColor="#d1d3d6" >
             <View style={styles.performer}>
                <View style={styles.imageContainer}>
