@@ -21,6 +21,8 @@ const Input = (props) => {
             autofocus={props.autofocus}
             style={[styles.input, props.inputStyle]}
             secureTextEntry={props.secureTextEntry}
+            multiline={props.multiline}
+            numberOfLines={props.numberOfLines}
          />
          {icon}
       </View>
@@ -42,6 +44,7 @@ const styles = {
       paddingTop: 10,
       paddingBottom: 10,
       flex: 20,
+      maxHeight: 100,
    },
    icon: {
       flex: 1,
