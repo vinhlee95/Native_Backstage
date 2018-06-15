@@ -50,24 +50,25 @@ export default class App extends React.Component {
       setting: createStackNavigator({
         Account: Account,
         Profile: Profile,
+        main: createMaterialBottomTabNavigator({
+          Dashboard: Dashboard,
+          Performer: Performer,
+          Calendar: Calendar,
+        }, {
+          navigationOptions: {
+            labeled: false,
+            shifting: true,
+            barStyle: {
+              backgroundColor: '#eff3f9',
+              borderTopColor: '#cacdd1',
+              borderWidth: .5,
+            }
+          }
+        })
+      }, {
+        initialRouteName: 'main',
+        headerMode: 'none'
       }),
-      main: createMaterialBottomTabNavigator({
-        Dashboard: Dashboard, 
-        Performer: Performer,
-        Calendar: Calendar,
-      },
-      {
-        navigationOptions: {
-          labeled: false,
-          shifting: true,
-          barStyle: {
-            backgroundColor: '#eff3f9',
-            borderTopColor: '#cacdd1',
-            borderWidth: .5,
-          }          
-        }
-      }
-      )
     },
     {
       navigationOptions: {
