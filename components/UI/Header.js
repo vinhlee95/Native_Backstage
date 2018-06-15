@@ -5,9 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const Header = (props) => {
-   console.log(props.route)
    return(
-      <View style={styles.header}>
+      <View style={[styles.header, props.headerStyle]}>
          <Text style={styles.headerText}>{props.headerName}</Text>
          {
             !props.notShowIcon

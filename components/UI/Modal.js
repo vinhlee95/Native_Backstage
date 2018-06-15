@@ -10,7 +10,8 @@ const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const Modal = (props) => {
    let width = props.width ? props.width : '60%';
-   let centerMargin = props.centerMargin ? props.centerMargin : '20%'
+   let centerMargin = props.centerMargin ? props.centerMargin : '20%';
+   let textColor = props.textColor ? props.textColor : '#1a4b93';
    const styles = {
       backdrop: {
          flex: 1,
@@ -39,7 +40,7 @@ const Modal = (props) => {
          textAlign: 'center',
          fontSize: 20,
          fontWeight: 'bold',
-         color: props.textColor,
+         color: textColor,
          marginBottom: 10,
       }
    }

@@ -29,7 +29,6 @@ class Account extends Component {
    }
 
   render() {
-      console.log(this.props.route)
       let email = null;
       if (firebase.auth().currentUser) {
          email = firebase.auth().currentUser.email;

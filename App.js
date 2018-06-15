@@ -10,7 +10,7 @@ import { AppLoading } from 'expo';
 import LoginForm from './components/Authentication/Login';
 import SignupForm from './components/Authentication/Signup';
 import Dashboard from './components/Dashboard';
-import Performer from './components/Performer';
+import Performer from './components/Performer/Performer';
 import Calendar from './components/Calendar';
 import Account from './components/Authentication/Account';
 import Profile from './components/Info/Profile';

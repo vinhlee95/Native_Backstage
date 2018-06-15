@@ -21,7 +21,6 @@ class Dashboard extends Component {
    }
 
    render() {
-      console.log(this.props.navigation.state.key)
       let email = null;
       if (firebase.auth().currentUser) {
          email = firebase.auth().currentUser.email;
