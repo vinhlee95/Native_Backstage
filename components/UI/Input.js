@@ -3,7 +3,11 @@ import { View, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Input = (props) => {
-   let showIcon = true;
+   let icon;
+   if(props.value==='') { icon = null }
+   if(props.value.length>0) {
+      icon = <Icon name="times-circle" size={15} style={styles.icon} color="#afb1b5" onPress={() => props.handleClearInput()} />;
+   }
    return(
       <View style={[styles.container, props.style]}>
          <TextInput
@@ -17,14 +21,8 @@ const Input = (props) => {
             autofocus={props.autofocus}
             style={[styles.input, props.inputStyle]}
             secureTextEntry={props.secureTextEntry}
-            onBlur={() => showIcon = false}
          />
-         {/* {
-            props.value.length > 0 && showIcon
-            ?
-            <Icon name="times-circle" size={15} style={styles.icon} color="#afb1b5" onPress={() => props.handleClearInput()}/>
-            : null
-         } */}
+         {icon}
       </View>
    );
 }
