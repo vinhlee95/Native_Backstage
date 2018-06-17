@@ -6,6 +6,7 @@ import _ from 'lodash';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Header from '../UI/Header';
 import Modal from '../UI/Modal';
+import AddButton from '../UI/AddButton';
 import PerformerItem from './PerformerItem';
 
 
@@ -75,6 +76,9 @@ class Performer extends Component {
                   {performerList}
                </View>
             </ScrollView>
+            <View style={{ position: 'absolute', bottom: 10, right: 10}}>
+               <AddButton />
+            </View>
          </View>
       );
    }

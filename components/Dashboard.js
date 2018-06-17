@@ -33,8 +33,11 @@ class Dashboard extends Component {
                <ViewContainer >
                   <Text style={styles.title}>Welcome {email}</Text>
                   <Text style={{ fontSize: 18}}>You can find your need-to-confirm, upcoming and past gigs bellow</Text>
+                  
                </ViewContainer>
+               
             </ScrollView>
+            
          </View>
       );
    }
