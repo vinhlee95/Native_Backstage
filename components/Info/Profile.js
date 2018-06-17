@@ -153,13 +153,12 @@ class Profile extends Component {
                         placeholder="First Name"
                         value={this.state.firstName}
                         onChangeText={(firstName) => this.setState({ firstName })}
-                        handleClearInput={() => this.setState({firstName:''})}
                         style={{ marginTop: 10}} />
                      <Input 
                         placeholder="Last Name"
                         value={this.state.lastName}                  
                         onChangeText={(lastName) => this.setState({ lastName })}
-                        handleClearInput={() => this.setState({lastName:''})} />
+                        />
 
                      <View style={[styles.headingContainer, {marginTop: 20}]}>
                         <Icon name="map-marker" size={25} />               
@@ -174,15 +173,13 @@ class Profile extends Component {
                         <Input 
                            placeholder="House number" 
                            value={this.state.location.houseNumber}
-									handleClearInput={() => this.setState({location:{...this.state.location, houseNumber: ''}})}
                            onChangeText={(houseNumber) => this.setState({ location: {...this.state.location, houseNumber} })} />
                      </View>
                      <View>
                         <Input 
                            placeholder="Postal Code"
                            value={this.state.location.postalCode} 
-									keyboardType="numeric"
-									handleClearInput={() => this.setState({location:{...this.state.location, postalCode: ''}})} 									
+                           keyboardType="numeric"
                            onChangeText={(postalCode) => this.setState({ location: {...this.state.location, postalCode} })} />
                      </View>
                      {

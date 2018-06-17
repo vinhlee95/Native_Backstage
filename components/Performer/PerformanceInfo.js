@@ -59,7 +59,7 @@ class PerformanceInfo extends Component {
 				<View style={styles.videoContainer} key={video.id}>
 					<WebView
 						source={{ uri: `https://www.youtube.com/watch?v=${serviceId}` }}
-						style={{ marginTop: 20 }}
+						style={{ marginTop: 20, height: 380 }}
 						scrollEnabled={false}
 						allowsInlineMediaPlayback
 					/>
@@ -121,6 +121,7 @@ const styles = {
       marginRight: 'auto'
    },
    videoContainer: { 
+		flex: 1,
       height: 320,
       width: '95%',
       marginLeft: 'auto',
