@@ -7,7 +7,7 @@ const PerformanceItem = (props) => {
    const { title, productImage } = props.performance;
    return(
       <TouchableHighlight 
-         onPress={() => console.log('item pressed')}
+         onPress={() => props.handleViewPerformanceInfo()}
          underlayColor="#d1d3d6" >
          <View style={styles.container}>
             <View style={styles.imageContainer}>

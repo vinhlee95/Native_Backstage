@@ -42,15 +42,15 @@ const styles = {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      height: DEVICE_HEIGHT/8,
+      height: DEVICE_HEIGHT/8.5,
       borderBottomColor: '#cacdd1',
       borderBottomWidth: 0.5,
-      shadowColor: '#000',
+      shadowColor: '#1a4b93',
       shadowOffset: {width: 0, height: 2},
       shadowOpacity: 0.1,
       shadowRadius: 2,
-      paddingTop: 40,
-      paddingBottom: 15,
+      paddingTop: 20,
+      paddingBottom: 5,
       paddingLeft: 8,
       paddingRight: 8,
       backgroundColor: '#1a4b93',
@@ -65,7 +65,7 @@ const styles = {
       fontWeight: 'bold',
       color: '#ed3838',
       paddingRight: 10,
-      marginTop: 10,
+      marginTop: 5,
    }
 }
 

@@ -50,11 +50,12 @@ class Performer extends Component {
                   key={performer.data.id}
                   performerData={performer.data}
                   productData={_.toArray(performer.products)}
-                  handleViewInfo={() => {
+                  handleViewPerformerInfo={() => {
                      this.props.navigation.navigate('PerformerInfo', {
                         performerData: performer.data
                      });
                   }}
+                  navigation={this.props.navigation}
                />
             );
          });
@@ -63,7 +64,7 @@ class Performer extends Component {
       return(
          <View style={{ flex: 1 }}>
             <Header 
-               headerName = "Performers" 
+               headerName = "All performance" 
                // get some bottom space for the p character
                headerStyle={{ paddingBottom: 5 }}
                onPress={() => {

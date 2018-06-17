@@ -16,6 +16,7 @@ import Account from './components/Authentication/Account';
 import Profile from './components/Info/Profile';
 import Loading from './components/Loading';
 import PerformerInfo from './components/Performer/PerformerInfo';
+import PerformanceInfo from './components/Performer/PerformanceInfo';
 
 export default class App extends React.Component {
 
@@ -52,6 +53,7 @@ export default class App extends React.Component {
         Account: Account,
         Profile: Profile,
         PerformerInfo: PerformerInfo,
+        PerformanceInfo: PerformanceInfo,
         main: createMaterialBottomTabNavigator({
           Dashboard: Dashboard,
           Performer: Performer,

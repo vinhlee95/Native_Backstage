@@ -23,6 +23,7 @@ const Input = (props) => {
             secureTextEntry={props.secureTextEntry}
             multiline={props.multiline}
             numberOfLines={props.numberOfLines}
+            onFocus={props.onFocus}
          />
          {icon}
       </View>
@@ -37,7 +38,7 @@ const styles = {
       alignItems: 'center'
    },
    input: {
-      fontSize: 18,
+      fontSize: 15,
       borderBottomColor: '#cacdd1',
       borderTopWidth: 0,
       borderBottomWidth: 1,

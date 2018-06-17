@@ -100,7 +100,7 @@ const styles = {
       marginRight: 'auto'
    },
    label: {
-      fontSize: 20,
+      fontSize: 16,
       fontWeight: 'bold'
    }
 }
