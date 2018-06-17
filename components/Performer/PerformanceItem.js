@@ -38,7 +38,7 @@ const styles = {
    productImage: {
       height: 80,
       width: 80,
-      borderRadius: 10,
+      borderRadius: 5,
       marginLeft: 'auto',
       marginRight: 'auto'
    },

@@ -5,6 +5,7 @@ import Input from '../UI/Input';
 import Header from '../UI/Header';
 import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
+import _ from 'lodash';
 
 class PerformanceInfo extends Component {
    constructor(props) {
@@ -49,7 +50,22 @@ class PerformanceInfo extends Component {
 
    render() {
       const productImage = this.props.navigation.state.params.performanceData.productImage;
-      console.log(this.props.navigation.state.params.performanceData.productImage)
+		console.log(_.toArray(this.props.navigation.state.params.performanceData.media));
+		let videoList;
+		const videoData = _.toArray(this.props.navigation.state.params.performanceData.media);
+		videoList = videoData.map(video => {
+			const serviceId = video.serviceId;
+			return(
+				<View style={styles.videoContainer} key={video.id}>
+					<WebView
+						source={{ uri: `https://www.youtube.com/watch?v=${serviceId}` }}
+						style={{ marginTop: 20 }}
+						scrollEnabled={false}
+						allowsInlineMediaPlayback
+					/>
+				</View>
+			);
+		});
       return(
          <View style={{flex:1, backgroundColor: 'white'}}>
             <Header
@@ -63,14 +79,7 @@ class PerformanceInfo extends Component {
                         <View style={styles.imageContainer}>
                            <Image style={styles.image} source={{uri:productImage}}/>
                         </View>
-                        <View style={styles.videoContainer}>
-                           <WebView
-                              source={{ uri: 'https://www.youtube.com/watch?v=bYP0GvCU1EQ' }}
-                              style={{ marginTop: 20 }}
-                              scrollEnabled={false}
-                              allowsInlineMediaPlayback
-                           />
-                        </View>
+                        {videoList}
                      </Swiper>
                      <ViewContainer>
                         <Text style={styles.label}>Performer name</Text>
