@@ -24,7 +24,6 @@
 * **[React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)**: customizable Icons for React Native.
 
 ## Bugs and fixes
-* Clear text input button (X) does not disappear when text input is blurred. 
 * Saving data in Profile screen: old data pops up before new one is successfully saved. 
 * swiper video view in Performance info
 * Buggy in multiline text input in Performer info & Performance info
