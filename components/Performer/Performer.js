@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Header from '../UI/Header';
 import Modal from '../UI/Modal';
 import AddButton from '../UI/AddButton';
+import AddModal from '../UI/AddModal';
 import PerformerItem from './PerformerItem';
 
 
@@ -21,7 +22,7 @@ class Performer extends Component {
       )
    }
 
-   state = {};
+   state = {showAddModal: false};
 
    componentDidMount() {
       request
@@ -63,7 +64,7 @@ class Performer extends Component {
       }
 
       return(
-         <View style={{ flex: 1 }}>
+         <View style={{ flex: 1, zIndex: 2 }}>
             <Header 
                headerName = "All performance" 
                // get some bottom space for the p character
@@ -76,9 +77,17 @@ class Performer extends Component {
                   {performerList}
                </View>
             </ScrollView>
-            <View style={{ position: 'absolute', bottom: 10, right: 10}}>
-               <AddButton />
+            <View style={{ position: 'absolute', bottom: 20, right: 20}}>
+               <AddButton onPress={() => {this.setState({ showAddModal: true }); console.log('press')}}/>
             </View>
+            {
+               this.state.showAddModal 
+               ?
+               <AddModal 
+                  isModalShowed={this.state.showAddModal}
+                  handleCloseModal={() => this.setState({ showAddModal: false })} />
+               : null
+            }
          </View>
       );
    }

@@ -17,7 +17,7 @@ const AddButton = (props) => {
          backgroundColor: background,
          shadowColor: '#000',
          shadowOffset: {width: 0, height: 5},
-         shadowOpacity: 0.1,
+         shadowOpacity: 0.2,
          shadowRadius: 2,
       },
       text: {
@@ -28,7 +28,9 @@ const AddButton = (props) => {
 
    }
    return(
-      <TouchableHighlight onPress={() => console.log('tapped!')} underlayColor="#86a7d8">
+      <TouchableHighlight 
+         onPress={() => props.onPress()} 
+         underlayColor="transparent" >
          <View style={[styles.button, props.style]}>
             <Text style={styles.text}>+</Text>
          </View>
