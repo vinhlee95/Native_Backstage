@@ -2,9 +2,10 @@ import React from 'react';
 import { View, TouchableHighlight, Text } from 'react-native';
 
 const AddButton = (props) => {
-   const { size, backgroundColor } = props;
+   const { size, backgroundColor, buttonText } = props;
    let buttonSize = size ? size : 60;
    let background = backgroundColor ? backgroundColor : '#1a4b93';
+   let text = buttonText ? buttonText : '+';
 
    const styles = {
       button: {
@@ -32,7 +33,7 @@ const AddButton = (props) => {
          onPress={() => props.onPress()} 
          underlayColor="transparent" >
          <View style={[styles.button, props.style]}>
-            <Text style={styles.text}>+</Text>
+            <Text style={styles.text}>{text}</Text>
          </View>
       </TouchableHighlight>
    );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import request from 'superagent';
 import _ from 'lodash';
 
@@ -22,7 +22,7 @@ class Performer extends Component {
       )
    }
 
-   state = {showAddModal: false};
+   state = {showAddButton: true, showAddModal: false};
 
    componentDidMount() {
       request
@@ -64,7 +64,8 @@ class Performer extends Component {
       }
 
       return(
-         <View style={{ flex: 1, zIndex: 2 }}>
+         <TouchableWithoutFeedback onPress={() => this.setState({ showAddModal: false })} >
+         <View style={{ flex: 1 }}>
             <Header 
                headerName = "All performance" 
                // get some bottom space for the p character
@@ -77,19 +78,27 @@ class Performer extends Component {
                   {performerList}
                </View>
             </ScrollView>
-            <View style={{ position: 'absolute', bottom: 20, right: 20}}>
-               <AddButton style={{ zIndex: 1000}} onPress={() => this.setState({ showAddModal: true })}/>
-            </View>
+            {
+               this.state.showAddButton
+               ?
+               <View style={{ position: 'absolute', bottom: 20, right: 20}}>
+                  <AddButton style={{ zIndex: 100000}} onPress={() => this.setState({ showAddButton: false, showAddModal: true })}/>
+               </View>
+               : null
+            }
+            
             {
                this.state.showAddModal 
                ?
                <AddModal 
                   isModalShowed={this.state.showAddModal}
                   handleCloseModal={() => this.setState({ showAddModal: false })}
+                  handleShowAddButton={() => this.setState({ showAddButton: true })}
                   navigation={this.props.navigation} />
                : null
             }
          </View>
+         </TouchableWithoutFeedback>
       );
    }
 }

@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import {Modal, Text, View, Dimensions, TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../UI/Button';
+import AddButton from '../UI/AddButton';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
 class AddModal extends Component {
    render() {
-      const {navigation, handleCloseModal} = this.props;
+      const {navigation, handleCloseModal, handleShowAddButton} = this.props;
       return(
          <View 
             style={[styles.modal, 
@@ -17,7 +18,7 @@ class AddModal extends Component {
                      {backgroundColor: 'rgba(255,255,255,0.8)'} 
                      : '']} >
             <Modal
-               animationType="slide"
+               animationType="fade"
                transparent={true}
                visible={this.props.isModalShowed}
                onDismiss={() => console.log('Modal is closed!')} >
@@ -26,6 +27,7 @@ class AddModal extends Component {
                      onPress={() => {
                         navigation.navigate('PerformerCreate');
                         handleCloseModal();
+                        handleShowAddButton();
                      }}>
                      <View style={styles.row}>
                         <Text style={styles.text}>Performer</Text>
@@ -37,16 +39,22 @@ class AddModal extends Component {
                      onPress={() => {
                         navigation.navigate('PerformanceCreate');
                         handleCloseModal();
+                        handleShowAddButton();
                      }}>
                      <View style={styles.row}>
                         <Text style={styles.text}>Performance</Text>
                         <Icon name="gift" size={30} color="red" style={styles.icon} />
                      </View>
                   </TouchableWithoutFeedback>
-                  <Button 
-                     title="Cancel" 
-                     style={{ backgroundColor: 'red'}}
-                     onPress={() => handleCloseModal()} />
+                  <View style={styles.closeButton}>
+                     <AddButton 
+                        buttonText="x" 
+                        onPress={() => {
+                           handleCloseModal();
+                           handleShowAddButton();
+                        }}
+                        backgroundColor='red' />
+                  </View>
 
                </View>
             </Modal>
@@ -66,7 +74,7 @@ const styles = {
    },
    optionContainer: {
       position: 'absolute',
-      bottom: DEVICE_HEIGHT/4, 
+      bottom: 75, 
       right: 20,
    },
    row: {
@@ -91,6 +99,10 @@ const styles = {
    },
    icon: {
       marginLeft: 10,
+   },
+   closeButton: {
+      flexDirection: 'row',
+      justifyContent: 'flex-end'
    }
 }
 
