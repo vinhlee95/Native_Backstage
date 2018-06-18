@@ -78,14 +78,15 @@ class Performer extends Component {
                </View>
             </ScrollView>
             <View style={{ position: 'absolute', bottom: 20, right: 20}}>
-               <AddButton onPress={() => {this.setState({ showAddModal: true }); console.log('press')}}/>
+               <AddButton style={{ zIndex: 1000}} onPress={() => this.setState({ showAddModal: true })}/>
             </View>
             {
                this.state.showAddModal 
                ?
                <AddModal 
                   isModalShowed={this.state.showAddModal}
-                  handleCloseModal={() => this.setState({ showAddModal: false })} />
+                  handleCloseModal={() => this.setState({ showAddModal: false })}
+                  navigation={this.props.navigation} />
                : null
             }
          </View>

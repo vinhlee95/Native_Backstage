@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Modal, Text, View, Dimensions} from 'react-native';
+import {Modal, Text, View, Dimensions, TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../UI/Button';
 
@@ -8,6 +8,7 @@ const DEVICE_WIDTH = Dimensions.get('window').width;
 
 class AddModal extends Component {
    render() {
+      const {navigation, handleCloseModal} = this.props;
       return(
          <View 
             style={[styles.modal, 
@@ -21,10 +22,16 @@ class AddModal extends Component {
                visible={this.props.isModalShowed}
                onDismiss={() => console.log('Modal is closed!')} >
                <View style={styles.optionContainer}>
+                  <TouchableWithoutFeedback 
+                     onPress={() => {
+                        navigation.navigate('PerformerCreate');
+                        handleCloseModal();
+                     }}>
                   <View style={styles.row}>
                      <Text style={styles.text}>Performer</Text>
                      <Icon name="user" size={30} color="red" style={styles.icon} />
                   </View>
+                  </TouchableWithoutFeedback>
                   <View style={styles.row}>
                      <Text style={styles.text}>Performance</Text>
                      <Icon name="gift" size={30} color="red" style={styles.icon} />
@@ -32,7 +39,7 @@ class AddModal extends Component {
                   <Button 
                      title="Cancel" 
                      style={{ backgroundColor: 'red'}}
-                     onPress={() => this.props.handleCloseModal()} />
+                     onPress={() => handleCloseModal()} />
 
                </View>
             </Modal>
