@@ -11,8 +11,8 @@ import Map from '../Location/Map';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import firebase from 'firebase';
-import Banner from '../UI/Banner';
 import Spinner from '../UI/Spinner';
+import SaveModal from '../UI/SaveModal';
 
 class Profile extends Component {
    static navigationOptions = ({ navigation }) => {
@@ -41,7 +41,7 @@ class Profile extends Component {
             postalCode: ''
          },
          isLoading: true,
-         isBannerShowed: false,
+         isModalShowed: false,
          isSpinnerShowed: false,
          isMapFullScreen: false,
          isHeaderShowed: true,
@@ -86,7 +86,7 @@ class Profile extends Component {
       this.setState({ isLoading: true })
       const { firstName, lastName, location } = this.state;
       this.props.saveData(firstName, lastName, location, () => {
-         this.setState({ isLoading: false, isBannerShowed: true });
+         this.setState({ isLoading: false, isModalShowed: true });
          this.loadData();         
       });
    }
@@ -206,9 +206,11 @@ class Profile extends Component {
                </ScrollView>
             }
             {
-               this.state.isBannerShowed 
+               this.state.isModalShowed 
                ? 
-               <Banner handleCloseModal={() => this.setState({ isBannerShowed: false })} />
+               <SaveModal 
+                  isModalShowed={this.state.isModalShowed}
+                  handleCloseModal={() => this.setState({ isModalShowed: false })} />
                : null
             }
          </Animated.View>
