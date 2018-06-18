@@ -27,15 +27,22 @@ class AddModal extends Component {
                         navigation.navigate('PerformerCreate');
                         handleCloseModal();
                      }}>
-                  <View style={styles.row}>
-                     <Text style={styles.text}>Performer</Text>
-                     <Icon name="user" size={30} color="red" style={styles.icon} />
-                  </View>
+                     <View style={styles.row}>
+                        <Text style={styles.text}>Performer</Text>
+                        <Icon name="user" size={30} color="red" style={styles.icon} />
+                     </View>
                   </TouchableWithoutFeedback>
-                  <View style={styles.row}>
-                     <Text style={styles.text}>Performance</Text>
-                     <Icon name="gift" size={30} color="red" style={styles.icon} />
-                  </View>
+
+                  <TouchableWithoutFeedback
+                     onPress={() => {
+                        navigation.navigate('PerformanceCreate');
+                        handleCloseModal();
+                     }}>
+                     <View style={styles.row}>
+                        <Text style={styles.text}>Performance</Text>
+                        <Icon name="gift" size={30} color="red" style={styles.icon} />
+                     </View>
+                  </TouchableWithoutFeedback>
                   <Button 
                      title="Cancel" 
                      style={{ backgroundColor: 'red'}}
@@ -70,7 +77,7 @@ const styles = {
       marginBottom: 10,
       paddingTop: 10, paddingBottom: 10,
       paddingLeft: 20, paddingRight: 20,
-      borderRadius: 5,
+      borderRadius: 25,
       borderWidth: 0.5,
       borderColor: '#dee2e8',
       shadowColor: '#1a4b93',

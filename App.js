@@ -18,6 +18,7 @@ import Loading from './components/Loading';
 import PerformerInfo from './components/Performer/PerformerInfo';
 import PerformanceInfo from './components/Performer/PerformanceInfo';
 import PerformerCreate from './components/Performer/PerformerCreate';
+import PerformanceCreate from './components/Performer/PerformanceCreate';
 
 export default class App extends React.Component {
 
@@ -56,6 +57,7 @@ export default class App extends React.Component {
         PerformerInfo: PerformerInfo,
         PerformanceInfo: PerformanceInfo,
         PerformerCreate: PerformerCreate,
+        PerformanceCreate: PerformanceCreate,
         main: createMaterialBottomTabNavigator({
           Dashboard: Dashboard,
           Performer: Performer,

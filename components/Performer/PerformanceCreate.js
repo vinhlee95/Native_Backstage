@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native';
 import Header from '../UI/Header';
 
-class PerformerCreate extends Component {
+class PerformanceCreate extends Component {
   render() {
     return (
       <View>
          <Header
-            headerName="New performer"
+            headerName="New performance"
             notShowIcon headerRightTitle = "Done"
             navigateBack={() => this.props.navigation.goBack()} />
       </View>
@@ -15,4 +15,4 @@ class PerformerCreate extends Component {
   }
 }
 
-export default PerformerCreate;
+export default PerformanceCreate;
