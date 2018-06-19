@@ -1,3 +1,7 @@
+// TODO: required props:
+// 1. isModalShowed: bool => showing blur overlay background color
+// 2. handleCloseModal: func => function to close modal
+
 import React, {Component} from 'react';
 import {Modal, Text, View, Dimensions, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';

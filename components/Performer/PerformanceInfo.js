@@ -5,6 +5,7 @@ import Input from '../UI/Input';
 import Header from '../UI/Header';
 import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
+import SaveModal from '../UI/SaveModal';
 import Tag from '../UI/Tag';
 import _ from 'lodash';
 
@@ -18,7 +19,8 @@ class PerformanceInfo extends Component {
       this.state = {
          title,
          description,
-         performerName: name
+         performerName: name,
+         showSaveModal: false
       };
       this.keyboardHeight = new Animated.Value(0);
    }
@@ -50,6 +52,12 @@ class PerformanceInfo extends Component {
          toValue: 10,
       }).start();
    };
+
+   handleSaveData = () => {
+      // do sth to save data
+      // display save modal
+      this.setState({ showSaveModal: true })
+   }
 
 
 
@@ -103,31 +111,46 @@ class PerformanceInfo extends Component {
                            onChangeText={title => this.setState({ title })}
                            style={{marginBottom: 25}} />  
 
-                        <Text style={styles.label}>Tags</Text>
+                        <Text style={styles.label}>Performance description</Text>
+                        <Input
+                           value={this.state.description}
+                           onChangeText={description => this.setState({ description })}
+                           multiline /> 
 
                         {/* Tag List */}
+                        <Text style={styles.label}>Tags</Text>
                         <View style={styles.tagList}>
                            <Tag tagName={performanceData.audienceSize} tagIonIconName="ios-people" />
                            <Tag tagName="Audio" tagIonIconName="ios-musical-note" tagWidth={80} />
                            <Tag tagName={performanceDuration} tagIonIconName="ios-clock" tagWidth={100} />
-                           <Tag tagName="Car to door" tagIonIconName="ios-car" tagWidth={120}  />
+                           {
+                              performanceData.carToDoor
+                              ?
+                              <Tag tagName="Car to door" tagIonIconName="ios-car" tagWidth={120}  />
+                              : null
+                           }
+                           
                            <Tag tagName={price} tagIonIconName="ios-pricetag" tagWidth={80}/>
                            <Tag tagName="Electricity" tagIconName="bolt" tagWidth={100} />
                         </View>
                         <Button 
                            title="Edit tags"
                            style={styles.editTagButton}
-                            />
+                           onPress={() => console.log('Go to edit tag screen')}
+                        />
 
-                        <Text style={styles.label}>Performance description</Text>
-                        <Input
-                           value={this.state.description}
-                           onChangeText={description => this.setState({ description })}
-                           multiline />    
-
-                        <Button title="Save" onPress={() => this.props.navigation.goBack()} />        
+                        <Button title="Save" onPress={() => this.handleSaveData()} />        
                      </ViewContainer>
                   </ScrollView>
+                  {
+                     this.state.showSaveModal
+                     ?
+                     <SaveModal 
+                        isModalShowed 
+                        handleCloseModal={() => this.setState({ showSaveModal: false })}
+                     />
+                     : null
+                  }
                </Animated.View> 
 
          </View>
