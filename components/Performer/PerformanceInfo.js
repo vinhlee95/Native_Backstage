@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, Keyboard, Animated, WebView } from 'react-native';
+import { View, Text, ScrollView, Image, Keyboard, Animated, WebView, Dimensions } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Input from '../UI/Input';
 import Header from '../UI/Header';
 import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
+import Tag from '../UI/Tag';
 import _ from 'lodash';
+
+const DEVICE_WIDTH = Dimensions.get('window').width;
 
 class PerformanceInfo extends Component {
    constructor(props) {
@@ -48,10 +51,16 @@ class PerformanceInfo extends Component {
       }).start();
    };
 
+
+
    render() {
       const productImage = this.props.navigation.state.params.performanceData.productImage;
-		console.log(_.toArray(this.props.navigation.state.params.performanceData.media));
-		let videoList;
+      const {performanceData} = this.props.navigation.state.params;
+      console.log(performanceData);
+      const performanceDuration = `${performanceData.duration} mins`;
+      const price = `${performanceData.price} €`;
+      let videoList;
+      
 		const videoData = _.toArray(this.props.navigation.state.params.performanceData.media);
 		videoList = videoData.map(video => {
 			const serviceId = video.serviceId;
@@ -90,7 +99,23 @@ class PerformanceInfo extends Component {
                         <Text style={styles.label}>Performance name</Text>
                         <Input
                            value={this.state.title}
-                           onChangeText={title => this.setState({ title })} />     
+                           onChangeText={title => this.setState({ title })} />  
+
+                        <Text style={styles.label}>Tags</Text>
+
+                        {/* Tag List */}
+                        <View style={styles.tagList}>
+                           <Tag tagName={performanceData.audienceSize} tagIonIconName="ios-people" />
+                           <Tag tagName="Audio" tagIonIconName="ios-musical-note" tagWidth={80} />
+                           <Tag tagName={performanceDuration} tagIonIconName="ios-clock" tagWidth={100} />
+                           <Tag tagName="Car to door" tagIonIconName="ios-car" tagWidth={120}  />
+                           <Tag tagName={price} tagIonIconName="ios-pricetag" tagWidth={80}/>
+                           <Tag tagName="Electricity" tagIconName="bolt" tagWidth={100} />
+                        </View>
+                        <Button 
+                           title="Edit tags"
+                           style={styles.editTagButton}
+                            />
 
                         <Text style={styles.label}>Performance description</Text>
                         <Input
@@ -130,6 +155,26 @@ const styles = {
    label: {
       fontSize: 16,
       fontWeight: 'bold'
+   },
+   tagList: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      flexWrap: 'wrap',
+      width: DEVICE_WIDTH,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginTop: 10, marginBottom: 10,
+   },
+   editTagButton: {
+      width: '30%',
+      backgroundColor: '#2d81e2',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      borderRadius: 20,
+      paddingTop: 0,
+      paddingBottom: 0,
+      marginTop: 0,
+      marginBottom: 20,
    }
 }
 

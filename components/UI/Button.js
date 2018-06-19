@@ -6,9 +6,10 @@ const ReusableButton = (props) => {
       <View style={[buttonStyle, props.style]}>
          <Button 
             title={props.title}
-            color="white"
+            color={props.textColor?props.textColor:'white'}
             onPress={props.onPress}
-            disabled={props.disabled} >
+            disabled={props.disabled}
+            fontSize={15} >
          </Button>
       </View>
    );
