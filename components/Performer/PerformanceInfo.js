@@ -136,7 +136,14 @@ class PerformanceInfo extends Component {
                         <Button 
                            title="Edit tags"
                            style={styles.editTagButton}
-                           onPress={() => console.log('Go to edit tag screen')}
+                           onPress={() => this.props.navigation.navigate('TagEdit', {
+                              audienceSize: performanceData.audienceSize,
+                              performanceDuration,
+                              carToDoor: performanceData.carToDoor,
+                              price,
+                              electricity: performanceData.electricity,
+                              navigation: this.props.navigation,
+                           })}
                         />
 
                         <Button title="Save" onPress={() => this.handleSaveData()} />        

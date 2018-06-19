@@ -19,6 +19,7 @@ import PerformerInfo from './components/Performer/PerformerInfo';
 import PerformanceInfo from './components/Performer/PerformanceInfo';
 import PerformerCreate from './components/Performer/PerformerCreate';
 import PerformanceCreate from './components/Performer/PerformanceCreate';
+import TagEdit from './components/Performer/TagEdit';
 
 export default class App extends React.Component {
 
@@ -58,6 +59,7 @@ export default class App extends React.Component {
         PerformanceInfo: PerformanceInfo,
         PerformerCreate: PerformerCreate,
         PerformanceCreate: PerformanceCreate,
+        TagEdit: TagEdit,
         main: createMaterialBottomTabNavigator({
           Dashboard: Dashboard,
           Performer: Performer,
