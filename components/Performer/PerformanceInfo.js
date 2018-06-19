@@ -94,12 +94,14 @@ class PerformanceInfo extends Component {
                         <Text style={styles.label}>Performer name</Text>
                         <Input
                            value={this.state.performerName}
-                           onChangeText={performerName => this.setState({ performerName })} />
+                           onChangeText={performerName => this.setState({ performerName })}
+                           style={{marginBottom: 25}} />
 
                         <Text style={styles.label}>Performance name</Text>
                         <Input
                            value={this.state.title}
-                           onChangeText={title => this.setState({ title })} />  
+                           onChangeText={title => this.setState({ title })}
+                           style={{marginBottom: 25}} />  
 
                         <Text style={styles.label}>Tags</Text>
 
@@ -153,7 +155,7 @@ const styles = {
       marginRight: 'auto',
    },
    label: {
-      fontSize: 16,
+      fontSize: 18,
       fontWeight: 'bold'
    },
    tagList: {
