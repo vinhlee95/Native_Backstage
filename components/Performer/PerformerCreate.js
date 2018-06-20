@@ -38,9 +38,7 @@ class PerformerCreate extends Component {
                isLoading: false
             });
          }
-      }
-
-      
+      } 
    }
 
    render() {
