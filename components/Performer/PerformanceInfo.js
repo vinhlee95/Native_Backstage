@@ -64,7 +64,7 @@ class PerformanceInfo extends Component {
    render() {
       const productImage = this.props.navigation.state.params.performanceData.productImage;
       const {performanceData} = this.props.navigation.state.params;
-      console.log(performanceData);
+      // console.log(performanceData);
       const performanceDuration = `${performanceData.duration} mins`;
       const price = `${performanceData.price} €`;
       let videoList;
@@ -121,7 +121,12 @@ class PerformanceInfo extends Component {
                         <Text style={styles.label}>Tags</Text>
                         <View style={styles.tagList}>
                            <Tag tagName={performanceData.audienceSize} tagIonIconName="ios-people" />
-                           <Tag tagName="Audio" tagIonIconName="ios-musical-note" tagWidth={80} />
+                           {
+                              performanceData.audio
+                              ?
+                              <Tag tagName="Audio" tagIonIconName="ios-musical-note" tagWidth={80} />
+                              : null
+                           }
                            <Tag tagName={performanceDuration} tagIonIconName="ios-clock" tagWidth={100} />
                            {
                               performanceData.carToDoor
@@ -131,18 +136,23 @@ class PerformanceInfo extends Component {
                            }
                            
                            <Tag tagName={price} tagIonIconName="ios-pricetag" tagWidth={80}/>
-                           <Tag tagName="Electricity" tagIconName="bolt" tagWidth={100} />
+                           {
+                              performanceData.electricity
+                              ?
+                              <Tag tagName="Electricity" tagIconName="bolt" tagWidth={100} /> 
+                              : null                             
+                           }
                         </View>
                         <Button 
                            title="Edit tags"
                            style={styles.editTagButton}
                            onPress={() => this.props.navigation.navigate('TagEdit', {
                               audienceSize: performanceData.audienceSize,
-                              performanceDuration,
+                              performanceDuration: performanceData.duration,
+                              audio: performanceData.audio,
                               carToDoor: performanceData.carToDoor,
                               price,
                               electricity: performanceData.electricity,
-                              navigation: this.props.navigation,
                            })}
                         />
 
