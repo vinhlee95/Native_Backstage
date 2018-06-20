@@ -6,11 +6,21 @@ import { Ionicons } from '@expo/vector-icons';
 import Header from '../UI/Header';
 import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
+import Spinner from '../UI/Spinner';
+import Input from '../UI/Input';
 
 class PerformerCreate extends Component {
-   state = { image: null };
+   state = { 
+         image: null, 
+         name: '',
+         description: '',
+         facebookUrl: '',
+         instagramUrl: '',
+         isLoading: false
+      };
 
    pickImage = async () => {
+      this.setState({ isLoading: true })
       const permissions = Permissions.CAMERA_ROLL;
       const { status } = await Permissions.askAsync(permissions);
 
@@ -24,7 +34,8 @@ class PerformerCreate extends Component {
 
          if (!result.cancelled) {
             this.setState({
-               image: result.uri
+               image: result.uri,
+               isLoading: false
             });
          }
       }
@@ -41,6 +52,7 @@ class PerformerCreate extends Component {
                navigateBack={() => this.props.navigation.goBack()} />
             <ScrollView>
                <ViewContainer>
+                  {/* Profile upload */}
                   {
                      this.state.image
                      ?
@@ -50,10 +62,42 @@ class PerformerCreate extends Component {
                      :
                      <TouchableWithoutFeedback onPress={() => this.pickImage()} >
                         <View style={styles.image}>
-                           <Ionicons name="ios-camera" size={60} />
+                           {
+                              this.state.isLoading
+                              ?
+                              <Spinner animating />
+                              :
+                              <View style={styles.iconContainer}>
+                                 <Ionicons name="ios-camera" size={60} />
+                                 <Text>Add photo</Text>
+                              </View>
+                           }
                         </View>
                      </TouchableWithoutFeedback>
                   }
+
+                  <Text style={styles.label}>Name</Text>
+                  <Input
+                     value={this.state.name}
+                     onChangeText={name => this.setState({ name })} />
+
+                  <Text style={styles.label}>Description</Text>
+                  <Input
+                     value={this.state.description}
+                     onChangeText={description => this.setState({ description })}
+                     // multiline
+                     numberOfLines={2} />
+
+                  <Text style={styles.label}>Facebook URL</Text>
+                     <Input
+                        value={this.state.facebookUrl}
+                        onChangeText={facebookUrl => this.setState({ facebookUrl })} />
+
+                  <Text style={styles.label}>Instagram URL</Text>
+                  <Input
+                     value={this.state.instagramUrl}
+                     onChangeText={instagramUrl => this.setState({ instagramUrl })} />
+                  <Button title="Save" onPress={() => this.props.navigation.goBack()}/>  
                   
                </ViewContainer>
             </ScrollView>
@@ -70,9 +114,15 @@ const styles = {
       borderRadius: 100,
       marginTop: 15, marginBottom: 15,
       marginLeft: 'auto', marginRight: 'auto',
+   },
+   iconContainer: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center'
+   },
+   label: {
+      fontSize: 16,
+      fontWeight: 'bold'
    }
 }
 
