@@ -8,6 +8,7 @@ import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
 import Spinner from '../UI/Spinner';
 import Input from '../UI/Input';
+import ListItem from '../UI/ListItem';
 
 class PerformanceCreate extends Component {
    state = {
@@ -87,6 +88,8 @@ class PerformanceCreate extends Component {
                      onChangeText={description => this.setState({ description })}
                      // multiline
                      numberOfLines={2} />
+                  <Text style={styles.label}>Tags</Text>
+                  <ListItem title="Edit tags" />
 
                   <Button title="Save" onPress={() => this.props.navigation.goBack()}/>  
                   
