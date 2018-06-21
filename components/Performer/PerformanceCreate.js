@@ -19,7 +19,8 @@ class PerformanceCreate extends Component {
       image: null,
       name: '',
       description: '',
-      isLoading: false
+      isLoading: false,
+      tagData: null,
    };
 
    pickImage = async () => {
@@ -36,9 +37,6 @@ class PerformanceCreate extends Component {
             allowsEditing: true,
             aspect: [4, 3],
          });
-
-         console.log(result);
-
          if (!result.cancelled) {
             this.setState({
                image: result.uri,
@@ -170,7 +168,13 @@ class PerformanceCreate extends Component {
                      }
                      <ListItem 
                         title={this.state.tagData?'Edit tags':'Add tags'} 
-                        onPress={() => this.props.navigation.navigate('NewTag', {returnData: this.returnData}) }/>
+                        onPress={() => 
+                           this.props.navigation.navigate('NewTag', 
+                           {
+                              returnData: this.returnData,
+                              tagData: this.state.tagData
+                           },
+                        )}/>
 
                      <Button title="Save" onPress={() => this.props.navigation.goBack()}/>  
                      

@@ -11,13 +11,17 @@ import Button from '../UI/Button';
 class TagEdit extends Component {
    constructor(props) {
       super(props);
-      this.state = {
-         audienceSize: '', 
-         performanceDuration: '', 
-         price: '', 
-         audio: false, 
-         carToDoor: false, 
-         electricity: false,
+      if(this.props.navigation.state.params.tagData) {
+         this.state = this.props.navigation.state.params.tagData
+      } else {
+         this.state = {
+            audienceSize: '', 
+            performanceDuration: '', 
+            price: '', 
+            audio: false, 
+            carToDoor: false, 
+            electricity: false,
+         }
       }
    }
 
@@ -28,6 +32,7 @@ class TagEdit extends Component {
    }
 
    render() {
+      console.log(this.state)
       const { audienceSize, performanceDuration, price, audio, carToDoor, electricity } = this.state;
       return (
          <View style={{flex:1, backgroundColor: 'white'}}>
