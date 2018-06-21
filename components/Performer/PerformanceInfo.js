@@ -15,11 +15,28 @@ class PerformanceInfo extends Component {
    constructor(props) {
       super(props);
       const { title, description, performerData, productImage  } = this.props.navigation.state.params.performanceData;
+      const {
+         audienceSize,
+         audio,
+         duration,
+         carToDoor,
+         electricity,
+         price
+      } = this.props.navigation.state.params.performanceData;
+      console.log(this.props.navigation.state.params.performanceData)
       const { name } = performerData;
       this.state = {
          title,
          description,
          performerName: name,
+         tagData: {
+            audienceSize,
+            audio,
+            duration,
+            carToDoor,
+            electricity,
+            price
+         },
          showSaveModal: false
       };
       this.keyboardHeight = new Animated.Value(0);
@@ -59,16 +76,73 @@ class PerformanceInfo extends Component {
       this.setState({ showSaveModal: true })
    }
 
+   renderTagList = () => {
+      const { audienceSize, audio, duration, carToDoor, electricity, price } = this.state.tagData;
 
+      let audioTag, carToDoorTag, electricityTag;
+      audio?audioTag="Audio":"";
+      carToDoor?carToDoorTag="Car to door":"";
+      electricity?electricityTag="Electricity":"";
+
+      const data = [
+         {
+            tagName: `${audienceSize}`,
+            tagIonIconName: 'ios-people',
+         },
+         {
+            tagName: `${duration}`,
+            tagIonIconName: 'ios-clock',
+            tagWidth: 100,
+         },
+         {
+            tagName: `${price}`,
+            tagIonIconName: 'ios-pricetag',
+            tagWidth: 80,
+         },
+         {
+            tagName: audioTag,
+            tagIonIconName: 'ios-musical-note',
+            tagWidth: 80,
+         },
+         {
+            tagName: carToDoorTag,
+            tagIonIconName: 'ios-car',
+            tagWidth: 120,
+         },
+         {
+            tagName: electricityTag,
+            tagIconName: 'bolt',
+            tagWidth: 100,
+         },
+      ];
+      return data.map((tagItem, index) => {
+         let hideTag = tagItem.tagName ? false : true;
+         const { tagName, tagIonIconName, tagIconName, tagWidth } = tagItem;
+         if(tagIonIconName === 'ios-clock') {
+            tagItem.tagName += ' mins';
+         } else if(tagIonIconName === 'ios-pricetag') {
+            tagItem.tagName += ' €';
+         }
+         return (
+            <Tag 
+               key={index}
+               tagName={tagItem.tagName} 
+               tagIonIconName={tagIonIconName}
+               tagIconName={tagIconName}
+               tagWidth={tagWidth}
+               hideTag={hideTag} />
+         );
+      });
+   }
+
+   returnData = (tagData) => {
+      this.setState({ tagData })
+   }  
 
    render() {
       const productImage = this.props.navigation.state.params.performanceData.productImage;
-      const {performanceData} = this.props.navigation.state.params;
-      // console.log(performanceData);
-      const performanceDuration = `${performanceData.duration} mins`;
-      const price = `${performanceData.price} €`;
-      let videoList;
-      
+      const {performanceData} = this.props.navigation.state.params;    
+      // console.log(performanceData)  
 		const videoData = _.toArray(this.props.navigation.state.params.performanceData.media);
 		videoList = videoData.map(video => {
 			const serviceId = video.serviceId;
@@ -120,39 +194,15 @@ class PerformanceInfo extends Component {
                         {/* Tag List */}
                         <Text style={styles.label}>Tags</Text>
                         <View style={styles.tagList}>
-                           <Tag tagName={performanceData.audienceSize} tagIonIconName="ios-people" />
-                           {
-                              performanceData.audio
-                              ?
-                              <Tag tagName="Audio" tagIonIconName="ios-musical-note" tagWidth={80} />
-                              : null
-                           }
-                           <Tag tagName={performanceDuration} tagIonIconName="ios-clock" tagWidth={100} />
-                           {
-                              performanceData.carToDoor
-                              ?
-                              <Tag tagName="Car to door" tagIonIconName="ios-car" tagWidth={120}  />
-                              : null
-                           }
-                           
-                           <Tag tagName={price} tagIonIconName="ios-pricetag" tagWidth={80}/>
-                           {
-                              performanceData.electricity
-                              ?
-                              <Tag tagName="Electricity" tagIconName="bolt" tagWidth={100} /> 
-                              : null                             
-                           }
+                           {this.renderTagList()}
                         </View>
+
                         <Button 
                            title="Edit tags"
                            style={styles.editTagButton}
                            onPress={() => this.props.navigation.navigate('TagEdit', {
-                              audienceSize: performanceData.audienceSize,
-                              performanceDuration: performanceData.duration,
-                              audio: performanceData.audio,
-                              carToDoor: performanceData.carToDoor,
-                              price,
-                              electricity: performanceData.electricity,
+                              tagData: this.state.tagData,
+                              returnData: this.returnData,
                            })}
                         />
 

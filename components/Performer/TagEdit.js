@@ -12,19 +12,25 @@ class TagEdit extends Component {
    constructor(props) {
       super(props);
       const { navigation } = this.props;
-      const { audienceSize, performanceDuration, audio, carToDoor, price, electricity } = navigation.state.params;
+      const { audienceSize, duration, audio, carToDoor, price, electricity } = navigation.state.params.tagData;
       this.state = {
-         audienceSize, performanceDuration, audio, carToDoor, price, electricity,
+         audienceSize, duration, audio, carToDoor, price, electricity,
       }
    }
+
+   goBack = () => {
+      const { navigation } = this.props;
+      navigation.state.params.returnData(this.state);
+      navigation.goBack();
+   }
+
    render() {
-      console.log(this.state)
       return (
          <View style={{flex:1, backgroundColor: 'white'}}>
             <Header
                headerName="Your tags"
                notShowIcon headerRightTitle="Done"
-               navigateBack={() => this.props.navigation.goBack()} />
+               navigateBack={this.goBack} />
             <ViewContainer>
                <ScrollView>
                   <View style={styles.label}>
@@ -41,8 +47,8 @@ class TagEdit extends Component {
                      <Text style={styles.labelText}>Duration (minutes)</Text>
                   </View>
                   <Input 
-                     value={this.state.performanceDuration}
-                     onChangeText={duration => this.setState({ performanceDuration: duration})}
+                     value={this.state.duration}
+                     onChangeText={duration => this.setState({ duration: duration})}
                      keyboardType="numeric" />
                   
                   <View style={styles.label}>
