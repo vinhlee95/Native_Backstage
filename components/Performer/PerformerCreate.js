@@ -43,7 +43,7 @@ class PerformerCreate extends Component {
 
    render() {
       return (
-         <View>
+         <View style={{ flex: 1, backgroundColor: 'white'}}>
             <Header
                headerName="New performer"
                notShowIcon headerRightTitle = "Done"

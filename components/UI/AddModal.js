@@ -10,7 +10,6 @@ const DEVICE_WIDTH = Dimensions.get('window').width;
 class AddModal extends Component {
    render() {
       const {navigation, handleCloseModal, handleShowAddButton} = this.props;
-      console.log(navigation)
       return(
          <View 
             style={[styles.modal, 

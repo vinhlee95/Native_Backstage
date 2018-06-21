@@ -46,7 +46,7 @@ class PerformanceCreate extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{ flex: 1, backgroundColor: 'white'}}>
          <Header
             headerName="New performance"
             notShowIcon headerRightTitle = "Done"
@@ -88,8 +88,8 @@ class PerformanceCreate extends Component {
                      onChangeText={description => this.setState({ description })}
                      // multiline
                      numberOfLines={2} />
-                  <Text style={styles.label}>Tags</Text>
-                  <ListItem title="Edit tags" />
+                  <Text style={[styles.label, {marginBottom: 15 }]}>Tags</Text>
+                  <ListItem title="Add tags" onPress={() => this.props.navigation.navigate('NewTag')}/>
 
                   <Button title="Save" onPress={() => this.props.navigation.goBack()}/>  
                   

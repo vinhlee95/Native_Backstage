@@ -11,21 +11,23 @@ import Button from '../UI/Button';
 class TagEdit extends Component {
    constructor(props) {
       super(props);
-      const { navigation } = this.props;
-      const { audienceSize, performanceDuration, audio, carToDoor, price, electricity } = navigation.state.params;
       this.state = {
-         audienceSize, performanceDuration, audio, carToDoor, price, electricity,
+         audienceSize: '', 
+         performanceDuration: '', 
+         price: '', 
+         audio: false, 
+         carToDoor: false, 
+         electricity: false,
       }
    }
    render() {
-      console.log(this.state)
       return (
          <View style={{flex:1, backgroundColor: 'white'}}>
             <Header
-               headerName="Your tags"
+               headerName="Add tags"
                notShowIcon headerRightTitle="Done"
                navigateBack={() => this.props.navigation.goBack()} />
-            <ViewContainer>
+            <ViewContainer style={{ marginTop: 15 }}>
                <ScrollView>
                   <View style={styles.label}>
                      <Ionicons name="ios-people" size={25} />
