@@ -33,7 +33,7 @@ class TagEdit extends Component {
                   </View>
                   <Input
                      value={this.state.audienceSize}
-                     onChange={size => this.setState({ audienceSize: size })}
+                     onChangeText={size => this.setState({ audienceSize: size })}
                      keyboardType="numeric" />
                   
                   <View style={styles.label}>
@@ -42,7 +42,7 @@ class TagEdit extends Component {
                   </View>
                   <Input 
                      value={this.state.performanceDuration}
-                     onChange={duration => this.setState({ performanceDuration: duration})}
+                     onChangeText={duration => this.setState({ performanceDuration: duration})}
                      keyboardType="numeric" />
                   
                   <View style={styles.label}>
@@ -51,7 +51,7 @@ class TagEdit extends Component {
                   </View>
                   <Input 
                      value={this.state.price}
-                     onChange={price => this.setState({ price: price})}
+                     onChangeText={price => this.setState({ price: price})}
                      keyboardType="numeric" />
 
                   <View style={styles.boolRow} >

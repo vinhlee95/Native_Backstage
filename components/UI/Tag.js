@@ -35,6 +35,9 @@ const Tags = (props) => {
          marginRight: 5,
       }
    }
+   if(props.hideTag) {
+      return null;
+   }
    return(
       <View style={[styles.tagContainer, props.style]}>
          {/* workaround: using either FontAwesome icons or default expo */}

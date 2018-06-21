@@ -20,13 +20,21 @@ class TagEdit extends Component {
          electricity: false,
       }
    }
+
+   goBack = () => {
+      const { navigation } = this.props;
+      navigation.state.params.returnData(this.state);
+      navigation.goBack();
+   }
+
    render() {
+      const { audienceSize, performanceDuration, price, audio, carToDoor, electricity } = this.state;
       return (
          <View style={{flex:1, backgroundColor: 'white'}}>
             <Header
                headerName="Add tags"
                notShowIcon headerRightTitle="Done"
-               navigateBack={() => this.props.navigation.goBack()} />
+               navigateBack={this.goBack} />
             <ViewContainer style={{ marginTop: 15 }}>
                <ScrollView>
                   <View style={styles.label}>
@@ -35,7 +43,7 @@ class TagEdit extends Component {
                   </View>
                   <Input
                      value={this.state.audienceSize}
-                     onChange={size => this.setState({ audienceSize: size })}
+                     onChangeText={size => this.setState({ audienceSize: size })}
                      keyboardType="numeric" />
                   
                   <View style={styles.label}>
@@ -44,7 +52,7 @@ class TagEdit extends Component {
                   </View>
                   <Input 
                      value={this.state.performanceDuration}
-                     onChange={duration => this.setState({ performanceDuration: duration})}
+                     onChangeText={duration => this.setState({ performanceDuration: duration})}
                      keyboardType="numeric" />
                   
                   <View style={styles.label}>
@@ -53,7 +61,7 @@ class TagEdit extends Component {
                   </View>
                   <Input 
                      value={this.state.price}
-                     onChange={price => this.setState({ price: price})}
+                     onChangeText={price => this.setState({ price: price})}
                      keyboardType="numeric" />
 
                   <View style={styles.boolRow} >
