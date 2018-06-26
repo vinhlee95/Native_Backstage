@@ -140,10 +140,11 @@ class PerformanceInfo extends Component {
    }  
 
    render() {
-      const productImage = this.props.navigation.state.params.performanceData.productImage;
-      const {performanceData} = this.props.navigation.state.params;    
+      const { performanceData } = this.props.navigation.state.params;
+      const {productImage} = performanceData;
       // console.log(performanceData)  
-		const videoData = _.toArray(this.props.navigation.state.params.performanceData.media);
+      // change media data to array format
+		const videoData = _.toArray(performanceData.media);
 		videoList = videoData.map(video => {
 			const serviceId = video.serviceId;
 			return(
@@ -152,7 +153,8 @@ class PerformanceInfo extends Component {
 						source={{ uri: `https://www.youtube.com/watch?v=${serviceId}` }}
 						style={{ marginTop: 20, height: 380 }}
 						scrollEnabled={false}
-						allowsInlineMediaPlayback
+                  allowsInlineMediaPlayback
+                  startInLoadingState
 					/>
 				</View>
 			);
@@ -166,7 +168,9 @@ class PerformanceInfo extends Component {
                navigateBack={() => this.props.navigation.goBack()} />
                <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
                   <ScrollView> 
-                     <Swiper height={380}>        
+                     <Swiper
+                        height={380}
+                        loop={false} >        
                         <View style={styles.imageContainer}>
                            <Image style={styles.image} source={{uri:productImage}}/>
                         </View>
