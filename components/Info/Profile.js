@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, KeyboardAvoidingView, Animated, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Ionicons } from '@expo/vector-icons';
+
 import ViewContainer from '../UI/View';
 import Header from '../UI/Header';
 import Input from '../UI/Input';
@@ -146,7 +148,7 @@ class Profile extends Component {
                <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
                   <ViewContainer>
                      <View style={[styles.headingContainer, { marginTop: 15 }]}>
-                        <Icon name="info-circle" size={25} />               
+                        <Ionicons name="ios-information-circle-outline" size={25} />               
                         <Text style={styles.heading}>Basic information</Text>
                      </View>
                      <Input 
@@ -161,7 +163,7 @@ class Profile extends Component {
                         />
 
                      <View style={[styles.headingContainer, {marginTop: 20}]}>
-                        <Icon name="map-marker" size={25} />               
+                        <Ionicons name="ios-home" size={25} />               
                         <Text style={styles.heading}>Home address</Text>                  
                      </View>
                      <View>
@@ -187,15 +189,18 @@ class Profile extends Component {
                         ?
                         <View style={{flex:1}}>
                            <View style={[styles.headingContainer, {marginTop: 20, marginBottom: 20}]}>
-                              <Icon name="map" size={25} />               
-                              <Text style={styles.heading}>Map</Text>                  
+                              <Ionicons name="ios-map" size={25} />               
+                              <Text style={styles.heading}>Map</Text>        
                            </View>
-                           <View style={{ flex: 1, shadowColor: '#000', shadowOffset: {width: 2, height: 4}, shadowOpacity: 0.1, }}>
+                           <View style={styles.mapView}>
+                              <View style={styles.noteContainer}>
+                                 <Text style={styles.note}>Tap on the map to view full-screen</Text>  
+                              </View>        
                               <Map 
                                  location={this.state.location} 
                                  scrollEnabled={false}  
                                  onPress={() => this.setState({ isMapFullScreen: true, isHeaderShowed: false })}
-                                 style={{ height: 300, marginBottom: 70 }} />
+                                 style={{ height: 300, marginBottom: 70, zIndex: 1 }} />
                            </View>
                         </View>
                         : null
@@ -241,7 +246,8 @@ const styles = {
    headingContainer: {
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: 'flex-start'
+      justifyContent: 'flex-start',
+      alignItems: 'center',
    },
    heading: {
       fontSize: 20,
@@ -250,6 +256,31 @@ const styles = {
       paddingBottom: 0,
       fontWeight: 'bold',
    },
+   mapView: {
+      flex: 1,
+      shadowColor: '#000',
+      shadowOffset: {
+         width: 2,
+         height: 4
+      },
+      shadowOpacity: 0.1,
+      position: 'relative'
+   },
+   noteContainer: {
+      position: 'absolute',
+      top: 3,
+      left: 3,
+      // set bigger zIndex than one on the map style
+      // to make text appears above the map
+      zIndex: 1000,
+   },
+   note: {
+      color: 'grey',
+      fontSize: 15,
+      backgroundColor: 'white',
+      paddingTop: 5, paddingLeft: 5,
+      opacity: 0.7
+   }
 }
 
 const mapStateToProps = ({ data }) => {

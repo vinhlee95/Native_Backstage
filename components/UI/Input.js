@@ -33,7 +33,7 @@ const styles = {
       alignItems: 'center'
    },
    input: {
-      fontSize: 15,
+      fontSize: 16,
       borderBottomColor: '#cacdd1',
       borderTopWidth: 0,
       borderBottomWidth: 1,
