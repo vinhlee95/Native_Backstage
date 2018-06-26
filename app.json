@@ -21,7 +21,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gigle.backstage"
+    },
+    "android": {
+       "package": "com.gigle.backstage"
     }
   }
 }
