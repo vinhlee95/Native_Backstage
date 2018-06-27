@@ -4,18 +4,19 @@ import firebase from 'firebase';
 import Spinner from './UI/Spinner';
 
 class Loading extends Component {
+
    state = { isLogin: false }
 
    componentDidMount() {
       firebase.auth().onAuthStateChanged((user) => {
          if (user) {
             this.setState({ isLogin: true });
-            this.props.navigation.navigate('Profile');
+            this.props.navigation.navigate('Dashboard');
          } else {
             this.setState({
                isLogin: false,
             });
-            this.props.navigation.navigate('Login');
+            this.props.navigation.navigate('Welcome');
             
          }
       });

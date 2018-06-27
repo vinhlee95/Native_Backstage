@@ -19,7 +19,7 @@ const Input = (props) => {
             multiline={props.multiline}
             numberOfLines={props.numberOfLines}
             onFocus={props.onFocus}
-            clearButtonMode="always"
+            clearButtonMode="while-editing"
          />
       </View>
    );

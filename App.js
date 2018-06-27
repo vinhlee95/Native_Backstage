@@ -21,6 +21,7 @@ import PerformerCreate from './components/Performer/PerformerCreate';
 import PerformanceCreate from './components/Performer/PerformanceCreate';
 import TagEdit from './components/Performer/TagEdit';
 import NewTag from './components/Performer/NewTag';
+import Welcome from './components/Welcome/Welcome';
 
 export default class App extends React.Component {
 
@@ -50,9 +51,10 @@ export default class App extends React.Component {
     const MainNavigator = createBottomTabNavigator({
       Loading: Loading,      
       authentication: createStackNavigator({
+         Welcome: Welcome,
         Signup: SignupForm,        
         Login: LoginForm,
-      },{ initialRouteName: 'Signup'}),      
+      },{ initialRouteName: 'Welcome'}),      
       setting: createStackNavigator({
         Account: Account,
         Profile: Profile,
