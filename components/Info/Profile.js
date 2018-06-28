@@ -130,10 +130,13 @@ class Profile extends Component {
             ?
             <Header 
                headerName = "Profile"
-               notShowIcon headerRightTitle = {this.state.headerTitleRight}
+               notShowIcon 
+               headerRightTitle = {this.state.headerTitleRight}
+               editMode
                navigateBack = {
                   () => this.props.navigation.navigate('Account')
                }
+               handleSaveInfo={this.handleSaveInfo}
             />
             : null
          }
@@ -200,7 +203,7 @@ class Profile extends Component {
                                  location={this.state.location} 
                                  scrollEnabled={false}  
                                  onPress={() => this.setState({ isMapFullScreen: true, isHeaderShowed: false })}
-                                 style={{ height: 300, marginBottom: 70, zIndex: 1 }} />
+                                 style={{ height: 300,zIndex: 1 }} />
                            </View>
                         </View>
                         : null
@@ -219,21 +222,6 @@ class Profile extends Component {
                : null
             }
          </Animated.View>
-         {
-            !this.state.isSpinnerShowed
-            ?
-            <Button 
-                  title="Save your information" 
-                  onPress={this.handleSaveInfo}
-                  style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  width: '90%',
-                  left: '5%',
-                  opacity: .9
-            }}/>
-            : null
-            }
          </View>
       );
    }

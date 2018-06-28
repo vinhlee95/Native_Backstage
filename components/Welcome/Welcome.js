@@ -8,20 +8,23 @@ const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const data = [
    { 
-      text: 'Welcome to Gigle Backstage', 
+      title: 'Welcome to Gigle Backstage', 
       image: require('../../images/Welcome/1.jpg'),
-      subText: 'Swiper to learn more',
+      tip: 'Swipe to learn more',
    },
    { 
-      text: 'View your upcoming gigs',
+      title: 'Manage your gigs',
+      subtitle: 'Quickly view your upcoming gigs, right on Dashboard.',
       image: require('../../images/Welcome/2.jpg'),       
    },
    { 
-      text: 'Add and modify your performance',
+      title: 'Add and modify your performance',
+      subtitle: 'Easily add more performer/ performance, and change information inside them.',
       image: require('../../images/Welcome/3.jpg'),      
    },
    {
-      text: 'Manage your schedule',
+      title: 'Manage your schedule',
+      subtitle: 'Your calendar is here! Quickly set your availability.',
       image: require('../../images/Welcome/4.jpg'),      
    }
 ];
@@ -60,20 +63,22 @@ class Welcome extends Component {
 
    renderSlides = () => {
       return data.map((slide, id) => {
-         let subText = slide.subText ? slide.subText : null;
+         let tip = slide.tip ? slide.tip : null;
          let buttonText = id === data.length-1 ? `I'm ready` : 'Skip';
+         let subtitle = slide.subtitle ? slide.subtitle : null;
          return(
             <View
                key={id}
                style={styles.slide} >
-               <View style={styles.textBlock}>
-                  <Text style={styles.text}>{slide.text}</Text>
+               <View style={styles.titleBlock}>
+                  <Text style={styles.title}>{slide.title}</Text>
+                  <Text style={styles.subtitle}>{subtitle}</Text>
                </View>
                <Image
                   source={slide.image}
                   style={styles.image}
                />
-               <Text style={styles.subText}>{subText}</Text>
+               <Text style={styles.tip}>{tip}</Text>
                <Button 
                   title={buttonText} 
                   onPress={() => this.props.navigation.navigate('Signup')}
@@ -99,7 +104,8 @@ const styles = {
       flex: 1,
       width: DEVICE_WIDTH,
       justifyContent:'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      paddingBottom: DEVICE_WIDTH/5,
    },
    image: {
       width: DEVICE_WIDTH, 
@@ -109,7 +115,7 @@ const styles = {
       alignSelf: 'stretch',
       opacity: 0.8
    },
-   textBlock: {
+   titleBlock: {
       width: '80%',
       backgroundColor: 'rgba(255,255,255,0.7)',
       marginLeft: 'auto', marginRight: 'auto',
@@ -117,11 +123,16 @@ const styles = {
       paddingTop: 10, paddingBottom: 10, paddingLeft: 10, paddingRight: 10,
       zIndex: 1,
    },
-   text: {
+   title: {
       fontSize: 30,
       textAlign: 'center'
    },
-   subText: {
+   subtitle: {
+      fontSize: 18,
+      marginTop: 10,
+      textAlign: 'center'
+   },
+   tip: {
       fontSize: 20,
       color: 'white',
       position: 'absolute',
@@ -134,7 +145,7 @@ const styles = {
       width: DEVICE_WIDTH,
       marginBottom: 0,
       marginTop: 20,
-      backgroundColor: 'rgba(66, 73, 84, 0.7)'
+      backgroundColor: 'rgba(66, 73, 84, 0.9)'
    }
 }
 

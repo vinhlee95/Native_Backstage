@@ -1,12 +1,23 @@
 import React from 'react';
-import {View, Text, Image, TouchableHighlight, Dimensions} from 'react-native';
+import {View, Text, Image, TouchableHighlight, Dimensions, TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Ionicons } from '@expo/vector-icons';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const Header = (props) => {
    return(
       <View style={[styles.header, props.headerStyle]}>
+         {
+            props.editMode
+            ?
+            <TouchableWithoutFeedback onPress={() => props.navigateBack()}>
+               <View>
+                  <Text style={styles.headerButtonLeft}>Cancel</Text>
+               </View>
+            </TouchableWithoutFeedback>
+            : null
+         }
          <Text style={styles.headerText}>{props.headerName}</Text>
          {
             !props.notShowIcon
@@ -28,11 +39,12 @@ const Header = (props) => {
             props.headerRightTitle
             ?
             <Text 
-               style={styles.done} 
-               onPress={() => props.navigateBack()}
+               style={styles.headerButtonRight} 
+               onPress={() => props.handleSaveInfo()}
                 >{props.headerRightTitle}</Text>
             : null
          }
+         
       </View>
    );
 }
@@ -59,13 +71,19 @@ const styles = {
       fontSize: 30,
       fontWeight: 'bold',
       color: 'white',
+      textAlign: 'center',
    },
-   done: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      color: '#ed3838',
+   headerButtonRight: {
+      fontSize: 20,
+      color: 'white',
       paddingRight: 10,
       marginTop: 5,
+   },
+   headerButtonLeft: {
+      fontSize: 20,
+      color: '#e83c3c',
+      marginTop: 5,
+      paddingLeft: 10,
    }
 }
 
