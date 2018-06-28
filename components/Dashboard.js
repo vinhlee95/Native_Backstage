@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Dashboard extends Component {
    static navigationOptions = {
+      header: null,
       tabBarIcon: ({ focused, tintColor }) => (
          focused
          ?

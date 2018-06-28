@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Ionicons } from '@expo/vector-icons';
+
 
 import Header from '../UI/Header';
 import Button from '../UI/Button';
@@ -9,10 +11,15 @@ import firebase from 'firebase';
 import ViewContainer from '../UI/View';
 import Modal from '../UI/Modal';
 
-
 class Account extends Component {
-   static navigationOptions = {
-       header: null,
+   static navigationOptions = ({ navigation }) => {
+      return {
+         headerTitle: <Text style={{fontSize: 25, color: 'white', fontWeight: 'bold'}}>Account</Text>,
+         headerLeft: <Ionicons name="ios-arrow-back" size={25} color="white" style={{paddingLeft: 10}} onPress={() => navigation.goBack()}/>,
+         headerStyle: {
+            backgroundColor: '#1a4b93'
+         }
+      }
    }
 
    state = { showModalLogout: false }
@@ -34,10 +41,10 @@ class Account extends Component {
       }
       return (
          <View style={{flex:1, backgroundColor: 'white'}}>
-            <Header 
+            {/* <Header 
                 headerName="Account" 
                 notShowIcon headerRightTitle="Done" 
-                navigateBack={() => this.props.navigation.goBack()} />
+                navigateBack={() => this.props.navigation.goBack()} /> */}
             <View style={styles.header}>
                 <Image 
                     source={require('../../images/profile_big.png')} 
@@ -81,6 +88,9 @@ class Account extends Component {
 }
 
 const styles = {
+   headerLeft: {
+      paddingLeft: 10,
+   },
    header: {
       backgroundColor: '#edf0f4',
       paddingTop: 10,

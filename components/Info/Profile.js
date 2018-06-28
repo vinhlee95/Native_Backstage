@@ -47,7 +47,6 @@ class Profile extends Component {
          isSpinnerShowed: false,
          isMapFullScreen: false,
          isHeaderShowed: true,
-         headerTitleRight: 'Done'
       };
       this.keyboardHeight = new Animated.Value(0);
    }
@@ -131,7 +130,6 @@ class Profile extends Component {
             <Header 
                headerName = "Profile"
                notShowIcon 
-               headerRightTitle = {this.state.headerTitleRight}
                editMode
                navigateBack = {
                   () => this.props.navigation.navigate('Account')
@@ -218,7 +216,10 @@ class Profile extends Component {
                ? 
                <SaveModal 
                   isModalShowed={this.state.isModalShowed}
-                  handleCloseModal={() => this.setState({ isModalShowed: false })} />
+                  handleCloseModal={() => {
+                     this.setState({ isModalShowed: false });
+                     this.props.navigation.goBack();
+                  }} />
                : null
             }
          </Animated.View>

@@ -36,13 +36,22 @@ const Header = (props) => {
             : null
          }
          {
-            props.headerRightTitle
+            props.editMode
             ?
             <Text 
                style={styles.headerButtonRight} 
                onPress={() => props.handleSaveInfo()}
-                >{props.headerRightTitle}</Text>
+                >Done</Text>
             : null
+         }
+         {
+            props.headerRightTitle
+            ?
+            <Text
+               style={styles.headerButtonRight}
+               onPress={() => props.navigateBack()}
+               >{props.headerRightTitle}</Text>
+            :null
          }
          
       </View>

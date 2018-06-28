@@ -48,56 +48,62 @@ export default class App extends React.Component {
   }
 
   render() {
-    const MainNavigator = createBottomTabNavigator({
-      Loading: Loading,      
-      authentication: createStackNavigator({
-         Welcome: Welcome,
-        Signup: SignupForm,        
-        Login: LoginForm,
-      },{ initialRouteName: 'Welcome'}),      
-      setting: createStackNavigator({
-        Account: Account,
-        Profile: Profile,
-        PerformerInfo: PerformerInfo,
-        PerformanceInfo: PerformanceInfo,
-        PerformerCreate: PerformerCreate,
-        PerformanceCreate: PerformanceCreate,
-        TagEdit: TagEdit,
-        NewTag: NewTag,
-        main: createMaterialBottomTabNavigator({
-          Dashboard: Dashboard,
-          Performer: Performer,
-          Calendar: Calendar,
-        }, {
-          navigationOptions: {
-            labeled: false,
-            shifting: true,
-            barStyle: {
-              backgroundColor: '#eff3f9',
-              borderTopColor: '#cacdd1',
-              borderWidth: .5,
-            }
-          }
-        })
+      const main = createMaterialBottomTabNavigator({
+            Dashboard: Dashboard,
+            Performer: Performer,
+            Calendar: Calendar,
       }, {
-        initialRouteName: 'main',
-        headerMode: 'none'
-      }),
-    },
-    {
-      navigationOptions: {
-        tabBarVisible: false,
+         labeled: false,
+         shifting: true,
+         barStyle: {
+            backgroundColor: '#eff3f9',
+            borderTopColor: '#cacdd1',
+            borderWidth: .5,
+         }
+      });
+      main.navigationOptions = ({ navigation }) => {
+         let { routeName } = navigation.state.routes[navigation.state.index];
+         let headerTitle = routeName;
+         return {
+            headerTitle,
+         };
       }
-    }
-    );
-    return (
-      <Provider store={store}>
-        <View style={styles.container}>
-          <MainNavigator / >
-        </View>
-      </Provider>
-    );
-  }
+      const MainNavigator = createBottomTabNavigator({
+         Loading: Loading,      
+         authentication: createStackNavigator({
+            Welcome: Welcome,
+            Signup: SignupForm,        
+            Login: LoginForm,
+         },{ initialRouteName: 'Welcome' }),      
+         setting: createStackNavigator({
+            Account: Account,
+            Profile: Profile,
+            PerformerInfo: PerformerInfo,
+            PerformanceInfo: PerformanceInfo,
+            PerformerCreate: PerformerCreate,
+            PerformanceCreate: PerformanceCreate,
+            TagEdit: TagEdit,
+            NewTag: NewTag,
+            main: main
+         }, {
+         initialRouteName: 'main',
+         //   headerMode: 'none'
+         }),
+      },
+      {
+         navigationOptions: {
+         tabBarVisible: false,
+         }
+      }
+      );
+      return (
+         <Provider store={store}>
+         <View style={styles.container}>
+            <MainNavigator / >
+         </View>
+         </Provider>
+      );
+   }
 }
 
 const styles = StyleSheet.create({
