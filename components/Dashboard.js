@@ -8,7 +8,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Dashboard extends Component {
    static navigationOptions = {
-      header: null,
       tabBarIcon: ({ focused, tintColor }) => (
          focused
          ?
@@ -25,11 +24,11 @@ class Dashboard extends Component {
       }
       return(
          <View style={{ flex: 1 }}>
-            <Header 
+            {/* <Header 
                headerName="Dashboard" 
                onPress={() => {
                   this.props.navigation.navigate('Account');
-               }} />   
+               }} />    */}
             <ScrollView style={{ flex: 1 }}>         
                <ViewContainer >
                   <Text style={styles.title}>Welcome {email}</Text>

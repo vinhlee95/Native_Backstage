@@ -9,9 +9,22 @@ import SaveModal from '../UI/SaveModal';
 import Tag from '../UI/Tag';
 import _ from 'lodash';
 
+import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
+
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
 class PerformanceInfo extends Component {
+   static navigationOptions = ({ navigation }) => {
+      return {
+         headerTitle: <HeaderTitle headerTitle="Your performance" />,
+         headerLeft: <HeaderLeftTitle navigation={navigation} />,
+         headerRight: <HeaderRightTitle headerRightTitle="Done" />,
+         headerStyle: {
+            backgroundColor: '#1a4b93'
+         },
+         headerTintColor: 'white'
+      }
+   }
    constructor(props) {
       super(props);
       const { title, description, performerData, productImage  } = this.props.navigation.state.params.performanceData;
@@ -161,11 +174,11 @@ class PerformanceInfo extends Component {
 		});
       return(
          <View style={{flex:1, backgroundColor: 'white'}}>
-            <Header
+            {/* <Header
                headerName="Your performance"
                headerStyle={{ paddingBottom: 5 }}
                notShowIcon headerRightTitle="Done"
-               navigateBack={() => this.props.navigation.goBack()} />
+               navigateBack={() => this.props.navigation.goBack()} /> */}
                <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
                   <ScrollView> 
                      <Swiper

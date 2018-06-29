@@ -18,11 +18,7 @@ class Calendar extends Component {
    render() {
       return(
          <View style={{ flex: 1 }}>
-            <Header 
-               headerName = "Calendar"
-               onPress={() => {
-                  this.props.navigation.navigate('Account');
-               }} />
+            <Text>Calendar</Text>
          </View>
       );
    }

@@ -4,7 +4,6 @@ import request from 'superagent';
 import _ from 'lodash';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Header from '../UI/Header';
 import Modal from '../UI/Modal';
 import AddButton from '../UI/AddButton';
 import AddModal from '../UI/AddModal';
@@ -66,13 +65,6 @@ class Performer extends Component {
       return(
          <TouchableWithoutFeedback onPress={() => this.setState({ showAddModal: false })} >
          <View style={{ flex: 1 }}>
-            <Header 
-               headerName = "All performance" 
-               // get some bottom space for the p character
-               headerStyle={{ paddingBottom: 5 }}
-               onPress={() => {
-                  this.props.navigation.navigate('Account');
-               }} />
             <ScrollView>
                <View>
                   {performerList}

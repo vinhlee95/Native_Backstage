@@ -4,21 +4,22 @@ import { ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Ionicons } from '@expo/vector-icons';
 
-
-import Header from '../UI/Header';
 import Button from '../UI/Button';
 import firebase from 'firebase';
 import ViewContainer from '../UI/View';
 import Modal from '../UI/Modal';
 
+import { HeaderTitle, HeaderLeftTitle } from '../UI/Header/index.js';
+
 class Account extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
-         headerTitle: <Text style={{fontSize: 25, color: 'white', fontWeight: 'bold'}}>Account</Text>,
-         headerLeft: <Ionicons name="ios-arrow-back" size={25} color="white" style={{paddingLeft: 10}} onPress={() => navigation.goBack()}/>,
+         headerTitle: <HeaderTitle headerTitle="Account" />,
+         headerLeft: <HeaderLeftTitle navigation={navigation}/>,
          headerStyle: {
             backgroundColor: '#1a4b93'
-         }
+         },
+         headerTintColor: 'white'
       }
    }
 

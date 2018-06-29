@@ -6,7 +6,21 @@ import Input from '../UI/Input';
 import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
 
+import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
+
 class PerformerInfo extends Component {
+   static navigationOptions = ({ navigation }) => {
+      return {
+         headerTitle: <HeaderTitle headerTitle="Your information" />,
+         headerLeft: <HeaderLeftTitle navigation={navigation} />,
+         headerRight: <HeaderRightTitle headerRightTitle="Done" />,
+         headerStyle: {
+            backgroundColor: '#1a4b93'
+         },
+         headerTintColor: 'white'
+      }
+   }
+
    constructor(props) {
       super(props);
       const { name, description, profile_facebook, profile_instagram } = this.props.navigation.state.params.performerData; 
@@ -47,10 +61,10 @@ class PerformerInfo extends Component {
       const { name, profilePic } = this.props.navigation.state.params.performerData;
       return (
          <View style={{flex:1, backgroundColor: 'white'}}>
-            <Header 
+            {/* <Header 
                headerName="Your Information" 
                notShowIcon headerRightTitle="Done"
-               navigateBack={() => this.props.navigation.goBack()} />
+               navigateBack={() => this.props.navigation.goBack()} /> */}
             <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
                <ScrollView>         
                   <View style={styles.imageContainer}>

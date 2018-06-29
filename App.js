@@ -23,6 +23,8 @@ import TagEdit from './components/Performer/TagEdit';
 import NewTag from './components/Performer/NewTag';
 import Welcome from './components/Welcome/Welcome';
 
+import { HeaderRightIcon } from './components/UI/Header/index.js';
+
 export default class App extends React.Component {
 
   // // landscape orientation
@@ -66,6 +68,13 @@ export default class App extends React.Component {
          let headerTitle = routeName;
          return {
             headerTitle,
+            headerTitleStyle: {
+               fontSize: 20, color: 'white'
+            },
+            headerStyle: {
+               backgroundColor: '#1a4b93',
+            },
+            headerRight: <HeaderRightIcon navigation={navigation} />
          };
       }
       const MainNavigator = createBottomTabNavigator({

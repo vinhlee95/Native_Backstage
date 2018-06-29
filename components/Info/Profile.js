@@ -16,17 +16,17 @@ import firebase from 'firebase';
 import Spinner from '../UI/Spinner';
 import SaveModal from '../UI/SaveModal';
 
+import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
+
 class Profile extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
-         header: null,
-         tabBarIcon: ({ focused, tintColor }) => (
-         focused
-         ?
-         <Icon name="user" size={24} color="#2b6edb" />
-         :
-         <Icon name="user" size={24} />
-         ),
+         headerTitle: <HeaderTitle headerTitle="Profile" />,
+         headerLeft: <HeaderLeftTitle navigation={navigation}/>,
+         headerRight: <HeaderRightTitle headerRightTitle="Done" textColor="white" saveInfo={this.handleSaveInfo} />,
+         headerStyle: {
+            backgroundColor: '#1a4b93'
+         }
       }
    }
 
@@ -124,7 +124,7 @@ class Profile extends Component {
       }
       return(
          <View style={{flex:1}}>
-         {
+         {/* {
             this.state.isHeaderShowed
             ?
             <Header 
@@ -137,7 +137,7 @@ class Profile extends Component {
                handleSaveInfo={this.handleSaveInfo}
             />
             : null
-         }
+         } */}
          
          <Animated.View style={[styles.container, { paddingBottom: this.keyboardHeight } ]}>
                    
