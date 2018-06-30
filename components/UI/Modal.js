@@ -9,10 +9,12 @@ const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const Modal = (props) => {
-   let width = props.width ? props.width : '60%';
-   let centerMargin = props.centerMargin ? props.centerMargin : '20%';
+   let width = props.width ? props.width : '70%';
+   let centerMargin = props.centerMargin ? props.centerMargin : '15%';
    let textColor = props.textColor ? props.textColor : '#1a4b93';
    let bannerBackgroundColor = props.bannerBackgroundColor ? props.bannerBackgroundColor : 'white';
+   let spinnerColor = props.spinnerColor ? props.spinnerColor : '#1a4b93';
+   let spinnerSize = props.spinnerSize ? props.spinnerSize : 'large';
    const styles = {
       backdrop: {
          flex: 1,
@@ -26,7 +28,7 @@ const Modal = (props) => {
       },
       banner: {
          position: 'absolute',
-         top: DEVICE_HEIGHT / 3,
+         top: DEVICE_HEIGHT / 4,
          width: width,
          left: centerMargin,
          right: centerMargin,
@@ -51,7 +53,7 @@ const Modal = (props) => {
          <View style={styles.banner}>
             <Text style={[styles.title, {marginBottom: 5}]}>{props.title}</Text>
             <Text style={[styles.title, {marginBottom: 15}]}>{props.subtitle}</Text>
-            <Spinner color={props.spinnerColor} size={props.spinnerSize} />
+            <Spinner color={spinnerColor} size={spinnerSize} />
          </View>
       </View>
    )

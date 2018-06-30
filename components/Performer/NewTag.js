@@ -3,7 +3,6 @@ import { View, Text, ScrollView, Switch } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import Header from '../UI/Header';
 import ViewContainer from '../UI/View';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
@@ -15,7 +14,8 @@ class TagEdit extends Component {
       return {
          headerTitle: <HeaderTitle headerTitle="Add tags" />,
          headerLeft: <HeaderLeftTitle navigation={navigation} />,
-         headerRight: <HeaderRightTitle headerRightTitle="Done" />,
+         headerRight: <HeaderRightTitle
+                        saveInfo={navigation.getParam('saveTag')} />,
          headerStyle: {
             backgroundColor: '#1a4b93'
          },
@@ -38,6 +38,12 @@ class TagEdit extends Component {
       }
    }
 
+   componentWillMount() {
+      this.props.navigation.setParams({
+         saveTag: this.goBack
+      })
+   }
+
    goBack = () => {
       const { navigation } = this.props;
       navigation.state.params.returnData(this.state);
@@ -49,10 +55,6 @@ class TagEdit extends Component {
       const { audienceSize, performanceDuration, price, audio, carToDoor, electricity } = this.state;
       return (
          <View style={{flex:1, backgroundColor: 'white'}}>
-            {/* <Header
-               headerName="Add tags"
-               notShowIcon headerRightTitle="Done"
-               navigateBack={this.goBack} /> */}
             <ViewContainer style={{ marginTop: 15 }}>
                <ScrollView>
                   <View style={styles.label}>
@@ -111,9 +113,6 @@ class TagEdit extends Component {
                         value={this.state.electricity}
                         onValueChange={() => this.setState({ electricity: !this.state.electricity})}/>
                   </View>
-                  <Button 
-                     title="Save information"
-                     onPress={() => console.log('Info saved')} />
                </ScrollView>
             </ViewContainer>
          </View>

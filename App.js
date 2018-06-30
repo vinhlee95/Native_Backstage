@@ -24,6 +24,7 @@ import NewTag from './components/Performer/NewTag';
 import Welcome from './components/Welcome/Welcome';
 
 import { HeaderRightIcon } from './components/UI/Header/index.js';
+import MapFullScreen from './components/Info/MapFullScreen';
 
 export default class App extends React.Component {
 
@@ -87,6 +88,7 @@ export default class App extends React.Component {
          setting: createStackNavigator({
             Account: Account,
             Profile: Profile,
+            MapFullScreen: MapFullScreen,
             PerformerInfo: PerformerInfo,
             PerformanceInfo: PerformanceInfo,
             PerformerCreate: PerformerCreate,

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Image, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableWithoutFeedback, Keyboard, Animated } from 'react-native';
 import { ImagePicker, Permissions } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 
-import Header from '../UI/Header';
-import Button from '../UI/Button';
+import SaveModal from '../UI/SaveModal';
 import ViewContainer from '../UI/View';
 import Spinner from '../UI/Spinner';
 import Input from '../UI/Input';
@@ -16,21 +15,26 @@ class PerformerCreate extends Component {
       return {
          headerTitle: <HeaderTitle headerTitle="New performer" />,
          headerLeft: <HeaderLeftTitle navigation={navigation} />,
-         headerRight: <HeaderRightTitle headerRightTitle="Done" />,
+         headerRight: <HeaderRightTitle 
+                        saveInfo={navigation.getParam('saveData')} />,
          headerStyle: {
             backgroundColor: '#1a4b93'
          },
-         headerTintColor: 'white'
       }
    }
-   state = { 
-         image: null, 
+   constructor(props) {
+      super(props);
+      this.state = {
+         image: null,
          name: '',
          description: '',
          facebookUrl: '',
          instagramUrl: '',
-         isLoading: false
+         isLoading: false,
+         isSaving: false,
       };
+      this.keyboardHeight = new Animated.Value(0);
+   }
 
    pickImage = async () => {
       this.setState({ isLoading: true })
@@ -51,64 +55,109 @@ class PerformerCreate extends Component {
       } 
    }
 
+   // add event listener for keyboard to show up
+   componentWillMount() {
+      this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+      this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+      // allowing header right button 
+      // to get access to function inside class
+      this.props.navigation.setParams({
+         saveData: this.handleSaveData
+      });
+   }
+
+   componentWillUnmount() {
+      this.keyboardWillShowSub.remove();
+      this.keyboardWillHideSub.remove();
+   }
+
+   // callbacks
+   keyboardWillShow = (event) => {
+      // this.setState({ flexNumber: 0.7})
+      Animated.timing(this.keyboardHeight, {
+         duration: event.duration,
+         toValue: event.endCoordinates.height,
+      }).start();
+   };
+
+   keyboardWillHide = (event) => {
+      // this.setState({ flexNumber: 0.4})      
+      Animated.timing(this.keyboardHeight, {
+         duration: event.duration,
+         toValue: 10,
+      }).start();
+   };
+
+
+   handleSaveData = () => {
+      // do sth to save data
+      // display save modal
+      this.setState({ isSaving: true })
+   }
+
    render() {
       return (
          <View style={{ flex: 1, backgroundColor: 'white'}}>
-            {/* <Header
-               headerName="New performer"
-               notShowIcon headerRightTitle = "Done"
-               navigateBack={() => this.props.navigation.goBack()} /> */}
-            <ScrollView>
-               <ViewContainer>
-                  {/* Profile upload */}
-                  {
-                     this.state.image
-                     ?
-                     <Image 
-                        source={{ uri: this.state.image }}
-                        style={styles.image} />
-                     :
-                     <TouchableWithoutFeedback onPress={() => this.pickImage()} >
-                        <View style={styles.image}>
-                           {
-                              this.state.isLoading
-                              ?
-                              <Spinner animating />
-                              :
-                              <View style={styles.iconContainer}>
-                                 <Ionicons name="ios-camera" size={60} />
-                                 <Text>Add photo</Text>
-                              </View>
-                           }
-                        </View>
-                     </TouchableWithoutFeedback>
-                  }
+            <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
+               <ScrollView>
+                  <ViewContainer>
+                     {/* Profile upload */}
+                     {
+                        this.state.image
+                        ?
+                        <Image 
+                           source={{ uri: this.state.image }}
+                           style={styles.image} />
+                        :
+                        <TouchableWithoutFeedback onPress={() => this.pickImage()} >
+                           <View style={styles.image}>
+                              {
+                                 this.state.isLoading
+                                 ?
+                                 <Spinner animating />
+                                 :
+                                 <View style={styles.iconContainer}>
+                                    <Ionicons name="ios-camera" size={60} />
+                                    <Text>Add photo</Text>
+                                 </View>
+                              }
+                           </View>
+                        </TouchableWithoutFeedback>
+                     }
 
-                  <Text style={styles.label}>Name</Text>
-                  <Input
-                     value={this.state.name}
-                     onChangeText={name => this.setState({ name })} />
-
-                  <Text style={styles.label}>Description</Text>
-                  <Input
-                     value={this.state.description}
-                     onChangeText={description => this.setState({ description })}
-                     // multiline
-                     numberOfLines={2} />
-
-                  <Text style={styles.label}>Facebook URL</Text>
+                     <Text style={styles.label}>Name</Text>
                      <Input
-                        value={this.state.facebookUrl}
-                        onChangeText={facebookUrl => this.setState({ facebookUrl })} />
+                        value={this.state.name}
+                        onChangeText={name => this.setState({ name })} />
 
-                  <Text style={styles.label}>Instagram URL</Text>
-                  <Input
-                     value={this.state.instagramUrl}
-                     onChangeText={instagramUrl => this.setState({ instagramUrl })} />
-                  <Button title="Save" onPress={() => this.props.navigation.goBack()}/>  
-                  
-               </ViewContainer>
-            </ScrollView>
+                     <Text style={styles.label}>Description</Text>
+                     <Input
+                        value={this.state.description}
+                        onChangeText={description => this.setState({ description })}
+                        // multiline
+                        numberOfLines={2} />
+
+                     <Text style={styles.label}>Facebook URL</Text>
+                        <Input
+                           value={this.state.facebookUrl}
+                           onChangeText={facebookUrl => this.setState({ facebookUrl })} />
+
+                     <Text style={styles.label}>Instagram URL</Text>
+                     <Input
+                        value={this.state.instagramUrl}
+                        onChangeText={instagramUrl => this.setState({ instagramUrl })} />
+                  </ViewContainer>
+                  {
+                     this.state.isSaving
+                     ?
+                     <SaveModal 
+                        isModalShowed 
+                        handleCloseModal={() => this.setState({ isSaving: false })}
+                     />
+                     : null
+                  }
+               </ScrollView>
+            </Animated.View>
          </View>
       )
    }

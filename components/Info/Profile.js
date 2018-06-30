@@ -13,19 +13,17 @@ import Map from '../Location/Map';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import firebase from 'firebase';
-import Spinner from '../UI/Spinner';
+import Modal from '../UI/Modal';
 import SaveModal from '../UI/SaveModal';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
-
-let _this = null;
 
 class Profile extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
          headerTitle: <HeaderTitle headerTitle="Profile" />,
          headerLeft: <HeaderLeftTitle navigation={navigation}/>,
-         headerRight: <HeaderRightTitle headerRightTitle="Done"
+         headerRight: <HeaderRightTitle 
                         saveInfo={navigation.getParam('saveInfo')} />,
          headerStyle: {
             backgroundColor: '#1a4b93'
@@ -46,10 +44,9 @@ class Profile extends Component {
             postalCode: ''
          },
          isLoading: true,
+         isSaving: false,
          isModalShowed: false,
-         isSpinnerShowed: false,
          isMapFullScreen: false,
-         isHeaderShowed: true,
       };
       this.keyboardHeight = new Animated.Value(0);
    }
@@ -60,17 +57,20 @@ class Profile extends Component {
       this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
       // allowing header right button 
       // to get access to function inside class
-      this.props.navigation.setParams({ saveInfo: this.handleSaveInfo });
+      this.props.navigation.setParams({
+         saveInfo: this.handleSaveInfo
+      });
+
    }
 
    componentWillUnmount() {
       this.keyboardWillShowSub.remove();
       this.keyboardWillHideSub.remove();
    }
-
-   testButton = () => {
-      console.log('Testing!')
-   }
+   
+   // componentDidMount() {
+   //    this.props.navigation.setParams({ saveInfo: this.handleSaveInfo });
+   // }
 
    // callbacks
    keyboardWillShow = (event) => {
@@ -94,10 +94,10 @@ class Profile extends Component {
    }
    
    handleSaveInfo = () => {
-      this.setState({ isLoading: true })
+      this.setState({ isSaving: true })
       const { firstName, lastName, location } = this.state;
       this.props.saveData(firstName, lastName, location, () => {
-         this.setState({ isLoading: false, isModalShowed: true });
+         this.setState({ isSaving: false, isModalShowed: true });
          this.loadData();         
       });
    }
@@ -119,42 +119,21 @@ class Profile extends Component {
    }
 
    render() {
+      // console.log(this.state.location)
       // console.log(this.state.location.description)
       // show map full screen when user tap the map 
-      if(this.state.isMapFullScreen) {
+      if(this.state.isLoading) {
          return (
-            <View style={{ flex: 1}}>
-                  <View style={{ flex: 1, position: 'absolute', top: 30, left: 15, zIndex: 1000 }}>
-                     <Icon name="times-circle" size={30} onPress={() => this.setState({ isMapFullScreen: false, isHeaderShowed: true })} />
-
-                  </View>
-               <Map location={this.state.location} />
-            </View>
+            <Modal title="Loading your profile" />
          )
       }
       return(
          <View style={{flex:1}}>
-         {/* {
-            this.state.isHeaderShowed
-            ?
-            <Header 
-               headerName = "Profile"
-               notShowIcon 
-               editMode
-               navigateBack = {
-                  () => this.props.navigation.navigate('Account')
-               }
-               handleSaveInfo={this.handleSaveInfo}
-            />
-            : null
-         } */}
-         
          <Animated.View style={[styles.container, { paddingBottom: this.keyboardHeight } ]}>
-                   
             {
-               this.state.isLoading
+               this.state.isSaving
                ?
-               <Spinner />
+               <Modal title="Saving your information" />
                :
                <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
                   <ViewContainer>
@@ -210,7 +189,9 @@ class Profile extends Component {
                               <Map 
                                  location={this.state.location} 
                                  scrollEnabled={false}  
-                                 onPress={() => this.setState({ isMapFullScreen: true, isHeaderShowed: false })}
+                                 onPress={() => this.props.navigation.navigate('MapFullScreen', {
+                                    location: this.state.location,
+                                 })}
                                  style={{ height: 300,zIndex: 1 }} />
                            </View>
                         </View>
@@ -228,7 +209,6 @@ class Profile extends Component {
                   isModalShowed={this.state.isModalShowed}
                   handleCloseModal={() => {
                      this.setState({ isModalShowed: false });
-                     this.props.navigation.goBack();
                   }} />
                : null
             }

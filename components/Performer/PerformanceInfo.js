@@ -18,7 +18,8 @@ class PerformanceInfo extends Component {
       return {
          headerTitle: <HeaderTitle headerTitle="Your performance" />,
          headerLeft: <HeaderLeftTitle navigation={navigation} />,
-         headerRight: <HeaderRightTitle headerRightTitle="Done" />,
+         headerRight: <HeaderRightTitle 
+                        saveInfo={navigation.getParam('saveData')} />,
          headerStyle: {
             backgroundColor: '#1a4b93'
          },
@@ -36,7 +37,7 @@ class PerformanceInfo extends Component {
          electricity,
          price
       } = this.props.navigation.state.params.performanceData;
-      console.log(this.props.navigation.state.params.performanceData)
+      // console.log(this.props.navigation.state.params.performanceData)
       const { name } = performerData;
       this.state = {
          title,
@@ -59,6 +60,11 @@ class PerformanceInfo extends Component {
    componentWillMount() {
       this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
       this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+      // allowing header right button 
+      // to get access to function inside class
+      this.props.navigation.setParams({
+         saveData: this.handleSaveData
+      });
    }
 
    componentWillUnmount() {
@@ -174,11 +180,6 @@ class PerformanceInfo extends Component {
 		});
       return(
          <View style={{flex:1, backgroundColor: 'white'}}>
-            {/* <Header
-               headerName="Your performance"
-               headerStyle={{ paddingBottom: 5 }}
-               notShowIcon headerRightTitle="Done"
-               navigateBack={() => this.props.navigation.goBack()} /> */}
                <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
                   <ScrollView> 
                      <Swiper
@@ -223,7 +224,6 @@ class PerformanceInfo extends Component {
                            })}
                         />
 
-                        <Button title="Save" onPress={() => this.handleSaveData()} />        
                      </ViewContainer>
                   </ScrollView>
                   {

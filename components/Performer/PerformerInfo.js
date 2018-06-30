@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, ScrollView, Image, Keyboard, Animated } from 'react-native';
-import Modal from '../UI/Modal';
-import Header from '../UI/Header';
+import SaveModal from '../UI/SaveModal';
 import Input from '../UI/Input';
-import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
@@ -13,7 +11,8 @@ class PerformerInfo extends Component {
       return {
          headerTitle: <HeaderTitle headerTitle="Your information" />,
          headerLeft: <HeaderLeftTitle navigation={navigation} />,
-         headerRight: <HeaderRightTitle headerRightTitle="Done" />,
+         headerRight: <HeaderRightTitle 
+                        saveInfo={navigation.getParam('saveData')} />,
          headerStyle: {
             backgroundColor: '#1a4b93'
          },
@@ -24,7 +23,7 @@ class PerformerInfo extends Component {
    constructor(props) {
       super(props);
       const { name, description, profile_facebook, profile_instagram } = this.props.navigation.state.params.performerData; 
-      this.state = { name, description, facebookUrl: profile_facebook, instagramUrl: profile_instagram };
+      this.state = { name, description, facebookUrl: profile_facebook, instagramUrl: profile_instagram, isSaving: false };
       this.keyboardHeight = new Animated.Value(0);
    }
 
@@ -32,6 +31,15 @@ class PerformerInfo extends Component {
    componentWillMount() {
       this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
       this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+      // allowing header right button 
+      // to get access to function inside class
+      this.props.navigation.setParams({
+         saveData: this.handleSaveData
+      });
+   }
+
+   handleSaveData = () => {
+      this.setState({ isSaving: true });
    }
 
    componentWillUnmount() {
@@ -92,9 +100,17 @@ class PerformerInfo extends Component {
                      <Input
                         value={this.state.instagramUrl}
                         onChangeText={instagramUrl => this.setState({ instagramUrl })} />
-                     <Button title="Save" onPress={() => this.props.navigation.goBack()}/>                     
                   </ViewContainer>
                </ScrollView>
+               {
+                  this.state.isSaving
+                  ?
+                  <SaveModal 
+                     isModalShowed 
+                     handleCloseModal={() => this.setState({ isSaving: false })}
+                  />
+                  : null
+               }
             </Animated.View>
          </View>
       )

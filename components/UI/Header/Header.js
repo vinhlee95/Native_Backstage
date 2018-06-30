@@ -49,7 +49,7 @@ export const HeaderRightTitle = (props) => {
                   color: 'white',
                   marginRight: 10,
                }}>
-               {props.headerRightTitle}</Text>
+               Done</Text>
          </View>
       </TouchableHighlight>
    )

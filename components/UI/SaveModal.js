@@ -20,7 +20,7 @@ class SaveModal extends Component {
                      {backgroundColor: 'rgba(0,0,0,0.3)'} 
                      : '']} >
             <Modal
-               animationType="slide"
+               animationType="fade"
                transparent={true}
                visible={this.props.isModalShowed}
                onDismiss={() => console.log('Modal is closed!')} >
@@ -49,11 +49,11 @@ const styles = {
    banner: {
       position: 'absolute',
       top: DEVICE_HEIGHT / 3,
-      width: '80%',
-      left: '10%',
-      right: '10%',
+      width: '70%',
+      left: '15%',
+      right: '15%',
       backgroundColor: 'white',
-      borderRadius: 5,
+      borderRadius: 10,
       paddingTop: 20
    },
    heading: {
