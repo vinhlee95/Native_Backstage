@@ -9,7 +9,20 @@ import ViewContainer from '../UI/View';
 import Spinner from '../UI/Spinner';
 import Input from '../UI/Input';
 
+import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
+
 class PerformerCreate extends Component {
+   static navigationOptions = ({ navigation }) => {
+      return {
+         headerTitle: <HeaderTitle headerTitle="New performer" />,
+         headerLeft: <HeaderLeftTitle navigation={navigation} />,
+         headerRight: <HeaderRightTitle headerRightTitle="Done" />,
+         headerStyle: {
+            backgroundColor: '#1a4b93'
+         },
+         headerTintColor: 'white'
+      }
+   }
    state = { 
          image: null, 
          name: '',
@@ -41,10 +54,10 @@ class PerformerCreate extends Component {
    render() {
       return (
          <View style={{ flex: 1, backgroundColor: 'white'}}>
-            <Header
+            {/* <Header
                headerName="New performer"
                notShowIcon headerRightTitle = "Done"
-               navigateBack={() => this.props.navigation.goBack()} />
+               navigateBack={() => this.props.navigation.goBack()} /> */}
             <ScrollView>
                <ViewContainer>
                   {/* Profile upload */}

@@ -41,7 +41,7 @@ export const HeaderRightIcon = (props) => {
 
 export const HeaderRightTitle = (props) => {
    return(
-      <TouchableHighlight onPress={() => props.saveInfo()} >
+      <TouchableHighlight onPress={props.saveInfo} >
          <View>
             <Text
                style={{ 

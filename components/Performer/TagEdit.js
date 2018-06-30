@@ -8,7 +8,20 @@ import ViewContainer from '../UI/View';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 
+import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
+
 class TagEdit extends Component {
+   static navigationOptions = ({ navigation }) => {
+      return {
+         headerTitle: <HeaderTitle headerTitle="Edit tags" />,
+         headerLeft: <HeaderLeftTitle navigation={navigation} />,
+         headerRight: <HeaderRightTitle headerRightTitle="Done" />,
+         headerStyle: {
+            backgroundColor: '#1a4b93'
+         },
+         headerTintColor: 'white'
+      }
+   }
    constructor(props) {
       super(props);
       const { navigation } = this.props;
@@ -27,10 +40,10 @@ class TagEdit extends Component {
    render() {
       return (
          <View style={{flex:1, backgroundColor: 'white'}}>
-            <Header
+            {/* <Header
                headerName="Your tags"
                notShowIcon headerRightTitle="Done"
-               navigateBack={this.goBack} />
+               navigateBack={this.goBack} /> */}
             <ViewContainer>
                <ScrollView>
                   <View style={styles.label}>

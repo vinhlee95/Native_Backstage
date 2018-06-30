@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, KeyboardAvoidingView, Animated, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { ScrollView, Button, View, Text, KeyboardAvoidingView, Animated, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Ionicons } from '@expo/vector-icons';
 
 import ViewContainer from '../UI/View';
 import Header from '../UI/Header';
 import Input from '../UI/Input';
-import Button from '../UI/Button';
+// import Button from '../UI/Button';
 import LocationSearch from '../Location/LocationSearch';
 import Map from '../Location/Map';
 
@@ -18,12 +18,15 @@ import SaveModal from '../UI/SaveModal';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 
+let _this = null;
+
 class Profile extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
          headerTitle: <HeaderTitle headerTitle="Profile" />,
          headerLeft: <HeaderLeftTitle navigation={navigation}/>,
-         headerRight: <HeaderRightTitle headerRightTitle="Done" textColor="white" saveInfo={this.handleSaveInfo} />,
+         headerRight: <HeaderRightTitle headerRightTitle="Done"
+                        saveInfo={navigation.getParam('saveInfo')} />,
          headerStyle: {
             backgroundColor: '#1a4b93'
          }
@@ -55,11 +58,18 @@ class Profile extends Component {
    componentWillMount() {
       this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
       this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+      // allowing header right button 
+      // to get access to function inside class
+      this.props.navigation.setParams({ saveInfo: this.handleSaveInfo });
    }
 
    componentWillUnmount() {
       this.keyboardWillShowSub.remove();
       this.keyboardWillHideSub.remove();
+   }
+
+   testButton = () => {
+      console.log('Testing!')
    }
 
    // callbacks
