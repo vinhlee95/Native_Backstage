@@ -3,12 +3,12 @@ import { View, Text, ScrollView, Image, TouchableWithoutFeedback, Keyboard, Anim
 import { ImagePicker, Permissions } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 
-import SaveModal from '../UI/SaveModal';
 import ViewContainer from '../UI/View';
 import Spinner from '../UI/Spinner';
 import Input from '../UI/Input';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
+import alertMessage from '../UI/alertMessage';
 
 class PerformerCreate extends Component {
    static navigationOptions = ({ navigation }) => {
@@ -31,7 +31,6 @@ class PerformerCreate extends Component {
          facebookUrl: '',
          instagramUrl: '',
          isLoading: false,
-         isSaving: false,
       };
       this.keyboardHeight = new Animated.Value(0);
    }
@@ -91,8 +90,7 @@ class PerformerCreate extends Component {
 
    handleSaveData = () => {
       // do sth to save data
-      // display save modal
-      this.setState({ isSaving: true })
+      alertMessage();
    }
 
    render() {
@@ -147,15 +145,6 @@ class PerformerCreate extends Component {
                         value={this.state.instagramUrl}
                         onChangeText={instagramUrl => this.setState({ instagramUrl })} />
                   </ViewContainer>
-                  {
-                     this.state.isSaving
-                     ?
-                     <SaveModal 
-                        isModalShowed 
-                        handleCloseModal={() => this.setState({ isSaving: false })}
-                     />
-                     : null
-                  }
                </ScrollView>
             </Animated.View>
          </View>

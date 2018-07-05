@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
-import { ScrollView, Button, View, Text, KeyboardAvoidingView, Animated, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { ScrollView, Button, View, Text, KeyboardAvoidingView, Animated, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import ViewContainer from '../UI/View';
-import Header from '../UI/Header';
 import Input from '../UI/Input';
-// import Button from '../UI/Button';
 import LocationSearch from '../Location/LocationSearch';
 import Map from '../Location/Map';
 
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import firebase from 'firebase';
 import Modal from '../UI/Modal';
-import SaveModal from '../UI/SaveModal';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
+import alertMessage from '../UI/alertMessage';
 
 class Profile extends Component {
    static navigationOptions = ({ navigation }) => {
@@ -45,7 +41,6 @@ class Profile extends Component {
          },
          isLoading: true,
          isSaving: false,
-         isModalShowed: false,
          isMapFullScreen: false,
       };
       this.keyboardHeight = new Animated.Value(0);
@@ -97,6 +92,7 @@ class Profile extends Component {
       this.setState({ isSaving: true })
       const { firstName, lastName, location } = this.state;
       this.props.saveData(firstName, lastName, location, () => {
+         alertMessage();
          this.setState({ isSaving: false, isModalShowed: true });
          this.loadData();         
       });
@@ -201,16 +197,6 @@ class Profile extends Component {
                   </ViewContainer>
                   
                </ScrollView>
-            }
-            {
-               this.state.isModalShowed 
-               ? 
-               <SaveModal 
-                  isModalShowed={this.state.isModalShowed}
-                  handleCloseModal={() => {
-                     this.setState({ isModalShowed: false });
-                  }} />
-               : null
             }
          </Animated.View>
          </View>

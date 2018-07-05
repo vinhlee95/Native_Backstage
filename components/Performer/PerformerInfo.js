@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Image, Keyboard, Animated } from 'react-native';
-import SaveModal from '../UI/SaveModal';
+import { View, Text, ScrollView, Image, Keyboard, Animated,  } from 'react-native';
 import Input from '../UI/Input';
 import ViewContainer from '../UI/View';
+import alertMessage from '../UI/alertMessage';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 
@@ -23,7 +23,7 @@ class PerformerInfo extends Component {
    constructor(props) {
       super(props);
       const { name, description, profile_facebook, profile_instagram } = this.props.navigation.state.params.performerData; 
-      this.state = { name, description, facebookUrl: profile_facebook, instagramUrl: profile_instagram, isSaving: false };
+      this.state = { name, description, facebookUrl: profile_facebook, instagramUrl: profile_instagram };
       this.keyboardHeight = new Animated.Value(0);
    }
 
@@ -39,7 +39,7 @@ class PerformerInfo extends Component {
    }
 
    handleSaveData = () => {
-      this.setState({ isSaving: true });
+      alertMessage();
    }
 
    componentWillUnmount() {
@@ -102,15 +102,6 @@ class PerformerInfo extends Component {
                         onChangeText={instagramUrl => this.setState({ instagramUrl })} />
                   </ViewContainer>
                </ScrollView>
-               {
-                  this.state.isSaving
-                  ?
-                  <SaveModal 
-                     isModalShowed 
-                     handleCloseModal={() => this.setState({ isSaving: false })}
-                  />
-                  : null
-               }
             </Animated.View>
          </View>
       )

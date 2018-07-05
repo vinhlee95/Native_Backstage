@@ -3,7 +3,6 @@ import { View, Text, ScrollView, Image, TouchableWithoutFeedback, Dimensions, Ke
 import { ImagePicker, Permissions } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 
-import SaveModal from '../UI/SaveModal';
 import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
 import Spinner from '../UI/Spinner';
@@ -12,6 +11,7 @@ import ListItem from '../UI/ListItem';
 import Tag from '../UI/Tag';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
+import alertMessage from '../UI/alertMessage';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -34,7 +34,6 @@ class PerformanceCreate extends Component {
          name: '',
          description: '',
          isLoading: false,
-         isSaving: false,
          tagData: null,
       };
       this.keyboardHeight = new Animated.Value(0);
@@ -76,10 +75,7 @@ class PerformanceCreate extends Component {
 
    handleSaveData = () => {
       // do sth to save data
-      // display save modal
-      this.setState({
-         isSaving: true
-      })
+      alertMessage();
    }
    
 
@@ -234,15 +230,6 @@ class PerformanceCreate extends Component {
                         )}/>
                      
                   </ViewContainer>
-                  {
-                     this.state.isSaving
-                     ?
-                     <SaveModal 
-                        isModalShowed 
-                        handleCloseModal={() => this.setState({ isSaving: false })}
-                     />
-                     : null
-                  }
                </ScrollView>
             </Animated.View>
          </View>

@@ -5,11 +5,11 @@ import Input from '../UI/Input';
 import Header from '../UI/Header';
 import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
-import SaveModal from '../UI/SaveModal';
 import Tag from '../UI/Tag';
 import _ from 'lodash';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
+import alertMessage from '../UI/alertMessage';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -51,7 +51,6 @@ class PerformanceInfo extends Component {
             electricity,
             price
          },
-         showSaveModal: false
       };
       this.keyboardHeight = new Animated.Value(0);
    }
@@ -92,7 +91,7 @@ class PerformanceInfo extends Component {
    handleSaveData = () => {
       // do sth to save data
       // display save modal
-      this.setState({ showSaveModal: true })
+      alertMessage();
    }
 
    renderTagList = () => {
@@ -226,15 +225,6 @@ class PerformanceInfo extends Component {
 
                      </ViewContainer>
                   </ScrollView>
-                  {
-                     this.state.showSaveModal
-                     ?
-                     <SaveModal 
-                        isModalShowed 
-                        handleCloseModal={() => this.setState({ showSaveModal: false })}
-                     />
-                     : null
-                  }
                </Animated.View> 
 
          </View>
