@@ -46,11 +46,13 @@ class Performer extends Component {
       if(this.state.performers) {
          // alter data to array
          performerList = this.state.performers.map(performer => {
+            // testing rendering 2 products
+            const twoProducts = _.toArray(performer.products).slice(0,2);
             return(
                <PerformerItem 
                   key={performer.data.id}
                   performerData={performer.data}
-                  productData={_.toArray(performer.products)}
+                  productData={twoProducts}
                   handleViewPerformerInfo={() => {
                      this.props.navigation.navigate('PerformerInfo', {
                         performerData: performer.data
