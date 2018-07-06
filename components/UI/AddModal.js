@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Modal, Text, View, Dimensions, TouchableWithoutFeedback} from 'react-native';
+import {Modal, Text, View, Dimensions, TouchableHighlight} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../UI/Button';
 import AddButton from '../UI/AddButton';
@@ -23,7 +24,8 @@ class AddModal extends Component {
                visible={this.props.isModalShowed}
                onDismiss={() => console.log('Modal is closed!')} >
                <View style={styles.optionContainer}>
-                  <TouchableWithoutFeedback 
+                  <TouchableHighlight
+                     underlayColor="lightgrey" 
                      onPress={() => {
                         navigation.navigate('PerformerCreate', { navigation: this.props.navigation });
                         handleCloseModal();
@@ -31,11 +33,12 @@ class AddModal extends Component {
                      }}>
                      <View style={styles.row}>
                         <Text style={styles.text}>Performer</Text>
-                        <Icon name="user" size={30} color="red" style={styles.icon} />
+                        <Ionicons name="ios-people" size={30} color="blue" style={styles.icon} />
                      </View>
-                  </TouchableWithoutFeedback>
+                  </TouchableHighlight>
 
-                  <TouchableWithoutFeedback
+                  <TouchableHighlight
+                     underlayColor="lightgrey"
                      onPress={() => {
                         navigation.navigate('PerformanceCreate');
                         handleCloseModal();
@@ -43,9 +46,9 @@ class AddModal extends Component {
                      }}>
                      <View style={styles.row}>
                         <Text style={styles.text}>Performance</Text>
-                        <Icon name="gift" size={30} color="red" style={styles.icon} />
+                        <Ionicons name="ios-film" size={30} color="red" style={styles.icon} />
                      </View>
-                  </TouchableWithoutFeedback>
+                  </TouchableHighlight>
                   <View style={styles.closeButton}>
                      <AddButton 
                         buttonText="x" 
@@ -94,7 +97,7 @@ const styles = {
       shadowRadius: 2,
    },
    text: {
-      fontSize: 16,
+      fontSize: 18,
       fontWeight: 'bold'
    },
    icon: {
