@@ -9,10 +9,10 @@ const PerformerItem = (props) => {
    const { performerData, productData, handleViewPerformerInfo } = props;
    const {name, profileThumb} = performerData;
    let performanceList;
-   performanceList = productData.map(performance => {
+   performanceList = productData.map((performance,id) => {
       return <PerformanceItem 
                performance={performance} 
-               key={performance.id}
+               key={id}
                handleViewPerformanceInfo={() => props.navigation.navigate('PerformanceInfo', {performanceData: performance})} />
    });
    return(

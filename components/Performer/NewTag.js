@@ -29,7 +29,7 @@ class TagEdit extends Component {
       } else {
          this.state = {
             audienceSize: '', 
-            performanceDuration: '', 
+            duration: '', 
             price: '', 
             audio: false, 
             carToDoor: false, 
@@ -52,7 +52,7 @@ class TagEdit extends Component {
 
    render() {
       console.log(this.state)
-      const { audienceSize, performanceDuration, price, audio, carToDoor, electricity } = this.state;
+      const { audienceSize, duration, price, audio, carToDoor, electricity } = this.state;
       return (
          <View style={{flex:1, backgroundColor: 'white'}}>
             <ViewContainer style={{ marginTop: 15 }}>
@@ -71,8 +71,8 @@ class TagEdit extends Component {
                      <Text style={styles.labelText}>Duration (minutes)</Text>
                   </View>
                   <Input 
-                     value={this.state.performanceDuration}
-                     onChangeText={duration => this.setState({ performanceDuration: duration})}
+                     value={this.state.duration}
+                     onChangeText={duration => this.setState({ duration: duration})}
                      keyboardType="numeric" />
                   
                   <View style={styles.label}>

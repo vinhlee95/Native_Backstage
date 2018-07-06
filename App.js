@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { Provider } from 'react-redux';
 import store from './store';
 import firebase from 'firebase';
-import { AppLoading } from 'expo';
+import { AppLoading, Notifications } from 'expo';
+import registerNotification from './services/push_notification';
 
 import LoginForm from './components/Authentication/Login';
 import SignupForm from './components/Authentication/Signup';
@@ -49,6 +50,23 @@ export default class App extends React.Component {
    };
    firebase.initializeApp(config);
   }
+
+  componentDidMount() {
+      registerNotification();
+      Notifications.addListener((notification) => {
+         const { text } = notification.data;
+         const { origin } = notification;
+
+         if(text && origin === 'received') {
+            Alert.alert(
+               'Hello from Gigle',
+               text, [{
+                  text: 'OK'
+               }]
+            )
+         }
+      });
+   }
 
   render() {
       const main = createMaterialBottomTabNavigator({

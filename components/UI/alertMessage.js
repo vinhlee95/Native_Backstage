@@ -1,13 +1,13 @@
 import React from 'react';
 import { Alert } from 'react-native';
 
-export default alertMessage = (title, message) => {
+export default alertMessage = (callback) => {
    return(
       Alert.alert(
-         title?title:'Information Saved',
-         message?message:'Your information has been saved',
+         'Information Saved',
+         'Your information has been saved',
          [
-            { text: 'OK' }
+            { text: 'OK', onPress: callback? () => callback(): null }
          ]
 
       )

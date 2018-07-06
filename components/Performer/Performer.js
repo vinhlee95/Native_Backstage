@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, ScrollView, TouchableWithoutFeedback, Image } from 'react-native';
 import request from 'superagent';
 import _ from 'lodash';
 
@@ -8,6 +8,9 @@ import Modal from '../UI/Modal';
 import AddButton from '../UI/AddButton';
 import AddModal from '../UI/AddModal';
 import PerformerItem from './PerformerItem';
+
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 
 class Performer extends Component {
@@ -24,44 +27,34 @@ class Performer extends Component {
    state = {showAddButton: true, showAddModal: false};
 
    componentDidMount() {
-      request
-         .post('https://nodedev.gigleapp.com/user')
-         .send({
-            action: 'getPerformersAndProducts',
-            userId: 'ZuaqGwjNc6M47HchSJYVa2lunf03'
-         })
-         .end((err, res) => {
-            res ? this.setState({ performers: _.toArray(res.body) }) : console.log('Error fetching')
-         });
+      this.props.fetchPerformerData();
    }
 
    render() {
-      if(!this.state.performers) {
+      if(!this.props.personalData || !this.props.productData) {
          return <Modal 
                   title="Loading your performance"
                   spinnerSize="small"
                   bannerBackgroundColor="white" />
       }
       let performerList;
-      if(this.state.performers) {
-         // alter data to array
-         performerList = this.state.performers.map(performer => {
-            // testing rendering 2 products
-            const twoProducts = _.toArray(performer.products).slice(0,2);
-            return(
-               <PerformerItem 
-                  key={performer.data.id}
-                  performerData={performer.data}
-                  productData={twoProducts}
+      if(this.props.personalData && this.props.productData) {
+         const { personalData, productData } = this.props;
+         const products = _.toArray(productData).slice(0,1);
+         const updatedProducts = products.concat(this.props.performanceData);
+         console.log(this.props.performanceData)
+
+         performerList = <PerformerItem 
+                  // key={performer.data.id}
+                  performerData={personalData}
+                  productData={updatedProducts}
                   handleViewPerformerInfo={() => {
                      this.props.navigation.navigate('PerformerInfo', {
-                        performerData: performer.data
+                        performerData: personalData
                      });
                   }}
                   navigation={this.props.navigation}
                />
-            );
-         });
       }
 
       return(
@@ -97,4 +90,12 @@ class Performer extends Component {
    }
 }
 
-export default Performer;
+const mapStateToProps = ({ performerData, performanceData }) => {
+   return {
+      personalData: performerData.personalData,
+      productData: performerData.productData,
+      performanceData
+   };
+}
+
+export default connect(mapStateToProps, actions)(Performer);

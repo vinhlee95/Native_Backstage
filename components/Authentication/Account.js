@@ -62,7 +62,7 @@ class Account extends Component {
             <ViewContainer>
                 <ListItem 
                     title="Edit your profile" 
-                    leftIcon={<Icon name="user" size={20} style={{ marginRight: 10}} />}
+                    leftIcon={<Ionicons name="ios-people" size={20} style={{ marginRight: 10}} />}
                     titleStyle={{ fontSize: 18}}
                     containerStyle={{ borderBottomWidth: .5, paddingLeft: 0 }}
                     onPress={() => this.props.navigation.navigate('Profile')} />

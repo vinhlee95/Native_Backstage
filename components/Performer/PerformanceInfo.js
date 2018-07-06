@@ -28,7 +28,8 @@ class PerformanceInfo extends Component {
    }
    constructor(props) {
       super(props);
-      const { title, description, performerData, productImage  } = this.props.navigation.state.params.performanceData;
+      const { title, description, performerData, productImage, image  } = this.props.navigation.state.params.performanceData;
+      console.log(performerData)
       const {
          audienceSize,
          audio,
@@ -43,6 +44,7 @@ class PerformanceInfo extends Component {
          title,
          description,
          performerName: name,
+         image,
          tagData: {
             audienceSize,
             audio,
@@ -185,7 +187,7 @@ class PerformanceInfo extends Component {
                         height={380}
                         loop={false} >        
                         <View style={styles.imageContainer}>
-                           <Image style={styles.image} source={{uri:productImage}}/>
+                           <Image style={styles.image} source={{uri:productImage?productImage:this.state.image}}/>
                         </View>
                         {videoList}
                      </Swiper>

@@ -5,13 +5,19 @@ import Button from '../UI/Button';
 
 const PerformanceItem = (props) => {
    const { title, productImage } = props.performance;
+   let imageURI;
+   if(!props.performance.image) {
+      imageURI = productImage;
+   } else {
+      imageURI = props.performance.image;
+   }
    return(
       <TouchableHighlight 
          onPress={() => props.handleViewPerformanceInfo()}
          underlayColor="#d1d3d6" >
          <View style={styles.container}>
             <View style={styles.imageContainer}>
-               <Image source={{uri: productImage}} style={styles.productImage} />
+               <Image source={{uri: imageURI }} style={styles.productImage} />
             </View>
             <View style={styles.infoContainer}>
                <Text>{title}</Text>

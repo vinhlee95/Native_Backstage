@@ -13,6 +13,9 @@ import Tag from '../UI/Tag';
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 import alertMessage from '../UI/alertMessage';
 
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
+
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
 class PerformanceCreate extends Component {
@@ -32,6 +35,7 @@ class PerformanceCreate extends Component {
       this.state = {
          image: null,
          name: '',
+         title: '',
          description: '',
          isLoading: false,
          tagData: null,
@@ -74,8 +78,10 @@ class PerformanceCreate extends Component {
 
 
    handleSaveData = () => {
+      const { name, title, description, tagData, image } = this.state;
       // do sth to save data
-      alertMessage();
+      alertMessage(() => this.props.navigation.goBack());
+      this.props.addPerformance(name, title, description, tagData, image);
    }
    
 
@@ -110,7 +116,7 @@ class PerformanceCreate extends Component {
    }
 
    renderTagList = () => {
-      const { audienceSize, audio, performanceDuration, carToDoor, electricity, price } = this.state.tagData;
+      const { audienceSize, audio, duration, carToDoor, electricity, price } = this.state.tagData;
 
       let audioTag, carToDoorTag, electricityTag;
       audio?audioTag="Audio":"";
@@ -123,7 +129,7 @@ class PerformanceCreate extends Component {
             tagIonIconName: 'ios-people',
          },
          {
-            tagName: `${performanceDuration}`,
+            tagName: `${duration}`,
             tagIonIconName: 'ios-clock',
             tagWidth: 100,
          },
@@ -198,36 +204,42 @@ class PerformanceCreate extends Component {
                      </TouchableWithoutFeedback>
                   }
 
-                  <Text style={styles.label}>Performance name</Text>
+                  <Text style={styles.label}>Performer name</Text>
                   <Input
                         value={this.state.name}
                         onChangeText={name => this.setState({ name })} />
 
-                     <Text style={styles.label}>Performance description</Text>
-                     <Input
-                        value={this.state.description}
-                        onChangeText={description => this.setState({ description })}
-                        // multiline
-                        numberOfLines={2} />
-                     <Text style={[styles.label, {marginBottom: 15 }]}>Tags</Text>
-                     {/* Tag list */}
-                     {
-                        this.state.tagData
-                        ?
-                        <View style={styles.tagList}>
-                           {this.renderTagList()}
-                        </View>
-                        : null
-                     }
-                     <ListItem 
-                        title={this.state.tagData?'Edit tags':'Add tags'} 
-                        onPress={() => 
-                           this.props.navigation.navigate('NewTag', 
-                           {
-                              returnData: this.returnData,
-                              tagData: this.state.tagData
-                           },
-                        )}/>
+                  <Text style={styles.label}>Performance name</Text>
+                  <Input
+                        value={this.state.title}
+                        onChangeText={title => this.setState({ title })} />
+
+                  <Text style={styles.label}>Performance description</Text>
+                  <Input
+                     value={this.state.description}
+                     onChangeText={description => this.setState({ description })}
+                     // multiline
+                     numberOfLines={2} />
+
+                  <Text style={[styles.label, {marginBottom: 15 }]}>Tags</Text>
+                  {/* Tag list */}
+                  {
+                     this.state.tagData
+                     ?
+                     <View style={styles.tagList}>
+                        {this.renderTagList()}
+                     </View>
+                     : null
+                  }
+                  <ListItem 
+                     title={this.state.tagData?'Edit tags':'Add tags'} 
+                     onPress={() => 
+                        this.props.navigation.navigate('NewTag', 
+                        {
+                           returnData: this.returnData,
+                           tagData: this.state.tagData
+                        },
+                     )}/>
                      
                   </ViewContainer>
                </ScrollView>
@@ -254,7 +266,7 @@ const styles = {
       alignItems: 'center'
    },
    label: {
-      fontSize: 16,
+      fontSize: 18,
       fontWeight: 'bold'
    },
    tagList: {
@@ -269,4 +281,4 @@ const styles = {
    },
 }
 
-export default PerformanceCreate;
+export default connect(null, actions)(PerformanceCreate);
