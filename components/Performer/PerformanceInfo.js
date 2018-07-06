@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, Keyboard, Animated, WebView, Dimensions } from 'react-native';
+import { View, Text, ScrollView, Image, Keyboard, Animated, WebView, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import { ImagePicker, Permissions } from 'expo';
 import Swiper from 'react-native-swiper';
 import Input from '../UI/Input';
-import Header from '../UI/Header';
 import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
 import Tag from '../UI/Tag';
+import Spinner from '../UI/Spinner';
+import { Ionicons } from '@expo/vector-icons';
+
 import _ from 'lodash';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 import alertMessage from '../UI/alertMessage';
+
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
 class PerformanceInfo extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
-         headerTitle: <HeaderTitle headerTitle="Your performance" />,
+         headerTitle: <HeaderTitle headerTitle="Edit performance" />,
          headerLeft: <HeaderLeftTitle navigation={navigation} />,
          headerRight: <HeaderRightTitle 
                         saveInfo={navigation.getParam('saveData')} />,
@@ -28,22 +34,27 @@ class PerformanceInfo extends Component {
    }
    constructor(props) {
       super(props);
-      const { title, description, performerData, productImage, image  } = this.props.navigation.state.params.performanceData;
-      console.log(performerData)
+      const {performanceData} = this.props.navigation.state.params;
       const {
+         title,
+         description,
+         performerData,
+         productImage,
          audienceSize,
          audio,
          duration,
          carToDoor,
          electricity,
          price
-      } = this.props.navigation.state.params.performanceData;
+      } = performanceData;
+      // console.log(performerData)
+      let image = performanceData.image ? performanceData.image : null;
       // console.log(this.props.navigation.state.params.performanceData)
       const { name } = performerData;
       this.state = {
          title,
          description,
-         performerName: name,
+         name,
          image,
          tagData: {
             audienceSize,
@@ -92,8 +103,33 @@ class PerformanceInfo extends Component {
 
    handleSaveData = () => {
       // do sth to save data
+      const { name, title, description, tagData, image } = this.state;
+      this.props.addPerformance(name, title, description, tagData, image);           
       // display save modal
       alertMessage();
+   }
+
+   pickImage = async () => {
+      this.setState({
+         isLoading: true
+      })
+      const permissions = Permissions.CAMERA_ROLL;
+      const {
+         status
+      } = await Permissions.askAsync(permissions);
+
+      if (status === 'granted') {
+         let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+         });
+         if (!result.cancelled) {
+            this.setState({
+               image: result.uri,
+               isLoading: false
+            });
+         }
+      }
    }
 
    renderTagList = () => {
@@ -185,17 +221,36 @@ class PerformanceInfo extends Component {
                   <ScrollView> 
                      <Swiper
                         height={380}
-                        loop={false} >        
-                        <View style={styles.imageContainer}>
-                           <Image style={styles.image} source={{uri:productImage?productImage:this.state.image}}/>
+                        loop={false} >   
+                        <View style={styles.imageContainer}>                           
+                           {
+                              productImage || this.state.image
+                              ?
+                              <Image style={styles.image} source={{uri:productImage?productImage:this.state.image}}/>
+                              :
+                              <TouchableWithoutFeedback onPress={() => this.pickImage()} >
+                                 <View style={styles.imagePickContainer}>
+                                    {
+                                       this.state.isLoading
+                                       ?
+                                       <Spinner animating />
+                                       :
+                                       <View style={styles.iconContainer}>
+                                          <Ionicons name="ios-camera" size={60} />
+                                          <Text>Add photo</Text>
+                                       </View>
+                                    }
+                                 </View>
+                              </TouchableWithoutFeedback>
+                           }     
                         </View>
                         {videoList}
                      </Swiper>
                      <ViewContainer>
                         <Text style={styles.label}>Performer name</Text>
                         <Input
-                           value={this.state.performerName}
-                           onChangeText={performerName => this.setState({ performerName })}
+                           value={this.state.name}
+                           onChangeText={name => this.setState({ name })}
                            style={{marginBottom: 25}} />
 
                         <Text style={styles.label}>Performance name</Text>
@@ -246,6 +301,21 @@ const styles = {
       marginLeft: 'auto',
       marginRight: 'auto'
    },
+   imagePickContainer: {
+      backgroundColor: 'lightgrey',
+      width: 200,
+      height: 200,
+      borderRadius: 100,
+      marginTop: 15,
+      marginBottom: 15,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+   },
+   iconContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+   },
    videoContainer: { 
 		flex: 1,
       height: 320,
@@ -279,4 +349,4 @@ const styles = {
    }
 }
 
-export default PerformanceInfo;
+export default connect(null, actions)(PerformanceInfo);

@@ -38,7 +38,14 @@ class PerformanceCreate extends Component {
          title: '',
          description: '',
          isLoading: false,
-         tagData: null,
+         tagData: {
+            audienceSize: '', 
+            duration: '', 
+            price: '', 
+            audio: null, 
+            carToDoor: null, 
+            electricity: null,
+         },
       };
       this.keyboardHeight = new Animated.Value(0);
    }
@@ -119,6 +126,7 @@ class PerformanceCreate extends Component {
       const { audienceSize, audio, duration, carToDoor, electricity, price } = this.state.tagData;
 
       let audioTag, carToDoorTag, electricityTag;
+      // change from bool value to equivalent text
       audio?audioTag="Audio":"";
       carToDoor?carToDoorTag="Car to door":"";
       electricity?electricityTag="Electricity":"";

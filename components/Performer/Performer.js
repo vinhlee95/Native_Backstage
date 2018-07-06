@@ -46,6 +46,7 @@ class Performer extends Component {
          // add local performance data to server one
          let updatedProductData;
          // check whether localData is an empty object
+         console.log(this.props.localPerformanceData)
          if (_.isEmpty(this.props.localPerformanceData)) {
             updatedProductData = productData;
          } else {
@@ -67,7 +68,6 @@ class Performer extends Component {
       });
                   
       return(
-         <TouchableWithoutFeedback onPress={() => this.setState({ showAddModal: false })} >
          <View style={{ flex: 1 }}>
             <ScrollView>
                <View>
@@ -94,7 +94,6 @@ class Performer extends Component {
                : null
             }
          </View>
-         </TouchableWithoutFeedback>
       );
    }
 }
