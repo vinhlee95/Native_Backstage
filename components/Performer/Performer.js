@@ -31,32 +31,41 @@ class Performer extends Component {
    }
 
    render() {
-      if(!this.props.personalData || !this.props.productData) {
+      if(!this.props.performerData) {
          return <Modal 
                   title="Loading your performance"
                   spinnerSize="small"
                   bannerBackgroundColor="white" />
       }
       let performerList;
-      if(this.props.personalData && this.props.productData) {
-         const { personalData, productData } = this.props;
-         const products = _.toArray(productData).slice(0,1);
-         const updatedProducts = products.concat(this.props.performanceData);
-         console.log(this.props.performanceData)
-
-         performerList = <PerformerItem 
-                  // key={performer.data.id}
-                  performerData={personalData}
-                  productData={updatedProducts}
-                  handleViewPerformerInfo={() => {
-                     this.props.navigation.navigate('PerformerInfo', {
-                        performerData: personalData
-                     });
-                  }}
-                  navigation={this.props.navigation}
-               />
-      }
-
+      const { performerData } = this.props;
+      performerList = performerData.map(performer => {
+         const personalData = performer.data;
+         // take only first 2 performance for a more compact list
+         const productData = _.toArray(performer.products).slice(0,1);
+         // add local performance data to server one
+         let updatedProductData;
+         // check whether localData is an empty object
+         if (_.isEmpty(this.props.localPerformanceData)) {
+            updatedProductData = productData;
+         } else {
+            updatedProductData = productData.concat(this.props.localPerformanceData);
+         }
+         return (
+            <PerformerItem 
+               key={personalData.id}
+               performerData={personalData}
+               productData={updatedProductData}
+               handleViewPerformerInfo={() => {
+                  this.props.navigation.navigate('PerformerInfo', {
+                     performerData: personalData
+                  });
+               }}
+               navigation={this.props.navigation}
+            />
+         )
+      });
+                  
       return(
          <TouchableWithoutFeedback onPress={() => this.setState({ showAddModal: false })} >
          <View style={{ flex: 1 }}>
@@ -90,11 +99,10 @@ class Performer extends Component {
    }
 }
 
-const mapStateToProps = ({ performerData, performanceData }) => {
+const mapStateToProps = ({ performerData, localPerformanceData }) => {
    return {
-      personalData: performerData.personalData,
-      productData: performerData.productData,
-      performanceData
+      performerData,
+      localPerformanceData
    };
 }
 

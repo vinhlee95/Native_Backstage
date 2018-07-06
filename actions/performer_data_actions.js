@@ -14,15 +14,10 @@ export const fetchPerformerData = () => {
          .end((err, res) => {
             const data = _.toArray(res.body);
             // console.log(data)
-            const personalData = data[0].data;
             // console.log(performerData);
-            const productData = data[0].products;
             dispatch({
                type: FETCH_PERFORMER_DATA,
-               payload: {
-                  personalData,
-                  productData
-               }
+               payload: data
             })
          });
    }

@@ -8,5 +8,5 @@ export default combineReducers({
    auth: authReducer,
    data: dataReducer,
    performerData: performerDataReducer,
-   performanceData: performance_data_reducer
+   localPerformanceData: performance_data_reducer
 })
