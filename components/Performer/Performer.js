@@ -46,7 +46,7 @@ class Performer extends Component {
          // add local performance data to server one
          let updatedProductData;
          // check whether localData is an empty object
-         console.log(this.props.localPerformanceData)
+         // console.log(this.props.localPerformanceData)
          if (_.isEmpty(this.props.localPerformanceData)) {
             updatedProductData = productData;
          } else {
@@ -99,6 +99,7 @@ class Performer extends Component {
 }
 
 const mapStateToProps = ({ performerData, localPerformanceData }) => {
+   // console.log(localPerformanceData)
    return {
       performerData,
       localPerformanceData

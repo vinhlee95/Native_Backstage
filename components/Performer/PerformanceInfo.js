@@ -34,7 +34,8 @@ class PerformanceInfo extends Component {
    }
    constructor(props) {
       super(props);
-      const {performanceData} = this.props.navigation.state.params;
+      const {performanceData, id} = this.props.navigation.state.params;
+      console.log(id)
       const {
          title,
          description,
@@ -56,6 +57,7 @@ class PerformanceInfo extends Component {
          description,
          name,
          image,
+         id,
          tagData: {
             audienceSize,
             audio,
@@ -280,6 +282,14 @@ class PerformanceInfo extends Component {
                            })}
                         />
 
+                        <Button
+                           title="Delete performance"
+                           style={{ backgroundColor: '#dd5e3b' }}
+                           onPress={() => {
+                              this.props.deletePerformance(this.state.id);
+                              this.props.navigation.goBack();
+                           }}
+                        />
                      </ViewContainer>
                   </ScrollView>
                </Animated.View> 

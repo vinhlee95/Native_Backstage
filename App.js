@@ -3,10 +3,12 @@ import { StyleSheet, Text, View, Alert } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { Provider } from 'react-redux';
-import store from './store';
 import firebase from 'firebase';
 import { AppLoading, Notifications } from 'expo';
 import registerNotification from './services/push_notification';
+
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import configureStore from './store';
 
 import LoginForm from './components/Authentication/Login';
 import SignupForm from './components/Authentication/Signup';
@@ -69,6 +71,7 @@ export default class App extends React.Component {
    }
 
   render() {
+     const { persistor, store } = configureStore();
       const main = createMaterialBottomTabNavigator({
             Dashboard: Dashboard,
             Performer: Performer,
@@ -127,9 +130,11 @@ export default class App extends React.Component {
       );
       return (
          <Provider store={store}>
-         <View style={styles.container}>
-            <MainNavigator / >
-         </View>
+            <PersistGate persistor={persistor}>
+               <View style={styles.container}>
+                  <MainNavigator / >
+               </View>
+            </PersistGate>
          </Provider>
       );
    }

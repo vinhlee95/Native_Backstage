@@ -13,6 +13,7 @@ import Tag from '../UI/Tag';
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 import alertMessage from '../UI/alertMessage';
 
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
@@ -205,7 +206,7 @@ class PerformanceCreate extends Component {
                               :
                               <View style={styles.iconContainer}>
                                  <Ionicons name="ios-camera" size={60} />
-                                 <Text>Add photo</Text>
+                                 <Text>Add media</Text>
                               </View>
                            }
                         </View>
@@ -240,7 +241,7 @@ class PerformanceCreate extends Component {
                      : null
                   }
                   <ListItem 
-                     title={this.state.tagData?'Edit tags':'Add tags'} 
+                     title={_.toArray(this.state.tagData).every(item => item === null || item==='')?'Add tags':'Edit tags'} 
                      onPress={() => 
                         this.props.navigation.navigate('NewTag', 
                         {

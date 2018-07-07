@@ -13,7 +13,7 @@ const PerformerItem = (props) => {
       return <PerformanceItem 
                performance={performance} 
                key={id}
-               handleViewPerformanceInfo={() => props.navigation.navigate('PerformanceInfo', {performanceData: performance})} />
+               handleViewPerformanceInfo={() => props.navigation.navigate('PerformanceInfo', {performanceData: performance, id})} />
    });
    return(
       <View>

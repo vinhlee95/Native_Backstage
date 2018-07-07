@@ -116,7 +116,7 @@ class PerformerCreate extends Component {
                                  :
                                  <View style={styles.iconContainer}>
                                     <Ionicons name="ios-camera" size={60} />
-                                    <Text>Add photo</Text>
+                                    <Text>Add profile picture</Text>
                                  </View>
                               }
                            </View>

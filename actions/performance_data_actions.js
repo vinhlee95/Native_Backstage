@@ -1,4 +1,4 @@
-import { ADD_PERFORMANCE } from './types';
+import { ADD_PERFORMANCE, DELETE_PERFORMANCE } from './types';
 
 export const addPerformance = (name, title, description, tagData, image) => {
    const {
@@ -20,5 +20,12 @@ export const addPerformance = (name, title, description, tagData, image) => {
          audienceSize, audio, duration, carToDoor, electricity, price,
          image,
       }
+   }
+}
+
+export const deletePerformance = (id) => {
+   return {
+      type: DELETE_PERFORMANCE,
+      payload: id
    }
 }
