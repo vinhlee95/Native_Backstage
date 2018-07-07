@@ -35,7 +35,7 @@ class PerformanceCreate extends Component {
       super(props);
       this.state = {
          image: null,
-         name: '',
+         name: 'Nuutti Vallin',
          title: '',
          description: '',
          isLoading: false,

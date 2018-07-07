@@ -1,4 +1,4 @@
-import { ADD_PERFORMANCE, DELETE_PERFORMANCE } from '../actions/types';
+import { ADD_PERFORMANCE, DELETE_PERFORMANCE, UPDATE_PERFORMANCE } from '../actions/types';
 import { PERSIST_REHYDRATE, PERSIST } from 'redux-persist/lib/constants'
 
 export default (state=[], action) => {
@@ -8,6 +8,9 @@ export default (state=[], action) => {
 
       case ADD_PERFORMANCE: 
          return [...state, action.payload];
+
+      case UPDATE_PERFORMANCE: 
+         return action.payload;
 
       case DELETE_PERFORMANCE:
          return [

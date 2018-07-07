@@ -46,17 +46,29 @@ class Performer extends Component {
          // add local performance data to server one
          let updatedProductData;
          // check whether localData is an empty object
-         // console.log(this.props.localPerformanceData)
          if (_.isEmpty(this.props.localPerformanceData)) {
             updatedProductData = productData;
          } else {
             updatedProductData = productData.concat(this.props.localPerformanceData);
          }
+         // Update data
+         let newProductData;
+         if(this.props.localPerformanceData.id) {
+            const { id } = this.props.localPerformanceData;
+            newProductData = [
+               ...updatedProductData.slice(0, id),
+               this.props.localPerformanceData,
+               ...updatedProductData.slice(id+1)
+            ]
+         } else {
+            newProductData = updatedProductData
+         }
+         console.log(newProductData)
          return (
             <PerformerItem 
                key={personalData.id}
                performerData={personalData}
-               productData={updatedProductData}
+               productData={newProductData}
                handleViewPerformerInfo={() => {
                   this.props.navigation.navigate('PerformerInfo', {
                      performerData: personalData

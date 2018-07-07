@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, Keyboard, Animated, WebView, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, ScrollView, Image, Keyboard, Animated, WebView, Dimensions, TouchableWithoutFeedback, Alert } from 'react-native';
 import { ImagePicker, Permissions } from 'expo';
 import Swiper from 'react-native-swiper';
 import Input from '../UI/Input';
@@ -35,7 +35,6 @@ class PerformanceInfo extends Component {
    constructor(props) {
       super(props);
       const {performanceData, id} = this.props.navigation.state.params;
-      console.log(id)
       const {
          title,
          description,
@@ -48,14 +47,15 @@ class PerformanceInfo extends Component {
          electricity,
          price
       } = performanceData;
+      console.log(audio)
       // console.log(performerData)
       let image = performanceData.image ? performanceData.image : null;
       // console.log(this.props.navigation.state.params.performanceData)
-      const { name } = performerData;
+      console.log(performerData)
       this.state = {
          title,
          description,
-         name,
+         name: 'Nutti Vallin',
          image,
          id,
          tagData: {
@@ -105,10 +105,26 @@ class PerformanceInfo extends Component {
 
    handleSaveData = () => {
       // do sth to save data
-      const { name, title, description, tagData, image } = this.state;
-      this.props.addPerformance(name, title, description, tagData, image);           
+      const { name, title, description, tagData, image, id } = this.state;
+      this.props.updatePerformance(name, title, description, tagData, image, id);           
       // display save modal
       alertMessage();
+   }
+
+   handleDeletePerformance = () => {
+      const { id } = this.state;
+      Alert.alert(
+         'Delete performance',
+         'Are you sure to delete this performance?',
+         [
+            {text: 'Cancel'},
+            {text: 'Ok', onPress: () => {
+               this.props.deletePerformance(id);
+               this.props.navigation.goBack();
+            }}
+         ],
+         { cancelable: true }
+      )
    }
 
    pickImage = async () => {
@@ -198,6 +214,7 @@ class PerformanceInfo extends Component {
    }  
 
    render() {
+      console.log(this.state.id)
       const { performanceData } = this.props.navigation.state.params;
       const {productImage} = performanceData;
       // console.log(performanceData)  
@@ -285,10 +302,7 @@ class PerformanceInfo extends Component {
                         <Button
                            title="Delete performance"
                            style={{ backgroundColor: '#dd5e3b' }}
-                           onPress={() => {
-                              this.props.deletePerformance(this.state.id);
-                              this.props.navigation.goBack();
-                           }}
+                           onPress={this.handleDeletePerformance}
                         />
                      </ViewContainer>
                   </ScrollView>
