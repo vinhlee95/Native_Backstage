@@ -7,16 +7,20 @@ export default (state=[], action) => {
          return action.payload.localPerformanceData || [];
 
       case ADD_PERFORMANCE: 
+      console.log(action.payload)
          return [...state, action.payload];
 
       case UPDATE_PERFORMANCE: 
-         return action.payload;
+      const { id } = action.payload;
+      const updatedState = [...state];
+      updatedState.splice(id-1, 1, action.payload)
+         return updatedState;
 
       case DELETE_PERFORMANCE:
-         return [
-            ...state.slice(0, action.payload-1),
-            ...state.slice(action.payload)
-         ]
+         const index = action.payload;
+         const newState = [...state];
+         newState.splice(index-1,1);
+         return newState;
 
       default:
          return state;

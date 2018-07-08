@@ -51,24 +51,11 @@ class Performer extends Component {
          } else {
             updatedProductData = productData.concat(this.props.localPerformanceData);
          }
-         // Update data
-         let newProductData;
-         if(this.props.localPerformanceData.id) {
-            const { id } = this.props.localPerformanceData;
-            newProductData = [
-               ...updatedProductData.slice(0, id),
-               this.props.localPerformanceData,
-               ...updatedProductData.slice(id+1)
-            ]
-         } else {
-            newProductData = updatedProductData
-         }
-         console.log(newProductData)
          return (
             <PerformerItem 
                key={personalData.id}
                performerData={personalData}
-               productData={newProductData}
+               productData={updatedProductData}
                handleViewPerformerInfo={() => {
                   this.props.navigation.navigate('PerformerInfo', {
                      performerData: personalData

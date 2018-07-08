@@ -47,11 +47,11 @@ class PerformanceInfo extends Component {
          electricity,
          price
       } = performanceData;
-      console.log(audio)
+      // console.log(audio)
       // console.log(performerData)
       let image = performanceData.image ? performanceData.image : null;
       // console.log(this.props.navigation.state.params.performanceData)
-      console.log(performerData)
+      // console.log(performerData)
       this.state = {
          title,
          description,
@@ -214,7 +214,7 @@ class PerformanceInfo extends Component {
    }  
 
    render() {
-      console.log(this.state.id)
+      // console.log(this.state.id)
       const { performanceData } = this.props.navigation.state.params;
       const {productImage} = performanceData;
       // console.log(performanceData)  

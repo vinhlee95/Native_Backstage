@@ -10,7 +10,7 @@ const PerformerItem = (props) => {
    const {name, profileThumb} = performerData;
    let performanceList;
    performanceList = productData.map((performance,id) => {
-      console.log(performance)
+      // console.log(performance)
       return <PerformanceItem 
                performance={performance} 
                key={id}
