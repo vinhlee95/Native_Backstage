@@ -10,6 +10,9 @@ import Input from '../UI/Input';
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 import alertMessage from '../UI/alertMessage';
 
+import * as actions from '../../actions';
+import { connect } from 'react-redux';
+
 class PerformerCreate extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
@@ -28,11 +31,12 @@ class PerformerCreate extends Component {
          image: null,
          name: '',
          description: '',
-         facebookUrl: '',
-         instagramUrl: '',
+         profile_facebook: '',
+         profile_instagram: '',
          isLoading: false,
       };
       this.keyboardHeight = new Animated.Value(0);
+      this.inputs = {};
    }
 
    pickImage = async () => {
@@ -89,12 +93,19 @@ class PerformerCreate extends Component {
 
 
    handleSaveData = () => {
-      // do sth to save data
+      // save data
+      const { image, name, description, profile_facebook, profile_instagram } = this.state;
+      this.props.createPerformer(image, name, description, profile_facebook, profile_instagram);
       alertMessage();
+   }
+
+   handleFocusNextField = (fieldID) => {
+      this.inputs[fieldID].focus();
    }
 
    render() {
       return (
+         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
          <View style={{ flex: 1, backgroundColor: 'white'}}>
             <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
                <ScrollView>
@@ -126,28 +137,43 @@ class PerformerCreate extends Component {
                      <Text style={styles.label}>Name</Text>
                      <Input
                         value={this.state.name}
-                        onChangeText={name => this.setState({ name })} />
+                        onChangeText={name => this.setState({ name })}
+                        returnKeyType="next"
+                        reference={input => this.inputs['name'] = input}
+                        onSubmitEditing={() => this.handleFocusNextField('description')}       />
 
                      <Text style={styles.label}>Description</Text>
                      <Input
                         value={this.state.description}
                         onChangeText={description => this.setState({ description })}
                         // multiline
-                        numberOfLines={2} />
+                        numberOfLines={2} 
+                        returnKeyType="next"
+                        reference={input => this.inputs['description'] = input}
+                        onSubmitEditing={() => this.handleFocusNextField('facebook')}     
+                        />
 
                      <Text style={styles.label}>Facebook URL</Text>
                         <Input
-                           value={this.state.facebookUrl}
-                           onChangeText={facebookUrl => this.setState({ facebookUrl })} />
+                           value={this.state.profile_facebook}
+                           onChangeText={profile_facebook => this.setState({ profile_facebook })} 
+                           returnKeyType="next"
+                           reference={input => this.inputs['facebook'] = input}
+                           onSubmitEditing={() => this.handleFocusNextField('instagram')}     
+                           />
 
                      <Text style={styles.label}>Instagram URL</Text>
                      <Input
-                        value={this.state.instagramUrl}
-                        onChangeText={instagramUrl => this.setState({ instagramUrl })} />
+                        value={this.state.profile_instagram}
+                        onChangeText={profile_instagram => this.setState({ profile_instagram })} 
+                        returnKeyType="done"
+                        reference={input => this.inputs['instagram'] = input}
+                        />
                   </ViewContainer>
                </ScrollView>
             </Animated.View>
          </View>
+         </TouchableWithoutFeedback>
       )
    }
 }
@@ -167,9 +193,9 @@ const styles = {
       alignItems: 'center'
    },
    label: {
-      fontSize: 16,
+      fontSize: 18,
       fontWeight: 'bold'
    }
 }
 
-export default PerformerCreate;
+export default connect(null, actions)(PerformerCreate);

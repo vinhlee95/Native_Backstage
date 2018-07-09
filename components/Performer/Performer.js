@@ -39,10 +39,13 @@ class Performer extends Component {
       }
       let performerList;
       const { performerData } = this.props;
-      performerList = performerData.map(performer => {
+      performerList = performerData.map((performer, id) => {
          const personalData = performer.data;
+         console.log(personalData)
          // take only first 2 performance for a more compact list
          const productData = _.toArray(performer.products).slice(0,1);
+         // console.log(productData)
+         // console.log(productData)
          // add local performance data to server one
          let updatedProductData;
          // check whether localData is an empty object
@@ -53,7 +56,7 @@ class Performer extends Component {
          }
          return (
             <PerformerItem 
-               key={personalData.id}
+               key={id}
                performerData={personalData}
                productData={updatedProductData}
                handleViewPerformerInfo={() => {

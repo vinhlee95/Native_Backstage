@@ -17,7 +17,7 @@ const PerformerItem = (props) => {
                handleViewPerformanceInfo={() => props.navigation.navigate('PerformanceInfo', {performanceData: performance, id})} />
    });
    return(
-      <View>
+      <View style={{ marginBottom: 20 }}> 
          <TouchableHighlight 
             style={{ backgroundColor: 'white' }}
             onPress={() => handleViewPerformerInfo()}

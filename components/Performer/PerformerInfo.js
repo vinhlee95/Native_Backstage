@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Image, Keyboard, Animated,  } from 'react-native';
+import { View, Text, ScrollView, Image, Keyboard, Animated, TouchableWithoutFeedback  } from 'react-native';
 import Input from '../UI/Input';
 import ViewContainer from '../UI/View';
 import alertMessage from '../UI/alertMessage';
@@ -25,6 +25,7 @@ class PerformerInfo extends Component {
       const { name, description, profile_facebook, profile_instagram } = this.props.navigation.state.params.performerData; 
       this.state = { name, description, facebookUrl: profile_facebook, instagramUrl: profile_instagram };
       this.keyboardHeight = new Animated.Value(0);
+      this.inputs = {};
    }
 
    // add event listener for keyboard to show up
@@ -64,10 +65,15 @@ class PerformerInfo extends Component {
       }).start();
    };
 
+   handleFocusNextField = (fieldID) => {
+      this.inputs[fieldID].focus();
+   }
+
    render() {
       console.log(this.props.navigation.state.params.performerData);
       const { name, profilePic } = this.props.navigation.state.params.performerData;
       return (
+         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
          <View style={{flex:1, backgroundColor: 'white'}}>
             {/* <Header 
                headerName="Your Information" 
@@ -82,28 +88,43 @@ class PerformerInfo extends Component {
                      <Text style={styles.label}>Performer name</Text>
                      <Input
                         value={this.state.name}
-                        onChangeText={name => this.setState({ name })} />
+                        onChangeText={name => this.setState({ name })} 
+                        returnKeyType='next'
+                        onSubmitEditing={() => this.handleFocusNextField('description')}
+                        />
 
                      <Text style={styles.label}>Performer description</Text>
                      <Input
                         value={this.state.description}
                         onChangeText={description => this.setState({ description })}
                         // multiline
-                        numberOfLines={2} />
+                        numberOfLines={2} 
+                        returnKeyType='next'
+                        reference={input => this.inputs['description'] = input}
+                        onSubmitEditing={() => this.handleFocusNextField('facebook')}
+                        />
 
                      <Text style={styles.label}>Facebook URL</Text>
                      <Input
                         value={this.state.facebookUrl}
-                        onChangeText={facebookUrl => this.setState({ facebookUrl })} />
+                        onChangeText={facebookUrl => this.setState({ facebookUrl })} 
+                        returnKeyType='next'
+                        reference={input => this.inputs['facebook'] = input}
+                        onSubmitEditing={() => this.handleFocusNextField('instagram')}
+                        />
 
                      <Text style={styles.label}>Instagram URL</Text>
                      <Input
                         value={this.state.instagramUrl}
-                        onChangeText={instagramUrl => this.setState({ instagramUrl })} />
+                        onChangeText={instagramUrl => this.setState({ instagramUrl })} 
+                        returnKeyType='done'
+                        reference={input => this.inputs['instagram'] = input}
+                        />
                   </ViewContainer>
                </ScrollView>
             </Animated.View>
          </View>
+         </TouchableWithoutFeedback>
       )
    }
 }

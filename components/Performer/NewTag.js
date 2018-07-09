@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Switch } from 'react-native';
+import { View, Text, ScrollView, Switch, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import ViewContainer from '../UI/View';
 import Input from '../UI/Input';
-import Button from '../UI/Button';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 
@@ -54,6 +53,7 @@ class TagEdit extends Component {
       console.log(this.state)
       const { audienceSize, duration, price, audio, carToDoor, electricity } = this.state;
       return (
+         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
          <View style={{flex:1, backgroundColor: 'white'}}>
             <ViewContainer style={{ marginTop: 15 }}>
                <ScrollView>
@@ -64,7 +64,8 @@ class TagEdit extends Component {
                   <Input
                      value={this.state.audienceSize}
                      onChangeText={size => this.setState({ audienceSize: size })}
-                     keyboardType="numeric" />
+                     keyboardType="numeric" 
+                     />
                   
                   <View style={styles.label}>
                      <Ionicons name="ios-clock" size={25} />
@@ -82,7 +83,8 @@ class TagEdit extends Component {
                   <Input 
                      value={this.state.price}
                      onChangeText={price => this.setState({ price: price})}
-                     keyboardType="numeric" />
+                     keyboardType="numeric"
+                     returnKeyType='done' />
 
                   <View style={styles.boolRow} >
                      <View style={styles.label}>
@@ -116,6 +118,7 @@ class TagEdit extends Component {
                </ScrollView>
             </ViewContainer>
          </View>
+         </TouchableWithoutFeedback>
       )
    }
 }

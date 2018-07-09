@@ -74,7 +74,8 @@ class TagEdit extends Component {
                   <Input 
                      value={this.state.price}
                      onChangeText={price => this.setState({ price: price})}
-                     keyboardType="numeric" />
+                     keyboardType="numeric"
+                     returnKeyType='done' />
 
                   <View style={styles.boolRow} >
                      <View style={styles.label}>

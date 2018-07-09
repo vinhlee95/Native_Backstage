@@ -27,7 +27,7 @@ export const HeaderRightIcon = (props) => {
    return(
       <TouchableHighlight onPress={() => props.navigation.navigate('Account')}  >
          <Image
-            source={require('../../../images/profile.png')}
+            source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/gigle-app.appspot.com/o/performers%2F-KdRcKf2I6DpEHDMOtB9%2FprofilePicture_thumb.jpg?alt=media&token=1a5b04a2-bce2-418d-a4f6-da567f690147'}}
             style={{
                width: 35,
                height: 35,

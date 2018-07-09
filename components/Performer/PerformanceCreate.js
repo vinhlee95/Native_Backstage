@@ -49,6 +49,7 @@ class PerformanceCreate extends Component {
          },
       };
       this.keyboardHeight = new Animated.Value(0);
+      this.inputs = {};
    }
 
    // add event listener for keyboard to show up
@@ -183,8 +184,13 @@ class PerformanceCreate extends Component {
       });
    }
 
+   handleFocusNextField = (fieldID) => {
+      this.inputs[fieldID].focus();
+   }
+
   render() {
     return (
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={{ flex: 1, backgroundColor: 'white'}}>
          <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
             <ScrollView>
@@ -216,19 +222,28 @@ class PerformanceCreate extends Component {
                   <Text style={styles.label}>Performer name</Text>
                   <Input
                         value={this.state.name}
-                        onChangeText={name => this.setState({ name })} />
+                        onChangeText={name => this.setState({ name })} 
+                        returnKeyType="next"
+                        onSubmitEditing={() => this.handleFocusNextField('performanceName')}  />
 
                   <Text style={styles.label}>Performance name</Text>
                   <Input
                         value={this.state.title}
-                        onChangeText={title => this.setState({ title })} />
+                        onChangeText={title => this.setState({ title })} 
+                        returnKeyType="next"
+                        reference={input => this.inputs['performanceName'] = input}
+                        onSubmitEditing={() => this.handleFocusNextField('description')}   
+                        />
 
                   <Text style={styles.label}>Performance description</Text>
                   <Input
                      value={this.state.description}
                      onChangeText={description => this.setState({ description })}
                      // multiline
-                     numberOfLines={2} />
+                     // numberOfLines={2}
+                     returnKeyType="done"
+                     reference={input => this.inputs['description'] = input}  
+                     />
 
                   <Text style={[styles.label, {marginBottom: 15 }]}>Tags</Text>
                   {/* Tag list */}
@@ -254,6 +269,7 @@ class PerformanceCreate extends Component {
                </ScrollView>
             </Animated.View>
          </View>
+         </TouchableWithoutFeedback>
       )
    }
 }

@@ -1,4 +1,4 @@
-import { FETCH_PERFORMER_DATA } from './types';
+import { FETCH_PERFORMER_DATA, CREATE_PERFORMER } from './types';
 import _ from 'lodash';
 import request from 'superagent';
 
@@ -20,5 +20,17 @@ export const fetchPerformerData = () => {
                payload: data
             })
          });
+   }
+}
+
+export const createPerformer = (image, name, description, profile_facebook, profile_instagram) => {
+   return {
+      type: CREATE_PERFORMER,
+      payload: { 
+         data: {
+            image, name, description, profile_facebook, profile_instagram 
+         },
+         products: {}
+      }
    }
 }

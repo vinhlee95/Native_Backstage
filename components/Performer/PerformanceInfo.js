@@ -68,6 +68,7 @@ class PerformanceInfo extends Component {
          },
       };
       this.keyboardHeight = new Animated.Value(0);
+      this.inputs = {};
    }
 
    // add event listener for keyboard to show up
@@ -213,6 +214,10 @@ class PerformanceInfo extends Component {
       this.setState({ tagData })
    }  
 
+   handleFocusNextField = (fieldID) => {
+      this.inputs[fieldID].focus();
+   }
+
    render() {
       // console.log(this.state.id)
       const { performanceData } = this.props.navigation.state.params;
@@ -235,6 +240,7 @@ class PerformanceInfo extends Component {
 			);
 		});
       return(
+         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
          <View style={{flex:1, backgroundColor: 'white'}}>
                <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
                   <ScrollView> 
@@ -270,19 +276,29 @@ class PerformanceInfo extends Component {
                         <Input
                            value={this.state.name}
                            onChangeText={name => this.setState({ name })}
-                           style={{marginBottom: 25}} />
+                           style={{marginBottom: 25}} 
+                           returnKeyType='next'
+                           onSubmitEditing={() => this.handleFocusNextField('performanceName')} />
+                           />
 
                         <Text style={styles.label}>Performance name</Text>
                         <Input
                            value={this.state.title}
                            onChangeText={title => this.setState({ title })}
-                           style={{marginBottom: 25}} />  
+                           style={{marginBottom: 25}} 
+                           returnKeyType='next'
+                           reference={input => this.inputs['performanceName'] = input}
+                           onSubmitEditing={() => this.handleFocusNextField('description')} />
+                           />  
 
                         <Text style={styles.label}>Performance description</Text>
                         <Input
                            value={this.state.description}
                            onChangeText={description => this.setState({ description })}
-                           multiline /> 
+                           // multiline 
+                           returnKeyType='done'
+                           reference={input => this.inputs['description'] = input}
+                        /> 
 
                         {/* Tag List */}
                         <Text style={styles.label}>Tags</Text>
@@ -291,7 +307,9 @@ class PerformanceInfo extends Component {
                         </View>
 
                         <Button 
-                           title="Edit tags"
+                           title = {
+                              _.toArray(this.state.tagData).every(item => item === null || item === '') ? 'Add tags' : 'Edit tags'
+                           }
                            style={styles.editTagButton}
                            onPress={() => this.props.navigation.navigate('TagEdit', {
                               tagData: this.state.tagData,
@@ -309,6 +327,7 @@ class PerformanceInfo extends Component {
                </Animated.View> 
 
          </View>
+         </TouchableWithoutFeedback>
       );
    }
 }
