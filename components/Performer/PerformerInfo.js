@@ -121,7 +121,7 @@ const styles = {
       marginRight: 'auto'
    },
    label: {
-      fontSize: 16,
+      fontSize: 18,
       fontWeight: 'bold'
    }
 }

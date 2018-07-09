@@ -3,11 +3,11 @@ import { View, Text, ScrollView, TouchableWithoutFeedback, Image } from 'react-n
 import request from 'superagent';
 import _ from 'lodash';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Modal from '../UI/Modal';
 import AddButton from '../UI/AddButton';
 import AddModal from '../UI/AddModal';
 import PerformerItem from './PerformerItem';
+import { Ionicons } from '@expo/vector-icons';
 
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -15,12 +15,12 @@ import * as actions from '../../actions';
 
 class Performer extends Component {
    static navigationOptions = {
-      tabBarIcon: ({ focused, tintColor }) => (
+      tabBarIcon: ({ focused }) => (
          focused
          ?
-         <Icon name="fire" size={24} color="#1a4b93" />
+         <Ionicons name="ios-people" size={32} color="#1a4b93" />
          :
-         <Icon name="fire" size={24} />
+         <Ionicons name="ios-people" size={32} color="#8f9193" />
       )
    }
 

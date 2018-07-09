@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, Animated } from 'react-native';
 import firebase from 'firebase';
 import ViewContainer from './UI/View';
-import Header from './UI/Header';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Ionicons } from '@expo/vector-icons';
 
 class Dashboard extends Component {
    static navigationOptions = {
-      tabBarIcon: ({ focused, tintColor }) => (
+      tabBarIcon: ({ focused }) => (
          focused
          ?
-         <Icon name="briefcase" size={24} color="#1a4b93" />
+         <Ionicons name="ios-briefcase" size={28} color="#1a4b93" />
          :
-         <Icon name="briefcase" size={24} />
+         <Ionicons name="ios-briefcase" size={28} color="#8f9193"/>
       ),
    }
 

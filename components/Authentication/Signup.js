@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { View, Text, Image, Dimensions, Animated, Keyboard, TouchableHighlight  } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, Text, Image, Dimensions, Animated, Keyboard, TouchableHighlight, TouchableWithoutFeedback  } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
@@ -22,6 +22,7 @@ class SignupForm extends Component {
          email: '', password: '', isSpinnershowed: false, error: '',
       };
       this.keyboardHeight = new Animated.Value(0);
+      this.inputs = {};
    }
 
    // add event listener for keyboard to show up
@@ -80,6 +81,7 @@ class SignupForm extends Component {
       let disableStatus;
       this.state.email === '' || this.state.password === '' ? disableStatus = true : disableStatus = false;
       return(
+         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
          <View style={{ flex: 1, justifyContent: 'center' }}>
             {this.image}
             {/* show loading screen */}
@@ -108,6 +110,8 @@ class SignupForm extends Component {
                   autoFocus
                   returnKeyType="next"
                   inputStyle={{ color: color.inputColor }}
+                  reference={input => this.inputs['email'] = input}
+                  onSubmitEditing={() => this.inputs['password'].focus()}
                />
                {/* display email-relatederror */}
                   {
@@ -125,6 +129,8 @@ class SignupForm extends Component {
                   onChangeText={password => this.setState({ password, error: { message: ''} })}
                   inputStyle={{ color: color.inputColor }}
                   secureTextEntry
+                  returnKeyType='done'
+                  reference={input => this.inputs['password'] = input}
                />
 
 
@@ -137,28 +143,29 @@ class SignupForm extends Component {
                }
 
                <Button 
-                  title="Sign Up" 
+                  title="Sign up" 
                   onPress={this.handleSubmit}
                   style={styles.button}
                   disabled={disableStatus} />
                <Text style={styles.message}>
                   Already had an account?
                </Text>
-               <TouchableHighlight 
+               <TouchableWithoutFeedback 
                   style={{flex:1}}
                   onPress={() => this.props.navigation.navigate('Login')} >
                   <View 
                      style={styles.signinContainer} >
                      <Text
                         style={styles.siginText}
-                        >Sign In</Text>
-                     <Icon name="arrow-right" size={20} color="#2b6edb" />
+                        >Sign in</Text>
+                     <Ionicons name="ios-arrow-forward" size={20} color="#2b6edb" />
                   </View>
-               </TouchableHighlight>
+               </TouchableWithoutFeedback>
                
             </ViewContainer>
             </Animated.View>
          </View>
+         </TouchableWithoutFeedback>
       );
    }
 }
@@ -176,8 +183,7 @@ const styles = {
       marginLeft: 'auto',
       marginRight: 'auto',
       zIndex: 1000,
-      backgroundColor: 'rgba(255, 255, 255, 0.8)',
-      opacity: 0.8,
+      backgroundColor: 'rgba(255, 255, 255, 0.9)',
       paddingLeft: '5%',
       paddingRight: '5%',
       paddingBottom: 5,

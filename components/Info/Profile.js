@@ -44,6 +44,7 @@ class Profile extends Component {
          isMapFullScreen: false,
       };
       this.keyboardHeight = new Animated.Value(0);
+      this.inputs = {};
    }
 
    // add event listener for keyboard to show up
@@ -114,6 +115,10 @@ class Profile extends Component {
       this.setState({ location: {...this.state.location, description }})
    }
 
+   handleFocusNextField = (fieldID) => {
+      this.inputs[fieldID].focus();
+   }
+
    render() {
       // console.log(this.state.location)
       // console.log(this.state.location.description)
@@ -141,11 +146,17 @@ class Profile extends Component {
                         placeholder="First Name"
                         value={this.state.firstName}
                         onChangeText={(firstName) => this.setState({ firstName })}
-                        style={{ marginTop: 10}} />
+                        style={{ marginTop: 10}}
+                        returnKeyType='next'
+                        reference={input => this.inputs['firstName'] = input}
+                        onSubmitEditing={() => this.handleFocusNextField('lastName')} />
                      <Input 
                         placeholder="Last Name"
                         value={this.state.lastName}                  
                         onChangeText={(lastName) => this.setState({ lastName })}
+                        returnKeyType='next'
+                        reference={input => this.inputs['lastName'] = input}
+                        // onSubmitEditing={() => this.handleFocusNextField('lastName')}
                         />
 
                      <View style={[styles.headingContainer, {marginTop: 20}]}>
@@ -161,14 +172,21 @@ class Profile extends Component {
                         <Input 
                            placeholder="House number" 
                            value={this.state.location.houseNumber}
-                           onChangeText={(houseNumber) => this.setState({ location: {...this.state.location, houseNumber} })} />
+                           onChangeText={(houseNumber) => this.setState({ location: {...this.state.location, houseNumber} })}
+                           returnKeyType='next'
+                           reference={input => this.inputs['houseNumber'] = input}
+                           onSubmitEditing={() => this.handleFocusNextField('postalCode')}
+                           />
                      </View>
                      <View>
                         <Input 
                            placeholder="Postal Code"
                            value={this.state.location.postalCode} 
                            keyboardType="numeric"
-                           onChangeText={(postalCode) => this.setState({ location: {...this.state.location, postalCode} })} />
+                           onChangeText={(postalCode) => this.setState({ location: {...this.state.location, postalCode} })} 
+                           returnKeyType='done'
+                           reference={input => this.inputs['postalCode'] = input}
+                           />
                      </View>
                      {
                         this.state.location.description

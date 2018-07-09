@@ -4,7 +4,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { Provider } from 'react-redux';
 import firebase from 'firebase';
-import { AppLoading, Notifications } from 'expo';
+import Expo, { AppLoading, Notifications } from 'expo';
 import registerNotification from './services/push_notification';
 
 import { PersistGate } from 'redux-persist/lib/integration/react';
@@ -28,6 +28,15 @@ import Welcome from './components/Welcome/Welcome';
 
 import { HeaderRightIcon } from './components/UI/Header/index.js';
 import MapFullScreen from './components/Info/MapFullScreen';
+
+const getToken = async () => {
+   let { status } = await Expo.Permissions.askAsync(
+      Expo.Permissions.NOTIFICATIONS
+   );
+   if(status !== 'granted') { return; }
+   let token = await Expo.Notifications.getExpoPushTokenAsync();
+   console.log(token);
+}
 
 export default class App extends React.Component {
 
@@ -54,36 +63,45 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-      registerNotification();
-      Notifications.addListener((notification) => {
-         const { text } = notification.data;
-         const { origin } = notification;
+      getToken();
+      this.listener = Expo.Notifications.addListener(this.handleNotification);
+   }
 
-         if(text && origin === 'received') {
-            Alert.alert(
-               'Hello from Gigle',
-               text, [{
-                  text: 'OK'
-               }]
-            )
-         }
-      });
+   componentWillUnmount() {
+      this.listener && this.listener.remove();
+   }
+
+   handleNotification = ({ origin, data }) => {
+      console.log(
+         `Push notification ${origin} with data: ${JSON.stringify(data)}`,
+      );
+      Alert.alert(
+         'Hello from Gigle',
+         'Good night',
+         [
+            { title: 'OK'}
+         ]
+      )
    }
 
   render() {
      const { persistor, store } = configureStore();
-      const main = createMaterialBottomTabNavigator({
+      const main = createBottomTabNavigator({
             Dashboard: Dashboard,
             Performer: Performer,
             Calendar: Calendar,
       }, {
-         labeled: false,
-         shifting: true,
-         barStyle: {
-            backgroundColor: '#eff3f9',
-            borderTopColor: '#cacdd1',
-            borderWidth: .5,
-         }
+         tabBarOptions: {
+            activeTintColor: '#1a4b93',
+            labelStyle: {
+               fontSize: 12,
+            },
+            style: {
+               backgroundColor: 'white',
+               borderTopColor: '#cacdd1',
+               borderWidth: .5,
+            },
+         },
       });
       main.navigationOptions = ({ navigation }) => {
          let { routeName } = navigation.state.routes[navigation.state.index];
@@ -91,7 +109,7 @@ export default class App extends React.Component {
          return {
             headerTitle,
             headerTitleStyle: {
-               fontSize: 20, color: 'white'
+               fontSize: 22, color: 'white'
             },
             headerStyle: {
                backgroundColor: '#1a4b93',

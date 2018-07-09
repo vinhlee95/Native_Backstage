@@ -1,7 +1,7 @@
 // consists of performer header & performance list
 import React from 'react';
 import { View, Text, Image, TouchableHighlight } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Ionicons } from '@expo/vector-icons';
 
 import PerformanceItem from './PerformanceItem';
 
@@ -19,6 +19,7 @@ const PerformerItem = (props) => {
    return(
       <View>
          <TouchableHighlight 
+            style={{ backgroundColor: 'white' }}
             onPress={() => handleViewPerformerInfo()}
             underlayColor="#d1d3d6" >
             <View style={styles.performer}>
@@ -27,7 +28,7 @@ const PerformerItem = (props) => {
                </View>
                <View style={styles.nameContainer}>
                   <Text style={styles.name}>{name}</Text>
-                  <Icon name="chevron-right" size={20} style={styles.arrowIcon} color="#e1e3e8" />
+                  <Ionicons name="ios-arrow-forward" size={25} style={styles.arrowIcon} color="#e1e3e8" />
                </View>
             </View>
          </TouchableHighlight>
@@ -43,13 +44,12 @@ const styles = {
    },
    nameContainer: {
       flex: 2,
-      marginLeft: 15,
       justifyContent: 'space-between',
       flexDirection: 'row',
       alignItems: 'center'
    },
    name: {
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: 'bold',
    },
    imageContainer: {
@@ -61,6 +61,11 @@ const styles = {
       borderRadius: 50,
       marginLeft: 'auto',
       marginRight: 'auto'
+   },
+   arrowIcon: {
+      position: 'absolute',
+      right: 5,
+      top: '40%'
    }
 }
 

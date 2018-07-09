@@ -12,14 +12,15 @@ const Input = (props) => {
             keyboardType={props.keyboardType}
             onSubmitEditing={props.onSubmitEditing}
             returnKeyType={props.returnKeyType}
-            focus={props.focus}
-            autofocus={props.autofocus}
+            // focus={props.focus}
+            autoFocus={props.autoFocus}
             style={[styles.input, props.inputStyle]}
             secureTextEntry={props.secureTextEntry}
             multiline={props.multiline}
             numberOfLines={props.numberOfLines}
             onFocus={props.onFocus}
             clearButtonMode="while-editing"
+            ref={props.reference}
          />
       </View>
    );

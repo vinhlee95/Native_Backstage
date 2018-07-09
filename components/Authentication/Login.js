@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, TextInput, Image, Dimensions, Animated, Keyboard } from 'react-native';
+import { View, Text, TextInput, Image, Dimensions, Animated, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Input from '../UI/Input';
@@ -23,6 +23,7 @@ class LoginForm extends Component {
          email: 'vinh@test.com', password: '', isSpinnershowed: false, error: '',
       };
       this.keyboardHeight = new Animated.Value(0);
+      this.inputs = {};
    }
 
    // add event listener for keyboard to show up
@@ -77,12 +78,12 @@ class LoginForm extends Component {
       }
    );
    }
-
    render() {
       // dynamically disable button
       let disableStatus;
       this.state.email === '' || this.state.password === '' ? disableStatus = true : disableStatus = false;
       return(
+         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
          <View style={{ flex: 1, justifyContent: 'center' }}>
             {this.image}
             {
@@ -103,9 +104,11 @@ class LoginForm extends Component {
                      value={this.state.email}
                      onChangeText={email => this.setState({ email, error: {} })}
                      keyboardType="email-address"
-                     autoFocus={true}
+                     autoFocus
                      returnKeyType="next"
                      inputStyle={{ color: color.inputColor }}
+                     reference={input => this.inputs['email'] = input}
+                     onSubmitEditing={() => this.inputs['password'].focus() }
                   />
                   {/* display email-relatederror */}
                   {
@@ -122,6 +125,8 @@ class LoginForm extends Component {
                      onChangeText={password => this.setState({ password, error: {} })}
                      inputStyle={{ color: color.inputColor }}
                      secureTextEntry
+                     returnKeyType='done'
+                     reference={input => this.inputs['password'] = input}
                   />
                   
                   {
@@ -142,6 +147,7 @@ class LoginForm extends Component {
             </ViewContainer>
             </Animated.View>
          </View>
+         </TouchableWithoutFeedback>
       );
    }
 }

@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import ViewContainer from './UI/View';
-import Header from './UI/Header';
+import { Ionicons } from '@expo/vector-icons';
 
 class Calendar extends Component {
    static navigationOptions = {
-      tabBarIcon: ({ focused, tintColor }) => (
+      tabBarIcon: ({ focused }) => (
          focused
          ?
-         <Icon name="calendar" size={24} color="#1a4b93" />
+         <Ionicons name="ios-calendar" size={28} color="#1a4b93" />
          :
-         <Icon name="calendar" size={24} />
+         <Ionicons name="ios-calendar" size={28} color="#8f9193" />
       ),
    }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Switch } from 'react-native';
+import { View, Text, ScrollView, Switch, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -45,6 +45,7 @@ class TagEdit extends Component {
 
    render() {
       return (
+         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
          <View style={{flex:1, backgroundColor: 'white'}}>
             <ViewContainer>
                <ScrollView>
@@ -107,6 +108,7 @@ class TagEdit extends Component {
                </ScrollView>
             </ViewContainer>
          </View>
+         </TouchableWithoutFeedback>
       )
    }
 }
