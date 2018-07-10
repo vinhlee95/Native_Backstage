@@ -13,15 +13,21 @@ export default (state=[], action) => {
       case UPDATE_PERFORMANCE: 
       const { id } = action.payload;
       const updatedState = [...state];
-      console.log(updatedState)
-      updatedState.splice(id-1, 1, action.payload)
+      const updatedItem = updatedState.find(item => item.id === id);
+      // console.log(updatedItem)
+      const index = updatedState.indexOf(updatedItem);
+      console.log(`Item with index of ${index}, id of ${id} is already updated`);
+      updatedState.splice(index, 1, action.payload)
          return updatedState;
 
       case DELETE_PERFORMANCE:
-         const index = action.payload;
+         const idD = action.payload;
          const newState = [...state];
-         newState.splice(index,1);
-         return newState;
+         const deletedItem = newState.find(item => item.id === idD);
+         const indexD = newState.indexOf(deletedItem);
+         console.log(`Item with index of ${indexD}, id of ${idD} is deleted`);
+         newState.splice(indexD, 1);
+            return newState;
 
       default:
          return state;

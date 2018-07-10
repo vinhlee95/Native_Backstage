@@ -34,8 +34,7 @@ class PerformanceInfo extends Component {
    }
    constructor(props) {
       super(props);
-      const {performanceData, id} = this.props.navigation.state.params;
-      console.log(id)
+      const {performanceData,} = this.props.navigation.state.params;
       const {
          title,
          description,
@@ -46,8 +45,10 @@ class PerformanceInfo extends Component {
          duration,
          carToDoor,
          electricity,
-         price
+         price,
+         id
       } = performanceData;
+      console.log(`You are accessing an item with id of ${id}`)
       // console.log(audio)
       const { name } = performerData;
       let image = performanceData.image ? performanceData.image : null;
@@ -110,7 +111,7 @@ class PerformanceInfo extends Component {
       const { name, title, description, tagData, image, id } = this.state;
       this.props.updatePerformance(name, title, description, tagData, image, id);           
       // display save modal
-      alertMessage();
+      alertMessage(() => this.props.navigation.goBack());
    }
 
    handleDeletePerformance = () => {

@@ -9,6 +9,8 @@ export const addPerformance = (name, title, description, tagData, image) => {
       electricity,
       price
    } = tagData;
+   const id = Math.floor(100000 + Math.random() * 900000);
+   console.log(`Item with id of ${id} was created`)
    return {
       type: ADD_PERFORMANCE,
       payload: {
@@ -19,6 +21,7 @@ export const addPerformance = (name, title, description, tagData, image) => {
          }, 
          audienceSize, audio, duration, carToDoor, electricity, price,
          image,
+         id
       }
    }
 }
