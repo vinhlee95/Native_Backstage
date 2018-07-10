@@ -13,6 +13,7 @@ export default (state=[], action) => {
       case UPDATE_PERFORMANCE: 
       const { id } = action.payload;
       const updatedState = [...state];
+      console.log(updatedState)
       updatedState.splice(id-1, 1, action.payload)
          return updatedState;
 

@@ -45,9 +45,11 @@ class Performer extends Component {
       performerData.forEach(performer => performerNameList.push(performer.data.name));
       performerList = performerData.map((performer, id) => {
          const personalData = performer.data;
-         const productData = _.toArray(performer.products).slice(0,2);
+         const productData = _.toArray(performer.products).slice(0,3);
          let updatedProductData = productData;
          const {localPerformanceData}= this.props; console.log(localPerformanceData)
+
+         // add performance to equivalent performer
          if(!_.isEmpty(localPerformanceData)) {
             localPerformanceData.forEach(performance => {
                if(!performance.performerData) {console.log('error')}
@@ -56,10 +58,6 @@ class Performer extends Component {
                }
             })
          } 
-         // console.log(updatedProductData)
-         // if(this.props.localPerformanceData && this.props.localPerformanceData.performerData.name === personalData.name) {
-         //    updatedProductData.push(this.props.localPerformanceData);
-         // }
          return (
             <PerformerItem 
                key={id}
