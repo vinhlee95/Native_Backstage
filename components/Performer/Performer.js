@@ -13,6 +13,8 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
 
+
+
 class Performer extends Component {
    static navigationOptions = {
       tabBarIcon: ({ focused }) => (
@@ -24,9 +26,9 @@ class Performer extends Component {
       )
    }
 
-   state = {showAddButton: true, showAddModal: false};
+   state = {showAddButton: true, showAddModal: false, };
 
-   componentDidMount() {
+   componentWillMount() {
       this.props.fetchPerformerData();
    }
 
@@ -37,23 +39,27 @@ class Performer extends Component {
                   spinnerSize="small"
                   bannerBackgroundColor="white" />
       }
-      let performerList;
+      let performerList, performerNameList=[]; 
       const { performerData } = this.props;
+      // console.log(performerData)
+      performerData.forEach(performer => performerNameList.push(performer.data.name));
       performerList = performerData.map((performer, id) => {
          const personalData = performer.data;
-         console.log(personalData)
-         // take only first 2 performance for a more compact list
-         const productData = _.toArray(performer.products).slice(0,1);
-         // console.log(productData)
-         // console.log(productData)
-         // add local performance data to server one
-         let updatedProductData;
-         // check whether localData is an empty object
-         if (_.isEmpty(this.props.localPerformanceData)) {
-            updatedProductData = productData;
-         } else {
-            updatedProductData = productData.concat(this.props.localPerformanceData);
-         }
+         const productData = _.toArray(performer.products).slice(0,2);
+         let updatedProductData = productData;
+         const {localPerformanceData}= this.props; console.log(localPerformanceData)
+         if(!_.isEmpty(localPerformanceData)) {
+            localPerformanceData.forEach(performance => {
+               if(!performance.performerData) {console.log('error')}
+               if(performance.performerData.name === personalData.name) {
+                  updatedProductData.push(performance);
+               }
+            })
+         } 
+         // console.log(updatedProductData)
+         // if(this.props.localPerformanceData && this.props.localPerformanceData.performerData.name === personalData.name) {
+         //    updatedProductData.push(this.props.localPerformanceData);
+         // }
          return (
             <PerformerItem 
                key={id}
@@ -92,7 +98,9 @@ class Performer extends Component {
                   isModalShowed={this.state.showAddModal}
                   handleCloseModal={() => this.setState({ showAddModal: false })}
                   handleShowAddButton={() => this.setState({ showAddButton: true })}
-                  navigation={this.props.navigation} />
+                  navigation={this.props.navigation}
+                  performerNameList={performerNameList}
+                  />
                : null
             }
          </View>
@@ -101,7 +109,7 @@ class Performer extends Component {
 }
 
 const mapStateToProps = ({ performerData, localPerformanceData }) => {
-   // console.log(localPerformanceData)
+   // console.log(performerData)
    return {
       performerData,
       localPerformanceData

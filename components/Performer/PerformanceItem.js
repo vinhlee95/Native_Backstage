@@ -37,28 +37,27 @@ const styles = {
       borderTopWidth: .5,
       borderBottomWidth: .5,
       borderColor: '#e1e3e8',
-      paddingTop: 5, paddingBottom: 5,
+      paddingTop: 10, paddingBottom: 10,
       // backgroundColor: '#eff0f2'
    },
    imageContainer: {
       flex: 1,
    },
    productImage: {
-      height: 90,
-      width: 90,
+      height: 50,
+      width: 50,
       borderRadius: 3,
       marginLeft: 'auto',
       marginRight: 'auto',
    },
    infoContainer: {
-      flex: 2,
-      flexDirection: 'column',
-      justifyContent: 'center'
+      flex: 4,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center'
    },
    arrowIcon: {
-      position: 'absolute',
-      right: 5,
-      top: '40%'
+      marginRight: 5,
    }
 }
 

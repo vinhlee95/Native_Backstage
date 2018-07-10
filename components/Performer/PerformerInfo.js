@@ -71,7 +71,8 @@ class PerformerInfo extends Component {
 
    render() {
       console.log(this.props.navigation.state.params.performerData);
-      const { name, profilePic } = this.props.navigation.state.params.performerData;
+      const { name, profilePic, profileThumb } = this.props.navigation.state.params.performerData;
+      let imageURI = profilePic?profilePic:profileThumb;
       return (
          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
          <View style={{flex:1, backgroundColor: 'white'}}>
@@ -82,7 +83,7 @@ class PerformerInfo extends Component {
             <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
                <ScrollView>         
                   <View style={styles.imageContainer}>
-                     <Image source={{uri:profilePic}} style={styles.image} />
+                     <Image source={{uri:imageURI}} style={styles.image} />
                   </View>
                   <ViewContainer>
                      <Text style={styles.label}>Performer name</Text>

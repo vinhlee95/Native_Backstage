@@ -28,7 +28,7 @@ class PerformerCreate extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         image: null,
+         profileThumb: null,
          name: '',
          description: '',
          profile_facebook: '',
@@ -51,7 +51,7 @@ class PerformerCreate extends Component {
          });
          if (!result.cancelled) {
             this.setState({
-               image: result.uri,
+               profileThumb: result.uri,
                isLoading: false
             });
          }
@@ -94,9 +94,9 @@ class PerformerCreate extends Component {
 
    handleSaveData = () => {
       // save data
-      const { image, name, description, profile_facebook, profile_instagram } = this.state;
-      this.props.createPerformer(image, name, description, profile_facebook, profile_instagram);
-      alertMessage();
+      const { profileThumb, name, description, profile_facebook, profile_instagram } = this.state;
+      this.props.createPerformer(profileThumb, name, description, profile_facebook, profile_instagram);
+      alertMessage(() => this.props.navigation.goBack());
    }
 
    handleFocusNextField = (fieldID) => {
@@ -112,10 +112,10 @@ class PerformerCreate extends Component {
                   <ViewContainer>
                      {/* Profile upload */}
                      {
-                        this.state.image
+                        this.state.profileThumb
                         ?
-                        <Image 
-                           source={{ uri: this.state.image }}
+                        <Image
+                           source={{ uri: this.state.profileThumb }}
                            style={styles.image} />
                         :
                         <TouchableWithoutFeedback onPress={() => this.pickImage()} >

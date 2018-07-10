@@ -35,6 +35,7 @@ class PerformanceInfo extends Component {
    constructor(props) {
       super(props);
       const {performanceData, id} = this.props.navigation.state.params;
+      console.log(id)
       const {
          title,
          description,
@@ -48,14 +49,14 @@ class PerformanceInfo extends Component {
          price
       } = performanceData;
       // console.log(audio)
-      // console.log(performerData)
+      const { name } = performerData;
       let image = performanceData.image ? performanceData.image : null;
       // console.log(this.props.navigation.state.params.performanceData)
       // console.log(performerData)
       this.state = {
          title,
          description,
-         name: 'Nutti Vallin',
+         name,
          image,
          id,
          tagData: {

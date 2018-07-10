@@ -8,12 +8,12 @@ import {
 export default (state=[], action) => {
    switch(action.type) {
       // case PERSIST_REHYDRATE:
-         // return action.payload.performerData || [];
 
       case FETCH_PERFORMER_DATA:
          return action.payload;
 
       case CREATE_PERFORMER:
+         console.log(action.payload)
          return [...state, action.payload];
 
       default:

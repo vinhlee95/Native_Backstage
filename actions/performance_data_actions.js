@@ -42,7 +42,9 @@ export const updatePerformance = (name, title, description, tagData, image, id) 
    return {
       type: UPDATE_PERFORMANCE,
       payload: {
-         name,
+         performerData: {
+            name
+         },
          title,
          description,
          audienceSize, audio, duration, carToDoor, electricity, price,

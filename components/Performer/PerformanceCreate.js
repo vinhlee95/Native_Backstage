@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Image, TouchableWithoutFeedback, Dimensions, Keyboard, Animated } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableWithoutFeedback, Dimensions, Keyboard, Animated, Picker } from 'react-native';
 import { ImagePicker, Permissions } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -35,7 +35,7 @@ class PerformanceCreate extends Component {
       super(props);
       this.state = {
          image: null,
-         name: 'Nuutti Vallin',
+         name: '',
          title: '',
          description: '',
          isLoading: false,
@@ -189,6 +189,15 @@ class PerformanceCreate extends Component {
    }
 
   render() {
+     console.log(`${this.state.name} is chosen as artist name`)
+     // render picker items
+     const {performerNameList} = this.props.navigation.state.params;
+     let pickerItems;
+     pickerItems = performerNameList.map((item, id) => {
+        return(
+           <Picker.Item label={item} value={item} key={id} />
+        )
+     });
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={{ flex: 1, backgroundColor: 'white'}}>
@@ -218,13 +227,18 @@ class PerformanceCreate extends Component {
                         </View>
                      </TouchableWithoutFeedback>
                   }
-
-                  <Text style={styles.label}>Performer name</Text>
-                  <Input
-                        value={this.state.name}
-                        onChangeText={name => this.setState({ name })} 
-                        returnKeyType="next"
-                        onSubmitEditing={() => this.handleFocusNextField('performanceName')}  />
+                  <View style={{marginBottom: 20 }}>
+                     <Text style={styles.label}>Performer name</Text>
+                     <Picker
+                        selectedValue={this.state.name}
+                        style={{ height: 100 }}
+                        itemStyle={{ fontSize: 16, height: 100, fontWeight: 'bold'}}
+                        onValueChange={(itemValue) => this.setState({name: itemValue})}
+                        >
+                        <Picker.Item label='Please choose an artist' />
+                        {pickerItems}
+                     </Picker>
+                  </View>
 
                   <Text style={styles.label}>Performance name</Text>
                   <Input

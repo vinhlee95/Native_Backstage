@@ -2,6 +2,17 @@ import { FETCH_PERFORMER_DATA, CREATE_PERFORMER } from './types';
 import _ from 'lodash';
 import request from 'superagent';
 
+const samplePerformerData = {
+   "data": {
+      "description": "",
+      "name": "Eminem ",
+      "profileThumb": "file:///var/mobile/Containers/Data/Application/C1D22526-8179-434F-B564-1842526B67FE/Library/Caches/ExponentExperienceData/%2540vinhlee95%252Fback-stage/ImagePicker/43DCAC52-9A58-4BF3-B323-EA93A9CC111D.jpg",
+      "profile_facebook": "",
+      "profile_instagram": "",
+   },
+   "products": {},
+}
+
 export const fetchPerformerData = () => {
    return (dispatch) => {
       let data;
@@ -15,6 +26,7 @@ export const fetchPerformerData = () => {
             const data = _.toArray(res.body);
             // console.log(data)
             // console.log(performerData);
+            data.push(samplePerformerData);
             dispatch({
                type: FETCH_PERFORMER_DATA,
                payload: data
@@ -23,12 +35,12 @@ export const fetchPerformerData = () => {
    }
 }
 
-export const createPerformer = (image, name, description, profile_facebook, profile_instagram) => {
+export const createPerformer = (profileThumb, name, description, profile_facebook, profile_instagram) => {
    return {
       type: CREATE_PERFORMER,
       payload: { 
          data: {
-            image, name, description, profile_facebook, profile_instagram 
+            profileThumb, name, description, profile_facebook, profile_instagram 
          },
          products: {}
       }

@@ -40,7 +40,9 @@ class AddModal extends Component {
                   <TouchableHighlight
                      underlayColor="lightgrey"
                      onPress={() => {
-                        navigation.navigate('PerformanceCreate');
+                        navigation.navigate('PerformanceCreate', {
+                           performerNameList: this.props.performerNameList
+                        });
                         handleCloseModal();
                         handleShowAddButton();
                      }}>
