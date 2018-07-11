@@ -23,7 +23,7 @@ class PerformanceInfo extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
          headerTitle: <HeaderTitle headerTitle="Edit performance" />,
-         headerLeft: <HeaderLeftTitle navigation={navigation} />,
+         // headerLeft: <HeaderLeftTitle navigation={navigation} />,
          headerRight: <HeaderRightTitle 
                         saveInfo={navigation.getParam('saveData')} />,
          headerStyle: {
@@ -253,7 +253,13 @@ class PerformanceInfo extends Component {
                            {
                               productImage || this.state.image
                               ?
-                              <Image style={styles.image} source={{uri:productImage?productImage:this.state.image}}/>
+                              <View>
+                                 <Image style={styles.image} source={{uri:productImage?productImage:this.state.image}}/>
+                                 <View style={styles.nameContainer}>
+                                    <Text>{this.state.title}</Text>
+                                    <Text>{this.state.name}</Text>
+                                 </View>
+                              </View>
                               :
                               <TouchableWithoutFeedback onPress={() => this.pickImage()} >
                                  <View style={styles.imagePickContainer}>
@@ -336,7 +342,6 @@ class PerformanceInfo extends Component {
 
 const styles = {
    imageContainer: {
-      marginTop: 10,
       marginBottom: 10,
    },
    image: {
@@ -344,7 +349,11 @@ const styles = {
       height: 320,
       borderRadius: 10,
       marginLeft: 'auto',
-      marginRight: 'auto'
+      marginRight: 'auto',
+      position: 'relative',
+   },
+   nameContainer: {
+      position: 'absolute', bottom: 20, left: 10,
    },
    imagePickContainer: {
       backgroundColor: 'lightgrey',
@@ -369,8 +378,8 @@ const styles = {
       marginRight: 'auto',
    },
    label: {
-      fontSize: 18,
-      fontWeight: 'bold'
+      fontSize: 20,
+      fontWeight: '600'
    },
    tagList: {
       flexDirection: 'row',

@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Image, Keyboard, Animated, TouchableWithoutFeedback  } from 'react-native';
+import { View, Text, ScrollView, Image, Keyboard, Animated, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import Input from '../UI/Input';
 import ViewContainer from '../UI/View';
 import alertMessage from '../UI/alertMessage';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 
+const DEVICE_HEIGHT = Dimensions.get('window').height;
+
 class PerformerInfo extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
-         headerTitle: <HeaderTitle headerTitle="Your information" />,
-         headerLeft: <HeaderLeftTitle navigation={navigation} />,
+         // headerTitle: <HeaderTitle headerTitle="Your information" />,
+         // headerLeft: <HeaderLeftTitle navigation={navigation} />,
          headerRight: <HeaderRightTitle 
                         saveInfo={navigation.getParam('saveData')} />,
          headerStyle: {
@@ -76,14 +78,11 @@ class PerformerInfo extends Component {
       return (
          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
          <View style={{flex:1, backgroundColor: 'white'}}>
-            {/* <Header 
-               headerName="Your Information" 
-               notShowIcon headerRightTitle="Done"
-               navigateBack={() => this.props.navigation.goBack()} /> */}
             <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
                <ScrollView>         
                   <View style={styles.imageContainer}>
                      <Image source={{uri:imageURI}} style={styles.image} />
+                     <Text style={styles.performerName}>{this.state.name}</Text>
                   </View>
                   <ViewContainer>
                      <Text style={styles.label}>Performer name</Text>
@@ -132,18 +131,22 @@ class PerformerInfo extends Component {
 
 const styles = {
    imageContainer: {
-      flex: 1,
-      marginTop: 10, marginBottom: 10,
+      flex: 1, marginBottom: 10,
    },
    image: {
-      width: 250,
-      height: 250,
-      borderRadius: 125,
+      width: '100%',
+      height: DEVICE_HEIGHT/2,
       marginLeft: 'auto',
-      marginRight: 'auto'
+      marginRight: 'auto',
+      position: 'relative',
+   },
+   performerName: {
+      position: 'absolute',
+      bottom: 20, left: 10,
+      color: 'white', fontWeight: 'bold', fontSize: 40,
    },
    label: {
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: 'bold'
    }
 }
