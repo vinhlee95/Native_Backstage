@@ -7,6 +7,7 @@ import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
 import Tag from '../UI/Tag';
 import Spinner from '../UI/Spinner';
+import ListItem from '../UI/ListItem';
 import { Ionicons } from '@expo/vector-icons';
 
 import _ from 'lodash';
@@ -22,10 +23,9 @@ const DEVICE_WIDTH = Dimensions.get('window').width;
 class PerformanceInfo extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
-         headerTitle: <HeaderTitle headerTitle="Edit performance" />,
-         // headerLeft: <HeaderLeftTitle navigation={navigation} />,
-         headerRight: <HeaderRightTitle 
-                        saveInfo={navigation.getParam('saveData')} />,
+         headerTitle: <HeaderTitle headerTitle={navigation.state.params.performanceData.title} />,
+         headerLeft: <HeaderLeftTitle navigation={navigation} />,
+         headerRight: <HeaderRightTitle saveInfo={navigation.getParam('saveInfo')} />, 
          headerStyle: {
             backgroundColor: '#1a4b93'
          },
@@ -69,42 +69,19 @@ class PerformanceInfo extends Component {
             price
          },
       };
-      this.keyboardHeight = new Animated.Value(0);
       this.inputs = {};
    }
 
    // add event listener for keyboard to show up
    componentWillMount() {
-      this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
-      this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
       // allowing header right button 
       // to get access to function inside class
       this.props.navigation.setParams({
-         saveData: this.handleSaveData
-      });
+         saveInfo: this.handleSaveData
+      })
    }
 
-   componentWillUnmount() {
-      this.keyboardWillShowSub.remove();
-      this.keyboardWillHideSub.remove();
-   }
 
-   // callbacks
-   keyboardWillShow = (event) => {
-      // this.setState({ flexNumber: 0.7})
-      Animated.timing(this.keyboardHeight, {
-         duration: event.duration,
-         toValue: event.endCoordinates.height,
-      }).start();
-   };
-
-   keyboardWillHide = (event) => {
-      // this.setState({ flexNumber: 0.4})      
-      Animated.timing(this.keyboardHeight, {
-         duration: event.duration,
-         toValue: 10,
-      }).start();
-   };
 
    handleSaveData = () => {
       // do sth to save data
@@ -112,6 +89,15 @@ class PerformanceInfo extends Component {
       this.props.updatePerformance(name, title, description, tagData, image, id);           
       // display save modal
       alertMessage(() => this.props.navigation.goBack());
+   }
+
+   handleEditInfo = () => {
+      const { title, description, name, id } = this.state;
+      this.props.navigation.navigate('PerformanceEdit', {
+         title, name, description, id,
+         tagData: this.state.tagData,
+         returnData: this.returnData,
+      });
    }
 
    handleDeletePerformance = () => {
@@ -212,8 +198,10 @@ class PerformanceInfo extends Component {
       });
    }
 
-   returnData = (tagData) => {
-      this.setState({ tagData })
+   returnData = (data) => {
+      const { title, name, description, tagData } = data;
+      this.setState({ title, name, description, tagData });
+      console.log(this.state.tagData)
    }  
 
    handleFocusNextField = (fieldID) => {
@@ -242,13 +230,11 @@ class PerformanceInfo extends Component {
 			);
 		});
       return(
-         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
          <View style={{flex:1, backgroundColor: 'white'}}>
-               <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
                   <ScrollView> 
-                     <Swiper
+                     {/* <Swiper
                         height={380}
-                        loop={false} >   
+                        loop={false} >    */}
                         <View style={styles.imageContainer}>                           
                            {
                               productImage || this.state.image
@@ -256,9 +242,13 @@ class PerformanceInfo extends Component {
                               <View>
                                  <Image style={styles.image} source={{uri:productImage?productImage:this.state.image}}/>
                                  <View style={styles.nameContainer}>
-                                    <Text>{this.state.title}</Text>
-                                    <Text>{this.state.name}</Text>
+                                    <Text style={styles.title}>{this.state.title}</Text>
+                                    <Text style={styles.name}>{this.state.name}</Text>
                                  </View>
+                                 <Button 
+                                    title="Edit" 
+                                    style={styles.editButton}
+                                    onPress={this.handleEditInfo} />
                               </View>
                               :
                               <TouchableWithoutFeedback onPress={() => this.pickImage()} >
@@ -277,11 +267,11 @@ class PerformanceInfo extends Component {
                               </TouchableWithoutFeedback>
                            }     
                         </View>
-                        {videoList}
-                     </Swiper>
+                        {/* {videoList}
+                     </Swiper> */}
                      <ViewContainer>
-                        <Text style={styles.label}>Performer name</Text>
-                        <Input
+                        {/* <Text style={styles.label}>Performer name</Text> */}
+                        {/* <Input
                            value={this.state.name}
                            onChangeText={name => this.setState({ name })}
                            style={{marginBottom: 25}} 
@@ -297,24 +287,28 @@ class PerformanceInfo extends Component {
                            returnKeyType='next'
                            reference={input => this.inputs['performanceName'] = input}
                            onSubmitEditing={() => this.handleFocusNextField('description')} />
-                           />  
-
-                        <Text style={styles.label}>Performance description</Text>
-                        <Input
+                           />   */}
+                        <View style={{ borderBottomWidth: 0.5, borderBottomColor: 'lightgrey'}}>
+                           <Text style={styles.label}>About this performance</Text>
+                        </View>
+                        <Text style={styles.description}>{this.state.description}</Text>
+                        {/* <Input
                            value={this.state.description}
                            onChangeText={description => this.setState({ description })}
                            // multiline 
                            returnKeyType='done'
                            reference={input => this.inputs['description'] = input}
-                        /> 
+                        />  */}
 
                         {/* Tag List */}
+                        <View style={{ borderBottomWidth: 0.5, borderBottomColor: 'lightgrey'}}>
                         <Text style={styles.label}>Tags</Text>
+                        </View>
                         <View style={styles.tagList}>
                            {this.renderTagList()}
                         </View>
 
-                        <Button 
+                        {/* <Button 
                            title = {
                               _.toArray(this.state.tagData).every(item => item === null || item === '') ? 'Add tags' : 'Edit tags'
                            }
@@ -329,25 +323,22 @@ class PerformanceInfo extends Component {
                            title="Delete performance"
                            style={{ backgroundColor: '#dd5e3b' }}
                            onPress={this.handleDeletePerformance}
-                        />
+                        /> */}
                      </ViewContainer>
                   </ScrollView>
-               </Animated.View> 
 
          </View>
-         </TouchableWithoutFeedback>
       );
    }
 }
 
 const styles = {
    imageContainer: {
-      marginBottom: 10,
+      marginBottom: 20,
    },
    image: {
-      width: '95%',
+      width: '100%',
       height: 320,
-      borderRadius: 10,
       marginLeft: 'auto',
       marginRight: 'auto',
       position: 'relative',
@@ -355,6 +346,19 @@ const styles = {
    nameContainer: {
       position: 'absolute', bottom: 20, left: 10,
    },
+   editButton: {
+      position: 'absolute', bottom: 20, right: 10,
+      backgroundColor: 'red', marginTop: 0, marginBottom: 0,
+      paddingLeft: 10, paddingRight: 10, paddingTop: 0, paddingBottom: 0,
+      borderRadius: 10,
+   },
+   title: {
+      color: 'white', fontSize: 35, fontWeight: '800'
+   },
+   name: {
+      color: 'white', fontSize: 25, fontWeight: '600'
+   },
+   
    imagePickContainer: {
       backgroundColor: 'lightgrey',
       width: 200,
@@ -379,7 +383,12 @@ const styles = {
    },
    label: {
       fontSize: 20,
-      fontWeight: '600'
+      fontWeight: '600',
+      paddingBottom: 5,
+   },
+   description: {
+      fontSize: 16,
+      marginTop: 10, marginBottom: 20,
    },
    tagList: {
       flexDirection: 'row',
@@ -390,17 +399,6 @@ const styles = {
       marginRight: 'auto',
       marginTop: 10, marginBottom: 10,
    },
-   editTagButton: {
-      width: '30%',
-      backgroundColor: '#2d81e2',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      borderRadius: 20,
-      paddingTop: 0,
-      paddingBottom: 0,
-      marginTop: 0,
-      marginBottom: 20,
-   }
 }
 
 export default connect(null, actions)(PerformanceInfo);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
-import { ListItem } from 'react-native-elements';
+// import { ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -8,13 +8,14 @@ import Button from '../UI/Button';
 import firebase from 'firebase';
 import ViewContainer from '../UI/View';
 import Modal from '../UI/Modal';
+import ListItem from '../UI/ListItem';
 
 import { HeaderTitle, HeaderLeftTitle } from '../UI/Header/index.js';
 
 class Account extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
-         headerTitle: <HeaderTitle headerTitle="Account" />,
+         headerTitle: <HeaderTitle headerTitle="Settings" />,
          headerLeft: <HeaderLeftTitle navigation={navigation}/>,
          headerStyle: {
             backgroundColor: '#1a4b93'
@@ -41,11 +42,7 @@ class Account extends Component {
          email = firebase.auth().currentUser.email;
       }
       return (
-         <View style={{flex:1, backgroundColor: 'white'}}>
-            {/* <Header 
-                headerName="Account" 
-                notShowIcon headerRightTitle="Done" 
-                navigateBack={() => this.props.navigation.goBack()} /> */}
+         <View style={{flex:1, backgroundColor: '#edeeef'}}>
             <View style={styles.header}>
                 <Image 
                     source={require('../../images/profile_big.png')} 
@@ -59,19 +56,20 @@ class Account extends Component {
                 />
                 <Text style={styles.email}>{email}</Text>
             </View>
-            <ViewContainer>
+            <Text style={styles.label}>ACCOUNT</Text>
+            <View style={{ marginTop: 10, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor:'#e0e2e5' }}>
                 <ListItem 
-                    title="Edit your profile" 
-                    leftIcon={<Ionicons name="ios-people" size={20} style={{ marginRight: 10}} />}
-                    titleStyle={{ fontSize: 18}}
-                    containerStyle={{ borderBottomWidth: .5, paddingLeft: 0 }}
+                    title='Edit your profile'
+                    icon='ios-create-outline'
                     onPress={() => this.props.navigation.navigate('Profile')} />
               
                 <Button 
-                title="Log Out" 
-                style={styles.button}
-                onPress={this.handleSignout} />
-            </ViewContainer>
+                  title="Log Out" 
+                  style={styles.button}
+                  onPress={this.handleSignout}
+                  icon='ios-log-out' />
+                  
+            </View>
             {
                this.state.showModalLogout
                ?
@@ -104,11 +102,12 @@ const styles = {
       marginTop: 10,
    },
    button: {
-      backgroundColor: '#ed3838',
-      width: '80%',
-      marginLeft: '10%',
-      marginRight: '10%',
-      marginTop: 20,
+      borderTopWidth: 0,
+      borderBottomWidth: 0,
+   },
+   label: {
+      fontSize: 18,
+      marginLeft: 10, marginTop: 10,
    }
 }
 

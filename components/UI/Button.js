@@ -1,31 +1,43 @@
 import React from 'react';
-import { View, Button } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const ReusableButton = (props) => {
+   const buttonStyle = {
+      backgroundColor: 'white',
+      borderTopWidth: 1,
+      borderBottomWidth: 1,
+      paddingTop: 10,
+      paddingBottom: 10,
+      borderColor: '#cacdd1',
+      flexDirection: 'row'
+   };
+   const textStyle = {
+      color: props.textColor?props.textColor:'red',
+      fontSize: 18,
+   };
+   const iconStyle = {
+      marginRight: 10, marginLeft: 10,
+   }
    return(
-      <View style={[buttonStyle, props.style]}>
-         <Button 
-            title={props.title}
-            color={props.textColor?props.textColor:'white'}
-            onPress={props.onPress}
-            disabled={props.disabled}
-            fontSize={15} >
-         </Button>
-      </View>
+      <TouchableOpacity onPress={props.onPress}>
+         <View style={[buttonStyle, props.style]}>
+            {
+               props.icon
+               ?
+               <Ionicons name={props.icon} size={20} style={iconStyle} color={textStyle.color} />
+               :
+               null
+            }
+            <Text 
+               style={[textStyle, props.textStyle]} >
+               {props.title}
+            </Text>
+         </View>
+      </TouchableOpacity>
    );
 }
 
-const buttonStyle = {
-   borderRadius: 5,
-   backgroundColor: '#1a4b93',
-   paddingTop: 5,
-   paddingBottom: 5,
-   marginTop: 10,
-   marginBottom: 10,
-   shadowColor: '#000',
-   shadowOffset: {width: 0, height: 3},
-   shadowOpacity: 0.2,
-   shadowRadius: 2,
-}
+
 
 export default ReusableButton;

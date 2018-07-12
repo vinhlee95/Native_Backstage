@@ -22,7 +22,7 @@ import PerformerInfo from './components/Performer/PerformerInfo';
 import PerformanceInfo from './components/Performer/PerformanceInfo';
 import PerformerCreate from './components/Performer/PerformerCreate';
 import PerformanceCreate from './components/Performer/PerformanceCreate';
-import TagEdit from './components/Performer/TagEdit';
+import PerformanceEdit from './components/Performer/PerformanceEdit';
 import NewTag from './components/Performer/NewTag';
 import Welcome from './components/Welcome/Welcome';
 
@@ -41,13 +41,13 @@ const getToken = async () => {
 export default class App extends React.Component {
 
   // landscape orientation
-  componentDidMount() {
-    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE_RIGHT);
-  }
+//   componentDidMount() {
+//      Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE_RIGHT);
+//   }
 
-  componentWillUnmount() {
-    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
-  }
+//   componentWillUnmount() {
+//      Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
+//   }
 
 
   componentWillMount() {
@@ -132,7 +132,7 @@ export default class App extends React.Component {
             PerformanceInfo: PerformanceInfo,
             PerformerCreate: PerformerCreate,
             PerformanceCreate: PerformanceCreate,
-            TagEdit: TagEdit,
+            PerformanceEdit: PerformanceEdit,
             NewTag: NewTag,
             main: main
          }, {

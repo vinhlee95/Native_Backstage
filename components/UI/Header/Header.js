@@ -40,16 +40,24 @@ export const HeaderRightIcon = (props) => {
 }
 
 export const HeaderRightTitle = (props) => {
+   let handlePress = props.saveInfo ? props.saveInfo : props.editMode
    return(
-      <TouchableHighlight onPress={props.saveInfo} >
-         <View>
+      <TouchableHighlight onPress={handlePress} >
+         <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Text
                style={{ 
                   fontSize: 18, 
                   color: 'white',
                   marginRight: 10,
+                  fontWeight: '600'
                }}>
-               Done</Text>
+               {props.text? props.text: 'Done'}</Text>
+            {
+               props.showIcon
+               ?
+               <Ionicons name="ios-arrow-forward" size={28} color="white" style={{ marginRight: 5 }} />
+               : null
+            }
          </View>
       </TouchableHighlight>
    )
