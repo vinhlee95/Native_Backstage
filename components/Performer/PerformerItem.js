@@ -29,12 +29,16 @@ const PerformerItem = (props) => {
             image={{uri: profileThumb}}
             title={name}
             onPress={() => handleViewPerformerInfo()}
-            imageStyle={styles.image}
             style={styles.performer}
+            imageStyle={styles.image}
+            titleContainerStyle={styles.titleContainerStyle}
+            titleTextStyle={styles.titleTextStyle}
             fontSize={25}
             arrowSize={25}
          />
-         {performanceList}
+         <View style={styles.performanceList}>
+            {performanceList}
+         </View>
       </View>
    );
 }
@@ -43,7 +47,13 @@ const styles = {
    performer: {
       flexDirection: 'row',
       paddingTop: 10, paddingBottom: 10,
+   },
+   titleContainerStyle: {
       borderBottomWidth: 0,
+   },
+   titleTextStyle: {
+      fontSize: 25,
+      fontWeight: '600'
    },
    nameContainer: {
       flex: 3,
@@ -52,12 +62,14 @@ const styles = {
       alignItems: 'center'
    },
    image: {
-      height: 80,
-      width: 80,
-      borderRadius: 40,
-      marginLeft: 10,
-      marginRight: 10,
+      height: 60,
+      width: 60,
+      borderRadius: 30,
    },
+   performanceList: {
+      borderTopWidth: 0.5, borderBottomWidth: 0.5,
+      borderColor: '#e0e2e5'
+   }
 }
 
 export default PerformerItem;

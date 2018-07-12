@@ -19,8 +19,12 @@ const ListItem = (props) => {
          justifyContent: 'space-between',
          flex: 1,
       },
+      defaultImageStyle: {
+         marginLeft: 10,
+         marginRight: 10,
+      },
       title: {
-         fontSize: props.fontSize?props.fontSize:18,
+         fontSize: 18,
       },
       leftIcon: {
          marginLeft: 10, marginRight: 10,
@@ -30,7 +34,7 @@ const ListItem = (props) => {
       }
    }
    return(
-      <TouchableOpacity onPress={props.onPress}>
+      <TouchableOpacity onPress={props.onPress} activeOpacity={0.7}>
          <View style={[styles.container, props.style]}>
             {
                props.icon
@@ -41,12 +45,12 @@ const ListItem = (props) => {
             {
                props.image
                ?
-               <Image source={props.image} style={props.imageStyle} />
+               <Image source={props.image} style={[props.imageStyle, styles.defaultImageStyle]} />
                :
                null
             }
-            <View style={[styles.listItem, props.style]}>
-               <Text style={styles.title}>{props.title}</Text>
+            <View style={[styles.listItem, props.titleContainerStyle]}>
+               <Text style={[styles.title, props.titleTextStyle]}>{props.title}</Text>
                <Ionicons name='ios-arrow-forward' size={props.arrowSize?props.arrowSize:20} style={styles.rightIcon} color={styles.listItem.borderColor} />
             </View>
          </View>

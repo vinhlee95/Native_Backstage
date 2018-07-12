@@ -11,9 +11,7 @@ const ViewContainer = (props) => {
 
 const style = {
    flex: 1,
-   marginLeft: 'auto',
-   marginRight: 'auto',
-   width: '95%',
+   paddingLeft: '2.5%', paddingRight: '2.5%'
 }
 
 export default ViewContainer;

@@ -7,13 +7,13 @@ const ReusableButton = (props) => {
       backgroundColor: 'white',
       borderTopWidth: 1,
       borderBottomWidth: 1,
-      paddingTop: 10,
-      paddingBottom: 10,
+      paddingTop: 15,
+      paddingBottom: 15,
       borderColor: '#cacdd1',
       flexDirection: 'row'
    };
    const textStyle = {
-      color: props.textColor?props.textColor:'red',
+      color: props.textStyle.color?props.textStyle.color:'black',
       fontSize: 18,
    };
    const iconStyle = {

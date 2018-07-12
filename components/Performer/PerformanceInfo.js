@@ -245,10 +245,7 @@ class PerformanceInfo extends Component {
                                     <Text style={styles.title}>{this.state.title}</Text>
                                     <Text style={styles.name}>{this.state.name}</Text>
                                  </View>
-                                 <Button 
-                                    title="Edit" 
-                                    style={styles.editButton}
-                                    onPress={this.handleEditInfo} />
+                                 
                               </View>
                               :
                               <TouchableWithoutFeedback onPress={() => this.pickImage()} >
@@ -270,35 +267,10 @@ class PerformanceInfo extends Component {
                         {/* {videoList}
                      </Swiper> */}
                      <ViewContainer>
-                        {/* <Text style={styles.label}>Performer name</Text> */}
-                        {/* <Input
-                           value={this.state.name}
-                           onChangeText={name => this.setState({ name })}
-                           style={{marginBottom: 25}} 
-                           returnKeyType='next'
-                           onSubmitEditing={() => this.handleFocusNextField('performanceName')} />
-                           />
-
-                        <Text style={styles.label}>Performance name</Text>
-                        <Input
-                           value={this.state.title}
-                           onChangeText={title => this.setState({ title })}
-                           style={{marginBottom: 25}} 
-                           returnKeyType='next'
-                           reference={input => this.inputs['performanceName'] = input}
-                           onSubmitEditing={() => this.handleFocusNextField('description')} />
-                           />   */}
                         <View style={{ borderBottomWidth: 0.5, borderBottomColor: 'lightgrey'}}>
                            <Text style={styles.label}>About this performance</Text>
                         </View>
                         <Text style={styles.description}>{this.state.description}</Text>
-                        {/* <Input
-                           value={this.state.description}
-                           onChangeText={description => this.setState({ description })}
-                           // multiline 
-                           returnKeyType='done'
-                           reference={input => this.inputs['description'] = input}
-                        />  */}
 
                         {/* Tag List */}
                         <View style={{ borderBottomWidth: 0.5, borderBottomColor: 'lightgrey'}}>
@@ -308,22 +280,20 @@ class PerformanceInfo extends Component {
                            {this.renderTagList()}
                         </View>
 
-                        {/* <Button 
-                           title = {
-                              _.toArray(this.state.tagData).every(item => item === null || item === '') ? 'Add tags' : 'Edit tags'
-                           }
-                           style={styles.editTagButton}
-                           onPress={() => this.props.navigation.navigate('TagEdit', {
-                              tagData: this.state.tagData,
-                              returnData: this.returnData,
-                           })}
+                        <Button 
+                           icon='ios-create'
+                           title="Edit performance" 
+                           textStyle={{fontSize: 20,fontWeight: '600'}}
+                           onPress={this.handleEditInfo} 
                         />
-
                         <Button
-                           title="Delete performance"
-                           style={{ backgroundColor: '#dd5e3b' }}
+                           icon='ios-trash-outline'
+                           style={{ borderTopWidth: 0, marginBottom: 10 }}
+                           textStyle={{color: 'red', fontSize: 20, fontWeight: '600'}}
+                           title='Delete performance'
                            onPress={this.handleDeletePerformance}
-                        /> */}
+                        />
+                  
                      </ViewContainer>
                   </ScrollView>
 
@@ -345,12 +315,6 @@ const styles = {
    },
    nameContainer: {
       position: 'absolute', bottom: 20, left: 10,
-   },
-   editButton: {
-      position: 'absolute', bottom: 20, right: 10,
-      backgroundColor: 'red', marginTop: 0, marginBottom: 0,
-      paddingLeft: 10, paddingRight: 10, paddingTop: 0, paddingBottom: 0,
-      borderRadius: 10,
    },
    title: {
       color: 'white', fontSize: 35, fontWeight: '800'

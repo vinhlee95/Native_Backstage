@@ -66,6 +66,7 @@ class Account extends Component {
                 <Button 
                   title="Log Out" 
                   style={styles.button}
+                  textStyle={{color: 'red'}}
                   onPress={this.handleSignout}
                   icon='ios-log-out' />
                   

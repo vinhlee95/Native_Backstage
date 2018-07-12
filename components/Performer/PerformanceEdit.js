@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Switch, TouchableWithoutFeedback, Keyboard, Button, Alert } from 'react-native';
+import { View, Text, ScrollView, Switch, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import ViewContainer from '../UI/View';
 import Input from '../UI/Input';
+import Button from '../UI/Button';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 
@@ -30,9 +30,9 @@ class PerformanceEdit extends Component {
       const { navigation } = this.props;
       const { params } = navigation.state;
       const { audienceSize, duration, audio, carToDoor, price, electricity } = params.tagData;
-      const { title, name, description, id } = params;
+      const { title, name, description } = params;
       this.state = {
-         title, name, description, id,
+         title, name, description, 
          tagData: {
             audienceSize, duration, audio, carToDoor, price, electricity,
          }
@@ -54,22 +54,6 @@ class PerformanceEdit extends Component {
 
     handleFocusNextField = (fieldID) => {
        this.inputs[fieldID].focus();
-    }
-
-    handleDeletePerformance = () => {
-      const { id } = this.state;
-      Alert.alert(
-         'Delete performance',
-         'Are you sure to delete this performance?',
-         [
-            {text: 'Cancel'},
-            {text: 'Ok', onPress: () => {
-               this.props.deletePerformance(id);
-               this.props.navigation.navigate('Performer');
-            }}
-         ],
-         { cancelable: true }
-      )
     }
 
    render() {
@@ -210,18 +194,6 @@ class PerformanceEdit extends Component {
                               }
                            })
                         }
-                     />
-                  </View>
-                  <View style={{
-                     marginBottom: 20,
-                     borderTopWidth: 1, borderBottomWidth: 1,
-                     paddingTop: 5, paddingBottom: 5,
-                     borderColor: 'lightgrey'
-                  }}>
-                     <Button
-                        color='red'
-                        title='Delete this performance'
-                        onPress={this.handleDeletePerformance}
                      />
                   </View>
                </ScrollView>
