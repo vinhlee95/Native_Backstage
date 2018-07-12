@@ -2,6 +2,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableHighlight } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import ListItem from '../UI/ListItem';
 import _ from 'lodash';
 
 import PerformanceItem from './PerformanceItem';
@@ -24,20 +25,15 @@ const PerformerItem = (props) => {
    performanceList = null;
    return(
       <View style={{ marginBottom: 20 }}> 
-         <TouchableHighlight 
-            style={{ backgroundColor: 'white' }}
+         <ListItem
+            image={{uri: profileThumb}}
+            title={name}
             onPress={() => handleViewPerformerInfo()}
-            underlayColor="#d1d3d6" >
-            <View style={styles.performer}>
-               <View style={styles.imageContainer}>
-                  <Image source={{uri:profileThumb}} style={styles.image} />
-               </View>
-               <View style={styles.nameContainer}>
-                  <Text style={styles.name}>{name}</Text>
-                  <Ionicons name="ios-arrow-forward" size={25} style={styles.arrowIcon} color="#e1e3e8" />
-               </View>
-            </View>
-         </TouchableHighlight>
+            imageStyle={styles.image}
+            style={styles.performer}
+            fontSize={25}
+            arrowSize={25}
+         />
          {performanceList}
       </View>
    );
@@ -47,6 +43,7 @@ const styles = {
    performer: {
       flexDirection: 'row',
       paddingTop: 10, paddingBottom: 10,
+      borderBottomWidth: 0,
    },
    nameContainer: {
       flex: 3,
@@ -54,25 +51,13 @@ const styles = {
       flexDirection: 'row',
       alignItems: 'center'
    },
-   name: {
-      fontSize: 25,
-   },
-   imageContainer: {
-      flex: 1,
-      marginRight: 10
-   },
    image: {
       height: 80,
       width: 80,
       borderRadius: 40,
-      marginLeft: 'auto',
-      marginRight: 'auto'
+      marginLeft: 10,
+      marginRight: 10,
    },
-   arrowIcon: {
-      position: 'absolute',
-      right: 5,
-      top: '40%'
-   }
 }
 
 export default PerformerItem;

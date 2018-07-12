@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -20,7 +20,7 @@ const ListItem = (props) => {
          flex: 1,
       },
       title: {
-         fontSize: 18,
+         fontSize: props.fontSize?props.fontSize:18,
       },
       leftIcon: {
          marginLeft: 10, marginRight: 10,
@@ -31,11 +31,23 @@ const ListItem = (props) => {
    }
    return(
       <TouchableOpacity onPress={props.onPress}>
-         <View style={styles.container}>
-            <Ionicons name={props.icon} size={20} style={styles.leftIcon} />
-            <View style={styles.listItem}>
+         <View style={[styles.container, props.style]}>
+            {
+               props.icon
+               ?
+               <Ionicons name={props.icon} size={20} style={styles.leftIcon} />
+               : null
+            }
+            {
+               props.image
+               ?
+               <Image source={props.image} style={props.imageStyle} />
+               :
+               null
+            }
+            <View style={[styles.listItem, props.style]}>
                <Text style={styles.title}>{props.title}</Text>
-               <Ionicons name='ios-arrow-forward' size={20} style={styles.rightIcon} color={styles.listItem.borderColor} />
+               <Ionicons name='ios-arrow-forward' size={props.arrowSize?props.arrowSize:20} style={styles.rightIcon} color={styles.listItem.borderColor} />
             </View>
          </View>
       </TouchableOpacity>
