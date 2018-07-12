@@ -66,6 +66,8 @@ class Account extends Component {
                 <Button 
                   title="Log Out" 
                   style={styles.button}
+                  iconColor='red'
+                  titleContainerStyle={{borderTopWidth:0,borderBottomWidth:0}}
                   textStyle={{color: 'red'}}
                   onPress={this.handleSignout}
                   icon='ios-log-out' />
@@ -104,7 +106,7 @@ const styles = {
    },
    button: {
       borderTopWidth: 0,
-      borderBottomWidth: 0,
+      borderBottomWidth: 0, paddingLeft: 10,
    },
    label: {
       fontSize: 18,

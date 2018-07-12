@@ -9,7 +9,7 @@ import PerformanceItem from './PerformanceItem';
 
 const PerformerItem = (props) => {
    const { performerData, productData, handleViewPerformerInfo } = props;
-   const {name, profileThumb, description} = performerData;
+   const {name, profileThumb, profilePic} = performerData;
    let performanceList;
    // render only when productData exists
    !_.isEmpty(productData)
@@ -26,7 +26,7 @@ const PerformerItem = (props) => {
    return(
       <View style={{ marginBottom: 20 }}> 
          <ListItem
-            image={{uri: profileThumb}}
+            image={{uri: profileThumb?profileThumb:profilePic}}
             title={name}
             onPress={() => handleViewPerformerInfo()}
             style={styles.performer}

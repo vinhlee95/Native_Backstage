@@ -19,8 +19,9 @@ import Account from './components/Authentication/Account';
 import Profile from './components/Info/Profile';
 import Loading from './components/Loading';
 import PerformerInfo from './components/Performer/PerformerInfo';
-import PerformanceInfo from './components/Performer/PerformanceInfo';
+import PerformerEdit from './components/Performer/PerformerEdit';
 import PerformerCreate from './components/Performer/PerformerCreate';
+import PerformanceInfo from './components/Performer/PerformanceInfo';
 import PerformanceCreate from './components/Performer/PerformanceCreate';
 import PerformanceEdit from './components/Performer/PerformanceEdit';
 import NewTag from './components/Performer/NewTag';
@@ -132,6 +133,7 @@ export default class App extends React.Component {
             PerformanceInfo: PerformanceInfo,
             PerformerCreate: PerformerCreate,
             PerformanceCreate: PerformanceCreate,
+            PerformerEdit: PerformerEdit,
             PerformanceEdit: PerformanceEdit,
             NewTag: NewTag,
             main: main

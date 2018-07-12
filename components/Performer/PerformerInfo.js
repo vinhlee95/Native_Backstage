@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
 import { View, Text, ScrollView, Image, Keyboard, Animated, TouchableWithoutFeedback, Dimensions } from 'react-native';
-import Input from '../UI/Input';
 import ViewContainer from '../UI/View';
 import alertMessage from '../UI/alertMessage';
+import Button from '../UI/Button';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
+import Label from '../UI/Label';
+
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 class PerformerInfo extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
-         // headerTitle: <HeaderTitle headerTitle="Your information" />,
+         headerTitle: <HeaderTitle headerTitle={navigation.state.params.performerData.name} />,
          // headerLeft: <HeaderLeftTitle navigation={navigation} />,
          headerRight: <HeaderRightTitle 
                         saveInfo={navigation.getParam('saveData')} />,
@@ -24,16 +28,21 @@ class PerformerInfo extends Component {
 
    constructor(props) {
       super(props);
-      const { name, description, profile_facebook, profile_instagram } = this.props.navigation.state.params.performerData; 
-      this.state = { name, description, facebookUrl: profile_facebook, instagramUrl: profile_instagram };
-      this.keyboardHeight = new Animated.Value(0);
+      const {params} = this.props.navigation.state;
+      // get performer data & product data
+      console.log(params.performerData)
+      const { name, description, profile_facebook, profile_instagram, profilePic, id } = params.performerData; 
+      this.productData = params.productData;
+
+      // set state accordingly
+      this.state = { 
+         name, description, profile_facebook, profile_instagram, profilePic, id 
+      };
       this.inputs = {};
    }
 
    // add event listener for keyboard to show up
    componentWillMount() {
-      this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
-      this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
       // allowing header right button 
       // to get access to function inside class
       this.props.navigation.setParams({
@@ -42,89 +51,67 @@ class PerformerInfo extends Component {
    }
 
    handleSaveData = () => {
+      const { name, description, profile_facebook, profile_instagram, profilePic, id } = this.state;
+      const productData = this.productData;
+      this.props.updatePerformer(name, description, profile_facebook, profile_instagram, profilePic, productData, id);
       alertMessage();
    }
 
-   componentWillUnmount() {
-      this.keyboardWillShowSub.remove();
-      this.keyboardWillHideSub.remove();
+   handleEditInfo = () => {
+      const { name, description, profile_facebook, profile_instagram } = this.state;
+      this.props.navigation.navigate('PerformerEdit', {
+         name, description, profile_facebook, profile_instagram,
+         returnData: this.returnData
+      });
    }
 
-   // callbacks
-   keyboardWillShow = (event) => {
-      // this.setState({ flexNumber: 0.7})
-      Animated.timing(this.keyboardHeight, {
-         duration: event.duration,
-         toValue: event.endCoordinates.height,
-      }).start();
-   };
-
-   keyboardWillHide = (event) => {
-      // this.setState({ flexNumber: 0.4})      
-      Animated.timing(this.keyboardHeight, {
-         duration: event.duration,
-         toValue: 10,
-      }).start();
-   };
+   returnData = (data) => {
+      const { name, description, profile_facebook, profile_instagram } = data;
+      this.setState({ name, description, profile_facebook, profile_instagram });
+   }
 
    handleFocusNextField = (fieldID) => {
       this.inputs[fieldID].focus();
    }
 
    render() {
-      console.log(this.props.navigation.state.params.performerData);
-      const { name, profilePic, profileThumb } = this.props.navigation.state.params.performerData;
-      let imageURI = profilePic?profilePic:profileThumb;
+      const { profilePic } = this.state;
       return (
-         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-         <View style={{flex:1, backgroundColor: 'white'}}>
-            <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
-               <ScrollView>         
-                  <View style={styles.imageContainer}>
-                     <Image source={{uri:imageURI}} style={styles.image} />
-                     <Text style={styles.performerName}>{this.state.name}</Text>
-                  </View>
-                  <ViewContainer>
-                     <Text style={styles.label}>Performer name</Text>
-                     <Input
-                        value={this.state.name}
-                        onChangeText={name => this.setState({ name })} 
-                        returnKeyType='next'
-                        onSubmitEditing={() => this.handleFocusNextField('description')}
-                        />
+         <ScrollView style={{backgroundColor:'white'}}>         
+            <View style={styles.imageContainer}>
+               <Image source={{uri:profilePic}} style={styles.image} />
+               <Text style={styles.performerName}>{this.state.name}</Text>
+            </View>
+            <ViewContainer>
+               <Label title='About me' icon='ios-person-outline' iconColor='#3ec1d8'/>
+               <Text style={styles.text}>{this.state.description}</Text>
 
-                     <Text style={styles.label}>Performer description</Text>
-                     <Input
-                        value={this.state.description}
-                        onChangeText={description => this.setState({ description })}
-                        // multiline
-                        numberOfLines={2} 
-                        returnKeyType='next'
-                        reference={input => this.inputs['description'] = input}
-                        onSubmitEditing={() => this.handleFocusNextField('facebook')}
-                        />
+               <Label title='Facebook' fontAwesomeIcon='facebook-square' iconColor='#1d71d3' />
+               <Text style={styles.text}>{this.state.profile_facebook}</Text>
 
-                     <Text style={styles.label}>Facebook URL</Text>
-                     <Input
-                        value={this.state.facebookUrl}
-                        onChangeText={facebookUrl => this.setState({ facebookUrl })} 
-                        returnKeyType='next'
-                        reference={input => this.inputs['facebook'] = input}
-                        onSubmitEditing={() => this.handleFocusNextField('instagram')}
-                        />
+               <Label title='Instagram' fontAwesomeIcon='instagram' iconColor='#d85936' />
+               <Text style={styles.text}>{this.state.profile_instagram}</Text>
 
-                     <Text style={styles.label}>Instagram URL</Text>
-                     <Input
-                        value={this.state.instagramUrl}
-                        onChangeText={instagramUrl => this.setState({ instagramUrl })} 
-                        returnKeyType='done'
-                        reference={input => this.inputs['instagram'] = input}
-                        />
-                  </ViewContainer>
-               </ScrollView>
-            </Animated.View>
-         </View>
-         </TouchableWithoutFeedback>
+               { /* buttons */ }
+               <View style={{ marginTop: 10, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor:'#e0e2e5' }}>
+                  <Button 
+                     icon='ios-create-outline'
+                     title="Edit performer" 
+                     iconColor='#378cef'
+                     textStyle={styles.buttonStyle}
+                     onPress={this.handleEditInfo} 
+                  />
+                  <Button
+                     icon='ios-trash-outline'
+                     titleContainerStyle={{borderBottomWidth:0}}
+                     textStyle={styles.buttonStyle}
+                     iconColor='red'
+                     title='Delete performer'
+                     onPress={this.handleDeletePerformance}
+                  />
+               </View>
+            </ViewContainer>
+         </ScrollView>
       )
    }
 }
@@ -145,10 +132,14 @@ const styles = {
       bottom: 20, left: 10,
       color: 'white', fontWeight: 'bold', fontSize: 40,
    },
-   label: {
+   text: {
+      fontSize: 16,
+      marginBottom: 10,
+   },
+   buttonStyle: {
       fontSize: 20,
-      fontWeight: 'bold'
+      fontWeight: '600'
    }
 }
 
-export default PerformerInfo;
+export default connect(null, actions)(PerformerInfo);

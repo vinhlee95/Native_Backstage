@@ -7,7 +7,7 @@ import { persistStore, persistCombineReducers } from 'redux-persist';
 const persistConfig = {
    key: 'root',
    storage: AsyncStorage,
-   whitelist: ['localPerformanceData']// only state in likedJobs reducer will be persisted
+   whitelist: ['localPerformanceData', 'performerData']// only state in likedJobs reducer will be persisted
 }
 
 let persistedReducer = persistCombineReducers(persistConfig, reducers);

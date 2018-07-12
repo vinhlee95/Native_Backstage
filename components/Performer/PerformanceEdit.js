@@ -10,6 +10,7 @@ import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/ind
 
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import alertMessage from '../UI/alertMessage';
 
 class PerformanceEdit extends Component {
    // render Header
@@ -18,7 +19,7 @@ class PerformanceEdit extends Component {
          headerTitle: <HeaderTitle headerTitle="Edit performance" />,
          headerLeft: <HeaderLeftTitle navigation={navigation} />,
          headerRight: <HeaderRightTitle 
-                        saveInfo={navigation.getParam('saveTag')} />,
+                        saveInfo={navigation.getParam('saveInfo')} />,
          headerStyle: {
             backgroundColor: '#1a4b93'
          },
@@ -42,14 +43,14 @@ class PerformanceEdit extends Component {
 
    componentWillMount() {
       this.props.navigation.setParams({
-         saveTag: this.goBack
+         saveInfo: this.handleSaveInfo
       })
    }
 
-   goBack = () => {
+   handleSaveInfo = () => {
       const { navigation } = this.props;
       navigation.state.params.returnData(this.state);
-      navigation.navigate('Performer');
+      alertMessage(() => navigation.goBack());
    }
 
     handleFocusNextField = (fieldID) => {
@@ -63,7 +64,7 @@ class PerformanceEdit extends Component {
             <View style={{backgroundColor: 'white', paddingTop: 20, paddingLeft: '2.5%', paddingRight: '2.5%' }}>
                <ScrollView>
                   <View style={styles.label}>
-                     <Ionicons name="ios-person" size={25} />
+                     <Ionicons name="ios-person-outline" size={25} />
                      <Text style={styles.labelText}>Performer name</Text>
                   </View>
                   <Input
@@ -74,7 +75,7 @@ class PerformanceEdit extends Component {
                      onSubmitEditing={() => this.handleFocusNextField('performanceName')} />
                      />
                   <View style={styles.label}>
-                     <Ionicons name="ios-create" size={25} />
+                     <Ionicons name="ios-create-outline" size={25} />
                      <Text style={styles.labelText}>Performance name</Text>
                   </View>
                   <Input
@@ -87,7 +88,7 @@ class PerformanceEdit extends Component {
                      />  
 
                   <View style={styles.label}>
-                     <Ionicons name="ios-document" size={25} />
+                     <Ionicons name="ios-document-outline" size={25} />
                      <Text style={styles.labelText}>Performance description</Text>
                   </View>
                   <Input
@@ -100,7 +101,7 @@ class PerformanceEdit extends Component {
                      />  
 
                   <View style={styles.label}>
-                     <Ionicons name="ios-people" size={25} />
+                     <Ionicons name="ios-people-outline" size={25} />
                      <Text style={styles.labelText}>Audience size</Text>
                   </View>
                   <Input
@@ -115,7 +116,7 @@ class PerformanceEdit extends Component {
                      keyboardType="numeric" />
                   
                   <View style={styles.label}>
-                     <Ionicons name="ios-clock" size={25} />
+                     <Ionicons name="ios-clock-outline" size={25} />
                      <Text style={styles.labelText}>Duration (minutes)</Text>
                   </View>
                   <Input 
@@ -129,7 +130,7 @@ class PerformanceEdit extends Component {
                      keyboardType="numeric" />
                   
                   <View style={styles.label}>
-                     <Ionicons name="ios-pricetag" size={25} />
+                     <Ionicons name="ios-pricetag-outline" size={25} />
                      <Text style={styles.labelText}>Price (€)</Text>
                   </View>
                   <Input 
@@ -145,7 +146,7 @@ class PerformanceEdit extends Component {
 
                   <View style={styles.boolRow} >
                      <View style={styles.label}>
-                        <Ionicons name="ios-musical-note" size={25} />
+                        <Ionicons name="ios-musical-note-outline" size={25} />
                         <Text style={styles.labelText}>Audio</Text>
                      </View>
                      <Switch 
@@ -163,7 +164,7 @@ class PerformanceEdit extends Component {
 
                   <View style={styles.boolRow}>
                      <View style={styles.label}>
-                        <Ionicons name="ios-car" size={25} />
+                        <Ionicons name="ios-car-outline" size={25} />
                         <Text style={styles.labelText}>Car to door</Text>
                      </View>
                      <Switch

@@ -13,8 +13,8 @@ const ListItem = (props) => {
       listItem: {
          borderBottomWidth: 0.5,
          borderColor: '#e0e2e5',
-         paddingTop: 10,
-         paddingBottom: 10,
+         paddingTop: 15,
+         paddingBottom: 15,
          flexDirection: 'row',
          justifyContent: 'space-between',
          flex: 1,

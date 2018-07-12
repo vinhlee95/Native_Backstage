@@ -44,6 +44,7 @@ class Performer extends Component {
       // console.log(performerData)
       performerData.forEach(performer => performerNameList.push(performer.data.name));
       performerList = performerData.map((performer, id) => {
+         console.log(performer)
          const personalData = performer.data;
          const productData = _.toArray(performer.products).slice(0,3);
          let updatedProductData = productData;
@@ -65,7 +66,8 @@ class Performer extends Component {
                productData={updatedProductData}
                handleViewPerformerInfo={() => {
                   this.props.navigation.navigate('PerformerInfo', {
-                     performerData: personalData
+                     performerData: personalData,
+                     productData: updatedProductData
                   });
                }}
                navigation={this.props.navigation}

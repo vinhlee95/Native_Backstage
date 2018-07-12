@@ -1,4 +1,4 @@
-import { FETCH_PERFORMER_DATA, CREATE_PERFORMER } from '../actions/types';
+import { FETCH_PERFORMER_DATA, CREATE_PERFORMER, UPDATE_PERFORMER } from '../actions/types';
 import {
    PERSIST_REHYDRATE,
    PERSIST
@@ -7,7 +7,8 @@ import {
 
 export default (state=[], action) => {
    switch(action.type) {
-      // case PERSIST_REHYDRATE:
+      case PERSIST_REHYDRATE:
+         return action.payload.performerData || {};
 
       case FETCH_PERFORMER_DATA:
          return action.payload;
@@ -15,6 +16,27 @@ export default (state=[], action) => {
       case CREATE_PERFORMER:
          console.log(action.payload)
          return [...state, action.payload];
+
+      case UPDATE_PERFORMER:
+         const {
+            id
+         } = action.payload.data;
+         // get a copy of existing state
+         const updatedState = [...state];
+         // find the updated item
+         const updatedItem = updatedState.find(performer => performer.data.id === id);
+         // find index of updated Item
+         const index = updatedState.indexOf(updatedItem);
+         // form a new item 
+         const newItem = {
+            data: action.payload.data,
+            products: action.payload.products
+         };
+         console.log(newItem)
+         // replace the updated item by the new one
+         updatedState.splice(index, 1, newItem);
+         console.log(`Performer with id of ${id} is successfully updated`)
+            return updatedState;
 
       default:
          return state;

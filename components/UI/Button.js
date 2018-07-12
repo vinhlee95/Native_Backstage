@@ -4,20 +4,22 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 const ReusableButton = (props) => {
    const buttonStyle = {
+      flexDirection: 'row',
       backgroundColor: 'white',
-      borderTopWidth: 1,
-      borderBottomWidth: 1,
+      alignItems: 'center'
+   }
+   const titleStyle = {
+      borderBottomWidth: 0.5,
       paddingTop: 15,
       paddingBottom: 15,
       borderColor: '#cacdd1',
-      flexDirection: 'row'
+      flex: 1, flexDirection: 'row'
    };
    const textStyle = {
-      color: props.textStyle.color?props.textStyle.color:'black',
       fontSize: 18,
    };
    const iconStyle = {
-      marginRight: 10, marginLeft: 10,
+      marginRight: 10
    }
    return(
       <TouchableOpacity onPress={props.onPress}>
@@ -25,14 +27,16 @@ const ReusableButton = (props) => {
             {
                props.icon
                ?
-               <Ionicons name={props.icon} size={20} style={iconStyle} color={textStyle.color} />
+               <Ionicons name={props.icon} size={25} style={iconStyle} color={props.iconColor?props.iconColor:'black'} />
                :
                null
             }
-            <Text 
-               style={[textStyle, props.textStyle]} >
-               {props.title}
-            </Text>
+            <View style={[titleStyle, props.titleContainerStyle]}>
+               <Text 
+                  style={[textStyle, props.textStyle]} >
+                  {props.title}
+               </Text>
+            </View>
          </View>
       </TouchableOpacity>
    );

@@ -17,6 +17,7 @@ import alertMessage from '../UI/alertMessage';
 
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import Label from '../UI/Label';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -99,6 +100,12 @@ class PerformanceInfo extends Component {
          returnData: this.returnData,
       });
    }
+
+   returnData = (data) => {
+      const { title, name, description, tagData } = data;
+      this.setState({ title, name, description, tagData });
+      console.log(this.state.tagData)
+   }  
 
    handleDeletePerformance = () => {
       const { id } = this.state;
@@ -198,11 +205,7 @@ class PerformanceInfo extends Component {
       });
    }
 
-   returnData = (data) => {
-      const { title, name, description, tagData } = data;
-      this.setState({ title, name, description, tagData });
-      console.log(this.state.tagData)
-   }  
+   
 
    handleFocusNextField = (fieldID) => {
       this.inputs[fieldID].focus();
@@ -267,33 +270,33 @@ class PerformanceInfo extends Component {
                         {/* {videoList}
                      </Swiper> */}
                      <ViewContainer>
-                        <View style={{ borderBottomWidth: 0.5, borderBottomColor: 'lightgrey'}}>
-                           <Text style={styles.label}>About this performance</Text>
-                        </View>
+                        < Label title = 'About this performance'
+                        icon = 'ios-information-circle-outline' />
                         <Text style={styles.description}>{this.state.description}</Text>
 
                         {/* Tag List */}
-                        <View style={{ borderBottomWidth: 0.5, borderBottomColor: 'lightgrey'}}>
-                        <Text style={styles.label}>Tags</Text>
-                        </View>
+                        <Label title='Tags' icon='ios-pricetags-outline' />
                         <View style={styles.tagList}>
                            {this.renderTagList()}
                         </View>
 
-                        <Button 
-                           icon='ios-create'
-                           title="Edit performance" 
-                           textStyle={{fontSize: 20,fontWeight: '600'}}
-                           onPress={this.handleEditInfo} 
-                        />
-                        <Button
-                           icon='ios-trash-outline'
-                           style={{ borderTopWidth: 0, marginBottom: 10 }}
-                           textStyle={{color: 'red', fontSize: 20, fontWeight: '600'}}
-                           title='Delete performance'
-                           onPress={this.handleDeletePerformance}
-                        />
-                  
+                        <View style={{ marginTop: 10, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor:'#e0e2e5' }}>
+                           <Button 
+                              icon='ios-create-outline'
+                              title="Edit performance" 
+                              textStyle={styles.buttonStyle}
+                              onPress={this.handleEditInfo} 
+                           />
+                           <Button
+                              icon='ios-trash-outline'
+                              style={{marginBottom: 10}}
+                              titleContainerStyle={{borderBottomWidth:0}}
+                              textStyle={[styles.buttonStyle, {color: 'red'}]}
+                              iconColor='red'
+                              title='Delete performance'
+                              onPress={this.handleDeletePerformance}
+                           />
+                        </View>
                      </ViewContainer>
                   </ScrollView>
 
@@ -345,11 +348,6 @@ const styles = {
       marginLeft: 'auto',
       marginRight: 'auto',
    },
-   label: {
-      fontSize: 20,
-      fontWeight: '600',
-      paddingBottom: 5,
-   },
    description: {
       fontSize: 16,
       marginTop: 10, marginBottom: 20,
@@ -363,6 +361,10 @@ const styles = {
       marginRight: 'auto',
       marginTop: 10, marginBottom: 10,
    },
+   buttonStyle: {
+      fontSize: 20,
+      fontWeight: '600'
+   }
 }
 
 export default connect(null, actions)(PerformanceInfo);
