@@ -12,6 +12,7 @@ const ListItem = (props) => {
       },
       listItem: {
          borderBottomWidth: 0.5,
+         borderTopWidth: props.borderTopWidth?props.borderTopWidth:0,
          borderColor: '#e0e2e5',
          paddingTop: 15,
          paddingBottom: 15,
@@ -27,7 +28,7 @@ const ListItem = (props) => {
          fontSize: 18,
       },
       leftIcon: {
-         marginLeft: 10, marginRight: 10,
+         marginRight: 10,
       },
       rightIcon: {
          marginRight: 10,
@@ -39,7 +40,7 @@ const ListItem = (props) => {
             {
                props.icon
                ?
-               <Ionicons name={props.icon} size={20} style={styles.leftIcon} />
+               <Ionicons name={props.icon} size={22} style={styles.leftIcon} color={props.iconColor} />
                : null
             }
             {

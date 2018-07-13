@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import ViewContainer from '../UI/View';
 import Spinner from '../UI/Spinner';
 import Input from '../UI/Input';
+import Label from '../UI/Label';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 import alertMessage from '../UI/alertMessage';
@@ -134,7 +135,7 @@ class PerformerCreate extends Component {
                         </TouchableWithoutFeedback>
                      }
 
-                     <Text style={styles.label}>Name</Text>
+                     <Label title='Name' icon='ios-person-outline' iconColor='#3ec1d8' />
                      <Input
                         value={this.state.name}
                         onChangeText={name => this.setState({ name })}
@@ -142,7 +143,7 @@ class PerformerCreate extends Component {
                         reference={input => this.inputs['name'] = input}
                         onSubmitEditing={() => this.handleFocusNextField('description')}       />
 
-                     <Text style={styles.label}>Description</Text>
+                     <Label title='About me' icon='ios-information-circle-outline' iconColor='#3ec1d8' />
                      <Input
                         value={this.state.description}
                         onChangeText={description => this.setState({ description })}
@@ -153,7 +154,7 @@ class PerformerCreate extends Component {
                         onSubmitEditing={() => this.handleFocusNextField('facebook')}     
                         />
 
-                     <Text style={styles.label}>Facebook URL</Text>
+                     <Label title='Facebook' fontAwesomeIcon='facebook-square' iconColor='#1d71d3'/>
                         <Input
                            value={this.state.profile_facebook}
                            onChangeText={profile_facebook => this.setState({ profile_facebook })} 
@@ -162,7 +163,7 @@ class PerformerCreate extends Component {
                            onSubmitEditing={() => this.handleFocusNextField('instagram')}     
                            />
 
-                     <Text style={styles.label}>Instagram URL</Text>
+                     <Label title='Instagram' fontAwesomeIcon='instagram' iconColor='#d85936' />
                      <Input
                         value={this.state.profile_instagram}
                         onChangeText={profile_instagram => this.setState({ profile_instagram })} 

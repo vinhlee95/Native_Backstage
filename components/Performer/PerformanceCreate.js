@@ -3,12 +3,13 @@ import { View, Text, ScrollView, Image, TouchableWithoutFeedback, Dimensions, Ke
 import { ImagePicker, Permissions } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 
-import Button from '../UI/Button';
 import ViewContainer from '../UI/View';
 import Spinner from '../UI/Spinner';
 import Input from '../UI/Input';
 import ListItem from '../UI/ListItem';
 import Tag from '../UI/Tag';
+import Label from '../UI/Label';
+import Button from '../UI/Button';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 import alertMessage from '../UI/alertMessage';
@@ -198,9 +199,12 @@ class PerformanceCreate extends Component {
            <Picker.Item label={item} value={item} key={id} />
         )
      });
+
+     // return true if at least 1 tag shows up
+     let noTag = _.toArray(this.state.tagData).every(item => item === null || item === '');
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={{ flex: 1, backgroundColor: 'white'}}>
+      <View style={{ flex: 1}}>
          <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
             <ScrollView>
                <ViewContainer>
@@ -228,11 +232,11 @@ class PerformanceCreate extends Component {
                      </TouchableWithoutFeedback>
                   }
                   <View style={{marginBottom: 20 }}>
-                     <Text style={styles.label}>Performer name</Text>
+                     <Label title='Performer name' icon='ios-person-outline' iconColor='#3ec1d8' />
                      <Picker
                         selectedValue={this.state.name}
                         style={{ height: 100 }}
-                        itemStyle={{ fontSize: 16, height: 100, fontWeight: 'bold'}}
+                        itemStyle={{ fontSize: 18, height: 100, fontWeight: '600'}}
                         onValueChange={(itemValue) => this.setState({name: itemValue})}
                         >
                         <Picker.Item label='Please choose an artist' />
@@ -240,7 +244,8 @@ class PerformanceCreate extends Component {
                      </Picker>
                   </View>
 
-                  <Text style={styles.label}>Performance name</Text>
+                  <Label title = 'Performance name'
+                        icon = 'ios-film-outline' iconColor='purple' />
                   <Input
                         value={this.state.title}
                         onChangeText={title => this.setState({ title })} 
@@ -249,7 +254,8 @@ class PerformanceCreate extends Component {
                         onSubmitEditing={() => this.handleFocusNextField('description')}   
                         />
 
-                  <Text style={styles.label}>Performance description</Text>
+                  <Label title = 'Description'
+                        icon = 'ios-information-circle-outline' iconColor='orange' />
                   <Input
                      value={this.state.description}
                      onChangeText={description => this.setState({ description })}
@@ -259,18 +265,25 @@ class PerformanceCreate extends Component {
                      reference={input => this.inputs['description'] = input}  
                      />
 
-                  <Text style={[styles.label, {marginBottom: 15 }]}>Tags</Text>
                   {/* Tag list */}
                   {
-                     this.state.tagData
+                     noTag
                      ?
-                     <View style={styles.tagList}>
-                        {this.renderTagList()}
+                     null
+                     :
+                     <View>
+                        <Label title='Tags' icon='ios-pricetags-outline' iconColor='blue' />
+                        <View style={styles.tagList}>
+                           {this.renderTagList()}
+                        </View>
                      </View>
-                     : null
                   }
                   <ListItem 
-                     title={_.toArray(this.state.tagData).every(item => item === null || item==='')?'Add tags':'Edit tags'} 
+                     title={noTag?'Add tags':'Edit tags'} 
+                     icon={noTag?'ios-add-circle-outline':'ios-build-outline'}
+                     iconColor='blue'
+                     style={{marginBottom: 20, backgroundColor: 'transparent'}}
+                     borderTopWidth={0.5}
                      onPress={() => 
                         this.props.navigation.navigate('NewTag', 
                         {
@@ -303,10 +316,6 @@ const styles = {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center'
-   },
-   label: {
-      fontSize: 18,
-      fontWeight: 'bold'
    },
    tagList: {
       flexDirection: 'row',

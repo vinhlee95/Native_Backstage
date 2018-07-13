@@ -61,7 +61,8 @@ class Account extends Component {
                 <ListItem 
                     title='Edit your profile'
                     icon='ios-create-outline'
-                    onPress={() => this.props.navigation.navigate('Profile')} />
+                    onPress={() => this.props.navigation.navigate('Profile')}
+                    style={styles.listItem} />
               
                 <Button 
                   title="Log Out" 
@@ -108,10 +109,13 @@ const styles = {
       borderTopWidth: 0,
       borderBottomWidth: 0, paddingLeft: 10,
    },
+   listItem: {
+      paddingLeft: 10,
+   },
    label: {
       fontSize: 18,
       marginLeft: 10, marginTop: 10,
-   }
+   },
 }
 
 
