@@ -3,7 +3,7 @@ import { View, Text, TextInput, Image, Dimensions, Animated, Keyboard, Touchable
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Input from '../UI/Input';
-import Button from '../UI/Button';
+import ButtonAuth from '../UI/Button_Auth';
 import ViewContainer from '../UI/View';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -137,7 +137,7 @@ class LoginForm extends Component {
                      : null
                   }
                   
-                  <Button 
+                  <ButtonAuth
                      title="Log In" 
                      onPress={this.handleSubmit}
                      style={styles.button}

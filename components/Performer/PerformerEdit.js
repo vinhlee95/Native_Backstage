@@ -86,7 +86,7 @@ class PerformerInfo extends Component {
                   </View> */}
                   <ScrollView>
                   <ViewContainer>
-                     <Label title='Name' icon='ios-person-outline' style={styles.label} />
+                     <Label title='Name' icon='ios-person-outline' iconColor='#3ec1d8' />
                      <Input
                         value={this.state.name}
                         onChangeText={name => this.setState({ name })} 
@@ -94,7 +94,7 @@ class PerformerInfo extends Component {
                         onSubmitEditing={() => this.handleFocusNextField('description')}
                         />
 
-                     <Label title='About me' icon='ios-information-circle-outline' style={styles.label} />
+                     <Label title='About me' icon='ios-information-circle-outline' iconColor='#3ec1d8' />
                      <Input
                         value={this.state.description}
                         onChangeText={description => this.setState({ description })}
@@ -105,7 +105,7 @@ class PerformerInfo extends Component {
                         onSubmitEditing={() => this.handleFocusNextField('facebook')}
                         />
 
-                     <Label title='Facebook' fontAwesomeIcon='facebook-f' style={styles.label} />
+                     <Label title='Facebook' fontAwesomeIcon='facebook-square' iconColor='#1d71d3'/>
                      <Input
                         value={this.state.profile_facebook}
                         onChangeText={profile_facebook => this.setState({ profile_facebook })} 
@@ -114,7 +114,7 @@ class PerformerInfo extends Component {
                         onSubmitEditing={() => this.handleFocusNextField('instagram')}
                         />
 
-                     <Label title='Instagram' fontAwesomeIcon='instagram' style={styles.label} />
+                     <Label title='Instagram' fontAwesomeIcon='instagram' iconColor='#d85936' />
                      <Input
                         value={this.state.profile_instagram}
                         onChangeText={profile_instagram => this.setState({ profile_instagram })} 
@@ -141,9 +141,6 @@ const styles = {
    //    marginRight: 'auto',
    //    position: 'relative',
    // },
-   label: {
-      paddingBottom: 0, marginBottom: 0, borderBottomWidth: 0,
-   }
 }
 
 export default PerformerInfo;

@@ -11,6 +11,7 @@ import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/ind
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import alertMessage from '../UI/alertMessage';
+import Label from '../UI/Label';
 
 class PerformanceEdit extends Component {
    // render Header
@@ -61,12 +62,9 @@ class PerformanceEdit extends Component {
       console.log(this.state)
       return (
          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <View style={{backgroundColor: 'white', paddingTop: 20, paddingLeft: '2.5%', paddingRight: '2.5%' }}>
+            <View style={{backgroundColor: 'white', paddingLeft: '2.5%', paddingRight: '2.5%' }}>
                <ScrollView>
-                  <View style={styles.label}>
-                     <Ionicons name="ios-person-outline" size={25} />
-                     <Text style={styles.labelText}>Performer name</Text>
-                  </View>
+                  <Label title='Performer name' icon='ios-person-outline' style={{marginTop: 20}} />
                   <Input
                      value={this.state.name}
                      onChangeText={name => this.setState({ name })}
@@ -74,10 +72,8 @@ class PerformanceEdit extends Component {
                      returnKeyType='next'
                      onSubmitEditing={() => this.handleFocusNextField('performanceName')} />
                      />
-                  <View style={styles.label}>
-                     <Ionicons name="ios-create-outline" size={25} />
-                     <Text style={styles.labelText}>Performance name</Text>
-                  </View>
+
+                  <Label title='Performance name' icon='ios-create-outline' />
                   <Input
                      value={this.state.title}
                      onChangeText={title => this.setState({ title })}
@@ -87,10 +83,7 @@ class PerformanceEdit extends Component {
                      onSubmitEditing={() => this.handleFocusNextField('description')} />
                      />  
 
-                  <View style={styles.label}>
-                     <Ionicons name="ios-document-outline" size={25} />
-                     <Text style={styles.labelText}>Performance description</Text>
-                  </View>
+                  <Label title='Description' icon='ios-document-outline' />
                   <Input
                      value={this.state.description}
                      onChangeText={description => this.setState({ description })}
@@ -100,10 +93,7 @@ class PerformanceEdit extends Component {
                      onSubmitEditing={() => this.handleFocusNextField('audienceSize')} />
                      />  
 
-                  <View style={styles.label}>
-                     <Ionicons name="ios-people-outline" size={25} />
-                     <Text style={styles.labelText}>Audience size</Text>
-                  </View>
+                  <Label title='Audience size' icon='ios-people-outline' />
                   <Input
                      value={this.state.tagData.audienceSize}
                      onChangeText={size => this.setState({
@@ -115,10 +105,7 @@ class PerformanceEdit extends Component {
                      reference={input => this.inputs['audienceSize'] = input}
                      keyboardType="numeric" />
                   
-                  <View style={styles.label}>
-                     <Ionicons name="ios-clock-outline" size={25} />
-                     <Text style={styles.labelText}>Duration (minutes)</Text>
-                  </View>
+                  <Label title='Duration (minutes)' icon='ios-clock-outline' />
                   <Input 
                      value={this.state.tagData.duration}
                      onChangeText={duration => this.setState({
@@ -129,10 +116,7 @@ class PerformanceEdit extends Component {
                      })}
                      keyboardType="numeric" />
                   
-                  <View style={styles.label}>
-                     <Ionicons name="ios-pricetag-outline" size={25} />
-                     <Text style={styles.labelText}>Price (€)</Text>
-                  </View>
+                  <Label title='Price (€)' icon='ios-pricetag-outline' />
                   <Input 
                      value={this.state.tagData.price}
                      onChangeText={price => this.setState({
@@ -145,10 +129,7 @@ class PerformanceEdit extends Component {
                      returnKeyType='done' />
 
                   <View style={styles.boolRow} >
-                     <View style={styles.label}>
-                        <Ionicons name="ios-musical-note-outline" size={25} />
-                        <Text style={styles.labelText}>Audio</Text>
-                     </View>
+                     <Label title='Audio' icon='ios-musical-note-outline' />
                      <Switch 
                         value={this.state.tagData.audio}
                         onValueChange={() => 
@@ -163,10 +144,7 @@ class PerformanceEdit extends Component {
                   </View>
 
                   <View style={styles.boolRow}>
-                     <View style={styles.label}>
-                        <Ionicons name="ios-car-outline" size={25} />
-                        <Text style={styles.labelText}>Car to door</Text>
-                     </View>
+                     <Label title='Car to door' icon='ios-car-outline' />
                      <Switch
                         value={this.state.tagData.carToDoor}
                         onValueChange={() => 
@@ -181,10 +159,7 @@ class PerformanceEdit extends Component {
                   </View>
 
                   <View style={[styles.boolRow]}>
-                     <View style={styles.label}>
-                        <Icon name="bolt" size={25} />
-                        <Text style={styles.labelText}>Electricity</Text>
-                     </View>
+                     <Label title='Electricity' fontAwesomeIcon='bolt' />
                      <Switch
                         value={this.state.tagData.electricity}
                         onValueChange={() => 
@@ -205,16 +180,6 @@ class PerformanceEdit extends Component {
 }
 
 const styles = {
-   label: {
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-      alignItems: 'center'
-   },
-   labelText: {
-      fontSize: 20,
-      fontWeight: '600',
-      marginLeft: 10,
-   },
    boolRow: {
       flexDirection: 'row',
       justifyContent: 'space-between',

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Dimensions } from 'react-native';
+import { View, Text, Image, Dimensions, TouchableHighlight } from 'react-native';
 import Swiper from 'react-native-swiper';
-import Button from '../UI/Button';
+import ButtonAuth from '../UI/Button_Auth';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -79,10 +79,11 @@ class Welcome extends Component {
                   style={styles.image}
                />
                <Text style={styles.tip}>{tip}</Text>
-               <Button 
-                  title={buttonText} 
+               <ButtonAuth 
+                  title={buttonText}
                   onPress={() => this.props.navigation.navigate('Signup')}
-                  style={styles.button} />
+                  style={styles.button}
+               />
             </View>
          );
       });

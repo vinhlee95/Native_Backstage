@@ -2,18 +2,6 @@ import { FETCH_PERFORMER_DATA, CREATE_PERFORMER, UPDATE_PERFORMER } from './type
 import _ from 'lodash';
 import request from 'superagent';
 const index = Math.floor(100000 + Math.random() * 900000);
-const samplePerformerData = {
-   "data": {
-      "description": "",
-      "name": "Eminem ",
-      "profilePic": "file:///var/mobile/Containers/Data/Application/C1D22526-8179-434F-B564-1842526B67FE/Library/Caches/ExponentExperienceData/%2540vinhlee95%252Fback-stage/ImagePicker/43DCAC52-9A58-4BF3-B323-EA93A9CC111D.jpg",
-      "profile_facebook": "",
-      "profile_instagram": "",
-      id: index,
-
-   },
-   "products": {},
-}
 
 export const fetchPerformerData = () => {
    return (dispatch) => {
@@ -27,8 +15,7 @@ export const fetchPerformerData = () => {
          .end((err, res) => {
             const data = _.toArray(res.body);
             // console.log(data)
-            // console.log(performerData);
-            data.push(samplePerformerData);
+            console.log(data);
             dispatch({
                type: FETCH_PERFORMER_DATA,
                payload: data

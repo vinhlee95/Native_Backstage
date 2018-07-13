@@ -270,12 +270,12 @@ class PerformanceInfo extends Component {
                         {/* {videoList}
                      </Swiper> */}
                      <ViewContainer>
-                        < Label title = 'About this performance'
-                        icon = 'ios-information-circle-outline' />
+                        <Label title = 'About this performance'
+                        icon = 'ios-information-circle-outline' iconColor='orange' />
                         <Text style={styles.description}>{this.state.description}</Text>
 
                         {/* Tag List */}
-                        <Label title='Tags' icon='ios-pricetags-outline' />
+                        <Label title='Tags' icon='ios-pricetags-outline' iconColor='blue' />
                         <View style={styles.tagList}>
                            {this.renderTagList()}
                         </View>
@@ -284,6 +284,7 @@ class PerformanceInfo extends Component {
                            <Button 
                               icon='ios-create-outline'
                               title="Edit performance" 
+                              iconColor='green'
                               textStyle={styles.buttonStyle}
                               onPress={this.handleEditInfo} 
                            />
@@ -291,7 +292,7 @@ class PerformanceInfo extends Component {
                               icon='ios-trash-outline'
                               style={{marginBottom: 10}}
                               titleContainerStyle={{borderBottomWidth:0}}
-                              textStyle={[styles.buttonStyle, {color: 'red'}]}
+                              textStyle={styles.buttonStyle}
                               iconColor='red'
                               title='Delete performance'
                               onPress={this.handleDeletePerformance}

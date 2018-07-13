@@ -75,7 +75,7 @@ class PerformerInfo extends Component {
    }
 
    render() {
-      const { profilePic } = this.state;
+      const { profilePic, description, profile_facebook,profile_instagram } = this.state;
       return (
          <ScrollView style={{backgroundColor:'white'}}>         
             <View style={styles.imageContainer}>
@@ -83,14 +83,20 @@ class PerformerInfo extends Component {
                <Text style={styles.performerName}>{this.state.name}</Text>
             </View>
             <ViewContainer>
-               <Label title='About me' icon='ios-person-outline' iconColor='#3ec1d8'/>
-               <Text style={styles.text}>{this.state.description}</Text>
+               <Label title='About' icon='ios-person-outline' iconColor='#3ec1d8'/>
+               {
+                  description ? <Text style={styles.text}>{this.state.description}</Text> : null
+               }
 
                <Label title='Facebook' fontAwesomeIcon='facebook-square' iconColor='#1d71d3' />
-               <Text style={styles.text}>{this.state.profile_facebook}</Text>
+               {
+                  profile_facebook ? <Text style={styles.text}>{this.state.profile_facebook}</Text> : null
+               }
 
                <Label title='Instagram' fontAwesomeIcon='instagram' iconColor='#d85936' />
-               <Text style={styles.text}>{this.state.profile_instagram}</Text>
+               {
+                  profile_instagram ? <Text style={styles.text}>{this.state.profile_instagram}</Text> : null
+               }
 
                { /* buttons */ }
                <View style={{ marginTop: 10, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor:'#e0e2e5' }}>

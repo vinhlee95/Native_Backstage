@@ -11,10 +11,10 @@ export default (state=[], action) => {
          return action.payload.performerData || {};
 
       case FETCH_PERFORMER_DATA:
+         // console.log([...state])
          return action.payload;
 
       case CREATE_PERFORMER:
-         console.log(action.payload)
          return [...state, action.payload];
 
       case UPDATE_PERFORMER:

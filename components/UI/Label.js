@@ -6,8 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default Label = (props) => {
    const styles = {
       label: {
-         borderBottomWidth: 0.5, borderBottomColor: 'lightgrey', paddingBottom: 5,
-         marginTop: 10, marginBottom: 10,
+         marginBottom: 5,
          flexDirection: 'row', alignItems: 'center'
       },
       title: {

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
 import ViewContainer from '../UI/View';
-import Button from '../UI/Button';
+import ButtonAuth from '../UI/Button_Auth';
 import Input from '../UI/Input';
 import Modal from '../UI/Modal';
 
@@ -142,7 +142,7 @@ class SignupForm extends Component {
                   : null
                }
 
-               <Button 
+               <ButtonAuth 
                   title="Sign up" 
                   onPress={this.handleSubmit}
                   style={styles.button}
