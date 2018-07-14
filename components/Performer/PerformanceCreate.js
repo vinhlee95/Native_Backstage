@@ -283,7 +283,10 @@ class PerformanceCreate extends Component {
                      icon={noTag?'ios-add-circle-outline':'ios-build-outline'}
                      iconColor='blue'
                      style={{marginBottom: 20, backgroundColor: 'transparent'}}
-                     borderTopWidth={0.5}
+                     titleContainerStyle={{
+                        borderColor: '#cacdd1',
+                        borderTopWidth: 1,
+                     }}
                      onPress={() => 
                         this.props.navigation.navigate('NewTag', 
                         {

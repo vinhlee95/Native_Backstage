@@ -38,6 +38,18 @@ const PerformerItem = (props) => {
          />
          <View style={styles.performanceList}>
             {performanceList}
+            <ListItem
+               title='Add performance...'
+               icon='ios-add-circle-outline'
+               leftIconSize={49}
+               style={styles.addIcon}
+               titleContainerStyle={{borderBottomWidth: 0}}
+               iconColor='#b4bac4'
+               titleTextStyle={{color: '#b4bac4'}}
+               onPress={() => props.navigation.navigate('PerformanceCreate', {
+                  performerNameList: props.performerNameList
+               })}
+            />
          </View>
       </View>
    );
@@ -69,6 +81,9 @@ const styles = {
    performanceList: {
       borderTopWidth: 0.5, borderBottomWidth: 0.5,
       borderColor: '#e0e2e5'
+   },
+   addIcon: {
+      paddingLeft: 15,
    }
 }
 

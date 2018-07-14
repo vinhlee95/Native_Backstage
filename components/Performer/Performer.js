@@ -45,11 +45,15 @@ class Performer extends Component {
 
       // take a lít of name of performer for rendering in performance create 
       performerData.forEach(performer => {
-         performerNameList.push(performer.data.name)}
-      );
+         if(!performer.data.name) {
+            performerNameList.push('');
+         } else {
+            performerNameList.push(performer.data.name)
+         }
+      });
       performerList = performerData.map((performer, id) => {
          const personalData = performer.data;
-         const productData = _.toArray(performer.products);
+         const productData = _.toArray(performer.products).splice(0,2);
          // console.log(productData)
          let updatedProductData = productData;
          const {localPerformanceData}= this.props; // console.log(localPerformanceData)
@@ -75,6 +79,7 @@ class Performer extends Component {
                   });
                }}
                navigation={this.props.navigation}
+               performerNameList={performerNameList}
             />
          )
       });
@@ -86,14 +91,14 @@ class Performer extends Component {
                   {performerList}
                </View>
             </ScrollView>
-            {
+            {/* {
                this.state.showAddButton
                ?
                <View style={{ position: 'absolute', bottom: 20, right: 20}}>
                   <AddButton style={{ zIndex: 100000}} onPress={() => this.setState({ showAddButton: false, showAddModal: true })}/>
                </View>
                : null
-            }
+            } */}
             
             {
                this.state.showAddModal 

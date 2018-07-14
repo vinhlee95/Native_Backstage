@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Switch, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, ScrollView, Switch, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 
 import Input from '../UI/Input';
-import Button from '../UI/Button';
+import ViewContainer from '../UI/View';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 
@@ -62,7 +60,7 @@ class PerformanceEdit extends Component {
       console.log(this.state)
       return (
          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <View style={{backgroundColor: 'white', paddingLeft: '2.5%', paddingRight: '2.5%' }}>
+            <ViewContainer>
                <ScrollView>
                   <Label title='Performer name' icon='ios-person-outline' style={{marginTop: 20}} />
                   <Input
@@ -173,7 +171,7 @@ class PerformanceEdit extends Component {
                      />
                   </View>
                </ScrollView>
-            </View>
+            </ViewContainer>
          </TouchableWithoutFeedback>
       )
    }

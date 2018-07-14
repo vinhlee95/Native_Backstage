@@ -11,7 +11,7 @@ const ListItem = (props) => {
          alignItems: 'center',
       },
       listItem: {
-         borderBottomWidth: 0.5,
+         borderBottomWidth: 1,
          borderTopWidth: props.borderTopWidth?props.borderTopWidth:0,
          borderColor: '#e0e2e5',
          paddingTop: 15,
@@ -40,7 +40,7 @@ const ListItem = (props) => {
             {
                props.icon
                ?
-               <Ionicons name={props.icon} size={22} style={styles.leftIcon} color={props.iconColor} />
+               <Ionicons name={props.icon} size={props.leftIconSize?props.leftIconSize:22} style={styles.leftIcon} color={props.iconColor} />
                : null
             }
             {
