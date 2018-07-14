@@ -15,7 +15,6 @@ export const fetchPerformerData = () => {
          .end((err, res) => {
             const data = _.toArray(res.body);
             // console.log(data)
-            console.log(data);
             dispatch({
                type: FETCH_PERFORMER_DATA,
                payload: data

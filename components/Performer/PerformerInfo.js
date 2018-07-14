@@ -30,7 +30,6 @@ class PerformerInfo extends Component {
       super(props);
       const {params} = this.props.navigation.state;
       // get performer data & product data
-      console.log(params.performerData)
       const { name, description, profile_facebook, profile_instagram, profilePic, id } = params.performerData; 
       this.productData = params.productData;
 

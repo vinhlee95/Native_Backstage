@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 const Tags = (props) => {
-   let tagWidth = props.tagWidth?props.tagWidth:60;
+   let tagWidth = props.tagWidth?props.tagWidth:80;
    let tagBackgroundColor = props.backgroundColor?props.backgroundColor:'#2d81e2';
    let tagNameColor = props.textColor?props.textColor:'white';
    let tagIconColor = props.iconColor?props.iconColor:'white';
