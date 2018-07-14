@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableWithoutFeedback, Image } from 'react-native';
-import request from 'superagent';
 import _ from 'lodash';
 
 import Modal from '../UI/Modal';
 import AddButton from '../UI/AddButton';
 import AddModal from '../UI/AddModal';
+import ListItem from '../UI/ListItem';
 import PerformerItem from './PerformerItem';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -89,6 +89,17 @@ class Performer extends Component {
             <ScrollView>
                <View>
                   {performerList}
+
+                  <ListItem
+                     title='Add performer...'
+                     icon='ios-person-add-outline'
+                     leftIconSize={60}
+                     style={{ paddingLeft: 15 }}
+                     titleContainerStyle={{borderBottomWidth: 0}}
+                     iconColor='#b4bac4'
+                     titleTextStyle={{color: '#b4bac4'}}
+                     onPress={() => this.props.navigation.navigate('PerformerCreate')}
+                  />
                </View>
             </ScrollView>
             {/* {

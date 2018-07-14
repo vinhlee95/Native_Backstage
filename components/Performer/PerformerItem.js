@@ -40,7 +40,7 @@ const PerformerItem = (props) => {
             {performanceList}
             <ListItem
                title='Add performance...'
-               icon='ios-add-circle-outline'
+               icon='ios-film-outline'
                leftIconSize={49}
                style={styles.addIcon}
                titleContainerStyle={{borderBottomWidth: 0}}
