@@ -269,7 +269,9 @@ class PerformanceInfo extends Component {
                <View>
                   <Label title = 'About this performance'
                   icon = 'ios-information-circle-outline' iconColor='orange' />
-                  <Text style={styles.description}>{this.state.description}</Text>
+                  <View style={styles.textContainer}>
+                     <Text style={styles.description}>{this.state.description}</Text>
+                  </View>
 
                   {/* Tag List */}
                   <Label title='Tags' icon='ios-pricetags-outline' iconColor='blue' />
@@ -346,10 +348,13 @@ const styles = {
       marginLeft: 'auto',
       marginRight: 'auto',
    },
+   textContainer: {
+      backgroundColor: 'white',
+      paddingTop: 10, paddingBottom: 10, paddingLeft: '2.5%',
+      marginBottom: 20,
+   },
    description: {
       fontSize: 16,
-      marginTop: 10, marginBottom: 20,
-      marginLeft: 10,
    },
    tagList: {
       flexDirection: 'row',
@@ -358,7 +363,8 @@ const styles = {
       width: DEVICE_WIDTH,
       marginLeft: 'auto',
       marginRight: 'auto',
-      marginTop: 10, marginBottom: 10,
+      marginBottom: 10,
+      backgroundColor: 'white', paddingTop: 10, paddingBottom: 10,
    },
    buttonStyle: {
       fontSize: 20,
