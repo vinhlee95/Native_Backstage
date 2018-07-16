@@ -84,17 +84,29 @@ class PerformerInfo extends Component {
             <View>
                <Label title='About' icon='ios-person-outline' iconColor='#3ec1d8'/>
                {
-                  description ? <Text style={styles.text}>{this.state.description}</Text> : null
+                  description ? 
+                  <View style={styles.textContainer}>
+                     <Text style={styles.text}>{this.state.description}</Text> 
+                  </View>
+                  : null
                }
 
                <Label title='Facebook' fontAwesomeIcon='facebook-square' iconColor='#1d71d3' />
                {
-                  profile_facebook ? <Text style={styles.text}>{this.state.profile_facebook}</Text> : null
+                  profile_facebook ? 
+                  <View style={styles.textContainer}>
+                     <Text style={styles.text}>{this.state.profile_facebook}</Text> 
+                  </View>
+                  : null
                }
 
                <Label title='Instagram' fontAwesomeIcon='instagram' iconColor='#d85936' />
                {
-                  profile_instagram ? <Text style={styles.text}>{this.state.profile_instagram}</Text> : null
+                  profile_instagram ? 
+                  <View style={styles.textContainer}>
+                     <Text style={styles.text}>{this.state.profile_instagram}</Text> 
+                  </View>
+                  : null
                }
 
                { /* buttons */ }
@@ -137,10 +149,15 @@ const styles = {
       bottom: 20, left: 10,
       color: 'white', fontWeight: 'bold', fontSize: 40,
    },
+   textContainer: {
+      backgroundColor: 'white',
+      paddingTop: 10,
+      paddingBottom: 10,
+      paddingLeft: '2.5%',
+      marginBottom: 20,
+   },
    text: {
       fontSize: 16,
-      marginBottom: 20,
-      marginLeft: 10,
    },
    buttonStyle: {
       fontSize: 20,
