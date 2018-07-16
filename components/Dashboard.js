@@ -4,6 +4,7 @@ import firebase from 'firebase';
 import ViewContainer from './UI/View';
 
 import { Ionicons } from '@expo/vector-icons';
+import Label from './UI/Label';
 
 class Dashboard extends Component {
    static navigationOptions = {
@@ -28,13 +29,27 @@ class Dashboard extends Component {
                onPress={() => {
                   this.props.navigation.navigate('Account');
                }} />    */}
-            <ScrollView style={{ flex: 1 }}>         
-               <ViewContainer >
-                  <Text style={styles.title}>Welcome {email}</Text>
-                  <Text style={{ fontSize: 18}}>You can find your need-to-confirm, upcoming and past gigs bellow</Text>
-                  
-               </ViewContainer>
-               
+            <ScrollView style={{ flex: 1, paddingTop: 10 }}>         
+                  <Label 
+                     title='Need your confirmation'
+                     icon='ios-alert-outline'
+                     iconColor='red'
+                     style={styles.label} />
+                  <View style={styles.textContainer}>
+                     <Text style={styles.text}>All set! There is currently no gigs that need your confirmation</Text>
+                  </View>
+
+                  <Label 
+                     title='Upcoming gigs'
+                     icon='ios-bonfire-outline'
+                     iconColor='orange'
+                     style={styles.label} />
+
+                  <Label 
+                     title='Past gigs'
+                     icon='ios-folder-open-outline'
+                     color='lightgreen'
+                     style={styles.label} />
             </ScrollView>
             
          </View>
@@ -43,9 +58,16 @@ class Dashboard extends Component {
 }
 
 const styles = {
-   title: {
-      fontSize: 25,
-      marginTop: 15,
+   label: {
+      paddingLeft: '2.5%',
+      marginTop: 10, marginBottom: 10,
+   },    
+   textContainer: {
+      backgroundColor: 'white',
+      paddingTop: 10, paddingBottom: 10, paddingLeft: '2.5%'
+   },
+   text: {
+      fontSize: 18,
    }
 }
 

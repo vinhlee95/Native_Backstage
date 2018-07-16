@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Switch, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { View, ScrollView, Switch, TouchableWithoutFeedback, Keyboard, Alert, Dimensions, Animated } from 'react-native';
 
 import Input from '../UI/Input';
 import ViewContainer from '../UI/View';
@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import alertMessage from '../UI/alertMessage';
 import Label from '../UI/Label';
+
+const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 class PerformanceEdit extends Component {
    // render Header
@@ -37,14 +39,39 @@ class PerformanceEdit extends Component {
             audienceSize, duration, audio, carToDoor, price, electricity,
          }
       }
+      this.keyboardHeight = new Animated.Value(0);
       this.inputs = {};
    }
 
    componentWillMount() {
+      this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+      this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
       this.props.navigation.setParams({
          saveInfo: this.handleSaveInfo
       })
    }
+
+   componentWillUnmount() {
+      this.keyboardWillShowSub.remove();
+      this.keyboardWillHideSub.remove();
+   }
+
+   // callbacks
+   keyboardWillShow = (event) => {
+      // this.setState({ flexNumber: 0.7})
+      Animated.timing(this.keyboardHeight, {
+         duration: event.duration,
+         toValue: event.endCoordinates.height,
+      }).start();
+   };
+
+   keyboardWillHide = (event) => {
+      // this.setState({ flexNumber: 0.4})      
+      Animated.timing(this.keyboardHeight, {
+         duration: event.duration,
+         toValue: 10,
+      }).start();
+   };
 
    handleSaveInfo = () => {
       const { navigation } = this.props;
@@ -60,7 +87,7 @@ class PerformanceEdit extends Component {
       console.log(this.state)
       return (
          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <ViewContainer>
+            <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
                <ScrollView>
                   <Label title='Performer name' icon='ios-person-outline' style={{marginTop: 20}} />
                   <Input
@@ -157,7 +184,7 @@ class PerformanceEdit extends Component {
                   </View>
 
                   <View style={[styles.boolRow]}>
-                     <Label title='Electricity' fontAwesomeIcon='bolt' />
+                     <Label title='Electricity' icon='ios-flash-outline' />
                      <Switch
                         value={this.state.tagData.electricity}
                         onValueChange={() => 
@@ -171,7 +198,7 @@ class PerformanceEdit extends Component {
                      />
                   </View>
                </ScrollView>
-            </ViewContainer>
+            </Animated.View>
          </TouchableWithoutFeedback>
       )
    }
@@ -182,10 +209,10 @@ const styles = {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      borderBottomWidth: 1,
-      borderBottomColor: '#cacdd1',
+      paddingTop: 10,
       paddingBottom: 10,
       marginBottom: 15,
+      backgroundColor:'white',
    }
 }
 
