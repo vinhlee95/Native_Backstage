@@ -137,83 +137,68 @@ class Profile extends Component {
                <Modal title="Saving your information" />
                :
                <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
-                  <ViewContainer>
-                     <View style={[styles.headingContainer, { marginTop: 15 }]}>
-                        <Ionicons name="ios-information-circle-outline" size={25} />               
-                        <Text style={styles.heading}>Basic information</Text>
-                     </View>
-                     <Input 
-                        placeholder="First Name"
-                        value={this.state.firstName}
-                        onChangeText={(firstName) => this.setState({ firstName })}
-                        style={{ marginTop: 10}}
-                        returnKeyType='next'
-                        reference={input => this.inputs['firstName'] = input}
-                        onSubmitEditing={() => this.handleFocusNextField('lastName')} />
-                     <Input 
-                        placeholder="Last Name"
-                        value={this.state.lastName}                  
-                        onChangeText={(lastName) => this.setState({ lastName })}
-                        returnKeyType='next'
-                        reference={input => this.inputs['lastName'] = input}
-                        // onSubmitEditing={() => this.handleFocusNextField('lastName')}
-                        />
+                  <Label title='Basic information' icon='ios-information-circle-outline' style={{paddingTop: 20}} />
+                  <Input 
+                     placeholder="First Name"
+                     value={this.state.firstName}
+                     onChangeText={(firstName) => this.setState({ firstName })}
+                     returnKeyType='next'
+                     reference={input => this.inputs['firstName'] = input}
+                     onSubmitEditing={() => this.handleFocusNextField('lastName')} />
+                  <Input 
+                     placeholder="Last Name"
+                     value={this.state.lastName}                  
+                     onChangeText={(lastName) => this.setState({ lastName })}
+                     returnKeyType='next'
+                     reference={input => this.inputs['lastName'] = input}
+                     />
+                  <Label title='Home' icon='ios-home-outline' />
 
-                     <View style={[styles.headingContainer, {marginTop: 20}]}>
-                        <Ionicons name="ios-home" size={25} />               
-                        <Text style={styles.heading}>Home address</Text>                  
-                     </View>
-                     <View>
-                        <LocationSearch  
-                           placeholder="Adress" 
-                           defaultValue={this.state.location.description}
-                           handleSelectLocation={this.handleSelectLocation}
-                           submitLocationDescription={this.submitLocationDescription} />
-                        <Input 
-                           placeholder="House number" 
-                           value={this.state.location.houseNumber}
-                           onChangeText={(houseNumber) => this.setState({ location: {...this.state.location, houseNumber} })}
-                           returnKeyType='next'
-                           reference={input => this.inputs['houseNumber'] = input}
-                           onSubmitEditing={() => this.handleFocusNextField('postalCode')}
-                           />
-                     </View>
-                     <View>
-                        <Input 
-                           placeholder="Postal Code"
-                           value={this.state.location.postalCode} 
-                           keyboardType="numeric"
-                           onChangeText={(postalCode) => this.setState({ location: {...this.state.location, postalCode} })} 
-                           returnKeyType='done'
-                           reference={input => this.inputs['postalCode'] = input}
-                           />
-                     </View>
-                     {
-                        this.state.location.description
-                        ?
-                        <View style={{flex:1}}>
-                           <View style={[styles.headingContainer, {marginTop: 20, marginBottom: 20}]}>
-                              <Ionicons name="ios-map" size={25} />               
-                              <Text style={styles.heading}>Map</Text>        
-                           </View>
-                           <View style={styles.mapView}>
-                              <View style={styles.noteContainer}>
-                                 <Text style={styles.note}>Tap on the map to view full-screen</Text>  
-                              </View>        
-                              <Map 
-                                 location={this.state.location} 
-                                 scrollEnabled={false}  
-                                 onPress={() => this.props.navigation.navigate('MapFullScreen', {
-                                    location: this.state.location,
-                                 })}
-                                 style={{ height: 300,zIndex: 1 }} />
-                           </View>
+                  <View>
+                     <LocationSearch  
+                        placeholder="Adress" 
+                        defaultValue={this.state.location.description}
+                        handleSelectLocation={this.handleSelectLocation}
+                        submitLocationDescription={this.submitLocationDescription} />
+                     <Input 
+                        placeholder="House number" 
+                        value={this.state.location.houseNumber}
+                        onChangeText={(houseNumber) => this.setState({ location: {...this.state.location, houseNumber} })}
+                        returnKeyType='next'
+                        reference={input => this.inputs['houseNumber'] = input}
+                        onSubmitEditing={() => this.handleFocusNextField('postalCode')}
+                        />
+                  </View>
+                  <View>
+                     <Input 
+                        placeholder="Postal Code"
+                        value={this.state.location.postalCode} 
+                        keyboardType="numeric"
+                        onChangeText={(postalCode) => this.setState({ location: {...this.state.location, postalCode} })} 
+                        returnKeyType='done'
+                        reference={input => this.inputs['postalCode'] = input}
+                        />
+                  </View>
+                  {
+                     this.state.location.description
+                     ?
+                     <View style={{flex:1}}>
+                        <Label title='Map' icon='ios-map-outline' />
+                        <View style={styles.mapView}>
+                           <View style={styles.noteContainer}>
+                              <Text style={styles.note}>Tap on the map to view full-screen</Text>  
+                           </View>        
+                           <Map 
+                              location={this.state.location} 
+                              scrollEnabled={false}  
+                              onPress={() => this.props.navigation.navigate('MapFullScreen', {
+                                 location: this.state.location,
+                              })}
+                              style={{ height: 300,zIndex: 1 }} />
                         </View>
-                        : null
-                     }
-                     
-                  </ViewContainer>
-                  
+                     </View>
+                     : null
+                  }
                </ScrollView>
             }
          </Animated.View>
@@ -225,19 +210,6 @@ class Profile extends Component {
 const styles = {
    container: {
       flex: 1,
-   },
-   headingContainer: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-   },
-   heading: {
-      fontSize: 20,
-      marginBottom: 0,
-      marginLeft: 5,
-      paddingBottom: 0,
-      fontWeight: 'bold',
    },
    mapView: {
       flex: 1,

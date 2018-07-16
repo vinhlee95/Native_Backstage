@@ -41,7 +41,7 @@ class LocationSearch extends Component {
               marginLeft: 'auto',
               marginRight: 'auto',
               marginBottom: 10,
-              marginTop: 10,
+              paddingLeft: 10,
           },
           textInput: {
               marginLeft: 0,
