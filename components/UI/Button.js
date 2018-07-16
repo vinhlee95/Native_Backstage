@@ -6,7 +6,8 @@ const ReusableButton = (props) => {
    const buttonStyle = {
       flexDirection: 'row',
       backgroundColor: 'white',
-      alignItems: 'center'
+      alignItems: 'center',
+      paddingLeft: 10,
    }
    const titleStyle = {
       borderBottomWidth: 0.5,

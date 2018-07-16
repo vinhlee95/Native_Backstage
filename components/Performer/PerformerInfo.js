@@ -76,12 +76,12 @@ class PerformerInfo extends Component {
    render() {
       const { profilePic, description, profile_facebook,profile_instagram } = this.state;
       return (
-         <ScrollView style={{backgroundColor:'white'}}>         
+         <ScrollView>         
             <View style={styles.imageContainer}>
                <Image source={{uri:profilePic}} style={styles.image} />
                <Text style={styles.performerName}>{this.state.name}</Text>
             </View>
-            <ViewContainer>
+            <View>
                <Label title='About' icon='ios-person-outline' iconColor='#3ec1d8'/>
                {
                   description ? <Text style={styles.text}>{this.state.description}</Text> : null
@@ -115,7 +115,7 @@ class PerformerInfo extends Component {
                      onPress={this.handleDeletePerformance}
                   />
                </View>
-            </ViewContainer>
+            </View>
          </ScrollView>
       )
    }
@@ -139,7 +139,8 @@ const styles = {
    },
    text: {
       fontSize: 16,
-      marginBottom: 10,
+      marginBottom: 20,
+      marginLeft: 10,
    },
    buttonStyle: {
       fontSize: 20,

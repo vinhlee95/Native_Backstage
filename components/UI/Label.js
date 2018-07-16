@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import Ionicons from '../../node_modules/@expo/vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default Label = (props) => {
    const styles = {
@@ -23,6 +24,13 @@ export default Label = (props) => {
             props.icon
             ?
             <Ionicons name={props.icon} size={22} style={styles.icon} color={props.iconColor} />
+            : 
+            null
+         }
+          {
+            props.fontAwesomeIcon
+            ?
+            <Icon name={props.fontAwesomeIcon} size={22} style={styles.icon} color={props.iconColor} />
             : 
             null
          }

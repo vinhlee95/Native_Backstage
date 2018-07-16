@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView, Image, Keyboard, Animated, WebView, Dimensions, TouchableWithoutFeedback, Alert } from 'react-native';
 import { ImagePicker, Permissions } from 'expo';
 import Swiper from 'react-native-swiper';
-import Input from '../UI/Input';
 import Button from '../UI/Button';
-import ViewContainer from '../UI/View';
 import Tag from '../UI/Tag';
 import Spinner from '../UI/Spinner';
-import ListItem from '../UI/ListItem';
 import { Ionicons } from '@expo/vector-icons';
 
 import _ from 'lodash';
@@ -233,73 +230,73 @@ class PerformanceInfo extends Component {
 			);
 		});
       return(
-         <View style={{flex:1, backgroundColor: 'white'}}>
-                  <ScrollView> 
-                     {/* <Swiper
-                        height={380}
-                        loop={false} >    */}
-                        <View style={styles.imageContainer}>                           
-                           {
-                              productImage || this.state.image
-                              ?
-                              <View>
-                                 <Image style={styles.image} source={{uri:productImage?productImage:this.state.image}}/>
-                                 <View style={styles.nameContainer}>
-                                    <Text style={styles.title}>{this.state.title}</Text>
-                                    <Text style={styles.name}>{this.state.name}</Text>
+         <View style={{flex:1}}>
+            <ScrollView> 
+               {/* <Swiper
+                  height={380}
+                  loop={false} >    */}
+                  <View style={styles.imageContainer}>                           
+                     {
+                        productImage || this.state.image
+                        ?
+                        <View>
+                           <Image style={styles.image} source={{uri:productImage?productImage:this.state.image}}/>
+                           <View style={styles.nameContainer}>
+                              <Text style={styles.title}>{this.state.title}</Text>
+                              <Text style={styles.name}>{this.state.name}</Text>
+                           </View>
+                           
+                        </View>
+                        :
+                        <TouchableWithoutFeedback onPress={() => this.pickImage()} >
+                           <View style={styles.imagePickContainer}>
+                              {
+                                 this.state.isLoading
+                                 ?
+                                 <Spinner animating />
+                                 :
+                                 <View style={styles.iconContainer}>
+                                    <Ionicons name="ios-camera" size={60} />
+                                    <Text>Add photo</Text>
                                  </View>
-                                 
-                              </View>
-                              :
-                              <TouchableWithoutFeedback onPress={() => this.pickImage()} >
-                                 <View style={styles.imagePickContainer}>
-                                    {
-                                       this.state.isLoading
-                                       ?
-                                       <Spinner animating />
-                                       :
-                                       <View style={styles.iconContainer}>
-                                          <Ionicons name="ios-camera" size={60} />
-                                          <Text>Add photo</Text>
-                                       </View>
-                                    }
-                                 </View>
-                              </TouchableWithoutFeedback>
-                           }     
-                        </View>
-                        {/* {videoList}
-                     </Swiper> */}
-                     <ViewContainer>
-                        <Label title = 'About this performance'
-                        icon = 'ios-information-circle-outline' iconColor='orange' />
-                        <Text style={styles.description}>{this.state.description}</Text>
+                              }
+                           </View>
+                        </TouchableWithoutFeedback>
+                     }     
+                  </View>
+                  {/* {videoList}
+               </Swiper> */}
+               <View>
+                  <Label title = 'About this performance'
+                  icon = 'ios-information-circle-outline' iconColor='orange' />
+                  <Text style={styles.description}>{this.state.description}</Text>
 
-                        {/* Tag List */}
-                        <Label title='Tags' icon='ios-pricetags-outline' iconColor='blue' />
-                        <View style={styles.tagList}>
-                           {this.renderTagList()}
-                        </View>
+                  {/* Tag List */}
+                  <Label title='Tags' icon='ios-pricetags-outline' iconColor='blue' />
+                  <View style={styles.tagList}>
+                     {this.renderTagList()}
+                  </View>
 
-                        <View style={{ marginTop: 10, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor:'#e0e2e5' }}>
-                           <Button 
-                              icon='ios-create-outline'
-                              title="Edit performance" 
-                              iconColor='green'
-                              textStyle={styles.buttonStyle}
-                              onPress={this.handleEditInfo} 
-                           />
-                           <Button
-                              icon='ios-trash-outline'
-                              style={{marginBottom: 10}}
-                              titleContainerStyle={{borderBottomWidth:0}}
-                              textStyle={styles.buttonStyle}
-                              iconColor='red'
-                              title='Delete performance'
-                              onPress={this.handleDeletePerformance}
-                           />
-                        </View>
-                     </ViewContainer>
-                  </ScrollView>
+                  <View style={{ marginTop: 10, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor:'#e0e2e5' }}>
+                     <Button 
+                        icon='ios-create-outline'
+                        title="Edit performance" 
+                        iconColor='green'
+                        textStyle={styles.buttonStyle}
+                        onPress={this.handleEditInfo} 
+                     />
+                     <Button
+                        icon='ios-trash-outline'
+                        style={{marginBottom: 10}}
+                        titleContainerStyle={{borderBottomWidth:0}}
+                        textStyle={styles.buttonStyle}
+                        iconColor='red'
+                        title='Delete performance'
+                        onPress={this.handleDeletePerformance}
+                     />
+                  </View>
+               </View>
+            </ScrollView>
 
          </View>
       );
@@ -352,6 +349,7 @@ const styles = {
    description: {
       fontSize: 16,
       marginTop: 10, marginBottom: 20,
+      marginLeft: 10,
    },
    tagList: {
       flexDirection: 'row',

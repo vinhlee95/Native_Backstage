@@ -85,7 +85,6 @@ class PerformerInfo extends Component {
                      <Text style={styles.performerName}>{this.state.name}</Text>
                   </View> */}
                   <ScrollView>
-                  <ViewContainer>
                      <Label title='Name' icon='ios-person-outline' iconColor='#3ec1d8' />
                      <Input
                         value={this.state.name}
@@ -121,7 +120,6 @@ class PerformerInfo extends Component {
                         returnKeyType='done'
                         reference={input => this.inputs['instagram'] = input}
                         />
-                  </ViewContainer>
                </ScrollView>
             </Animated.View>
             </View>
