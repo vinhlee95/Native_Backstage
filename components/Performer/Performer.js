@@ -94,7 +94,6 @@ class Performer extends Component {
                      title='Add performer...'
                      icon='ios-person-add-outline'
                      leftIconSize={60}
-                     style={{ paddingLeft: 15 }}
                      titleContainerStyle={{borderBottomWidth: 0}}
                      iconColor='#b4bac4'
                      titleTextStyle={{color: '#b4bac4'}}
@@ -111,7 +110,7 @@ class Performer extends Component {
                : null
             } */}
             
-            {
+            {/* {
                this.state.showAddModal 
                ?
                <AddModal 
@@ -122,7 +121,7 @@ class Performer extends Component {
                   performerNameList={performerNameList}
                   />
                : null
-            }
+            } */}
          </View>
       );
    }

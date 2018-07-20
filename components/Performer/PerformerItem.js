@@ -82,9 +82,6 @@ const styles = {
       borderTopWidth: 0.5, borderBottomWidth: 0.5,
       borderColor: '#e0e2e5'
    },
-   addIcon: {
-      paddingLeft: 15,
-   }
 }
 
 export default PerformerItem;

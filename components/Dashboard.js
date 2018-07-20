@@ -23,6 +23,12 @@ class Dashboard extends Component {
    componentWillMount() {
       this.props.fetchGigsData();
    }
+   
+   handleNavigate = () => {
+      this.props.navigation.navigate('GigDetails', {
+         gigDetails: this.props.gigsData
+      });
+   }
 
    render() {
       // console.log(this.props.gigsData)
@@ -66,7 +72,7 @@ class Dashboard extends Component {
                   icon='ios-film-outline'
                   iconColor='orange'
                   style={styles.label} />
-               <TouchableOpacity>
+               <TouchableOpacity onPress={this.handleNavigate}>
                   <View style={[styles.textContainer, styles.upcomingGigsContainer]}>
                      <View style={styles.info}>
                         <Text style={styles.time}>{gigsData.gigTime}</Text>

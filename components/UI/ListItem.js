@@ -9,6 +9,7 @@ const ListItem = (props) => {
          backgroundColor: 'white',
          flexDirection: 'row',
          alignItems: 'center',
+         paddingLeft: 10,
       },
       listItem: {
          borderBottomWidth: 1,
@@ -20,8 +21,12 @@ const ListItem = (props) => {
          justifyContent: 'space-between',
          flex: 1,
       },
+      rightContent: {
+         flexDirection: 'row',
+         justifyContent: 'flex-end',
+         marginRight: 10,
+      },
       defaultImageStyle: {
-         marginLeft: 10,
          marginRight: 10,
       },
       title: {
@@ -30,9 +35,6 @@ const ListItem = (props) => {
       leftIcon: {
          marginRight: 10,
       },
-      rightIcon: {
-         marginRight: 10,
-      }
    }
    return(
       <TouchableOpacity onPress={props.onPress} activeOpacity={0.7}>
@@ -52,7 +54,26 @@ const ListItem = (props) => {
             }
             <View style={[styles.listItem, props.titleContainerStyle]}>
                <Text style={[styles.title, props.titleTextStyle]}>{props.title}</Text>
-               <Ionicons name='ios-arrow-forward' size={props.arrowSize?props.arrowSize:20} style={styles.rightIcon} color={styles.listItem.borderColor} />
+               <View style={styles.rightContent}>
+                  {
+                     props.rightTitle
+                     ?
+                     <Text style={styles.title}>{props.rightTitle}</Text>
+                     :
+                     null
+                  }
+                  {
+                     props.noArrow
+                     ?
+                     null
+                     :
+                     <Ionicons 
+                        name='ios-arrow-forward' 
+                        style={{marginLeft: 5}}
+                        size={props.arrowSize?props.arrowSize:20} 
+                        color={styles.listItem.borderColor} />
+                  }
+               </View>
             </View>
          </View>
       </TouchableOpacity>
