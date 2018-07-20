@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, Animated } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
-import ViewContainer from './UI/View';
 
 import { Ionicons } from '@expo/vector-icons';
 import Label from './UI/Label';
+import Modal from './UI/Modal';
+
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 class Dashboard extends Component {
    static navigationOptions = {
@@ -17,11 +20,30 @@ class Dashboard extends Component {
       ),
    }
 
+   componentWillMount() {
+      this.props.fetchGigsData();
+   }
+
    render() {
+      // console.log(this.props.gigsData)
       let email = null;
       if (firebase.auth().currentUser) {
          email = firebase.auth().currentUser.email;
       }
+   
+      // render loading modal
+      if(!this.props.gigsData) {
+         return <Modal
+                  title = "Loading your gigs"
+                  spinnerSize = "small"
+                  bannerBackgroundColor = "white" / >
+      }
+
+      const gigsData = this.props.gigsData;
+
+      {/* check the charge status to conditionally render icon */}
+      let status = gigsData.gigStatus ? gigsData.gigStatus.toUpperCase() : '';
+
       return(
          <View style={{ flex: 1 }}>
             {/* <Header 
@@ -30,26 +52,55 @@ class Dashboard extends Component {
                   this.props.navigation.navigate('Account');
                }} />    */}
             <ScrollView style={{ flex: 1, paddingTop: 10 }}>         
-                  <Label 
-                     title='Need your confirmation'
-                     icon='ios-alert-outline'
-                     iconColor='red'
-                     style={styles.label} />
-                  <View style={styles.textContainer}>
-                     <Text style={styles.text}>All set! There is currently no gigs that need your confirmation</Text>
+               <Label 
+                  title='Need your confirmation'
+                  icon='ios-alert-outline'
+                  iconColor='red'
+                  style={styles.label} />
+               <View style={styles.textContainer}>
+                  <Text style={styles.text}>All set! There is currently no gigs that need your confirmation</Text>
+               </View>
+
+               <Label 
+                  title='Upcoming gigs'
+                  icon='ios-film-outline'
+                  iconColor='orange'
+                  style={styles.label} />
+               <TouchableOpacity>
+                  <View style={[styles.textContainer, styles.upcomingGigsContainer]}>
+                     <View style={styles.info}>
+                        <Text style={styles.time}>{gigsData.gigTime}</Text>
+                        <View style={styles.listItem}>
+                           <Ionicons name='ios-calendar-outline' size={25} color='orange' />
+                           <Text style={styles.infoText}>{gigsData.gigDate}</Text>
+                        </View>
+
+                        <View style={styles.listItem}>
+                           <Ionicons name='ios-navigate-outline' size={25} color='blue' />
+                           <Text style={styles.infoText}>{gigsData.gigAddress}</Text>
+                        </View>
+
+                        <View style={styles.listItem}>
+                           {/* conditionally render charged icon */}
+                           {
+                              status === 'CHARGED'
+                              ?
+                              <Ionicons name='ios-checkmark-circle-outline' size={25} color='green' />
+                              :
+                              <Ionicons name='ios-warning-outline' size={25} color='red' />
+                           }
+                           <Text style={styles.infoText}>{gigsData.gigStatus}</Text>
+                        </View>
+                     </View>
+                     <Ionicons name='ios-arrow-forward' size={30} color='#e0e2e5' />
                   </View>
+               </TouchableOpacity>
 
-                  <Label 
-                     title='Upcoming gigs'
-                     icon='ios-bonfire-outline'
-                     iconColor='orange'
-                     style={styles.label} />
-
-                  <Label 
-                     title='Past gigs'
-                     icon='ios-folder-open-outline'
-                     color='lightgreen'
-                     style={styles.label} />
+               <Label 
+                  title='Past gigs'
+                  icon='ios-bookmarks-outline'
+                  color='lightgreen'
+                  style={styles.label} />
             </ScrollView>
             
          </View>
@@ -59,17 +110,36 @@ class Dashboard extends Component {
 
 const styles = {
    label: {
-      paddingLeft: '2.5%',
       marginTop: 10, marginBottom: 10,
    },    
    textContainer: {
       backgroundColor: 'white',
       paddingTop: 10, paddingBottom: 10, paddingLeft: '2.5%'
    },
+   upcomingGigsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between', alignItems: 'center',
+      flex: 1,
+      paddingRight: 10,
+   },
+   listItem: {
+      flexDirection: 'row', justifyContent: 'flex-start',
+      alignItems: 'center',
+      marginTop: 10,
+   },
+   infoText: {
+      fontSize: 18,
+      marginLeft: 10
+   }, 
    text: {
       fontSize: 18,
-   }
+   },
+   time: { fontSize: 30 }
+}
+
+const mapStateToProps = ({ gigsData }) => {
+   return { gigsData };
 }
 
 
-export default Dashboard;
+export default connect(mapStateToProps, actions)(Dashboard);
