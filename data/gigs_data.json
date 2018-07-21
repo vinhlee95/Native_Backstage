@@ -13,34 +13,56 @@
    "gigTimestamp": "2018-03-30T17:38:09+03:00",
    "id": "-L8XkTNidSZ29_UKNfTR",
    "latLng": "undefined,24.96110",
-   "performerId": "-KbAjbzw5SdAP5Ylvfvu",
    "product": {
       "audienceSize": "10",
-      "created": 1520249555306,
-      "createdBy": "Janne Matilainen (1pzSSnpSl5YiXwqP7oB4fYnp01B3)",
-      "description": "Kuvaus\n",
+      "audio": true,
+      "carToDoor": true,
+      "created": 1487621960079,
+      "description": "Lattia-akrobatiaa, parkouria ja musiikkia kekseliäästi yhdistelevä koko perheelle sopiva sirkusnumero.",
       "duration": "15",
-      "id": "-L6pvitJCbwxRHcJtQ9e",
-      "performerData": {
-         "icon": "https://firebasestorage.googleapis.com/v0/b/gigle-app.appspot.com/o/performers%2F-KbAjbzw5SdAP5Ylvfvu%2FprofilePicture_thumb.jpg?alt=media&token=1a6b1b7a-61dc-472b-80e6-3f61a7159e0e",
-         "name": "Testiesiintyjä 2"
+      "electricity": true,
+      "media": {
+         "youtube_nnuaMsWBkNE": {
+            "id": "youtube_nnuaMsWBkNE",
+            "productId": "-KdRcKkrEFKZNfLKjdbD",
+            "service": "youtube",
+            "serviceId": "nnuaMsWBkNE"
+         }
       },
-      "performerId": "-KbAjbzw5SdAP5Ylvfvu",
+      "performerData": {
+         "icon": "https://firebasestorage.googleapis.com/v0/b/gigle-app.appspot.com/o/performers%2F-KdRcKf2I6DpEHDMOtB9%2FprofilePicture_thumb.jpg?alt=media&token=1a5b04a2-bce2-418d-a4f6-da567f690147",
+         "id": "-KdRcKf2I6DpEHDMOtB9",
+         "name": "Nuutti Vallin"
+      },
+      "performerId": "-KdRcKf2I6DpEHDMOtB9",
       "performers": "1",
-      "price": "1",
-      "productImage": "https://firebasestorage.googleapis.com/v0/b/gigle-app.appspot.com/o/products%2F-L6pvitJCbwxRHcJtQ9e%2FprofilePicture.jpg?alt=media&token=2d109260-b62f-4e9a-9cfd-6e334ef7e1b0",
+      "price": "600",
+      "productImage": "https://firebasestorage.googleapis.com/v0/b/gigle-app.appspot.com/o/products%2F-KdRcKkrEFKZNfLKjdbD%2FprofilePicture.jpg?alt=media&token=17986491-d758-446a-8bf2-dbd1f0f2e918",
       "sets": "1",
-      "setupTime": "0",
-      "stageHeight": "2",
-      "stageX": "1",
-      "stageY": "1",
+      "setupTime": "15",
+      "stageHeight": "4",
+      "stageX": "5",
+      "stageY": "5",
       "state": "public",
-      "tags": ["tag_2000", "tag_3"],
-      "takedownTime": "0",
-      "title": "otsikko!",
-      "updated": 1522074930394,
-      "updatedBy": "Janne Matilainen (1pzSSnpSl5YiXwqP7oB4fYnp01B3)",
-      "users": ["1pzSSnpSl5YiXwqP7oB4fYnp01B3"]
+      "tags": [
+         "tag_1000",
+         "tag_5000",
+         "tag_5",
+         "tag_100002",
+         "tag_100004",
+         "tag_5002",
+         "tag_5005",
+         "tag_500",
+         "tag_501",
+         "tag_502"
+      ],
+      "takedownTime": "15",
+      "title": "Sirkusnumero - Acro Concertino",
+      "updated": 1516859264570,
+      "updatedBy": "  (Lvi2L1p0tITTPOXZJMZHMh3aG873)",
+      "users": {
+         "ZuaqGwjNc6M47HchSJYVa2lunf03": true,
+      }
    },
    "stripeTransactionId": "ch_1C9wVxE4JpoNlH5ABVVSfIyE"
 }
