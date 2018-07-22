@@ -32,6 +32,9 @@ const ListItem = (props) => {
       title: {
          fontSize: 18,
       },
+      rightTitle: {
+         fontSize: 16,
+      },
       leftIcon: {
          marginRight: 10,
       },
@@ -58,7 +61,7 @@ const ListItem = (props) => {
                   {
                      props.rightTitle
                      ?
-                     <Text style={styles.title}>{props.rightTitle}</Text>
+                     <Text style={styles.rightTitle}>{props.rightTitle}</Text>
                      :
                      null
                   }

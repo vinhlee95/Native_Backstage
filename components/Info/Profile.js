@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { ScrollView, Button, View, Text, KeyboardAvoidingView, Animated, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { ScrollView, View, Text, KeyboardAvoidingView, Animated, TouchableWithoutFeedback, TouchableOpacity, Keyboard, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import ViewContainer from '../UI/View';
 import Input from '../UI/Input';
+import Modal from '../UI/Modal';
+import ListItem from '../UI/ListItem'
+
 import LocationSearch from '../Location/LocationSearch';
 import Map from '../Location/Map';
 
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import Modal from '../UI/Modal';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 import alertMessage from '../UI/alertMessage';
@@ -120,89 +122,76 @@ class Profile extends Component {
    }
 
    render() {
-      // console.log(this.state.location)
-      // console.log(this.state.location.description)
-      // show map full screen when user tap the map 
+      console.log(this.state.location)
+      const { lat, lng, description, houseNumber, postalCode } = this.state.location;
+      // change latitudeDelta and longitudeDelta 
+      // for small map picture
+      const mapThumb = {
+         lat, lng,
+         latDelta: 0.001,
+         lngDelta: 0.002
+      }
+
+      // get full location description for rendering in location list item
+      let des = description ? description : '';
+      console.log(description)
+      let des_in_array = des.split(',')
+      // add house number & postal code to the existing description
+      des_in_array.splice(1, 0, houseNumber);
+      des_in_array.splice(2, 0, postalCode);
+      let fullDescription = des_in_array.join(',')
+
       if(this.state.isLoading) {
          return (
             <Modal title="Loading your profile" />
          )
       }
       return(
-         <View style={{flex:1}}>
-         <Animated.View style={[styles.container, { paddingBottom: this.keyboardHeight } ]}>
-            {
-               this.state.isSaving
-               ?
-               <Modal title="Saving your information" />
-               :
-               <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
-                  <Label title='Basic information' icon='ios-information-circle-outline' style={{paddingTop: 20}} />
-                  <Input 
-                     placeholder="First Name"
-                     value={this.state.firstName}
-                     onChangeText={(firstName) => this.setState({ firstName })}
-                     returnKeyType='next'
-                     reference={input => this.inputs['firstName'] = input}
-                     onSubmitEditing={() => this.handleFocusNextField('lastName')} />
-                  <Input 
-                     placeholder="Last Name"
-                     value={this.state.lastName}                  
-                     onChangeText={(lastName) => this.setState({ lastName })}
-                     returnKeyType='next'
-                     reference={input => this.inputs['lastName'] = input}
-                     />
-                  <Label title='Home' icon='ios-home-outline' />
+         <ScrollView style={{flex:1}}>
+            <ListItem
+               title='First Name'
+               rightTitle={this.state.firstName}
+               noArrow
+               titleTextStyle={styles.title}
+            />
 
-                  <View>
-                     <LocationSearch  
-                        placeholder="Adress" 
-                        defaultValue={this.state.location.description}
-                        handleSelectLocation={this.handleSelectLocation}
-                        submitLocationDescription={this.submitLocationDescription} />
-                     <Input 
-                        placeholder="House number" 
-                        value={this.state.location.houseNumber}
-                        onChangeText={(houseNumber) => this.setState({ location: {...this.state.location, houseNumber} })}
-                        returnKeyType='next'
-                        reference={input => this.inputs['houseNumber'] = input}
-                        onSubmitEditing={() => this.handleFocusNextField('postalCode')}
-                        />
-                  </View>
-                  <View>
-                     <Input 
-                        placeholder="Postal Code"
-                        value={this.state.location.postalCode} 
-                        keyboardType="numeric"
-                        onChangeText={(postalCode) => this.setState({ location: {...this.state.location, postalCode} })} 
-                        returnKeyType='done'
-                        reference={input => this.inputs['postalCode'] = input}
-                        />
-                  </View>
-                  {
-                     this.state.location.description
-                     ?
-                     <View style={{flex:1}}>
-                        <Label title='Map' icon='ios-map-outline' />
-                        <View style={styles.mapView}>
-                           <View style={styles.noteContainer}>
-                              <Text style={styles.note}>Tap on the map to view full-screen</Text>  
-                           </View>        
-                           <Map 
-                              location={this.state.location} 
-                              scrollEnabled={false}  
-                              onPress={() => this.props.navigation.navigate('MapFullScreen', {
-                                 location: this.state.location,
-                              })}
-                              style={{ height: 300,zIndex: 1 }} />
+            <ListItem
+               title='Last Name'
+               rightTitle={this.state.lastName}
+               noArrow
+               titleTextStyle={styles.title}
+            />
+
+            <TouchableOpacity
+               onPress={() => this.props.navigation.navigate('MapFullScreen', {
+                  location: this.state.location
+               })}
+            >
+                  <View style={styles.content}>
+                     <View style={styles.leftCol}>
+                        <View style={styles.titleContainer}>
+                           <Text style={[styles.title, {marginBottom: 10}]}>Location</Text>
+                           <Text style={styles.text}>{fullDescription}</Text>
                         </View>
                      </View>
-                     : null
-                  }
-               </ScrollView>
-            }
-         </Animated.View>
-         </View>
+                     <View style={styles.rightCol}>
+                        <Map
+                           style={{ width: 100, height: 100, borderRadius: 5 }}
+                           location={mapThumb}
+                        />
+                        <Ionicons name='ios-arrow-forward' size={25}
+                           color='#e0e2e5'
+                           style={{marginLeft: 5}} />
+                     </View>
+                  </View>
+            </TouchableOpacity>
+            <ListItem 
+               title="Edit profile" 
+               titleTextStyle={styles.title}
+               borderTopWidth={1}
+               onPress={() => {}} 
+            />
+         </ScrollView>
       );
    }
 }
@@ -235,6 +224,30 @@ const styles = {
       backgroundColor: 'white',
       paddingTop: 5, paddingLeft: 5,
       opacity: 0.7
+   },
+
+   title: {
+      fontSize: 18,
+      fontWeight: '500',
+   },
+
+   content: {
+      flex: 1,
+      flexDirection: 'row',
+      paddingTop: 10, paddingBottom: 10, paddingRight: 5,
+      backgroundColor: 'white',
+   },
+   leftCol: {
+      flexDirection: 'row', flex: 2,
+   },
+   titleContainer: {
+      width: '80%', marginLeft: 10
+   },
+   text: { fontSize: 16 },
+   rightCol: {
+      flexDirection: 'row', flex: 1,
+      alignItems: 'center',
+
    }
 }
 
