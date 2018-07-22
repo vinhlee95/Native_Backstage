@@ -107,6 +107,9 @@ class Dashboard extends Component {
                   icon='ios-bookmarks-outline'
                   color='lightgreen'
                   style={styles.label} />
+               <View style={styles.textContainer}>
+                  <Text style={styles.text}>You have not had any previous gigs yet</Text>
+               </View>
             </ScrollView>
             
          </View>

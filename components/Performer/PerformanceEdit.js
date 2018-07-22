@@ -211,8 +211,9 @@ const styles = {
       alignItems: 'center',
       paddingTop: 10,
       paddingBottom: 10,
-      marginBottom: 15,
       backgroundColor:'white',
+      borderBottomWidth: 1,
+      borderBottomColor: '#e0e2e5'
    }
 }
 
