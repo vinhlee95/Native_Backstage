@@ -10,19 +10,19 @@ class LocationSearch extends Component {
     this.props.defaultValue ? defaultValue = this.props.defaultValue : defaultValue = '';
     return (
       <GooglePlacesAutocomplete
-        value="Helsinki, Finland"
-        placeholder={this.props.placeholder}
-        minLength={2} // minimum length of text to search
-        autoFocus={false}
-        returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
-        listViewDisplayed='auto'    // true/false/undefined
-        fetchDetails={true}
-        renderDescription={row => row.description} // custom description render
-        onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-          const { lat, lng } = details.geometry.location;
-          this.props.handleSelectLocation(lat, lng);
-          this.props.submitLocationDescription(data.description);
-        }}
+         value={this.props.value}
+         placeholder={this.props.placeholder}
+         minLength={2} // minimum length of text to search
+         autoFocus={false}
+         returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
+         listViewDisplayed='auto'    // true/false/undefined
+         fetchDetails={true}
+         renderDescription={row => row.description} // custom description render
+         onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
+            const { lat, lng } = details.geometry.location;
+            this.props.handleSelectLocation(lat, lng);
+            this.props.submitLocationDescription(data.description);
+         }}
         
         getDefaultValue={() => defaultValue}
         
@@ -33,25 +33,26 @@ class LocationSearch extends Component {
         }}
         
         styles={{
-          textInputContainer: {
+          textInputContainer: [this.props.containerStyle, {
               backgroundColor: 'transparent',
               borderBottomColor: '#cacdd1',
               borderTopWidth: 0,
-              borderBottomWidth: 1,
+              borderBottomWidth: this.props.noBorder ? 0 :1,
               marginLeft: 'auto',
               marginRight: 'auto',
               marginBottom: 10,
               paddingLeft: 10,
-          },
-          textInput: {
+          }],
+          textInput: [this.props.inputStyle, {
               marginLeft: 0,
               marginRight: 0,
               height: 38,
               color: 'black',
-              fontSize: 18,
+              fontSize: 16,
               backgroundColor: 'transparent',
               paddingLeft: 0,
-          },
+              textAlign: this.props.textAlign ? this.props.textAlign : 'none'
+          }],
           predefinedPlacesDescription: {
               color: '#1faadb'
           },

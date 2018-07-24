@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, KeyboardAvoidingView, Animated, TouchableWithoutFeedback, TouchableOpacity, Keyboard, Alert } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity, Keyboard, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import ViewContainer from '../UI/View';
-import Input from '../UI/Input';
 import Modal from '../UI/Modal';
 import ListItem from '../UI/ListItem'
 
-import LocationSearch from '../Location/LocationSearch';
 import Map from '../Location/Map';
 
 import { connect } from 'react-redux';
@@ -45,51 +42,23 @@ class Profile extends Component {
          isSaving: false,
          isMapFullScreen: false,
       };
-      this.keyboardHeight = new Animated.Value(0);
-      this.inputs = {};
+      
    }
 
-   // add event listener for keyboard to show up
-   componentWillMount() {
-      this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
-      this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
-      // allowing header right button 
-      // to get access to function inside class
-      this.props.navigation.setParams({
-         saveInfo: this.handleSaveInfo
-      });
-
-   }
-
-   componentWillUnmount() {
-      this.keyboardWillShowSub.remove();
-      this.keyboardWillHideSub.remove();
-   }
-   
-   // componentDidMount() {
-   //    this.props.navigation.setParams({ saveInfo: this.handleSaveInfo });
-   // }
-
-   // callbacks
-   keyboardWillShow = (event) => {
-      // this.setState({ flexNumber: 0.7})
-      Animated.timing(this.keyboardHeight, {
-         duration: event.duration,
-         toValue: event.endCoordinates.height,
-      }).start();
-   };
-
-   keyboardWillHide = (event) => {
-      // this.setState({ flexNumber: 0.4})      
-      Animated.timing(this.keyboardHeight, {
-         duration: event.duration,
-         toValue: 10,
-      }).start();
-   };
 
    componentDidMount() {
       this.loadData();
+      this.props.navigation.setParams({
+         saveInfo: this.handleSaveInfo
+      });
    }
+
+   returnData = (data) => {
+      const { firstName, lastName, location } = data;
+      this.setState({
+         firstName, lastName, location
+      })
+   } 
    
    handleSaveInfo = () => {
       this.setState({ isSaving: true })
@@ -103,27 +72,22 @@ class Profile extends Component {
 
    loadData = () => {
       this.props.loadData(() => {
-         console.log(this.props)
+         // console.log(this.props)
          const { firstName, lastName, location } = this.props;
-         this.setState({ ...this.state, firstName, lastName, location, isLoading: false })
+         const des = location.description;
+         const des_in_array = des.split(',');
+         const street = des_in_array.slice(0, 1).join(' ');
+         const city = des_in_array.slice(1, 2).join(' ');
+         const country = des_in_array.slice(2, 3).join(' ');
+         this.setState({ ...this.state, firstName, lastName, location: {
+            ...location, street, city, country
+         }, isLoading: false })
       });
    }
 
-   handleSelectLocation = (lat, lng) => {
-      this.setState({ location: {...this.state.location, lat, lng } });
-   }
-
-   submitLocationDescription = (description) => {
-      this.setState({ location: {...this.state.location, description }})
-   }
-
-   handleFocusNextField = (fieldID) => {
-      this.inputs[fieldID].focus();
-   }
-
    render() {
-      console.log(this.state.location)
-      const { lat, lng, description, houseNumber, postalCode } = this.state.location;
+      const { firstName, lastName, location } = this.state;
+      const { lat, lng, description, houseNumber, postalCode } = location;
       // change latitudeDelta and longitudeDelta 
       // for small map picture
       const mapThumb = {
@@ -134,7 +98,6 @@ class Profile extends Component {
 
       // get full location description for rendering in location list item
       let des = description ? description : '';
-      console.log(description)
       let des_in_array = des.split(',')
       // add house number & postal code to the existing description
       des_in_array.splice(1, 0, houseNumber);
@@ -189,7 +152,10 @@ class Profile extends Component {
                title="Edit profile" 
                titleTextStyle={styles.title}
                borderTopWidth={1}
-               onPress={() => {}} 
+               onPress={() => this.props.navigation.navigate('ProfileEdit', {
+                  profileData: { firstName, lastName, location },
+                  returnData: this.returnData
+               }) } 
             />
          </ScrollView>
       );

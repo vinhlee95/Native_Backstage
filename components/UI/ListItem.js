@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 
 const ListItem = (props) => {
+   // right content only acquires a bigger width when text input exists
+   let rightContentFlex = props.textInputValue ? 2 : 0.5;
    const styles = {
       container: {
          backgroundColor: 'white',
@@ -21,9 +23,13 @@ const ListItem = (props) => {
          justifyContent: 'space-between',
          flex: 1,
       },
+      leftContent: {
+         flex: 1,
+      },
       rightContent: {
          flexDirection: 'row',
          justifyContent: 'flex-end',
+         flex: rightContentFlex,
          marginRight: 10,
       },
       defaultImageStyle: {
@@ -56,8 +62,26 @@ const ListItem = (props) => {
                null
             }
             <View style={[styles.listItem, props.titleContainerStyle]}>
-               <Text style={[styles.title, props.titleTextStyle]}>{props.title}</Text>
+               <View style={styles.leftContent}>
+                  <Text style={[styles.title, props.titleTextStyle]}>{props.title}</Text>
+               </View>
                <View style={styles.rightContent}>
+                  {
+                     props.textInputValue
+                     ?
+                     <TextInput 
+                        placeholder={props.placeholder}
+                        value={props.textInputValue}
+                        style={{width: '100%',fontSize: 16, textAlign: 'right'}}
+                        onChangeText={props.onChangeText}
+                        returnKeyType={props.returnKeyType}
+                        onSubmitEditing={props.onSubmitEditing}
+                        ref={props.reference}
+                        keyboardType={props.keyboardType}
+                     />
+                     :
+                     null
+                  }
                   {
                      props.rightTitle
                      ?

@@ -30,6 +30,7 @@ import Welcome from './components/Welcome/Welcome';
 import { HeaderRightIcon } from './components/UI/Header/index.js';
 import MapFullScreen from './components/Info/MapFullScreen';
 import GigDetails from './components/GigDetails';
+import ProfileEdit from './components/Info/ProfileEdit';
 
 const getToken = async () => {
    let { status } = await Expo.Permissions.askAsync(
@@ -129,6 +130,7 @@ export default class App extends React.Component {
          setting: createStackNavigator({
             Account: Account,
             Profile: Profile,
+            ProfileEdit: ProfileEdit,
             GigDetails: GigDetails,
             MapFullScreen: MapFullScreen,
             PerformerInfo: PerformerInfo,

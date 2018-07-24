@@ -59,7 +59,7 @@ class Account extends Component {
             <Text style={styles.label}>ACCOUNT</Text>
             <View style={{ marginTop: 10, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor:'#e0e2e5' }}>
                 <ListItem 
-                    title='Edit your profile'
+                    title='View your profile'
                     icon='ios-create-outline'
                     onPress={() => this.props.navigation.navigate('Profile')}
                     style={styles.listItem} />
