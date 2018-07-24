@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { View, Text, ScrollView, Image, Keyboard, Animated, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import Input from '../UI/Input';
-import ViewContainer from '../UI/View';
 import alertMessage from '../UI/alertMessage';
 import Label from '../UI/Label';
+import ListItem from '../UI/ListItem';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 
-const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 class PerformerInfo extends Component {
    static navigationOptions = ({ navigation }) => {
@@ -78,48 +77,59 @@ class PerformerInfo extends Component {
       
       return (
          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-         <View style={{flex:1, marginTop: 20}}>
+         <View style={{flex:1}}>
             <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
                   {/* <View style={styles.imageContainer}>
                      <Image source={{uri:imageURI}} style={styles.image} />
                      <Text style={styles.performerName}>{this.state.name}</Text>
                   </View> */}
                   <ScrollView>
-                     <Label title='Name' icon='ios-person-outline' iconColor='#3ec1d8' />
-                     <Input
-                        value={this.state.name}
+                     <ListItem
+                        title='Name'
+                        placeholder='Name'
+                        icon='ios-person-outline'
+                        textInputValue={this.state.name}
+                        returnKeyType='next'
                         onChangeText={name => this.setState({ name })} 
-                        returnKeyType='next'
                         onSubmitEditing={() => this.handleFocusNextField('description')}
-                        />
+                        noArrow
+                     />
 
-                     <Label title='About me' icon='ios-information-circle-outline' iconColor='#3ec1d8' />
-                     <Input
-                        value={this.state.description}
-                        onChangeText={description => this.setState({ description })}
-                        // multiline
-                        numberOfLines={2} 
+                     <ListItem
+                        title='About me'
+                        placeholder='About me'
+                        icon='ios-information-circle-outline'
+                        textInputValue={this.state.description}
                         returnKeyType='next'
+                        onChangeText={description => this.setState({ description })} 
                         reference={input => this.inputs['description'] = input}
                         onSubmitEditing={() => this.handleFocusNextField('facebook')}
-                        />
-
-                     <Label title='Facebook' fontAwesomeIcon='facebook-square' iconColor='#1d71d3'/>
-                     <Input
-                        value={this.state.profile_facebook}
-                        onChangeText={profile_facebook => this.setState({ profile_facebook })} 
+                        noArrow
+                     />
+                     
+                     <ListItem
+                        title='Facebook'
+                        placeholder='Facebook'
+                        fontAwesomeIcon = 'facebook-square'
+                        textInputValue={this.state.profile_facebook}
                         returnKeyType='next'
-                        reference={input => this.inputs['facebook'] = input}
+                        onChangeText={profile_facebook => this.setState({ profile_facebook })} 
+                         reference={input => this.inputs['facebook'] = input}
                         onSubmitEditing={() => this.handleFocusNextField('instagram')}
-                        />
+                        noArrow
+                     />
 
-                     <Label title='Instagram' fontAwesomeIcon='instagram' iconColor='#d85936' />
-                     <Input
-                        value={this.state.profile_instagram}
-                        onChangeText={profile_instagram => this.setState({ profile_instagram })} 
+                     <ListItem
+                        title='Instagram'
+                        placeholder='Instagram'
+                        fontAwesomeIcon = 'instagram'
+                        textInputValue={this.state.profile_instagram}
                         returnKeyType='done'
+                        onChangeText={profile_instagram => this.setState({ profile_facebook })} 
                         reference={input => this.inputs['instagram'] = input}
-                        />
+                        noArrow
+                     />
+
                </ScrollView>
             </Animated.View>
             </View>

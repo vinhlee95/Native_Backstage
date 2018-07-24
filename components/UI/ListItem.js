@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, Switch, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const ListItem = (props) => {
    // right content only acquires a bigger width when text input exists
@@ -14,7 +14,10 @@ const ListItem = (props) => {
          paddingLeft: 10,
       },
       leftIconContainer: {
+         // set a fixed flex for icon
+         // so it only acquires 1:10 compared with the listItem container
          flex: props.leftIconFlex ? props.leftIconFlex : 1,
+         flexDirection: 'row', justifyContent: 'center', alignItems: 'center'
       },
       listItem: {
          borderBottomWidth: 1,
@@ -40,6 +43,7 @@ const ListItem = (props) => {
       },
       title: {
          fontSize: 18,
+         fontWeight: '500'
       },
       rightTitle: {
          fontSize: 16,
@@ -58,6 +62,15 @@ const ListItem = (props) => {
                   <Ionicons name={props.icon} size={props.leftIconSize?props.leftIconSize:22} style={styles.leftIcon} color={props.iconColor} />
                </View>
                : null
+            }
+            {
+               props.fontAwesomeIcon
+               ?
+               <View style={styles.leftIconContainer}>
+                  <Icon name={props.fontAwesomeIcon} size={22} style={styles.leftIcon} color={props.iconColor} />
+               </View>
+               : 
+               null
             }
             {
                props.image

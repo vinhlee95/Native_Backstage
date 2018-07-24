@@ -96,7 +96,6 @@ class PerformanceEdit extends Component {
                      returnKeyType='next'
                      onSubmitEditing={() => this.handleFocusNextField('performanceName')} 
                      noArrow
-                     titleTextStyle={styles.title}
                   />
 
                   <ListItem
@@ -109,7 +108,6 @@ class PerformanceEdit extends Component {
                      reference={input => this.inputs['performanceName'] = input}
                      onSubmitEditing={() => this.handleFocusNextField('description')} 
                      noArrow
-                     titleTextStyle={styles.title}
                   /> 
 
                   <ListItem
@@ -122,7 +120,6 @@ class PerformanceEdit extends Component {
                      reference={input => this.inputs['description'] = input}
                      onSubmitEditing={() => this.handleFocusNextField('audienceSize')} 
                      noArrow
-                     titleTextStyle={styles.title}
                   /> 
 
                   <ListItem
@@ -139,7 +136,6 @@ class PerformanceEdit extends Component {
                      reference={input => this.inputs['audienceSize'] = input}
                      keyboardType='numeric'
                      noArrow
-                     titleTextStyle={styles.title}
                   /> 
 
                   <ListItem
@@ -156,7 +152,6 @@ class PerformanceEdit extends Component {
                      })}
                      keyboardType='numeric'
                      noArrow
-                     titleTextStyle={styles.title}
                   /> 
                   
                   <ListItem
@@ -172,7 +167,6 @@ class PerformanceEdit extends Component {
                      })}
                      keyboardType='numeric'
                      noArrow
-                     titleTextStyle={styles.title}
                   /> 
 
                   <ListItem
@@ -189,7 +183,6 @@ class PerformanceEdit extends Component {
                         })
                      } 
                      noArrow
-                     titleTextStyle={styles.title}
                   />
 
                   <ListItem
@@ -206,7 +199,6 @@ class PerformanceEdit extends Component {
                         })
                      } 
                      noArrow
-                     titleTextStyle={styles.title}
                   />
 
                   <ListItem
@@ -223,7 +215,6 @@ class PerformanceEdit extends Component {
                         })
                      } 
                      noArrow
-                     titleTextStyle={styles.title}
                   />
 
                </ScrollView>
@@ -234,9 +225,6 @@ class PerformanceEdit extends Component {
 }
 
 const styles = {
-   title: {
-      fontSize: 18, fontWeight: '500'
-   },
    boolRow: {
       flexDirection: 'row',
       justifyContent: 'space-between',

@@ -5,36 +5,47 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default Label = (props) => {
    const styles = {
-      label: {
+      labelContainer: {
          marginBottom: 5, marginLeft: 10,
          flexDirection: 'row', alignItems: 'center'
+      },
+      leftIconContainer: {
+         flex: 1, justifyContent: 'center',
+      },
+      titleContainer: {
+         flex: 10, justifyContent: 'center',
       },
       title: {
          fontSize: 20,
          fontWeight: '600',
-         paddingBottom: 5,
       },
       icon: {
          marginRight: 10,
       }
    }
    return(
-      <View style={[styles.label, props.style]}>
+      <View style={[styles.labelContainer, props.style]}>
          {
             props.icon
             ?
-            <Ionicons name={props.icon} size={22} style={styles.icon} color={props.iconColor} />
+            <View style={styles.leftIconContainer}>
+               <Ionicons name={props.icon} size={22} style={styles.icon} color={props.iconColor} />
+            </View>
             : 
             null
          }
-          {
+         {
             props.fontAwesomeIcon
             ?
-            <Icon name={props.fontAwesomeIcon} size={22} style={styles.icon} color={props.iconColor} />
+            <View style={styles.leftIconContainer}>
+               <Icon name={props.fontAwesomeIcon} size={22} style={styles.icon} color={props.iconColor} />
+            </View>
             : 
             null
          }
-         <Text style={styles.title}>{props.title}</Text>
+         <View style={styles.titleContainer}>
+            <Text style={styles.title}>{props.title}</Text>
+         </View>
       </View>
    );
 }

@@ -15,6 +15,7 @@ import alertMessage from '../UI/alertMessage';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import Label from '../UI/Label';
+import ListItem from '../UI/ListItem';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -280,18 +281,16 @@ class PerformanceInfo extends Component {
                   </View>
 
                   <View style={{ marginTop: 10, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor:'#e0e2e5' }}>
-                     <Button 
+                     <ListItem 
                         icon='ios-create-outline'
                         title="Edit performance" 
                         iconColor='green'
-                        textStyle={styles.buttonStyle}
                         onPress={this.handleEditInfo} 
                      />
-                     <Button
+                     <ListItem
                         icon='ios-trash-outline'
                         style={{marginBottom: 10}}
                         titleContainerStyle={{borderBottomWidth:0}}
-                        textStyle={styles.buttonStyle}
                         iconColor='red'
                         title='Delete performance'
                         onPress={this.handleDeletePerformance}
@@ -366,10 +365,6 @@ const styles = {
       marginBottom: 10,
       backgroundColor: 'white', paddingTop: 10, paddingBottom: 10,
    },
-   buttonStyle: {
-      fontSize: 20,
-      fontWeight: '600'
-   }
 }
 
 export default connect(null, actions)(PerformanceInfo);

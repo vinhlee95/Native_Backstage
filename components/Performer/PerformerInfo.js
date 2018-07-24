@@ -9,6 +9,7 @@ import Label from '../UI/Label';
 
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import ListItem from '../UI/ListItem';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
@@ -110,15 +111,19 @@ class PerformerInfo extends Component {
                }
 
                { /* buttons */ }
-               <View style={{ marginTop: 10, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor:'#e0e2e5' }}>
-                  <Button 
+               <View style={{ 
+                  marginTop: 10, marginBottom: 10,
+                  borderTopWidth: 0.5, borderBottomWidth: 0.5, 
+                  borderColor:'#e0e2e5',
+               }}>
+                  <ListItem 
                      icon='ios-create-outline'
                      title="Edit performer" 
                      iconColor='#378cef'
                      textStyle={styles.buttonStyle}
                      onPress={this.handleEditInfo} 
                   />
-                  <Button
+                  <ListItem
                      icon='ios-trash-outline'
                      titleContainerStyle={{borderBottomWidth:0}}
                      textStyle={styles.buttonStyle}
