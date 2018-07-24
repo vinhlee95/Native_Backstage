@@ -42,6 +42,7 @@ const PerformerItem = (props) => {
                title='Add performance...'
                icon='ios-film-outline'
                leftIconSize={49}
+               leftIconFlex={2}
                style={styles.addIcon}
                titleContainerStyle={{borderBottomWidth: 0}}
                iconColor='#b4bac4'

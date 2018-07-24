@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import { View, ScrollView, Switch, TouchableWithoutFeedback, Keyboard, Alert, Dimensions, Animated } from 'react-native';
-
-import Input from '../UI/Input';
-import ViewContainer from '../UI/View';
-
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import alertMessage from '../UI/alertMessage';
 import Label from '../UI/Label';
+import Input from '../UI/Input';
+import ListItem from '../UI/ListItem';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
@@ -89,38 +87,49 @@ class PerformanceEdit extends Component {
          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
                <ScrollView>
-                  <Label title='Performer name' icon='ios-person-outline' style={{marginTop: 20}} />
-                  <Input
-                     value={this.state.name}
+                  <ListItem
+                     icon='ios-person-outline'
+                     title='Performer'
+                     placeholder='Performer name'
+                     textInputValue={this.state.name}
                      onChangeText={name => this.setState({ name })}
-                     style={{marginBottom: 25}} 
                      returnKeyType='next'
-                     onSubmitEditing={() => this.handleFocusNextField('performanceName')} />
-                     />
+                     onSubmitEditing={() => this.handleFocusNextField('performanceName')} 
+                     noArrow
+                     titleTextStyle={styles.title}
+                  />
 
-                  <Label title='Performance name' icon='ios-create-outline' />
-                  <Input
-                     value={this.state.title}
+                  <ListItem
+                     icon='ios-create-outline'
+                     title='Performance'
+                     placeholder='Performance name'
+                     textInputValue={this.state.title}
                      onChangeText={title => this.setState({ title })}
-                     style={{marginBottom: 25}} 
                      returnKeyType='next'
                      reference={input => this.inputs['performanceName'] = input}
-                     onSubmitEditing={() => this.handleFocusNextField('description')} />
-                     />  
+                     onSubmitEditing={() => this.handleFocusNextField('description')} 
+                     noArrow
+                     titleTextStyle={styles.title}
+                  /> 
 
-                  <Label title='Description' icon='ios-document-outline' />
-                  <Input
-                     value={this.state.description}
+                  <ListItem
+                     icon='ios-document-outline'
+                     title='Description'
+                     placeholder='Description'
+                     textInputValue={this.state.description}
                      onChangeText={description => this.setState({ description })}
-                     style={{marginBottom: 25}} 
                      returnKeyType='next'
                      reference={input => this.inputs['description'] = input}
-                     onSubmitEditing={() => this.handleFocusNextField('audienceSize')} />
-                     />  
+                     onSubmitEditing={() => this.handleFocusNextField('audienceSize')} 
+                     noArrow
+                     titleTextStyle={styles.title}
+                  /> 
 
-                  <Label title='Audience size' icon='ios-people-outline' />
-                  <Input
-                     value={this.state.tagData.audienceSize}
+                  <ListItem
+                     icon='ios-people-outline'
+                     title='Audience'
+                     placeholder='Audience'
+                     textInputValue={this.state.tagData.audienceSize}
                      onChangeText={size => this.setState({
                         tagData: {
                            ...this.state.tagData,
@@ -128,75 +137,95 @@ class PerformanceEdit extends Component {
                         }
                      })}
                      reference={input => this.inputs['audienceSize'] = input}
-                     keyboardType="numeric" />
-                  
-                  <Label title='Duration (minutes)' icon='ios-clock-outline' />
-                  <Input 
-                     value={this.state.tagData.duration}
+                     keyboardType='numeric'
+                     noArrow
+                     titleTextStyle={styles.title}
+                  /> 
+
+                  <ListItem
+                     icon='ios-clock-outline'
+                     title='Duration (minutes)'
+                     placeholder='Duration'
+                     textInputValue={this.state.tagData.duration}
+                     leftContent={2}
                      onChangeText={duration => this.setState({
                         tagData: {
                            ...this.state.tagData,
                            duration
                         }
                      })}
-                     keyboardType="numeric" />
+                     keyboardType='numeric'
+                     noArrow
+                     titleTextStyle={styles.title}
+                  /> 
                   
-                  <Label title='Price (€)' icon='ios-pricetag-outline' />
-                  <Input 
-                     value={this.state.tagData.price}
+                  <ListItem
+                     icon='ios-pricetag-outline'
+                     title='Price (€)'
+                     placeholder='Price'
+                     textInputValue={this.state.tagData.price}
                      onChangeText={price => this.setState({
                         tagData: {
                            ...this.state.tagData,
                            price
                         }
                      })}
-                     keyboardType="numeric"
-                     returnKeyType='done' />
+                     keyboardType='numeric'
+                     noArrow
+                     titleTextStyle={styles.title}
+                  /> 
 
-                  <View style={styles.boolRow} >
-                     <Label title='Audio' icon='ios-musical-note-outline' />
-                     <Switch 
-                        value={this.state.tagData.audio}
-                        onValueChange={() => 
-                           this.setState({
-                              tagData: {
-                                 ...this.state.tagData,
-                                 audio: !this.state.tagData.audio
-                              }
-                           })
-                        } 
-                     />
-                  </View>
+                  <ListItem
+                     title='Audio'
+                     icon='ios-musical-note-outline'
+                     switch
+                     switchValue={this.state.tagData.audio}
+                     onSwitchValueChange={() => 
+                        this.setState({
+                           tagData: {
+                              ...this.state.tagData,
+                              audio: !this.state.tagData.audio
+                           }
+                        })
+                     } 
+                     noArrow
+                     titleTextStyle={styles.title}
+                  />
 
-                  <View style={styles.boolRow}>
-                     <Label title='Car to door' icon='ios-car-outline' />
-                     <Switch
-                        value={this.state.tagData.carToDoor}
-                        onValueChange={() => 
-                           this.setState({
-                              tagData: {
-                                 ...this.state.tagData,
-                                 carToDoor: !this.state.tagData.carToDoor
-                              }
-                           })
-                        } 
-                     />
-                  </View>
+                  <ListItem
+                     title='Car to door'
+                     icon='ios-car-outline'
+                     switch
+                     switchValue={this.state.tagData.carToDoor}
+                     onSwitchValueChange={() => 
+                        this.setState({
+                           tagData: {
+                              ...this.state.tagData,
+                              carToDoor: !this.state.tagData.carToDoor
+                           }
+                        })
+                     } 
+                     noArrow
+                     titleTextStyle={styles.title}
+                  />
 
-                  <View style={[styles.boolRow]}>
-                     <Label title='Electricity' icon='ios-flash-outline' />
-                     <Switch
-                        value={this.state.tagData.electricity}
-                        onValueChange={() => 
-                           this.setState({
-                              tagData: {
-                                 ...this.state.tagData,
-                                 electricity: !this.state.tagData.electricity
-                              }
-                           })
-                        }
-                     />
-                  </View>
+                  <ListItem
+                     title='Electricity'
+                     icon='ios-flash-outline'
+                     switch
+                     switchValue={this.state.tagData.electricity}
+                     onSwitchValueChange={() => 
+                        this.setState({
+                           tagData: {
+                              ...this.state.tagData,
+                              electricity: !this.state.tagData.electricity
+                           }
+                        })
+                     } 
+                     noArrow
+                     titleTextStyle={styles.title}
+                  />
+
                </ScrollView>
             </Animated.View>
          </TouchableWithoutFeedback>
@@ -205,6 +234,9 @@ class PerformanceEdit extends Component {
 }
 
 const styles = {
+   title: {
+      fontSize: 18, fontWeight: '500'
+   },
    boolRow: {
       flexDirection: 'row',
       justifyContent: 'space-between',

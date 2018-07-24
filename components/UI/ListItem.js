@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, Switch, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -13,6 +13,9 @@ const ListItem = (props) => {
          alignItems: 'center',
          paddingLeft: 10,
       },
+      leftIconContainer: {
+         flex: props.leftIconFlex ? props.leftIconFlex : 1,
+      },
       listItem: {
          borderBottomWidth: 1,
          borderTopWidth: props.borderTopWidth?props.borderTopWidth:0,
@@ -21,10 +24,10 @@ const ListItem = (props) => {
          paddingBottom: 15,
          flexDirection: 'row',
          justifyContent: 'space-between',
-         flex: 1,
+         flex: 10,
       },
       leftContent: {
-         flex: 1,
+         flex: props.leftContent ? props.leftContent : 1,
       },
       rightContent: {
          flexDirection: 'row',
@@ -51,7 +54,9 @@ const ListItem = (props) => {
             {
                props.icon
                ?
-               <Ionicons name={props.icon} size={props.leftIconSize?props.leftIconSize:22} style={styles.leftIcon} color={props.iconColor} />
+               <View style={styles.leftIconContainer}>
+                  <Ionicons name={props.icon} size={props.leftIconSize?props.leftIconSize:22} style={styles.leftIcon} color={props.iconColor} />
+               </View>
                : null
             }
             {
@@ -99,6 +104,16 @@ const ListItem = (props) => {
                         style={{marginLeft: 5}}
                         size={props.arrowSize?props.arrowSize:20} 
                         color={styles.listItem.borderColor} />
+                  }
+                  {
+                     props.switch
+                     ?
+                     <Switch
+                        value={props.switchValue}
+                        onValueChange={props.onSwitchValueChange}
+                     />
+                     :
+                     null
                   }
                </View>
             </View>

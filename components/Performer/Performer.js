@@ -94,6 +94,7 @@ class Performer extends Component {
                      title='Add performer...'
                      icon='ios-person-add-outline'
                      leftIconSize={60}
+                     leftIconFlex={2}
                      titleContainerStyle={{borderBottomWidth: 0}}
                      iconColor='#b4bac4'
                      titleTextStyle={{color: '#b4bac4'}}
