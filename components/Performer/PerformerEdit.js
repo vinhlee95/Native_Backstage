@@ -125,7 +125,7 @@ class PerformerInfo extends Component {
                         fontAwesomeIcon = 'instagram'
                         textInputValue={this.state.profile_instagram}
                         returnKeyType='done'
-                        onChangeText={profile_instagram => this.setState({ profile_facebook })} 
+                        onChangeText={profile_instagram => this.setState({ profile_instagram })} 
                         reference={input => this.inputs['instagram'] = input}
                         noArrow
                      />

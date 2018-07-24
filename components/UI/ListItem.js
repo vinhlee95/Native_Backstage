@@ -84,9 +84,9 @@ const ListItem = (props) => {
                <View style={styles.leftContent}>
                   <Text style={[styles.title, props.titleTextStyle]}>{props.title}</Text>
                </View>
-               <View style={styles.rightContent}>
+               <View style={[styles.rightContent, props.rightContentStyle]}>
                   {
-                     props.textInputValue
+                     props.textInputValue || props.textInputValue === ''
                      ?
                      <TextInput 
                         placeholder={props.placeholder}
@@ -97,6 +97,7 @@ const ListItem = (props) => {
                         onSubmitEditing={props.onSubmitEditing}
                         ref={props.reference}
                         keyboardType={props.keyboardType}
+                        clearButtonMode="while-editing"
                      />
                      :
                      null

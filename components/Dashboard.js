@@ -123,7 +123,8 @@ const styles = {
    },    
    textContainer: {
       backgroundColor: 'white',
-      paddingTop: 10, paddingBottom: 10, paddingLeft: '2.5%'
+      paddingTop: 10, paddingBottom: 10, paddingLeft: '2.5%',
+      marginBottom: 20
    },
    upcomingGigsContainer: {
       flexDirection: 'row',

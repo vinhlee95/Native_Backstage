@@ -47,12 +47,14 @@ class GigDetails extends Component {
                title='Date'
                rightTitle={this.state.gigDate}
                noArrow
+               rightContentStyle={styles.rightContentStyle}
             />
             <ListItem
                icon='ios-clock-outline'
                title='Time'
                rightTitle={this.state.gigTime}
                noArrow
+               rightContentStyle={styles.rightContentStyle}               
             />
 
             <TouchableOpacity
@@ -112,12 +114,14 @@ class GigDetails extends Component {
                icon='ios-person-outline'
                title='Customer Name'
                rightTitle={this.state.customerName}
+               rightContentStyle={styles.rightContentStyle}
                noArrow
             />
             <ListItem
                icon='ios-mail-outline'
                title='Customer Email'
                rightTitle={this.state.customerEmail}
+               rightContentStyle={styles.rightContentStyle}
             />
          </ScrollView>
       )
@@ -145,6 +149,7 @@ const styles = {
    },
    title: {
       fontSize: 18,
+      fontWeight: '500',
       marginBottom: 10,
    },
    text: { fontSize: 16 },
@@ -152,6 +157,9 @@ const styles = {
       flexDirection: 'row', flex: 1,
       alignItems: 'center',
 
+   },
+   rightContentStyle: {
+      flex: 1,
    }
 
 }
