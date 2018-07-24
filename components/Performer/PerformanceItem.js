@@ -19,6 +19,7 @@ const PerformanceItem = (props) => {
          onPress={() => props.handleViewPerformanceInfo()}
          style={styles.listItemContainer}
          titleContainerStyle={styles.titleContainerStyle}
+         titleTextStyle={{fontWeight: '400'}}
       />
    );
 }

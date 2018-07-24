@@ -31,11 +31,12 @@ const ListItem = (props) => {
       },
       leftContent: {
          flex: props.leftContent ? props.leftContent : 1,
+         justifyContent: 'center'
       },
       rightContent: {
+         flex: rightContentFlex,
          flexDirection: 'row',
          justifyContent: 'flex-end',
-         flex: rightContentFlex,
          marginRight: 10,
       },
       defaultImageStyle: {
