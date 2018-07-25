@@ -18,6 +18,7 @@ import Label from '../UI/Label';
 import ListItem from '../UI/ListItem';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
+const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 class PerformanceInfo extends Component {
    static navigationOptions = ({ navigation }) => {
@@ -268,19 +269,22 @@ class PerformanceInfo extends Component {
                   {/* {videoList}
                </Swiper> */}
                <View>
-                  <Label title = 'About this performance'
-                  icon = 'ios-information-circle-outline' iconColor='orange' />
                   <View style={styles.textContainer}>
+                     <Label title = 'About this performance'
+                     icon = 'ios-information-circle-outline' iconColor='orange' />
                      <Text style={styles.description}>{this.state.description}</Text>
                   </View>
 
                   {/* Tag List */}
-                  <Label title='Tags' icon='ios-pricetags-outline' iconColor='blue' />
-                  <View style={styles.tagList}>
-                     {this.renderTagList()}
+                  <View style={styles.textContainer}>
+                     <Label title='Tags' icon='ios-pricetags-outline' iconColor='blue' />
+                     <View style={styles.tagList}>
+                     
+                        {this.renderTagList()}
+                     </View>
                   </View>
 
-                  <View style={{ marginTop: 10, borderTopWidth: 0.5, borderBottomWidth: 0.5, borderColor:'#e0e2e5' }}>
+                  <View style={{borderBottomWidth: 0.5, borderColor:'#e0e2e5' }}>
                      <ListItem 
                         icon='ios-create-outline'
                         title="Edit performance" 
@@ -305,9 +309,6 @@ class PerformanceInfo extends Component {
 }
 
 const styles = {
-   imageContainer: {
-      marginBottom: 20,
-   },
    image: {
       width: '100%',
       height: 320,
@@ -350,19 +351,18 @@ const styles = {
    textContainer: {
       backgroundColor: 'white',
       paddingTop: 10, paddingBottom: 10, paddingLeft: '2.5%',
-      marginBottom: 20,
+      borderBottomWidth: 1,
+      borderColor: '#e0e2e5',
    },
    description: {
       fontSize: 16,
+      marginLeft: DEVICE_WIDTH/11,
    },
    tagList: {
       flexDirection: 'row',
-      justifyContent: 'center',
       flexWrap: 'wrap',
       width: DEVICE_WIDTH,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      marginBottom: 10,
+      marginLeft: DEVICE_WIDTH/11,
       backgroundColor: 'white', paddingTop: 10, paddingBottom: 10,
    },
 }

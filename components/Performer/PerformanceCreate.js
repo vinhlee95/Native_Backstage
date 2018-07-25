@@ -5,11 +5,9 @@ import { Ionicons } from '@expo/vector-icons';
 
 import ViewContainer from '../UI/View';
 import Spinner from '../UI/Spinner';
-import Input from '../UI/Input';
-import ListItem from '../UI/ListItem';
 import Tag from '../UI/Tag';
 import Label from '../UI/Label';
-import Button from '../UI/Button';
+import ListItem from '../UI/ListItem';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 import alertMessage from '../UI/alertMessage';
@@ -207,7 +205,6 @@ class PerformanceCreate extends Component {
       <View style={{ flex: 1}}>
          <Animated.View style={{ flex: 1, marginBottom: this.keyboardHeight }}>   
             <ScrollView>
-               <ViewContainer>
                   {/* Profile upload */}
                   {
                      this.state.image
@@ -244,26 +241,27 @@ class PerformanceCreate extends Component {
                      </Picker>
                   </View>
 
-                  <Label title = 'Performance name'
-                        icon = 'ios-film-outline' iconColor='purple' />
-                  <Input
-                        value={this.state.title}
-                        onChangeText={title => this.setState({ title })} 
-                        returnKeyType="next"
-                        reference={input => this.inputs['performanceName'] = input}
-                        onSubmitEditing={() => this.handleFocusNextField('description')}   
-                        />
+                  <ListItem
+                     title='Performance'
+                     placeholder='Performance'
+                     icon='ios-film-outline'
+                     textInputValue={this.state.title}
+                     onChangeText={title => this.setState({ title })}
+                     onSubmitEditing={() => this.handleFocusNextField('description')} 
+                     returnKeyType='next'
+                     noArrow
+                  />
 
-                  <Label title = 'Description'
-                        icon = 'ios-information-circle-outline' iconColor='orange' />
-                  <Input
-                     value={this.state.description}
+                  <ListItem
+                     title='Description'
+                     placeholder='Description'
+                     icon='ios-information-circle-outline'
+                     textInputValue={this.state.description}
                      onChangeText={description => this.setState({ description })}
-                     // multiline
-                     // numberOfLines={2}
-                     returnKeyType="done"
                      reference={input => this.inputs['description'] = input}  
-                     />
+                     returnKeyType='done'
+                     noArrow
+                  />
 
                   {/* Tag list */}
                   {
@@ -271,7 +269,7 @@ class PerformanceCreate extends Component {
                      ?
                      null
                      :
-                     <View>
+                     <View style={styles.tagContainer}>
                         <Label title='Tags' icon='ios-pricetags-outline' iconColor='blue' />
                         <View style={styles.tagList}>
                            {this.renderTagList()}
@@ -282,11 +280,7 @@ class PerformanceCreate extends Component {
                      title={noTag?'Add tags':'Edit tags'} 
                      icon={noTag?'ios-add-circle-outline':'ios-build-outline'}
                      iconColor='blue'
-                     style={{marginBottom: 20, backgroundColor: 'transparent'}}
-                     titleContainerStyle={{
-                        borderColor: '#cacdd1',
-                        borderTopWidth: 1,
-                     }}
+                     style={{marginBottom: 20}}
                      onPress={() => 
                         this.props.navigation.navigate('NewTag', 
                         {
@@ -295,7 +289,6 @@ class PerformanceCreate extends Component {
                         },
                      )}/>
                      
-                  </ViewContainer>
                </ScrollView>
             </Animated.View>
          </View>
@@ -320,6 +313,9 @@ const styles = {
       justifyContent: 'center',
       alignItems: 'center'
    },
+   tagContainer: {
+      marginTop: 10
+   },
    tagList: {
       flexDirection: 'row',
       justifyContent: 'center',
@@ -329,6 +325,7 @@ const styles = {
       marginRight: 'auto',
       marginTop: 10,
       marginBottom: 10,
+      backgroundColor: 'white', paddingTop: 10, paddingBottom: 10,
    },
 }
 

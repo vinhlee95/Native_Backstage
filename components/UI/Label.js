@@ -6,21 +6,20 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default Label = (props) => {
    const styles = {
       labelContainer: {
-         marginBottom: 5, marginLeft: 10,
+         marginBottom: 5, 
          flexDirection: 'row', alignItems: 'center'
       },
       leftIconContainer: {
-         flex: 1, justifyContent: 'center',
+         flex: 1, flexDirection: 'row', justifyContent: 'center'
       },
       titleContainer: {
-         flex: 10, justifyContent: 'center',
+         flex: 10, flexDirection: 'row'
       },
       title: {
-         fontSize: 20,
+         fontSize: 18,
          fontWeight: '600',
       },
       icon: {
-         marginRight: 10,
       }
    }
    return(

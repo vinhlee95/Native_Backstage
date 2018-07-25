@@ -12,6 +12,7 @@ import * as actions from '../../actions';
 import ListItem from '../UI/ListItem';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
+const DEVICE_WIDTH = Dimensions.get('window').width;
 
 class PerformerInfo extends Component {
    static navigationOptions = ({ navigation }) => {
@@ -83,37 +84,39 @@ class PerformerInfo extends Component {
                <Text style={styles.performerName}>{this.state.name}</Text>
             </View>
             <View>
-               <Label title='About' icon='ios-person-outline' iconColor='#3ec1d8'/>
                {
                   description ? 
                   <View style={styles.textContainer}>
+                     <Label title='About' icon='ios-person-outline' iconColor='#3ec1d8'/>
                      <Text style={styles.text}>{this.state.description}</Text> 
                   </View>
                   : null
                }
+               
+               <ListItem 
+                  fontAwesomeIcon='facebook-square'
+                  title="Facebook" 
+                  rightTitle={this.state.profile_facebook}
+                  iconColor='#1d71d3'
+                  textStyle={styles.buttonStyle}
+                  titleContainerStyle={{borderTopWidth: 1}}
+                  noArrow
+                  rightContentStyle={{ flex: 2 }}
+               />
 
-               <Label title='Facebook' fontAwesomeIcon='facebook-square' iconColor='#1d71d3' />
-               {
-                  profile_facebook ? 
-                  <View style={styles.textContainer}>
-                     <Text style={styles.text}>{this.state.profile_facebook}</Text> 
-                  </View>
-                  : null
-               }
-
-               <Label title='Instagram' fontAwesomeIcon='instagram' iconColor='#d85936' />
-               {
-                  profile_instagram ? 
-                  <View style={styles.textContainer}>
-                     <Text style={styles.text}>{this.state.profile_instagram}</Text> 
-                  </View>
-                  : null
-               }
+               <ListItem 
+                  fontAwesomeIcon='instagram'
+                  title="Instagram" 
+                  rightTitle={this.state.profile_instagram}
+                  iconColor='#d85936'
+                  textStyle={styles.buttonStyle}
+                  noArrow
+                  rightContentStyle={{ flex: 2 }}
+               />
 
                { /* buttons */ }
                <View style={{ 
-                  marginTop: 10, marginBottom: 10,
-                  borderTopWidth: 0.5, borderBottomWidth: 0.5, 
+                  borderBottomWidth: 0.5, 
                   borderColor:'#e0e2e5',
                }}>
                   <ListItem 
@@ -140,7 +143,7 @@ class PerformerInfo extends Component {
 
 const styles = {
    imageContainer: {
-      flex: 1, marginBottom: 10,
+      flex: 1,
    },
    image: {
       width: '100%',
@@ -159,10 +162,10 @@ const styles = {
       paddingTop: 10,
       paddingBottom: 10,
       paddingLeft: '2.5%',
-      marginBottom: 20,
    },
    text: {
       fontSize: 16,
+      marginLeft: DEVICE_WIDTH/11
    },
    buttonStyle: {
       fontSize: 20,
