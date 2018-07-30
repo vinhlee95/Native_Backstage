@@ -52,11 +52,6 @@ class Dashboard extends Component {
 
       return(
          <View style={{ flex: 1 }}>
-            {/* <Header 
-               headerName="Dashboard" 
-               onPress={() => {
-                  this.props.navigation.navigate('Account');
-               }} />    */}
             <ScrollView style={{ flex: 1, paddingTop: 10 }}>         
                <Label 
                   title='Need your confirmation'

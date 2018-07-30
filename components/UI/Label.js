@@ -7,7 +7,7 @@ export default Label = (props) => {
    const styles = {
       labelContainer: {
          marginBottom: 5, 
-         flexDirection: 'row', alignItems: 'center'
+         flex: 1, flexDirection: 'row', alignItems: 'center'
       },
       leftIconContainer: {
          flex: 1, flexDirection: 'row', justifyContent: 'center'

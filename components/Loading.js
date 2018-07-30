@@ -17,7 +17,6 @@ class Loading extends Component {
                isLogin: false,
             });
             this.props.navigation.navigate('Welcome');
-            
          }
       });
    }

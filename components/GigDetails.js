@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Image, Linking } from 'react-native';
 
 import { HeaderTitle } from './UI/Header/index.js';
 import ListItem from './UI/ListItem.js';
@@ -35,6 +35,9 @@ class GigDetails extends Component {
       }
    }
 
+   handleEmail = () => {
+      Linking.openURL(`mailto: ${this.state.customerEmail}`);
+   }
 
    render() {
       console.log(this.state.product)
@@ -42,26 +45,34 @@ class GigDetails extends Component {
       const { navigation } = this.props;
       return (
          <ScrollView>
+            <View style={{
+               borderBottomWidth: 1,
+               borderColor: '#e0e2e5',
+            }}>
             <ListItem
                icon='ios-calendar-outline'
                title='Date'
                rightTitle={this.state.gigDate}
                noArrow
                rightContentStyle={styles.rightContentStyle}
+               unTouchable
             />
             <ListItem
                icon='ios-clock-outline'
                title='Time'
                rightTitle={this.state.gigTime}
                noArrow
-               rightContentStyle={styles.rightContentStyle}               
+               rightContentStyle={styles.rightContentStyle} 
+               unTouchable              
             />
 
             <TouchableOpacity
                onPress={() => navigation.navigate('MapFullScreen', { location })}
             >
                <View style={styles.listItem}>
-                  <Ionicons name='ios-navigate-outline' size={25} />
+                  <View style={styles.leftIconContainer}>
+                     <Ionicons name='ios-navigate-outline' size={25} />
+                  </View>
                   <View style={styles.content}>
                      <View style={styles.leftCol}>
                         <View style={styles.titleContainer}>
@@ -89,7 +100,9 @@ class GigDetails extends Component {
                })}
             >
                <View style={styles.listItem}>
-                  <Ionicons name='ios-film-outline' size={25} />
+                  <View style={styles.leftIconContainer}>
+                     <Ionicons name='ios-film-outline' size={25} />
+                  </View>
                   <View style={styles.content}>
                      <View style={styles.leftCol}>
                         <View style={styles.titleContainer}>
@@ -100,7 +113,7 @@ class GigDetails extends Component {
                      <View style={styles.rightCol}>
                         <Image
                            source={{ uri: productImage }}
-                           style={{ width: 100, height: 100, borderRadius: 5 }}
+                           style={{ width: 95, height: 95, borderRadius: 5 }}
                         />
                         <Ionicons name='ios-arrow-forward' size={25}
                            color='#e0e2e5'
@@ -116,13 +129,17 @@ class GigDetails extends Component {
                rightTitle={this.state.customerName}
                rightContentStyle={styles.rightContentStyle}
                noArrow
+               unTouchable
             />
             <ListItem
                icon='ios-mail-outline'
                title='Customer Email'
+               onPress={this.handleEmail}
                rightTitle={this.state.customerEmail}
                rightContentStyle={styles.rightContentStyle}
+               titleContainerStyle={{ borderBottomWidth: 0 }}
             />
+            </View>
          </ScrollView>
       )
    }
@@ -134,18 +151,22 @@ const styles = {
       backgroundColor: 'white',
       paddingLeft: 10, paddingTop: 10,
    },
-   content: {
+   leftIconContainer: {
       flex: 1,
+   },
+   content: {
+      flex: 10,
       flexDirection: 'row',
       borderBottomWidth: 1,
       borderColor: '#e0e2e5',
       paddingBottom: 10, paddingRight: 5,
+
    },
    leftCol: {
       flexDirection: 'row', flex: 2,
    },
    titleContainer: {
-      width: '80%', marginLeft: 10
+      width: '80%', 
    },
    title: {
       fontSize: 18,

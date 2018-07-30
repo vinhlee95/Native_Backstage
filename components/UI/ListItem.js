@@ -54,7 +54,7 @@ const ListItem = (props) => {
       },
    }
    return(
-      <TouchableOpacity onPress={props.onPress} activeOpacity={0.7}>
+      <TouchableOpacity onPress={props.onPress} activeOpacity={props.unTouchable?1:0.7}>
          <View style={[styles.container, props.style]}>
             {
                props.icon
