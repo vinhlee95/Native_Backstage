@@ -24,7 +24,11 @@ const PerformerItem = (props) => {
    :
    performanceList = null;
    return(
-      <View style={{ marginBottom: 20 }}> 
+      <View style={{ 
+         marginBottom: 20,
+         borderTopWidth: 1, borderBottomWidth: 1,
+         borderColor: '#e0e2e5',
+      }}> 
          <ListItem
             image={{uri: profileThumb?profileThumb:profilePic}}
             title={name}
@@ -41,7 +45,7 @@ const PerformerItem = (props) => {
             <ListItem
                title='Add performance...'
                icon='ios-film-outline'
-               leftIconSize={49}
+               leftIconSize={65}
                leftIconFlex={2}
                style={styles.addIcon}
                titleContainerStyle={{borderBottomWidth: 0}}

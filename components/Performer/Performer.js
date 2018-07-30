@@ -93,8 +93,12 @@ class Performer extends Component {
                   <ListItem
                      title='Add performer...'
                      icon='ios-person-add-outline'
-                     leftIconSize={60}
+                     leftIconSize={65}
                      leftIconFlex={2}
+                     style={{
+                        borderTopWidth: 1, borderBottomWidth: 1,
+                        borderColor: '#e0e2e5',
+                     }}
                      titleContainerStyle={{borderBottomWidth: 0}}
                      iconColor='#b4bac4'
                      titleTextStyle={{color: '#b4bac4'}}
@@ -129,7 +133,7 @@ class Performer extends Component {
 }
 
 const mapStateToProps = ({ performerData, localPerformanceData }) => {
-   console.log(performerData)
+   // console.log(performerData)
    return {
       performerData,
       localPerformanceData

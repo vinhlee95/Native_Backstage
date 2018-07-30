@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
 import { View, Text, ScrollView, Image, Keyboard, Animated, TouchableWithoutFeedback, Dimensions } from 'react-native';
-import ViewContainer from '../UI/View';
-import alertMessage from '../UI/alertMessage';
-import Button from '../UI/Button';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 import Label from '../UI/Label';
 
-import { connect } from 'react-redux';
-import * as actions from '../../actions';
 import ListItem from '../UI/ListItem';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -19,8 +14,6 @@ class PerformerInfo extends Component {
       return {
          headerTitle: <HeaderTitle headerTitle={navigation.state.params.performerData.name} />,
          // headerLeft: <HeaderLeftTitle navigation={navigation} />,
-         headerRight: <HeaderRightTitle 
-                        saveInfo={navigation.getParam('saveData')} />,
          headerStyle: {
             backgroundColor: '#1a4b93'
          },
@@ -42,26 +35,11 @@ class PerformerInfo extends Component {
       this.inputs = {};
    }
 
-   // add event listener for keyboard to show up
-   componentWillMount() {
-      // allowing header right button 
-      // to get access to function inside class
-      this.props.navigation.setParams({
-         saveData: this.handleSaveData
-      });
-   }
-
-   handleSaveData = () => {
+   handleEditInfo = () => {
       const { name, description, profile_facebook, profile_instagram, profilePic, id } = this.state;
       const productData = this.productData;
-      this.props.updatePerformer(name, description, profile_facebook, profile_instagram, profilePic, productData, id);
-      alertMessage();
-   }
-
-   handleEditInfo = () => {
-      const { name, description, profile_facebook, profile_instagram } = this.state;
       this.props.navigation.navigate('PerformerEdit', {
-         name, description, profile_facebook, profile_instagram,
+         name, description, profile_facebook, profile_instagram, profilePic, id, productData,
          returnData: this.returnData
       });
    }
@@ -101,6 +79,7 @@ class PerformerInfo extends Component {
                   textStyle={styles.buttonStyle}
                   titleContainerStyle={{borderTopWidth: 1}}
                   noArrow
+                  unTouchable
                   rightContentStyle={{ flex: 2 }}
                />
 
@@ -111,6 +90,7 @@ class PerformerInfo extends Component {
                   iconColor='#d85936'
                   textStyle={styles.buttonStyle}
                   noArrow
+                  unTouchable
                   rightContentStyle={{ flex: 2 }}
                />
 
@@ -161,11 +141,11 @@ const styles = {
       backgroundColor: 'white',
       paddingTop: 10,
       paddingBottom: 10,
-      paddingLeft: '2.5%',
    },
    text: {
       fontSize: 16,
-      marginLeft: DEVICE_WIDTH/11
+      marginLeft: DEVICE_WIDTH/11,
+      paddingLeft: '2.5%'
    },
    buttonStyle: {
       fontSize: 20,
@@ -173,4 +153,4 @@ const styles = {
    }
 }
 
-export default connect(null, actions)(PerformerInfo);
+export default PerformerInfo;

@@ -37,7 +37,6 @@ export const createPerformer = (profilePic, name, description, profile_facebook,
 }
 
 export const updatePerformer = (name, description, profile_facebook, profile_instagram, profilePic, productData, id) => {
-   console.log(`Item with id of ${id} is updated`)
    return {
       type: UPDATE_PERFORMER,
       payload: {

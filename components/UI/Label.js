@@ -7,20 +7,18 @@ export default Label = (props) => {
    const styles = {
       labelContainer: {
          marginBottom: 5, 
-         flex: 1, flexDirection: 'row', alignItems: 'center'
+         flex: 1, flexDirection: 'row', alignItems: 'center',
       },
       leftIconContainer: {
-         flex: 1, flexDirection: 'row', justifyContent: 'center'
+         flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
       },
       titleContainer: {
-         flex: 10, flexDirection: 'row'
+         flex: 10, flexDirection: 'row', paddingLeft: '2.5%'
       },
       title: {
          fontSize: 18,
          fontWeight: '600',
       },
-      icon: {
-      }
    }
    return(
       <View style={[styles.labelContainer, props.style]}>

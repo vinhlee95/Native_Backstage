@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Image, Keyboard, Animated, TouchableWithoutFeedback, Dimensions } from 'react-native';
-import Input from '../UI/Input';
+import { View, ScrollView, Image, Keyboard, Animated, TouchableWithoutFeedback,  } from 'react-native';
 import alertMessage from '../UI/alertMessage';
-import Label from '../UI/Label';
 import ListItem from '../UI/ListItem';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 
-class PerformerInfo extends Component {
+class PerformerEdit extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
          headerTitle: <HeaderTitle headerTitle='Edit information' />,
@@ -24,8 +24,8 @@ class PerformerInfo extends Component {
 
    constructor(props) {
       super(props);
-      const { name, description, profile_facebook, profile_instagram } = this.props.navigation.state.params; 
-      this.state = { name, description, profile_facebook, profile_instagram };
+      const { name, description, profile_facebook, profile_instagram, profilePic, id, productData } = this.props.navigation.state.params; 
+      this.state = { name, description, profile_facebook, profile_instagram, profilePic, id, productData };
       this.keyboardHeight = new Animated.Value(0);
       this.inputs = {};
    }
@@ -42,6 +42,10 @@ class PerformerInfo extends Component {
    }
 
    handleSaveData = () => {
+      const { name, description, profile_facebook, profile_instagram, profilePic, id, productData } = this.state;
+
+      this.props.updatePerformer(name, description, profile_facebook, profile_instagram, profilePic, productData, id);
+
       const { navigation } = this.props;
       navigation.state.params.returnData(this.state);
       alertMessage(() => navigation.goBack());
@@ -151,4 +155,5 @@ const styles = {
    // },
 }
 
-export default PerformerInfo;
+export default connect(null, actions)(PerformerEdit);
+

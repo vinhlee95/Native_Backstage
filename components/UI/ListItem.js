@@ -37,6 +37,7 @@ const ListItem = (props) => {
          flex: rightContentFlex,
          flexDirection: 'row',
          justifyContent: 'flex-end',
+         alignItems: 'center',
          marginRight: 10,
       },
       defaultImageStyle: {
