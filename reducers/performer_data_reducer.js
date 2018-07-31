@@ -1,4 +1,4 @@
-import { FETCH_PERFORMER_DATA, CREATE_PERFORMER, UPDATE_PERFORMER } from '../actions/types';
+import { FETCH_PERFORMER_DATA, CREATE_PERFORMER, UPDATE_PERFORMER, DELETE_PERFORMER } from '../actions/types';
 import {
    PERSIST_REHYDRATE,
    PERSIST
@@ -37,6 +37,15 @@ export default (state=[], action) => {
          updatedState.splice(index, 1, newItem);
          console.log(`Performer with id of ${id} is successfully updated`)
             return updatedState;
+
+      case DELETE_PERFORMER:
+         const idD = action.payload;
+         const newState = [...state];
+         const deletedItem = newState.find(item => item.id === idD);
+         const indexD = newState.indexOf(deletedItem);
+         console.log(`Item with index of ${indexD}, id of ${idD} is deleted`);
+         newState.splice(indexD, 1);
+         return newState;
 
       default:
          return state;

@@ -1,4 +1,4 @@
-import { FETCH_PERFORMER_DATA, CREATE_PERFORMER, UPDATE_PERFORMER } from './types';
+import { FETCH_PERFORMER_DATA, CREATE_PERFORMER, UPDATE_PERFORMER, DELETE_PERFORMER } from './types';
 import _ from 'lodash';
 import request from 'superagent';
 const index = Math.floor(100000 + Math.random() * 900000);
@@ -45,5 +45,12 @@ export const updatePerformer = (name, description, profile_facebook, profile_ins
          },
          products: productData
       }
+   }
+}
+
+export const deletePerformer = (id) => {
+   return {
+      type: DELETE_PERFORMER,
+      payload: id
    }
 }

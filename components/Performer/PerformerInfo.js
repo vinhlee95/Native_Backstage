@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Image, Keyboard, Animated, TouchableWithoutFeedback, Dimensions } from 'react-native';
+import { View, Text, ScrollView, Image, Alert, Dimensions } from 'react-native';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
-import Label from '../UI/Label';
-
 import ListItem from '../UI/ListItem';
+
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 const DEVICE_WIDTH = Dimensions.get('window').width;
@@ -43,6 +44,23 @@ class PerformerInfo extends Component {
          returnData: this.returnData
       });
    }
+
+   handleDeletePerformer = () => {
+      const { id } = this.state;
+      Alert.alert(
+         'Delete performance',
+         'Are you sure to delete this performer?',
+         [
+            {text: 'Cancel', 'style': 'cancel'},
+            {text: 'OK', onPress: () => {
+               this.props.deletePerformer(id);
+               this.props.navigation.goBack();
+            }, 'style': 'destructive'}
+         ],
+         { cancelable: true }
+      )
+   }
+
 
    returnData = (data) => {
       const { name, description, profile_facebook, profile_instagram } = data;
@@ -115,7 +133,7 @@ class PerformerInfo extends Component {
                      titleContainerStyle={{borderBottomWidth:0}}
                      iconColor='red'
                      title='Delete performer'
-                     onPress={this.handleDeletePerformance}
+                     onPress={this.handleDeletePerformer}
                   />
                </View>
             </View>
@@ -142,4 +160,4 @@ const styles = {
    }
 }
 
-export default PerformerInfo;
+export default connect(null, actions)(PerformerInfo);

@@ -89,11 +89,11 @@ class PerformanceInfo extends Component {
          'Delete performance',
          'Are you sure to delete this performance?',
          [
-            {text: 'Cancel'},
-            {text: 'Ok', onPress: () => {
+            {text: 'Cancel', 'style': 'cancel'},
+            {text: 'OK', onPress: () => {
                this.props.deletePerformance(id);
                this.props.navigation.goBack();
-            }}
+            }, 'style': 'destructive'}
          ],
          { cancelable: true }
       )
