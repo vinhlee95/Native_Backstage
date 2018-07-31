@@ -8,12 +8,13 @@ export default Label = (props) => {
       labelContainer: {
          marginBottom: 5, 
          flex: 1, flexDirection: 'row', alignItems: 'center',
+         paddingLeft: 10,
       },
       leftIconContainer: {
-         flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
+         flex: 1, flexDirection: 'row', justifyContent: 'center',
       },
       titleContainer: {
-         flex: 10, flexDirection: 'row', paddingLeft: '2.5%'
+         flex: 10, flexDirection: 'row', 
       },
       title: {
          fontSize: 18,

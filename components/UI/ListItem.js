@@ -5,12 +5,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const ListItem = (props) => {
    // right content only acquires a bigger width when text input exists
-   let rightContentFlex = props.textInputValue ? 2 : 0.5;
+   let rightContentFlex = props.textInputValue || props.textInputValue === '' ? 2 : 0.5;
    const styles = {
       container: {
          backgroundColor: 'white',
          flexDirection: 'row',
-         alignItems: 'center',
+         alignItems: props.leftTextContent ? 'flex-start' : 'center',
          paddingLeft: 10,
       },
       leftIconContainer: {
@@ -25,7 +25,7 @@ const ListItem = (props) => {
          borderColor: '#e0e2e5',
          paddingTop: 15,
          paddingBottom: 15,
-         flexDirection: 'row',
+         flexDirection: props.leftTextContent ? 'column' : 'row',
          justifyContent: 'space-between',
          flex: 10,
       },
@@ -52,6 +52,7 @@ const ListItem = (props) => {
       },
       leftIcon: {
          marginRight: 10,
+         paddingTop: props.leftTextContent ? 15 : 0,
       },
    }
    return(
@@ -85,6 +86,14 @@ const ListItem = (props) => {
                <View style={styles.leftContent}>
                   <Text style={[styles.title, props.titleTextStyle]}>{props.title}</Text>
                </View>
+               {
+                  props.leftTextContent
+                  ?
+                  <View style={{ marginTop: 10 }}>
+                     {props.leftTextContent}
+                  </View>
+                  : null
+               }
                <View style={[styles.rightContent, props.rightContentStyle]}>
                   {
                      props.textInputValue || props.textInputValue === ''

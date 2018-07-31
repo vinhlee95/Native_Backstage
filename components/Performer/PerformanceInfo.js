@@ -269,20 +269,34 @@ class PerformanceInfo extends Component {
                   {/* {videoList}
                </Swiper> */}
                <View>
-                  <View style={styles.textContainer}>
-                     <Label title = 'About this performance'
-                     icon = 'ios-information-circle-outline' iconColor='orange' />
-                     <Text style={styles.description}>{this.state.description}</Text>
-                  </View>
+                  <ListItem
+                     title='About this performance'
+                     leftTextContent={
+                        <Text style={{
+                           fontSize: 16,
+                        }}>{this.state.description}
+                        </Text>
+                     }
+                     icon = 'ios-information-circle-outline'
+                     iconColor = 'orange'
+                     noArrow
+                     unTouchable
+                  />
 
                   {/* Tag List */}
-                  <View style={styles.textContainer}>
-                     <Label title='Tags' icon='ios-pricetags-outline' iconColor='blue' />
-                     <View style={styles.tagList}>
-                     
-                        {this.renderTagList()}
-                     </View>
-                  </View>
+
+                  <ListItem
+                     title='Tags'
+                     leftTextContent={
+                        <View style={styles.tagList}>
+                           {this.renderTagList()}
+                        </View>
+                     }
+                     icon='ios-pricetags-outline' 
+                     iconColor='blue'
+                     noArrow
+                     unTouchable
+                  />
 
                   <View style={{borderBottomWidth: 0.5, borderColor:'#e0e2e5' }}>
                      <ListItem 
@@ -311,7 +325,7 @@ class PerformanceInfo extends Component {
 const styles = {
    image: {
       width: '100%',
-      height: 320,
+      height: DEVICE_HEIGHT/2.5,
       marginLeft: 'auto',
       marginRight: 'auto',
       position: 'relative',
@@ -350,20 +364,19 @@ const styles = {
    },
    textContainer: {
       backgroundColor: 'white',
-      paddingTop: 10, paddingBottom: 10, paddingLeft: '2.5%',
+      paddingTop: 10, paddingBottom: 10,
+   },
+   descriptionContainer: {
       borderBottomWidth: 1,
       borderColor: '#e0e2e5',
+       paddingBottom: 10,
    },
    description: {
       fontSize: 16,
-      marginLeft: DEVICE_WIDTH/11,
    },
    tagList: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      width: DEVICE_WIDTH,
-      marginLeft: DEVICE_WIDTH/11,
-      backgroundColor: 'white', paddingTop: 10, paddingBottom: 10,
    },
 }
 

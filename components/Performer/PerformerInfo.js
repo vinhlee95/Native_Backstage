@@ -62,12 +62,20 @@ class PerformerInfo extends Component {
                <Text style={styles.performerName}>{this.state.name}</Text>
             </View>
             <View>
+
                {
-                  description ? 
-                  <View style={styles.textContainer}>
-                     <Label title='About' icon='ios-person-outline' iconColor='#3ec1d8'/>
-                     <Text style={styles.text}>{this.state.description}</Text> 
-                  </View>
+                  description
+                  ?
+                  <ListItem
+                     title='About'
+                     icon='ios-person-outline' 
+                     iconColor='#3ec1d8'
+                     leftTextContent={
+                        <Text style={{ fontSize: 16 }}>{this.state.description}</Text> 
+                     }
+                     noArrow
+                     unTouchable
+                  />
                   : null
                }
                
@@ -76,8 +84,6 @@ class PerformerInfo extends Component {
                   title="Facebook" 
                   rightTitle={this.state.profile_facebook}
                   iconColor='#1d71d3'
-                  textStyle={styles.buttonStyle}
-                  titleContainerStyle={{borderTopWidth: 1}}
                   noArrow
                   unTouchable
                   rightContentStyle={{ flex: 2 }}
@@ -88,7 +94,6 @@ class PerformerInfo extends Component {
                   title="Instagram" 
                   rightTitle={this.state.profile_instagram}
                   iconColor='#d85936'
-                  textStyle={styles.buttonStyle}
                   noArrow
                   unTouchable
                   rightContentStyle={{ flex: 2 }}
@@ -103,13 +108,11 @@ class PerformerInfo extends Component {
                      icon='ios-create-outline'
                      title="Edit performer" 
                      iconColor='#378cef'
-                     textStyle={styles.buttonStyle}
                      onPress={this.handleEditInfo} 
                   />
                   <ListItem
                      icon='ios-trash-outline'
                      titleContainerStyle={{borderBottomWidth:0}}
-                     textStyle={styles.buttonStyle}
                      iconColor='red'
                      title='Delete performer'
                      onPress={this.handleDeletePerformance}
@@ -127,7 +130,7 @@ const styles = {
    },
    image: {
       width: '100%',
-      height: DEVICE_HEIGHT/2,
+      height: DEVICE_HEIGHT/2.5,
       marginLeft: 'auto',
       marginRight: 'auto',
       position: 'relative',
@@ -136,20 +139,6 @@ const styles = {
       position: 'absolute',
       bottom: 20, left: 10,
       color: 'white', fontWeight: 'bold', fontSize: 40,
-   },
-   textContainer: {
-      backgroundColor: 'white',
-      paddingTop: 10,
-      paddingBottom: 10,
-   },
-   text: {
-      fontSize: 16,
-      marginLeft: DEVICE_WIDTH/11,
-      paddingLeft: '2.5%'
-   },
-   buttonStyle: {
-      fontSize: 20,
-      fontWeight: '600'
    }
 }
 
