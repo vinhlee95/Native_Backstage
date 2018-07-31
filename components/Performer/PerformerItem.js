@@ -41,20 +41,23 @@ const PerformerItem = (props) => {
             arrowSize={25}
          />
          <View style={styles.performanceList}>
-            {performanceList}
             <ListItem
-               title='Add performance...'
+               title='Add new performance...'
                icon='ios-film-outline'
                leftIconSize={65}
                leftIconFlex={2}
                style={styles.addIcon}
-               titleContainerStyle={{borderBottomWidth: 0}}
                iconColor='#b4bac4'
+               titleContainerStyle={{
+                  paddingTop: 25,
+                  paddingBottom: 25,
+               }}
                titleTextStyle={{color: '#b4bac4'}}
                onPress={() => props.navigation.navigate('PerformanceCreate', {
                   performerNameList: props.performerNameList
                })}
             />
+            {performanceList}
          </View>
       </View>
    );

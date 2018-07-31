@@ -101,13 +101,15 @@ const ListItem = (props) => {
                      <TextInput 
                         placeholder={props.placeholder}
                         value={props.textInputValue}
-                        style={{width: '100%',fontSize: 16, textAlign: 'right'}}
+                        style={{width: '100%',fontSize: 16, textAlign: props.textAlign ? props.textAlign : 'right'}}
                         onChangeText={props.onChangeText}
                         returnKeyType={props.returnKeyType}
                         onSubmitEditing={props.onSubmitEditing}
                         ref={props.reference}
                         keyboardType={props.keyboardType}
                         clearButtonMode="while-editing"
+                        multiline={props.multiline}
+                        numberOfLines={props.numberOfLines}
                      />
                      :
                      null

@@ -104,6 +104,9 @@ class PerformerEdit extends Component {
                         placeholder='About me'
                         icon='ios-information-circle-outline'
                         textInputValue={this.state.description}
+                        multiline
+                        textAlign='left'
+                        numberOfLines={2}
                         returnKeyType='next'
                         onChangeText={description => this.setState({ description })} 
                         reference={input => this.inputs['description'] = input}

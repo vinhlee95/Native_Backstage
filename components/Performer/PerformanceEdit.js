@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Switch, TouchableWithoutFeedback, Keyboard, Alert, Dimensions, Animated } from 'react-native';
+import { View, ScrollView, TouchableWithoutFeedback, Keyboard, Alert, Dimensions, Animated } from 'react-native';
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import alertMessage from '../UI/alertMessage';
-import Label from '../UI/Label';
-import Input from '../UI/Input';
 import ListItem from '../UI/ListItem';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -30,9 +28,9 @@ class PerformanceEdit extends Component {
       const { navigation } = this.props;
       const { params } = navigation.state;
       const { audienceSize, duration, audio, carToDoor, price, electricity } = params.tagData;
-      const { title, name, description } = params;
+      const { title, name, description, image, id } = params;
       this.state = {
-         title, name, description, 
+         title, name, description, image, id,
          tagData: {
             audienceSize, duration, audio, carToDoor, price, electricity,
          }
@@ -72,7 +70,10 @@ class PerformanceEdit extends Component {
    };
 
    handleSaveInfo = () => {
+      const { name, title, description, tagData, image, id } = this.state;
       const { navigation } = this.props;
+
+      this.props.updatePerformance(name, title, description, tagData, image, id);
       navigation.state.params.returnData(this.state);
       alertMessage(() => navigation.goBack());
    }
@@ -82,7 +83,6 @@ class PerformanceEdit extends Component {
     }
 
    render() {
-      console.log(this.state)
       return (
          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
@@ -114,6 +114,9 @@ class PerformanceEdit extends Component {
                      icon='ios-document-outline'
                      title='Description'
                      placeholder='Description'
+                     multiline
+                     numberOfLines={2}
+                     textAlign='left'
                      textInputValue={this.state.description}
                      onChangeText={description => this.setState({ description })}
                      returnKeyType='next'
@@ -183,6 +186,7 @@ class PerformanceEdit extends Component {
                         })
                      } 
                      noArrow
+                     unTouchable
                   />
 
                   <ListItem
@@ -199,6 +203,7 @@ class PerformanceEdit extends Component {
                         })
                      } 
                      noArrow
+                     unTouchable
                   />
 
                   <ListItem
@@ -215,6 +220,7 @@ class PerformanceEdit extends Component {
                         })
                      } 
                      noArrow
+                     unTouchable
                   />
 
                </ScrollView>

@@ -42,6 +42,7 @@ export const updatePerformance = (name, title, description, tagData, image, id) 
       electricity,
       price
    } = tagData;
+   console.log(`Performance with id of ${id} is updated`)
    return {
       type: UPDATE_PERFORMANCE,
       payload: {

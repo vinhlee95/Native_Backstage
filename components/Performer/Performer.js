@@ -53,7 +53,7 @@ class Performer extends Component {
       });
       performerList = performerData.map((performer, id) => {
          const personalData = performer.data;
-         const productData = _.toArray(performer.products).splice(0,2);
+         const productData = _.toArray(performer.products).slice(0,3);
          // console.log(productData)
          let updatedProductData = productData;
          const {localPerformanceData}= this.props; // console.log(localPerformanceData)
@@ -91,7 +91,7 @@ class Performer extends Component {
                   {performerList}
 
                   <ListItem
-                     title='Add performer...'
+                     title='Add new performer...'
                      icon='ios-person-add-outline'
                      leftIconSize={65}
                      leftIconFlex={2}

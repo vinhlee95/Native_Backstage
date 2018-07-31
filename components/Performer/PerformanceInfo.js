@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView, Image, Keyboard, Animated, WebView, Dimensions, TouchableWithoutFeedback, Alert } from 'react-native';
 import { ImagePicker, Permissions } from 'expo';
 import Swiper from 'react-native-swiper';
-import Button from '../UI/Button';
 import Tag from '../UI/Tag';
 import Spinner from '../UI/Spinner';
 import { Ionicons } from '@expo/vector-icons';
@@ -10,11 +9,9 @@ import { Ionicons } from '@expo/vector-icons';
 import _ from 'lodash';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
-import alertMessage from '../UI/alertMessage';
 
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import Label from '../UI/Label';
 import ListItem from '../UI/ListItem';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
@@ -25,7 +22,6 @@ class PerformanceInfo extends Component {
       return {
          headerTitle: <HeaderTitle headerTitle={navigation.state.params.performanceData.title} />,
          headerLeft: <HeaderLeftTitle navigation={navigation} />,
-         headerRight: <HeaderRightTitle saveInfo={navigation.getParam('saveInfo')} />, 
          headerStyle: {
             backgroundColor: '#1a4b93'
          },
@@ -72,29 +68,10 @@ class PerformanceInfo extends Component {
       this.inputs = {};
    }
 
-   // add event listener for keyboard to show up
-   componentWillMount() {
-      // allowing header right button 
-      // to get access to function inside class
-      this.props.navigation.setParams({
-         saveInfo: this.handleSaveData
-      })
-   }
-
-
-
-   handleSaveData = () => {
-      // do sth to save data
-      const { name, title, description, tagData, image, id } = this.state;
-      this.props.updatePerformance(name, title, description, tagData, image, id);           
-      // display save modal
-      alertMessage(() => this.props.navigation.goBack());
-   }
-
    handleEditInfo = () => {
-      const { title, description, name, id } = this.state;
+      const { name, title, description, image, id } = this.state;
       this.props.navigation.navigate('PerformanceEdit', {
-         title, name, description, id,
+         name, title, description, image, id,
          tagData: this.state.tagData,
          returnData: this.returnData,
       });

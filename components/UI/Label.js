@@ -7,17 +7,17 @@ export default Label = (props) => {
    const styles = {
       labelContainer: {
          marginBottom: 5, 
-         flex: 1, flexDirection: 'row', alignItems: 'center',
-         paddingLeft: 10,
+         flex: 1, flexDirection: 'row', alignItems: 'center', 
+         paddingLeft: '2.5%'
       },
       leftIconContainer: {
-         flex: 1, flexDirection: 'row', justifyContent: 'center',
+         flex: 1, 
       },
       titleContainer: {
-         flex: 10, flexDirection: 'row', 
+         flex: 11,
       },
       title: {
-         fontSize: 18,
+         fontSize: 20,
          fontWeight: '600',
       },
    }
