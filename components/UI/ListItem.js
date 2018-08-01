@@ -25,13 +25,12 @@ const ListItem = (props) => {
          borderColor: '#e0e2e5',
          paddingTop: 15,
          paddingBottom: 15,
-         flexDirection: props.leftTextContent ? 'column' : 'row',
+         flexDirection:  'row',
          justifyContent: 'space-between',
          flex: 10,
       },
       leftContent: {
          flex: props.leftContent ? props.leftContent : 1,
-         justifyContent: 'center'
       },
       rightContent: {
          flex: rightContentFlex,
@@ -58,11 +57,13 @@ const ListItem = (props) => {
    return(
       <TouchableOpacity onPress={props.onPress} activeOpacity={props.unTouchable?1:0.7}>
          <View style={[styles.container, props.style]}>
+
+            {/* icons */}
             {
                props.icon
                ?
                <View style={styles.leftIconContainer}>
-                  <Ionicons name={props.icon} size={props.leftIconSize?props.leftIconSize:22} style={styles.leftIcon} color={props.iconColor} />
+                  <Ionicons name={props.icon} size={props.leftIconSize?props.leftIconSize:22} style={[styles.leftIcon, props.iconStyle]} color={props.iconColor} />
                </View>
                : null
             }
@@ -82,18 +83,22 @@ const ListItem = (props) => {
                :
                null
             }
+
+            {/* list item */}
             <View style={[styles.listItem, props.titleContainerStyle]}>
                <View style={styles.leftContent}>
                   <Text style={[styles.title, props.titleTextStyle]}>{props.title}</Text>
+
+                  {
+                     props.leftTextContent
+                     ?
+                     <View style={{ marginTop: 10 }}>
+                        {props.leftTextContent}
+                     </View>
+                     : null
+                  }
                </View>
-               {
-                  props.leftTextContent
-                  ?
-                  <View style={{ marginTop: 10 }}>
-                     {props.leftTextContent}
-                  </View>
-                  : null
-               }
+               
                <View style={[styles.rightContent, props.rightContentStyle]}>
                   {
                      props.textInputValue || props.textInputValue === ''
@@ -120,6 +125,12 @@ const ListItem = (props) => {
                      <Text style={styles.rightTitle}>{props.rightTitle}</Text>
                      :
                      null
+                  }
+                  {
+                     props.mapView
+                     ?
+                     <View>{props.mapView}</View>
+                     : null
                   }
                   {
                      props.noArrow

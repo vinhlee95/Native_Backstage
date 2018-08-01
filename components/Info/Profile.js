@@ -11,15 +11,12 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
-import alertMessage from '../UI/alertMessage';
 
 class Profile extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
          headerTitle: <HeaderTitle headerTitle="Profile" />,
          headerLeft: <HeaderLeftTitle navigation={navigation}/>,
-         headerRight: <HeaderRightTitle 
-                        saveInfo={navigation.getParam('saveInfo')} />,
          headerStyle: {
             backgroundColor: '#1a4b93'
          }
@@ -48,9 +45,6 @@ class Profile extends Component {
 
    componentDidMount() {
       this.loadData();
-      this.props.navigation.setParams({
-         saveInfo: this.handleSaveInfo
-      });
    }
 
    returnData = (data) => {
@@ -60,16 +54,6 @@ class Profile extends Component {
       })
    } 
    
-   handleSaveInfo = () => {
-      this.setState({ isSaving: true })
-      const { firstName, lastName, location } = this.state;
-      this.props.saveData(firstName, lastName, location, () => {
-         alertMessage();
-         this.setState({ isSaving: false, isModalShowed: true });
-         this.loadData();         
-      });
-   }
-
    loadData = () => {
       this.props.loadData(() => {
          // console.log(this.props)
@@ -113,6 +97,7 @@ class Profile extends Component {
          <ScrollView style={{flex:1}}>
             <ListItem
                title='First Name'
+               icon='ios-person-outline'
                rightTitle={this.state.firstName}
                noArrow
                titleTextStyle={styles.title}
@@ -120,12 +105,13 @@ class Profile extends Component {
 
             <ListItem
                title='Last Name'
+               icon='ios-person-outline'
                rightTitle={this.state.lastName}
                noArrow
                titleTextStyle={styles.title}
             />
 
-            <TouchableOpacity
+            {/* <TouchableOpacity
                onPress={() => this.props.navigation.navigate('MapFullScreen', {
                   location: this.state.location
                })}
@@ -141,17 +127,35 @@ class Profile extends Component {
                         <Map
                            style={{ width: 100, height: 100, borderRadius: 5 }}
                            location={mapThumb}
+                           scrollEnabled={false}
                         />
                         <Ionicons name='ios-arrow-forward' size={25}
                            color='#e0e2e5'
                            style={{marginLeft: 5}} />
                      </View>
                   </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+
+            <ListItem
+               icon='ios-navigate-outline'
+               title='Location'
+               leftTextContent={<Text>{fullDescription}</Text>}
+               mapView={
+                  <Map
+                     style={{ width: 100, height: 100, borderRadius: 5 }}
+                     location={mapThumb}
+                     scrollEnabled={false}
+                  />
+               }
+               onPress={() => this.props.navigation.navigate('MapFullScreen', {
+                  location: this.state.location
+               })}
+            />
+
             <ListItem 
                title="Edit profile" 
+               icon='ios-create-outline'
                titleTextStyle={styles.title}
-               borderTopWidth={1}
                onPress={() => this.props.navigation.navigate('ProfileEdit', {
                   profileData: { firstName, lastName, location },
                   returnData: this.returnData
@@ -166,55 +170,6 @@ const styles = {
    container: {
       flex: 1,
    },
-   mapView: {
-      flex: 1,
-      shadowColor: '#000',
-      shadowOffset: {
-         width: 2,
-         height: 4
-      },
-      shadowOpacity: 0.1,
-      position: 'relative'
-   },
-   noteContainer: {
-      position: 'absolute',
-      top: 3,
-      left: 3,
-      // set bigger zIndex than one on the map style
-      // to make text appears above the map
-      zIndex: 1000,
-   },
-   note: {
-      color: 'grey',
-      fontSize: 15,
-      backgroundColor: 'white',
-      paddingTop: 5, paddingLeft: 5,
-      opacity: 0.7
-   },
-
-   title: {
-      fontSize: 18,
-      fontWeight: '500',
-   },
-
-   content: {
-      flex: 1,
-      flexDirection: 'row',
-      paddingTop: 10, paddingBottom: 10, paddingRight: 5,
-      backgroundColor: 'white',
-   },
-   leftCol: {
-      flexDirection: 'row', flex: 2,
-   },
-   titleContainer: {
-      width: '80%', marginLeft: 10
-   },
-   text: { fontSize: 16 },
-   rightCol: {
-      flexDirection: 'row', flex: 1,
-      alignItems: 'center',
-
-   }
 }
 
 const mapStateToProps = ({ data }) => {

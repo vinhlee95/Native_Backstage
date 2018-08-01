@@ -4,6 +4,10 @@ import { ScrollView, View, Text, Animated, Keyboard, Alert } from 'react-native'
 import ListItem from '../UI/ListItem';
 import LocationSearch from '../Location/LocationSearch';
 import Map from '../Location/Map';
+import alertMessage from '../UI/alertMessage';
+
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 
 import {
@@ -53,9 +57,14 @@ class ProfileEdit extends Component {
    }
 
    handleSaveInfo = () => {
+      const { firstName, lastName, location } = this.state;
       const { navigation } = this.props;
+
+      this.props.saveData(firstName, lastName, location, () => {
+         alertMessage(() => navigation.goBack());
+      });
+
       navigation.state.params.returnData(this.state);
-      navigation.goBack();
    }
 
 
@@ -197,6 +206,7 @@ class ProfileEdit extends Component {
                         </View>        
                         <Map 
                            location={this.state.location} 
+                           scrollEnabled={false}
                            onPress={() => this.props.navigation.navigate('MapFullScreen', {
                               location: this.state.location,
                            })}
@@ -247,7 +257,7 @@ const styles = {
    },
 }
 
-export default ProfileEdit;
+export default connect(null, actions)(ProfileEdit);
 
 
 

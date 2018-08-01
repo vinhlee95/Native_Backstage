@@ -64,12 +64,11 @@ class Account extends Component {
                     onPress={() => this.props.navigation.navigate('Profile')}
                     style={styles.listItem} />
               
-                <Button 
+                <ListItem 
                   title="Log Out" 
-                  style={styles.button}
+                  style={styles.listItem}
                   iconColor='red'
                   titleContainerStyle={{borderTopWidth:0,borderBottomWidth:0}}
-                  textStyle={{color: 'red'}}
                   onPress={this.handleSignout}
                   icon='ios-log-out' />
                   
@@ -104,10 +103,6 @@ const styles = {
       fontWeight: 'bold',
       textAlign: 'center',
       marginTop: 10,
-   },
-   button: {
-      borderTopWidth: 0,
-      borderBottomWidth: 0, paddingLeft: 10,
    },
    listItem: {
       paddingLeft: 10,

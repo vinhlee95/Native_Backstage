@@ -117,6 +117,12 @@ class PerformanceEdit extends Component {
                      multiline
                      numberOfLines={2}
                      textAlign='left'
+                     style={{
+                        alignItems: 'flex-start'
+                     }}
+                     iconStyle={{
+                        paddingTop: 15
+                     }}
                      textInputValue={this.state.description}
                      onChangeText={description => this.setState({ description })}
                      returnKeyType='next'

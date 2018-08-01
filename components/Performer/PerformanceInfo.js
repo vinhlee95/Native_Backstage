@@ -254,6 +254,9 @@ class PerformanceInfo extends Component {
                         }}>{this.state.description}
                         </Text>
                      }
+                     rightContentStyle={{
+                        flex: 0
+                     }}
                      icon = 'ios-information-circle-outline'
                      iconColor = 'orange'
                      noArrow
@@ -269,6 +272,9 @@ class PerformanceInfo extends Component {
                            {this.renderTagList()}
                         </View>
                      }
+                     rightContentStyle={{
+                        flex: 0
+                     }}
                      icon='ios-pricetags-outline' 
                      iconColor='blue'
                      noArrow
