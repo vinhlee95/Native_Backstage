@@ -76,7 +76,52 @@ class SignupForm extends Component {
       );
    }
 
+   // enable signing up after tapping 'Done' button
+   handleSignup = () => this.handleSubmit();
+
    render() {
+      const styles = {
+         container: {
+            height: this.state.error.code ? DEVICE_HEIGHT/2.1 : DEVICE_HEIGHT / 2.3,
+            width: '95%',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            zIndex: 1000,
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            paddingLeft: '5%',
+            paddingRight: '5%',
+            paddingTop: 15,
+            borderRadius: 5,
+         },
+         title: {
+            textAlign: 'center',
+            fontSize: 22,
+            fontWeight: '600',
+            paddingBottom: 15,
+         },
+         button: {
+            marginTop: 0,
+            marginBottom: 0,
+         },
+         message: {
+            color: color.inputColor,
+            textAlign: 'center',
+            fontSize: 16,
+            paddingTop: 15,
+            paddingBottom: 10
+         },
+         signinContainer: {
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'center',
+         },
+         siginText: {
+            textAlign: 'center',
+            fontSize: 18,
+            color: '#2b6edb',
+            fontWeight: '600',
+         }
+      }
       // dynamically disable button
       let disableStatus;
       this.state.email === '' || this.state.password === '' ? disableStatus = true : disableStatus = false;
@@ -131,6 +176,7 @@ class SignupForm extends Component {
                   secureTextEntry
                   returnKeyType='done'
                   reference={input => this.inputs['password'] = input}
+                  onSubmitEditing={this.handleSignup}
                />
 
 
@@ -158,7 +204,7 @@ class SignupForm extends Component {
                      <Text
                         style={styles.siginText}
                         >Sign in</Text>
-                     <Ionicons name="ios-arrow-forward" size={20} color="#2b6edb" />
+                     {/* <Ionicons name="ios-arrow-forward" size={20} color="#2b6edb" /> */}
                   </View>
                </TouchableWithoutFeedback>
                
@@ -172,53 +218,6 @@ class SignupForm extends Component {
 
 const color = {
    inputColor: '#6a6b6d',
-}
-
-const styles = {
-   container: {
-      display: 'flex',
-      height: DEVICE_HEIGHT /2.3,
-      justifyContent: 'space-around',
-      width: '95%',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      zIndex: 1000,
-      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-      paddingLeft: '5%',
-      paddingRight: '5%',
-      paddingBottom: 5,
-      borderRadius: 5,
-   },
-   title: {
-      textAlign: 'center',
-      fontSize: 20,
-      fontWeight: 'bold',
-      paddingTop: 10, 
-      paddingBottom: 10,
-   },
-   button: {
-      marginTop: 0,
-      marginBottom: 0,
-   },
-   message: {
-      color: color.inputColor,
-      textAlign: 'center',
-      fontSize: 16,
-      paddingTop: 10,
-      paddingBottom: 10
-   },
-   signinContainer: {
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'center',
-   },
-   siginText: {
-      textAlign: 'center',
-      fontSize: 18,
-      color: '#2b6edb',
-      fontWeight: 'bold',
-      marginRight: 5,
-   }
 }
 
 export default connect(null, actions)(SignupForm);

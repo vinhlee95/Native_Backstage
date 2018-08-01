@@ -8,6 +8,7 @@ import ViewContainer from '../UI/View';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import Modal from '../UI/Modal';
+import Ionicons from '../../node_modules/@expo/vector-icons/Ionicons';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -20,7 +21,9 @@ class LoginForm extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         email: 'vinh@test.com', password: '', isSpinnershowed: false, error: '',
+         email: 'vinh@test.com', password: '', 
+         isSpinnershowed: false, 
+         error: '',
       };
       this.keyboardHeight = new Animated.Value(0);
       this.inputs = {};
@@ -78,7 +81,47 @@ class LoginForm extends Component {
       }
    );
    }
+
+   // enable loggin in right after tapping 'Done' button
+   handleLogin = () => this.handleSubmit();
+
    render() {
+      console.log(this.state.error.code)
+      const color = {
+         inputColor: '#6a6b6d',
+      }
+
+      const styles = {
+         container: {
+            height: this.state.error.code ? DEVICE_HEIGHT / 2.2 : DEVICE_HEIGHT / 2.5,
+            width: '95%',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            zIndex: 1000,
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            paddingLeft: '5%',
+            paddingRight: '5%',
+            paddingTop: 20,
+            paddingBottom: 10,
+            borderRadius: 5,
+         },
+         title: {
+            textAlign: 'center',
+            fontSize: 22,
+            fontWeight: '600',
+            paddingBottom: 20,
+         },
+         button: {
+            marginTop: 20,
+            marginBottom: 0,
+         },
+         backButton: {
+            position: 'absolute',
+            left: 12,
+            paddingRight: 10,
+         },
+
+      }
       // dynamically disable button
       let disableStatus;
       this.state.email === '' || this.state.password === '' ? disableStatus = true : disableStatus = false;
@@ -98,7 +141,7 @@ class LoginForm extends Component {
             <Animated.View style={[styles.container, { marginBottom: this.keyboardHeight } ]}>
             <ViewContainer>
                   <Text style={styles.title}>Sign into Gigle</Text>
-                  <Icon name="chevron-left" size={20} style={styles.backButton} color="#2b6edb" onPress={() => this.props.navigation.navigate('Signup')}/>
+                  <Ionicons name='ios-arrow-back' size={25} style={styles.backButton} color='#2b6edb' onPress={() => this.props.navigation.navigate('Signup')} />
                   <Input 
                      placeholder="Email"
                      value={this.state.email}
@@ -127,6 +170,7 @@ class LoginForm extends Component {
                      secureTextEntry
                      returnKeyType='done'
                      reference={input => this.inputs['password'] = input}
+                     onSubmitEditing={this.handleLogin}
                   />
                   
                   {
@@ -150,46 +194,6 @@ class LoginForm extends Component {
          </TouchableWithoutFeedback>
       );
    }
-}
-
-const color = {
-   inputColor: '#6a6b6d',
-}
-
-const styles = {
-   container: {
-      display: 'flex',
-      height: DEVICE_HEIGHT / 2.5,
-      justifyContent: 'space-around',
-      width: '95%',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      zIndex: 1000,
-      backgroundColor: 'rgba(255, 255, 255, 0.8)',
-      opacity: 0.8,
-      paddingLeft: '5%',
-      paddingRight: '5%',
-      paddingTop: 20,
-      paddingBottom: 10,
-      borderRadius: 5,
-   },
-   title: {
-      textAlign: 'center',
-      fontSize: 20,
-      fontWeight: 'bold',
-      paddingBottom: 10,
-   },
-   button: {
-      marginTop: 0,
-      marginBottom: 0,
-   },
-   backButton: {
-      position: 'absolute',
-      top: 5,
-      left: 0,
-      paddingRight: 10,
-   },
-   
 }
 
 export default connect(null, actions)(LoginForm);

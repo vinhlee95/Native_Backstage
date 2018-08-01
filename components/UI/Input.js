@@ -32,7 +32,6 @@ const styles = {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: 'white'
    },
    input: {
       fontSize: 18,
@@ -41,7 +40,6 @@ const styles = {
       borderBottomWidth: 1,
       paddingTop: 10,
       paddingBottom: 10,
-      paddingLeft: 10,
       flex: 20,
       maxHeight: 100,
    },
