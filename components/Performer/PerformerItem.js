@@ -31,7 +31,7 @@ const PerformerItem = (props) => {
    } else if(profileThumb) {
      imageURI = profileThumb;
    } else {
-     imageURI = ProfileThumb;
+     imageURI = profilePic;
    }
 
    return(
