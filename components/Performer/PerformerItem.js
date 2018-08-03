@@ -4,6 +4,7 @@ import { View, Text, Image, TouchableHighlight } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ListItem from '../UI/ListItem';
 import _ from 'lodash';
+import ProfileThumb from '../../images/profile.jpeg';
 
 import PerformanceItem from './PerformanceItem';
 
@@ -23,6 +24,16 @@ const PerformerItem = (props) => {
    })
    :
    performanceList = null;
+
+   let imageURI;
+   if(!profileThumb && !profilePic) {
+     imageURI= 'https://goo.gl/images/QmEExp'
+   } else if(profileThumb) {
+     imageURI = profileThumb;
+   } else {
+     imageURI = ProfileThumb;
+   }
+
    return(
       <View style={{ 
          marginBottom: 20,
@@ -30,7 +41,7 @@ const PerformerItem = (props) => {
          borderColor: '#e0e2e5',
       }}> 
          <ListItem
-            image={{uri: profileThumb?profileThumb:profilePic}}
+            image={{uri: imageURI }}
             title={name}
             onPress={() => handleViewPerformerInfo()}
             style={styles.performer}

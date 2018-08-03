@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Image, Alert, Dimensions } from 'react-native';
+import { View, Text, ScrollView, Image, Alert, Dimensions, TouchableWithoutFeedback } from 'react-native';
 
 import { HeaderTitle, HeaderLeftTitle, HeaderRightTitle } from '../UI/Header/index.js';
 import ListItem from '../UI/ListItem';
+import Spinner from '../UI/Spinner';
+import { Ionicons } from '@expo/vector-icons';
 
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -76,7 +78,26 @@ class PerformerInfo extends Component {
       return (
          <ScrollView>         
             <View style={styles.imageContainer}>
-               <Image source={{uri:profilePic}} style={styles.image} />
+              {
+                profilePic
+                ?
+                <Image source={{uri:profilePic}} style={styles.image} />
+                :
+                <TouchableWithoutFeedback onPress={() => this.pickImage()} >
+                    <View style={styles.image}>
+                      {
+                          this.state.isLoading
+                          ?
+                          <Spinner animating />
+                          :
+                          <View style={styles.iconContainer}>
+                            <Ionicons name="ios-camera" size={60} />
+                            <Text>Add profile picture</Text>
+                          </View>
+                      }
+                    </View>
+                </TouchableWithoutFeedback>
+              }
                <Text style={styles.performerName}>{this.state.name}</Text>
             </View>
             <View>

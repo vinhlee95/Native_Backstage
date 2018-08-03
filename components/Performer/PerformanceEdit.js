@@ -120,6 +120,9 @@ class PerformanceEdit extends Component {
                      style={{
                         alignItems: 'flex-start'
                      }}
+                     titleContainerStyle={{
+                        alignItems: 'flex-start'
+                     }}
                      iconStyle={{
                         paddingTop: 15
                      }}

@@ -26,7 +26,7 @@ const ListItem = (props) => {
          paddingTop: 15,
          paddingBottom: 15,
          flexDirection:  'row',
-         justifyContent: 'space-between',
+         justifyContent: 'space-between', alignItems: 'center',
          flex: 10,
       },
       leftContent: {
@@ -82,7 +82,7 @@ const ListItem = (props) => {
                <Image source={props.image} style={[props.imageStyle, styles.defaultImageStyle]} />
                :
                null
-            }
+            } 
 
             {/* list item */}
             <View style={[styles.listItem, props.titleContainerStyle]}>
